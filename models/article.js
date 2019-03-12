@@ -29,6 +29,7 @@ var ArticleSchema = Schema({
         type: Date, 
         default: Date.now 
    },
+   publi_date: Date,
    author: {
        type: Schema.ObjectId, 
        ref: 'user'
