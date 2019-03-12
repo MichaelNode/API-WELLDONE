@@ -4,7 +4,7 @@ var path = require('path');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.redirect('http://localhost:3001/');
+  res.sendFile(path.join(__dirname +('/../admin/build/index.html')));
 });
 
 module.exports = router;
