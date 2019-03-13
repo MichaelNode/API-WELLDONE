@@ -35,10 +35,10 @@ var ArticleSchema = Schema({
        ref: 'user'
    },
    last_modification: Date,
-   res_article: {
+   /* res_article: {
         type: Schema.ObjectId, 
         ref: 'article'
-   }
+   } */
 });
 
 ArticleSchema.statics.allowedCategorys = function () {
@@ -50,4 +50,4 @@ ArticleSchema.statics.allowedCategorys = function () {
     ];
 };
 
-modulo.exports = mongoose.model('article', ArticleSchema);
+module.exports = mongoose.model('article', ArticleSchema);

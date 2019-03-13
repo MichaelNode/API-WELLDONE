@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "install_users": "node ./lib/saveUsers",
+    "install_articles": "node ./lib/saveArticles"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
