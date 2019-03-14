@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "build": "webpack public/javascripts/app.js --output dist/js/app.js"
+    "build": "webpack public/javascripts/app.js --output dist/js/app.js",
+    "install_users": "node ./lib/saveUsers",
+    "install_articles": "node ./lib/saveArticles"
   },
   "dependencies": {
     "@babel/core": "^7.3.4",

@@ -23,10 +23,10 @@ var UserSchema = Schema({
         index: true,
         unique: true 
     },
-    article: [{
+    /* article: [{
         type: Schema.ObjectId, 
         ref: 'article'
-    }],
+    }], */
     password: String,
     image: String,
     state: Boolean,

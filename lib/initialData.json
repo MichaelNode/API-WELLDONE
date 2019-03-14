@@ -1,0 +1,95 @@
+{ 
+    "articles":[
+       {
+        "title": "Reseña Pizzeria Vesubio",
+        "file": "",
+        "summary": "",
+        "content": "Hace mucho tiempo que no leía una novela con el estilo de Pizzería Vesubio",
+        "state": true,
+        "category": "",
+        "create_at": "",
+        "publi_date": "",
+        "author": "",
+        "last_modification": ""
+       },
+       {
+        "title": "Reseña Hotel de las Musas",
+        "file": "",
+        "summary": "",
+        "content": "Hoy os traigo mi opinión sobre “Hotel de las Musas",
+        "state": true,
+        "category": "",
+        "create_at": "",
+        "publi_date": "",
+        "author": "",
+        "last_modification": ""
+    },
+    {
+        "title": "Las siete Magníficas",
+        "file": "",
+        "summary": "",
+        "content": "Me gustan los libros que son una madeja",
+        "state": true,
+        "category": "",
+        "create_at": "",
+        "publi_date": "",
+        "author": "",
+        "last_modification": ""
+    }
+   ],
+   "users": [
+       {
+        "name": "Alex",
+        "last_name": "Cappa",
+        "address": "Juan duque 10",
+        "email": "alejandro@gmail.com",
+        "nick_name": "acappa",
+        "article": "",
+        "password": "aaa220",
+        "image": "",
+        "state": true,
+        "create_at": "",
+        "last_modification": ""
+       },
+       {
+        "name": "Miguel",
+        "last_name": "Zamora",
+        "address": "Juan duque 10",
+        "email": "miguel@gmail.com",
+        "nick_name": "mzamora",
+        "article": "",
+        "password": "aaa220",
+        "image": "",
+        "state": true,
+        "create_at": "",
+        "last_modification": ""
+       },
+       {
+        "name": "Michael",
+        "last_name": "Hidalgo",
+        "address": "Juan duque 10",
+        "email": "michael@gmail.com",
+        "nick_name": "mhidalgo",
+        "article": "",
+        "password": "mmm220",
+        "image": "",
+        "state": true,
+        "create_at": "",
+        "last_modification": ""
+       },
+       {
+        "name": "Inma",
+        "last_name": "Ordmar",
+        "address": "Juan duque 10",
+        "email": "inma@gmail.com",
+        "nick_name": "irodmar",
+        "article": "",
+        "password": "iii220",
+        "image": "",
+        "state": true,
+        "create_at": "",
+        "last_modification": ""
+       }
+
+   ]
+}
