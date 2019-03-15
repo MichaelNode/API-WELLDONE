@@ -3,9 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 var app = express();
-//require('./lib/connectMongoose');
+require('./lib/connectMongoose');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -16,13 +18,25 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const i18n = require('i18n');
+const i18n = require('./lib/i18n')();
 
 // i18n config for internationalization
-i18n.configure({
-  locales:['en', 'de'],
-  directory: __dirname + '/locales'
-});
+// Multilanguage setup
+app.use(i18n.init);
+app.locals.getLocales = i18n.getLocales();
+
+// Use session
+app.use(session({
+  name: "session-devrock",
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true},
+  store: new MongoStore({
+    // conectar a la base de datos para guardar la session allí
+    url: process.env.MONGOOSE_CONNECTION_STRING
+  })
+}));
 
 // Import router
 require('./routes/router')(app);
@@ -42,7 +56,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json('error');
 });
 
 module.exports = app;

@@ -5,16 +5,20 @@ import store from './store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import AdminPanel from './AdminPanel';
 import * as serviceWorker from './serviceWorker';
+import I18n from "redux-i18n"
+import {translations} from "./config/translations"
 
 render(
     <Provider store={store}>
-      <BrowserRouter>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={AdminPanel}/>
-          </Switch>
-        </BrowserRouter>
-      </BrowserRouter>
+        <I18n translations={translations} initialLang="es">
+          <BrowserRouter>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/admin" component={AdminPanel}/>
+              </Switch>
+            </BrowserRouter>
+          </BrowserRouter>
+        </I18n>
     </Provider>
     , document.getElementById('root')
 );
