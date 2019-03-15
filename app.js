@@ -16,6 +16,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const i18n = require('i18n');
+
+// i18n config for internationalization
+i18n.configure({
+  locales:['en', 'de'],
+  directory: __dirname + '/locales'
+});
+
 // Import router
 require('./routes/router')(app);
 
