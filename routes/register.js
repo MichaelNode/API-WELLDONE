@@ -9,12 +9,12 @@ router.get('/', function(req, res, next) {
 router.post('/', async function (req, res, next) {
   try {
     const userData = req.body;
-    userData.password = await User.hashPassword(userData.password) 
-    const newUser = new User(userData)
-    const newUserSaved = await newUser.save()
-    res.json({success: true, user: newUserSaved})
+    userData.password = await User.hashPassword(userData.password); 
+    const newUser = new User(userData);
+    const newUserSaved = await newUser.save();
+    res.json({success: true, user: newUserSaved});
   } catch (err){
-    next(err)
+    res.render('register', {error: 'Error al ingresar los datos'});
   }
 })
 
