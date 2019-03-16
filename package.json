@@ -8,6 +8,7 @@
     "install_articles": "node ./lib/saveArticles"
   },
   "dependencies": {
+    "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
