@@ -38,6 +38,12 @@ app.use(session({
   })
 }));
 
+// Helper middleware for get if user is auth
+app.use(async (req, res, next) => {
+  res.locals.isLogged = require('./lib/jwtAuth').isLogged(req);
+  next();
+});
+
 // Import router
 require('./routes/router')(app);
 

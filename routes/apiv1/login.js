@@ -26,7 +26,6 @@ router.post('/', upload.any(), async (req, res, next) => {
         res.json({'success': false, 'error': err});
         return;
       }
-      console.log(user);
       // save user in session
       req.session.user = {_id: user._id};
       // return token with a success response

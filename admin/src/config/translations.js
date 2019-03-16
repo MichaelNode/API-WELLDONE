@@ -1,12 +1,12 @@
 export const translations = {
     en: {
-        "Username": "Username",
+        "Email": "Email",
         "Password": "Password",
         "error_password": 'Error contraseña', // TODO: CAMBIAR
         "error_username": 'Error username', // TODO: CAMBIAR
     },
     es: {
-        "Username": "Usuario",
+        "Email": "Email",
         "Password": "Contraseña",
         "error_password": 'Error contraseña', // TODO: CAMBIAR
         "error_username": 'Error username', // TODO: CAMBIAR

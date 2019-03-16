@@ -1,21 +1,24 @@
-import {LOGIN_ERROR, LOGIN_STARTED, LOGIN_SUCCESS, LOGOUT} from "./types";
+import * as types from "./types";
+import StorageWrapper from '../../utils/StorageWrapper';
+
+const token = StorageWrapper.getValue('token');
 
 const initialState = {
-    isLogged: false,
     isLoading: false,
-    error: ''
+    error: '',
+    token: token,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_STARTED:
-        return {...state, isLogged: false, isLoading: true, error: ''};
-    case LOGIN_SUCCESS:
-        return {...state, isLogged: true, isLoading: false, user: action.payload, error: ''};
-    case LOGIN_ERROR:
-        return {...state, isLogged: false, isLoading: false, user: null, error: action.payload};
-    case LOGOUT:
-        return {...state, isLogged: false, isLoading: false, user: null, error: ''};
+    case types.LOGIN_STARTED:
+        return {...state, isLoading: true, token: false, error: ''};
+    case types.LOGIN_SUCCESS:
+        return {...state, isLoading: false, token: action.payload, error: ''};
+    case types.LOGIN_ERROR:
+        return {...state, isLoading: false, token: null, error: action.payload};
+    case types.LOGOUT:
+        return {...state, isLoading: false, token: null, error: ''};
     default:
         return state;
     }

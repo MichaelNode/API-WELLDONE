@@ -9,14 +9,14 @@ class AdminPanel extends Component {
     return (
         <div>
           {
-            this.props.isLogged &&  !this.props.isLoading && (
+            this.props.token &&  !this.props.isLoading && (
                 <div className="App">
                   <h1>Welldone Admin Panel</h1>
                 </div>
             )
           }
           {
-            !this.props.isLogged && !this.props.isLoading &&
+            !this.props.token && !this.props.isLoading &&
                 <Login/>
           }
           {
@@ -29,6 +29,6 @@ class AdminPanel extends Component {
 }
 
 export default connect(state => ({
-  isLogged: state.user.isLogged,
+  token: state.user.token,
   isLoading: state.user.isLoading
 }))(AdminPanel);

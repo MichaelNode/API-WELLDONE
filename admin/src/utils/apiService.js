@@ -21,29 +21,26 @@ const initialHeaders = {
  * @returns {Promise<*>}
  */
 export const asyncFetch = async (url, method = 'GET', body = null, headers = initialHeaders) => {
-        const options = {
-            method: method,
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
-        };
+    const options = {
+        method: method,
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+    };
 
-        // add headers to the request if exist
-        if (body) {
-            options.body = body;
-        }
+    // add body to the request if exist
+    if (body) {
+        options.body = body;
+    }
 
-        if (headers) {
-            options.headers = headers;
-        }
+    // add headers to the request if exist
+    if (headers) {
+        options.headers = headers;
+    }
 
-        console.log('asdasd');
-        console.log(options);
-
-        // get data from url
-        const response = await fetch(url, options);
-        console.log(response);
-        return await response.json();
+    // get data from url
+    const response = await fetch(url, options);
+    return await response.json();
 };
 
 
