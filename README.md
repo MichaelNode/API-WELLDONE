@@ -12,7 +12,7 @@ npm install
 
 - Install react dependencies
 ```
-nom run install_react
+npm run install_react
 ```
 
 - Install initial data in db
