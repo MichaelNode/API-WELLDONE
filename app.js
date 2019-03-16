@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 var app = express();
 require('./lib/connectMongoose');
@@ -15,6 +17,32 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+const i18n = require('./lib/i18n')();
+
+// i18n config for internationalization
+// Multilanguage setup
+app.use(i18n.init);
+app.locals.getLocales = i18n.getLocales();
+
+// Use session
+app.use(session({
+  name: "session-devrock",
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true},
+  store: new MongoStore({
+    // conectar a la base de datos para guardar la session allí
+    url: process.env.MONGOOSE_CONNECTION_STRING
+  })
+}));
+
+// Helper middleware for get if user is auth
+app.use(async (req, res, next) => {
+  res.locals.isLogged = require('./lib/jwtAuth').isLogged(req);
+  next();
+});
 
 // Import router
 require('./routes/router')(app);
@@ -34,7 +62,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json('error');
 });
 
 module.exports = app;
