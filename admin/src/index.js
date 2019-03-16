@@ -1,10 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import {Provider} from 'react-redux';
+import {render} from 'react-dom';
+import store from './store';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import AdminPanel from './AdminPanel';
 import * as serviceWorker from './serviceWorker';
+import I18n from "redux-i18n"
+import {translations} from "./config/translations"
 
-ReactDOM.render(<AdminPanel />, document.getElementById('root'));
+render(
+    <Provider store={store}>
+        <I18n translations={translations} initialLang="es">
+          <BrowserRouter>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/admin" component={AdminPanel}/>
+              </Switch>
+            </BrowserRouter>
+          </BrowserRouter>
+        </I18n>
+    </Provider>
+    , document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
