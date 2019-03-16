@@ -1,4 +1,4 @@
 
-import style from '../stylesheets/index.sass';
+import style from '../stylesheets/main.scss';
 
 

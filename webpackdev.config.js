@@ -19,15 +19,11 @@ module.exports = {
                 loader: "style-loader"
             }, {
                 loader: "css-loader",
-                options: { importLoaders: 1 }
             }, {
                 loader: "postcss-loader",
-                options: { parser: 'sugarss', exec: true, plugins: function () {
-                    return [
-                        require('precss'),
-                        require('autoprefixer')
-                    ];  
-                } }
+                options: { 
+                    plugins: () => [ require('precss'), require('autoprefixer') ]
+                } 
             }, {
                 loader: "sass-loader"
             }]
