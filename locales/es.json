@@ -1,3 +1,5 @@
 {
-	"Invalid credentials": "Invalid credentials"
+	"Invalid credentials": "Invalid credentials",
+	"You are not authenticated": "You are not authenticated",
+	"you are not authenticated": "you are not authenticated"
 }

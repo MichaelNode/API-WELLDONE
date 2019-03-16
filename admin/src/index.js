@@ -4,6 +4,7 @@ import {render} from 'react-dom';
 import store from './store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import AdminPanel from './AdminPanel';
+import InstantLogout from './components/login/InstantLogout';
 import * as serviceWorker from './serviceWorker';
 import I18n from "redux-i18n"
 import {translations} from "./config/translations"
@@ -15,6 +16,7 @@ render(
             <BrowserRouter>
               <Switch>
                 <Route exact path="/admin" component={AdminPanel}/>
+                <Route exact path="/admin/logout" component={InstantLogout}/>
               </Switch>
             </BrowserRouter>
           </BrowserRouter>

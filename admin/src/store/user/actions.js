@@ -26,3 +26,15 @@ export const loginErrorAction = (error) => {
         payload: error
     }
 };
+
+/**
+ * Action for user logout
+ * @returns {{type: string}}
+ */
+export const logoutAction = (redirect) => {
+  StorageWrapper.clear();
+  return {
+      type: types.LOGOUT,
+      payload: redirect
+  }
+};

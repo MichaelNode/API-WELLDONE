@@ -33,3 +33,25 @@ export const auth = (email, password) => async dispatch =>{
         dispatch(actions.loginErrorAction(err));
     }
 };
+
+/**
+ * Operation for user logout
+ * @returns {Function}
+ */
+export const logout = (redirect) => async dispatch => {
+    try {
+        const response = await asyncFetch(apiRoutes.logout, 'GET');
+        // if have an error dispatch login error
+        if (!isSuccessResponse(response)) {
+            return dispatch(actions.loginErrorAction(response.error));
+        }
+        console.log(redirect);
+        // dispatch logout
+        dispatch(actions.logoutAction(redirect));
+
+    }catch (err) {
+        console.log(err);
+        dispatch(actions.loginErrorAction(err));
+    }
+    dispatch({type: types.LOGOUT});
+};

@@ -42,14 +42,23 @@ class Login extends Component {
     handleSubmit = (evt) => {
         evt.preventDefault();
         let errors = false;
+
+        // check if email is valid
         if (!this.checkEmail()) {
-            this.setState({emailError: 'error_password'});
+            this.setState({emailError: 'error_email'});
             errors = true;
+        }else{
+            this.setState({emailError: ''});
         }
+
+        // check if password is valid
         if (!this.checkPassword()) {
-            this.setState({emailError: 'error_password'});
+            this.setState({passwordError: 'error_password'});
             errors = true;
+        }else{
+            this.setState({passwordError: ''});
         }
+
         if (errors) return;
 
         this.props.login(this.state.email, this.state.password);
