@@ -4,7 +4,12 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "build": "webpack public/javascripts/app.js --output dist/js/app.js",
+    "build": "webpack public/javascripts/app.js --output dist/js/app.js && npm run react_build",
+    "install_react": "cd admin && npm install",
+    "dev": "(npm run start &) && cd admin && npm start",
+    "seeder": "npm run install_users && npm run install_articles",
+    "react_start": "cd admin && npm start",
+    "react_build": "cd admin && npm run build",
     "install_users": "node ./lib/saveUsers",
     "install_articles": "node ./lib/saveArticles"
   },
