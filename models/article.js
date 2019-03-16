@@ -50,4 +50,12 @@ ArticleSchema.statics.allowedCategorys = function () {
     ];
 };
 
-module.exports = mongoose.model('articles', ArticleSchema);
+ArticleSchema.statics.listArticles = async function(filters){
+     const query = Article.find(filters);
+     result = await query.exec();
+     return result;
+}
+
+const Article = mongoose.model('articles', ArticleSchema);
+
+module.exports = Article;

@@ -9,16 +9,15 @@ const Articles = require('../models/article')
 
 
 /* GET anuncios page. */
-router.get('/', function (req, res, next) {
-        console.log('entro')
-        Articles.find({}).exec(function(err, resp){
-            res.render('articles', { articles: resp });
-        })
-       
-      
-     
-
-    
+router.get('/', async function (req, res, next) {
+    try {
+        const filters = {}
+        filters.state = true;
+        const articles = await Articles.listArticles(filters); 
+        res.render('articles', { articles });
+    } catch(err){ 
+        return res.next(err);
+    }
 });
 
 module.exports = router;
