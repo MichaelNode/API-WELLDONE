@@ -8,7 +8,6 @@ var upload = multer();
 
 router.post('/', upload.any(), async (req, res, next) => {
   try {
-    console.log(req.body);
     const user = await getUserFromRequestLogged(req);
     // if no user then return an error
     if (!user) {
