@@ -1,23 +1,34 @@
-var createError = require('http-errors');
+'use strict';
+
+
 var express = require('express');
+var createError = require('http-errors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var articleRouter = require('./routes/article')
+const mongoose = require('mongoose');
+require('./lib/connectMongoose').default
+
 
 var app = express();
-//require('./lib/connectMongoose');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Import router
+
+
 require('./routes/router')(app);
+
+app.use('/articles', articleRouter);
 
 app.use(express.static(path.join(__dirname, 'admin/build')));
 

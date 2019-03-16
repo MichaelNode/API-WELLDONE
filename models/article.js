@@ -32,7 +32,7 @@ var ArticleSchema = Schema({
    publi_date: Date,
    author: {
        type: Schema.ObjectId, 
-       ref: 'user'
+       ref: 'users'
    },
    last_modification: Date,
    /* res_article: {
@@ -50,4 +50,4 @@ ArticleSchema.statics.allowedCategorys = function () {
     ];
 };
 
-module.exports = mongoose.model('article', ArticleSchema);
+module.exports = mongoose.model('articles', ArticleSchema);

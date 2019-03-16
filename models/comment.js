@@ -6,11 +6,11 @@ var Schema = mongoose.Schema;
 var CommentSchema = Schema({
     user: {
         type: Schema.ObjectId, 
-        ref: 'user'
+        ref: 'users'
     },
     article: {
         type: Schema.ObjectId, 
-        ref: 'article'
+        ref: 'articles'
     },
     content: String,
     create_at: String,

@@ -37,5 +37,5 @@ var UserSchema = Schema({
     last_modification: Date
 });
 
-module.exports = mongoose.model('user', UserSchema)
+module.exports = mongoose.model('users', UserSchema)
 
