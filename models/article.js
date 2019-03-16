@@ -50,8 +50,9 @@ ArticleSchema.statics.allowedCategorys = function () {
     ];
 };
 
-ArticleSchema.statics.listArticles = async function(filters){
+ArticleSchema.statics.listArticles = async function(filters, sort){
      const query = Article.find(filters);
+     query.sort(sort);
      result = await query.exec();
      return result;
 }

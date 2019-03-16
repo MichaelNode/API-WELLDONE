@@ -2,4 +2,9 @@ h1 hello world
 if articles
 ul
   for article in articles
-    li= article.title
+    .card_art
+      h2=  article.title
+      p=   article.author
+      p=   article.summary
+      img(src=article.file)
+      p=   article.create_at
