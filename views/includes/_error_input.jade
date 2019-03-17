@@ -1,0 +1,13 @@
+mixin error_input(inputName, errors)
+    - let hasError = false;
+    - let inputId = `error-${inputName}`;
+    - for (error of errors) {
+    -   if (error.param !== inputName) {
+    -       continue;
+    -   }
+    -   hasError = true;
+        span.error(id=inputId)=error.msg
+    - }
+    -if (!hasError) {
+        span.error(id=inputId)
+    - }

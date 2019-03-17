@@ -1,23 +1,33 @@
 extends layout
+include ./includes/_error_input
 
 block content
 
   form(method='POST' action='/register')
     div
       label(for='name') #{__('First Name')}:
-      input#name.form-control(type='text', name='name')
+      input#name.form-control(type='text', name='name', value=name)
+      +error_input('name', errors)
     div
       label(for='last_name') #{__('Last Name')}:
-      input#last_name.form-control(type='text', name='last_name')
+      input#last_name.form-control(type='text', name='last_name', value=last_name)
+      +error_input('last_name', errors)
     div
       label(for='email') #{__('Email')}:
-      input#email.form-control(type='email', placeholder='name@email.com' name='email')
+      input#email.form-control(type='email', placeholder='name@email.com', name='email', value=email)
+      +error_input('email', errors)
     div
-      label(for='favoriteBook') #{__('Nick name')}:
-      input#favoriteBook.form-control(type='text', name='nick_name')
+      label(for='nick_name') #{__('Nick name')}:
+      input#nick_name.form-control(type='text', name='nick_name', value=nick_name)
+      +error_input('nick_name', errors)
     div
       label(for='pw') #{__('Password')}:
       input#pw.form-control(type='password' name='password')
+      +error_input('password', errors)
+    div
+      label(for='confirmPassword') #{__('Confirm Password')}:
+      input#confirmPassword.form-control(type='password' name='confirmPassword')
+      +error_input('confirmPassword', errors)
     div
       p= message
 

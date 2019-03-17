@@ -10,5 +10,13 @@
 	"Password": "Password",
 	"Sign up": "Sign up",
 	"There was an error entering the data": "There was an error entering the data",
-	"{{name}}: You have successfully registered!": "{{name}}: You have successfully registered!"
+	"{{name}}: You have successfully registered!": "{{name}}: You have successfully registered!",
+	"El nombre solo puede contener letras": "El nombre solo puede contener letras",
+	"El apellido solo puede contener letras": "El apellido solo puede contener letras",
+	"La contraseña debe tener al menos 8 caracteres": "La contraseña debe tener al menos 8 caracteres",
+	"El email no está correctamente escrito": "El email no está correctamente escrito",
+	"Confirm Password": "Confirm Password",
+	"Password confirmation does not match password": "Password confirmation does not match password",
+	"E-mail already in use": "E-mail already in use",
+	"Nick name already in use": "Nick name already in use"
 }

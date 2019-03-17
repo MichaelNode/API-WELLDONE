@@ -1,37 +1,47 @@
 const express = require('express');
 const router = express.Router();
 const { validationResult } = require('express-validator/check');
-const validations = require('../lib/validationsRegisterForm');
+const {validation, renderRegister} = require('../lib/userService');
+const namedRoutes = require('../lib/namedRoutes');
 
 const User = require('../models/user');
 
 
 router.get('/', function(req, res, next) {
-  res.render('register');
+  renderRegister(res);
 });
 
-router.post('/',  validations, async function (req, res, next) {
+router.post('/',  validation, async function (req, res, next) {
 
   try {
-    const validationErrors = validationResult(req)
+    const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
-      const errorMessage = validationErrors.array()[0].msg
-      res.render('register', {message: errorMessage})
+      renderRegister(res, {
+        errors: validationErrors.array({onlyFirstError: true}),
+        name: req.body.name,
+        last_name: req.body.last_name,
+        nick_name: req.body.nick_name,
+        email: req.body.email,
+      });
       return;
     }
     const userData = req.body;
     userData.password = await User.hashPassword(userData.password);
     const newUser = new User(userData);
-    const newUserSaved = await newUser.save();
-    res.render('register', {message: res.__('{{name}}: You have successfully registered!', {'name': newUserSaved.name})});
-
+    await newUser.save();
+    res.redirect(namedRoutes.admin);
 
   } catch (err){
-    console.log(err);
-    res.render('register', {message: res.__('There was an error entering the data') });
-
+    renderRegister(res, {
+      errors: [],
+      name: req.body.name,
+      last_name: req.body.last_name,
+      nick_name: req.body.nick_name,
+      email: req.body.email,
+      message: res.__('There was an error entering the data')
+    });
   }
 
-})
+});
 
 module.exports = router;
