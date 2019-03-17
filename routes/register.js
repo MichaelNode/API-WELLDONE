@@ -6,7 +6,6 @@ const namedRoutes = require('../lib/namedRoutes');
 
 const User = require('../models/user');
 
-
 router.get('/', function(req, res, next) {
   renderRegister(res);
 });
