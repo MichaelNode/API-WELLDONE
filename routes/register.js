@@ -17,17 +17,18 @@ router.post('/',  validations, async function (req, res, next) {
     if (!validationErrors.isEmpty()) {
       const errorMessage = validationErrors.array()[0].msg
       res.render('register', {message: errorMessage})
-    } 
+      return;
+    }
     const userData = req.body;
-    userData.password = await User.hashPassword(userData.password); 
+    userData.password = await User.hashPassword(userData.password);
     const newUser = new User(userData);
     const newUserSaved = await newUser.save();
-    res.render('register', {message: `${newUserSaved.name}: ¡Te has dado de alta con éxito!`});
+    res.render('register', {message: res.__('{{name}}: You have successfully registered!', {'name': newUserSaved.name})});
 
 
   } catch (err){
-
-    res.render('register', {message: 'Hubo un error al ingresar los datos' });
+    console.log(err);
+    res.render('register', {message: res.__('There was an error entering the data') });
 
   }
 

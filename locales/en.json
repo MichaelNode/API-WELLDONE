@@ -1,5 +1,14 @@
 {
 	"Invalid credentials": "Invalid credentials",
 	"You are not authenticated": "You are not authenticated",
-	"you are not authenticated": "you are not authenticated"
+	"you are not authenticated": "you are not authenticated",
+	"Logout": "Logout",
+	"First Name": "First Name",
+	"Last Name": "Last Name",
+	"Email": "Email",
+	"Nick name": "Nick name",
+	"Password": "Password",
+	"Sign up": "Sign up",
+	"There was an error entering the data": "There was an error entering the data",
+	"{{name}}: You have successfully registered!": "{{name}}: You have successfully registered!"
 }

@@ -4,21 +4,21 @@ block content
 
   form(method='POST' action='/register')
     div
-      label(for='name') Nombre:
+      label(for='name') #{__('First Name')}:
       input#name.form-control(type='text', name='name')
     div
-      label(for='last_name') Apellido:
-      input#name.form-control(type='text', name='last_name')
+      label(for='last_name') #{__('Last Name')}:
+      input#last_name.form-control(type='text', name='last_name')
     div
-      label(for='email') Email:
+      label(for='email') #{__('Email')}:
       input#email.form-control(type='email', placeholder='name@email.com' name='email')
     div
-      label(for='favoriteBook') Nick_name:
+      label(for='favoriteBook') #{__('Nick name')}:
       input#favoriteBook.form-control(type='text', name='nick_name')
     div
-      label(for='pw') Contraseña:
+      label(for='pw') #{__('Password')}:
       input#pw.form-control(type='password' name='password')
     div
       p= message
-   
-    button.btn.btn-primary(type='submit') Darme de alta
+
+    button.btn.btn-primary(type='submit') #{__('Sign up')}

@@ -1,5 +1,14 @@
 {
-	"Invalid credentials": "Invalid credentials",
-	"You are not authenticated": "You are not authenticated",
-	"you are not authenticated": "you are not authenticated"
+	"Invalid credentials": "Credenciales inválidas",
+	"You are not authenticated": "No estás autenticado",
+	"you are not authenticated": "no estás autenticado",
+	"Logout": "Logout",
+	"First Name": "Nombre",
+	"Last Name": "Apellidos",
+	"Email": "Email",
+	"Nick name": "Nombre de usuario",
+	"Password": "Constraseña",
+	"Sign up": "Darme de alta",
+	"There was an error entering the data": "There was an error entering the data",
+	"{{name}}: You have successfully registered!": "{{name}}: You have successfully registered!"
 }
