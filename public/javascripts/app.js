@@ -1,4 +1,4 @@
 
-import style from '../stylesheets/main.scss';
+import style from '../stylesheets/style.scss';
 
 
