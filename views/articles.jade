@@ -1,11 +1,13 @@
+extends layout
 
-include ./partials/header.jade
-if articles
-ul
-  for article in articles
-    .card_art
-      h2=  article.title
-      p=   article.author
-      p=   article.summary
-      img(src=article.file)
-      p=   article.create_at
+block content
+  include ./partials/header.jade
+  if articles
+  .container.row.main_container 
+    for article in articles
+        .card.col-xs-12.col-xl-4.col-sm-4
+          img.card-img-top.img-fluid(alt='Card image cap', src=article.file)
+          h4.card-title=article.title
+          h5=article.create_at
+          h5=article.author
+          p.card-text=article.summary

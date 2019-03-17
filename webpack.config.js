@@ -1,5 +1,3 @@
-
-
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = {
@@ -14,15 +12,20 @@ module.exports = {
            }
          },
          {
-            test: /\.scss$/,
+            test: /\.s(a|c)ss$/,
             use: [{
                 loader: "style-loader"
             }, {
-                loader: "css-loader"
+                loader: "css-loader",
+            }, {
+                loader: "postcss-loader",
+                options: {
+                    plugins: () => [ require('precss'), require('autoprefixer') ]
+                }
             }, {
                 loader: "sass-loader"
             }]
-           }
+        }
        ]
     },
     plugins: [
