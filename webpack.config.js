@@ -14,16 +14,16 @@ module.exports = {
            }
          },
          {
-            test: /\.scss$/,
+            test: /\.s(a|c)ss$/,
             use: [{
                 loader: "style-loader"
             }, {
                 loader: "css-loader",
             }, {
                 loader: "postcss-loader",
-                options: { 
+                options: {
                     plugins: () => [ require('precss'), require('autoprefixer') ]
-                } 
+                }
             }, {
                 loader: "sass-loader"
             }]
