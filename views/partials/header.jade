@@ -1,0 +1,31 @@
+header
+  nav.navbar.fixed-top.navbar-expand-lg.navbar-light.bg-light
+    a(href='/')
+      h3 BlogCoding
+    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarColor02', aria-controls='navbarColor02', aria-expanded='false', aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarColor02.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        li.nav-item.dropdown
+          a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            i.fas.fa-user-circle
+          .dropdown-menu(aria-labelledby='navbarDropdown')
+            a.dropdown-item(href='/login') Sign in
+            a.dropdown-item(href='/register') Create an account
+        form.form-inline.my-2.my-lg-0
+          input#search.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
+          button#btn-search.btn.btn-outline-info.my-2.my-sm-0(type='submit') Search
+    div
+      ul.nav.justify-content-center
+        li.nav-item
+          a.nav-link(href='#') CULTURE
+        li.nav-item
+          a.nav-link(href='#') TECH
+        li.nav-item
+          a.nav-link(href='#') POLITICS
+        li.nav-item
+          a.nav-link(href='#') DESING
+        li.nav-item
+          a.nav-link(href='#') SCIENCE
+        li.nav-item
+          a.nav-link(href='#') POPULAR
