@@ -27,4 +27,8 @@ export default class StorageWrapper {
     static removeValue(name) {
         StorageWrapper._storage.removeItem(name);
     }
+
+    static clear(){
+        StorageWrapper._storage.clear();
+    }
 }

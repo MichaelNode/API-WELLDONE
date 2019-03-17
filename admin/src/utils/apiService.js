@@ -43,4 +43,3 @@ export const asyncFetch = async (url, method = 'GET', body = null, headers = ini
     return await response.json();
 };
 
-

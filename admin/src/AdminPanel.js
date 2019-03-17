@@ -3,6 +3,7 @@ import './App.css';
 import {connect} from "react-redux";
 import Login from './components/login/Login'
 import Loading from './components/loading/Loading'
+import Nav from "./components/nav/Nav";
 
 class AdminPanel extends Component {
   render() {
@@ -12,6 +13,7 @@ class AdminPanel extends Component {
             this.props.token &&  !this.props.isLoading && (
                 <div className="App">
                   <h1>Welldone Admin Panel</h1>
+                  <Nav/>
                 </div>
             )
           }

@@ -7,7 +7,7 @@ const loginRouter = require('./login');
 // Router class
 class Router {
     constructor(app) {
-        app.use(namedRoutes.apiv1_login, loginRouter);
+        app.use(namedRoutes.apiv1_user, loginRouter);
     }
 }
 

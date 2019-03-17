@@ -1,3 +1,22 @@
 {
-	"Invalid credentials": "Invalid credentials"
+	"Invalid credentials": "Credenciales inválidas",
+	"You are not authenticated": "No estás autenticado",
+	"you are not authenticated": "no estás autenticado",
+	"Logout": "Logout",
+	"First Name": "Nombre",
+	"Last Name": "Apellidos",
+	"Email": "Email",
+	"Nick name": "Nombre de usuario",
+	"Password": "Constraseña",
+	"Sign up": "Darme de alta",
+	"There was an error entering the data": "There was an error entering the data",
+	"{{name}}: You have successfully registered!": "{{name}}: You have successfully registered!",
+	"El nombre solo puede contener letras": "El nombre solo puede contener letras",
+	"El apellido solo puede contener letras": "El apellido solo puede contener letras",
+	"La contraseña debe tener al menos 8 caracteres": "La contraseña debe tener al menos 8 caracteres",
+	"El email no está correctamente escrito": "El email no está correctamente escrito",
+	"Confirm Password": "Confirma la contraseña",
+	"Password confirmation does not match password": "Las contraseñas no coinciden",
+	"E-mail already in use": "El E-mail ya está en uso",
+	"Nick name already in use": "Nick name already in use"
 }
