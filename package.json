@@ -9,6 +9,7 @@
     "dev": "(npm run start &) && cd admin && npm start",
     "seeder": "npm run install_users && npm run install_articles",
     "react_start": "cd admin && npm start",
+    "react_dev": "cd admin && npm build_dev",
     "react_build": "cd admin && npm run build",
     "install_users": "node ./lib/saveUsers",
     "install_articles": "node ./lib/saveArticles"
