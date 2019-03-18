@@ -28,7 +28,14 @@ npm run seeder
 npm run dev
 ```
 
-- if you do not want to configure the server CORS, you can run npm run build, you will have the React project accessible in the path /admin
+- If you do not want to configure the server CORS, you can run npm run build, you will have the React project accessible in the path /admin
+```
+npm run build_dev
+``` 
+
+## Production
+
+- Do following command
 ```
 npm run build
 ```
