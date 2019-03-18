@@ -17,6 +17,7 @@
     "@babel/core": "^7.3.4",
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.4",
+    "animate.css": "^3.7.0",
     "array-unique": "^0.3.2",
     "babel-loader": "^8.0.5",
     "bcrypt": "^3.0.4",

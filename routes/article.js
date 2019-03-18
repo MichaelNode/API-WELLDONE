@@ -13,7 +13,7 @@ router.get('/:page?', async function (req, res, next) {
         filters.state = true;
         const sort =  'create_at';
         const page =  req.params.page || 1;
-        const recordsPerPage = 4;
+        const recordsPerPage = 6;
         const articles = await Articles.listArticles(filters, sort,page,recordsPerPage); 
         const count = await Articles.Count(filters);
         const pageButtonCount =  Math.ceil( count / recordsPerPage);

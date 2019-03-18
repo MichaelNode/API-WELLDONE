@@ -3,18 +3,17 @@ extends layout
 block content
   include ./partials/header.jade
   if articles
-  .container-fluid.row.main_container.grid 
+  .container-fluid.card-columns
     for article in articles
-        .card.col-xs-12.col-xl-4.col-sm-4
+        .card.animated.bounceInLeft
           img.grid-sizer.card-img-top.img-fluid(alt='Card image cap', src=article.file)
           h4.card-title=article.title
           h5=article.create_at
           h5=article.author
           p.card-text=article.summary
-      
- 
-  
 
+
+ 
   if (count >= recordsPerPage)
     nav(aria-label='...', style='text-align: center')
       ul.pagination

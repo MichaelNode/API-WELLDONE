@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".main_nav a {\\n  color: #545b62;\\n  font-weight: bold; }\\n\\n.card {\\n  border: none !important; }\\n\\n/* .card:first-child {\\n  -webkit-box-flex: 0 !important;;\\n  -ms-flex: 0 0 66.666667% !important;\\n  flex: 0 0 66.666667% !important;\\n  max-width: 66.666667% !important;\\n} */\\n.card p {\\n  text-align: justify; }\\n\\n.main_container {\\n  padding-top: 5%; }\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./public/stylesheets/index.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/sass-loader/lib/loader.js");
+eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".main_nav a {\\n  color: #545b62;\\n  font-weight: bold; }\\n\\n.card {\\n  border: none !important; }\\n\\n/* .card:first-child {\\r\\n  -webkit-box-flex: 0 !important;;\\r\\n  -ms-flex: 0 0 66.666667% !important;\\r\\n  flex: 0 0 66.666667% !important;\\r\\n  max-width: 66.666667% !important;\\r\\n} */\\n.card p {\\n  text-align: justify; }\\n\\n.container-fluid {\\n  padding-top: 10%; }\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./public/stylesheets/index.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/sass-loader/lib/loader.js");
 
 /***/ }),
 
