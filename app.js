@@ -2,6 +2,7 @@
 
 
 var express = require('express');
+var bodyParser = require('body-parser')
 var createError = require('http-errors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -24,10 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Import router
-
-
 require('./routes/router')(app);
-
 app.use('/articles', articleRouter);
 
 app.use(express.static(path.join(__dirname, 'admin/build')));

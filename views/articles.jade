@@ -3,7 +3,7 @@ extends layout
 block content
   include ./partials/header.jade
   if articles
-  .container.row.main_container 
+  .container-fluid.row.main_container 
     for article in articles
         .card.col-xs-12.col-xl-4.col-sm-4
           img.card-img-top.img-fluid(alt='Card image cap', src=article.file)
@@ -11,3 +11,34 @@ block content
           h5=article.create_at
           h5=article.author
           p.card-text=article.summary
+  
+
+  if (count >= recordsPerPage)
+    nav(aria-label='...', style='text-align: center')
+      ul.pagination
+        -if (lower_limit > 1)
+          li.page-item
+            -var pageUrl =  '/articles/' + (lower_limit - pageButtonCount); 
+            a.page-link(href=pageUrl, tabindex='-1') Previous
+        -else
+          li.page-item.disabled
+            a.page-link(href='#', tabindex='-1') Previous
+        -for (i = 1; i < pageButtonCount + 1; i++)
+          -if (count > (recordsPerPage * paginationNo))
+            -paginationNo = paginationNo + 1
+            -var pageUrl =  '/articles/' + paginationNo; 
+              -if (page != paginationNo)
+                li.page-item
+                  a.page-link(href=pageUrl) #{paginationNo}
+              -else
+                li.page-item.active
+                  a.page-link(href='#')
+                    | #{paginationNo}
+                    span.sr-only (current)
+        -if (count > (recordsPerPage * upper_limit))
+          -var pageUrl = '/articles/' + (upper_limit + 1) 
+            li.page-item
+              a.page-link(href=pageUrl) Next
+        -else
+            li.page-item.disabled
+              a.page-link(href='#', tabindex='-1') Next

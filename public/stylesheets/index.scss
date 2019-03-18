@@ -6,6 +6,22 @@
   }
 }
 
+.card {
+  border: none !important;
+}
+
+.card:first-child {
+  -webkit-box-flex: 0 !important;;
+  -ms-flex: 0 0 66.666667% !important;
+  flex: 0 0 66.666667% !important;
+  max-width: 66.666667% !important;
+}
+
+.card {
+  p {
+    text-align: justify;
+  }
+}
 .main_container {
   padding-top: 5%;
 }

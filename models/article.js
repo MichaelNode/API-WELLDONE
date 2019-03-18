@@ -50,11 +50,21 @@ ArticleSchema.statics.allowedCategorys = function () {
     ];
 };
 
-ArticleSchema.statics.listArticles = async function(filters, sort){
+ArticleSchema.statics.listArticles = async function(filters, sort,pages,perPage){
      const query = Article.find(filters);
      query.sort(sort);
+     if(pages !== undefined && perPage !== undefined){
+          console.log('entro a modelo', pages, perPage)
+		query.skip((perPage * pages) - perPage);
+		query.limit(perPage)
+	}	
      result = await query.exec();
      return result;
+}
+
+ArticleSchema.statics.Count = function(filters){
+	const query = Article.find(filters);
+	return query.count().exec();
 }
 
 const Article = mongoose.model('articles', ArticleSchema);
