@@ -1,20 +1,27 @@
-var createError = require('http-errors');
+'use strict';
+
 var express = require('express');
+var createError = require('http-errors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-
 var app = express();
+app.locals.moment = require('moment');
 require('./lib/connectMongoose');
+var articleRouter = require('./routes/article')
+
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -28,13 +35,13 @@ app.locals.getLocales = i18n.getLocales();
 // Use session
 app.use(session({
   name: "session-devrock",
-  secret: process.env.SESSION_SECRET,
+  secret: 'thisisnotasecret',
   resave: false,
   saveUninitialized: false,
   cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true},
   store: new MongoStore({
     // conectar a la base de datos para guardar la session allí
-    url: process.env.MONGOOSE_CONNECTION_STRING
+    url: "mongodb://localhost:27017/welldone"
   })
 }));
 
@@ -46,6 +53,7 @@ app.use(async (req, res, next) => {
 
 // Import router
 require('./routes/router')(app);
+app.use('/articles', articleRouter);
 
 app.use(express.static(path.join(__dirname, 'admin/build')));
 

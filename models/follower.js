@@ -6,11 +6,11 @@ var Schema = mongoose.Schema;
 var FollowerSchema = Schema({
     user: {
         type: Schema.ObjetId, 
-        ref: 'user'
+        ref: 'users'
     },
     follower: {
         type: Schema.ObjetId,
-        ref: 'user'
+        ref: 'users'
     },
     create_at : { 
         type: Date, 
