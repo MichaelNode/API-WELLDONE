@@ -3,8 +3,21 @@ extends layout
 block content
   div(class="jumbotron-fluid" id="header")
     div(class="container")
-      h1(class="text-center d-block")= title
-      h2(class="text-center d-block text-muted") Home for writers around the world
+      h1(class="text-center display-2 d-block")= title
+      h2(class="text-center font-weight-normal d-block text-muted") Home for writers around the world
+  nav(class="navbar sticky-top navbar-light bg-light navbar-expand-md")
+    a(href="#header" class="navbar-brand")= title
+    button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav")
+      span(class="navbar-toggler-icon")
+    div(class="collapse navbar-collapse justify-content-between" id="mainNav")
+      div(class="navbar-nav")
+        a(class="nav-item mx-lg-4 mx-xl-6 nav-link" href="#") Culture
+        a(class="nav-item mx-lg-4 mx-xl-6 nav-link" href="#") Tech
+        a(class="nav-item mx-lg-4 mx-xl-6 nav-link" href="#") Health
+        a(class="nav-item mx-lg-4 mx-xl-6 nav-link" href="#") Music
+      form(class="form-inline")
+        input(type="search" class="form-control mx-2" placeholder="Search")
+        button(type="submit" class="btn btn btn-outline-secondary")
+          i(class="fas fa-search")
   div(class="container")
-    
-    p(class="lead") Design showcase
+    p(class="text-justify my-2") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis architecto saepe explicabo harum cupiditate accusamus totam vel quam incidunt eveniet id inventore perferendis pariatur quo commodi ex dignissimos eaque asperiores ullam porro ut fuga, molestiae illo! Sed voluptatem illo laborum labore eaque in ex quia, eum odio vel nam fugiat tenetur impedit ea repudiandae fugit perspiciatis quo voluptas corporis? Culpa laboriosam maxime voluptatibus reiciendis consequuntur ab vero dolorem atque nemo dignissimos, qui quasi esse impedit accusantium quibusdam nesciunt quod sint repudiandae, porro nisi architecto temporibus magni deserunt beatae. Dolorum delectus vel dolore soluta optio in! Amet earum saepe atque ullam ex libero eum doloremque commodi quibusdam culpa obcaecati aliquid, perspiciatis explicabo. Nesciunt laudantium perferendis iure officiis sunt dolore quae aliquam ab vitae obcaecati cum sit quisquam magni consequuntur soluta hic, doloremque distinctio quaerat? Cum perferendis explicabo corporis sit, officia impedit. Molestias ad sint, excepturi suscipit similique blanditiis, dolore facere minima eos vel nobis. Quam voluptatum itaque, sint voluptatibus a illum blanditiis. Labore optio eligendi earum tempora deleniti in atque, animi corporis. Eligendi qui esse, dolores quaerat corporis autem distinctio? Placeat, sed, ratione ducimus doloremque mollitia fuga aliquam recusandae enim at inventore blanditiis ipsum ad obcaecati praesentium molestias animi beatae eaque.
