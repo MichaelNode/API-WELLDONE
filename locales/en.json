@@ -1,3 +1,7 @@
 {
-	"Invalid credentials": "Invalid credentials"
+	"Invalid credentials": "Invalid credentials",
+	"El nombre solo puede contener letras": "El nombre solo puede contener letras",
+	"El apellido solo puede contener letras": "El apellido solo puede contener letras",
+	"La contraseña debe tener al menos 8 caracteres": "La contraseña debe tener al menos 8 caracteres",
+	"El email no está correctamente escrito": "El email no está correctamente escrito"
 }
