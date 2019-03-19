@@ -6,24 +6,27 @@ block content
   .container-fluid.card-columns
     for article in articles
         .card.animated.bounceInLeft
-          img.grid-sizer.card-img-top.img-fluid(alt='Card image cap', src=article.file)
+          .hovereffect
+            img.card-img-top.img-fluid(src=article.file)
+            .overlay
+              h2 Category
+              h2= article.category
           h4.card-title=article.title
-          h5=article.create_at
-          h5=article.author
           p.card-text=article.summary
+          h6=article.author.name
+          p #{moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')}
+         
 
-
- 
   if (count >= recordsPerPage)
     nav(aria-label='...', style='text-align: center')
       ul.pagination
-        -if (lower_limit > 1)
+        -if (current > 0)
           li.page-item
             -var pageUrl =  '/articles/' + (lower_limit - pageButtonCount); 
-            a.page-link(href=pageUrl, tabindex='-1') Previous
+            a.page-link(href=pageUrl) First
         -else
           li.page-item.disabled
-            a.page-link(href='#', tabindex='-1') Previous
+            a.page-link(href='#', tabindex='-1') First
         -for (i = 1; i < pageButtonCount + 1; i++)
           -if (count > (recordsPerPage * paginationNo))
             -paginationNo = paginationNo + 1
@@ -36,10 +39,11 @@ block content
                   a.page-link(href='#')
                     | #{paginationNo}
                     span.sr-only (current)
-        -if (count > (recordsPerPage * upper_limit))
-          -var pageUrl = '/articles/' + (upper_limit + 1) 
+        -if (current = pages)
+          -var pageUrl = '/articles/' + (pageButtonCount) 
             li.page-item
-              a.page-link(href=pageUrl) Next
+              a.page-link(href=pageUrl) Last
         -else
             li.page-item.disabled
-              a.page-link(href='#', tabindex='-1') Next
+              a.page-link(href='#', tabindex='-1') Last
+

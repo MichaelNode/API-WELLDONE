@@ -1,4 +1,7 @@
 
+@import "./image.scss";
+
+
 .main_nav{
   a {
     color: #545b62;
@@ -10,17 +13,15 @@
   border: none !important;
 }
 
-/* .card:first-child {
-  -webkit-box-flex: 0 !important;;
-  -ms-flex: 0 0 66.666667% !important;
-  flex: 0 0 66.666667% !important;
-  max-width: 66.666667% !important;
-} */
-
 .card {
   p {
     text-align: justify;
+    color: #6c757d;
   }
+  h4 h2 {
+    color:black;
+  }
+
 }
 .container-fluid {
   padding-top: 10%;
