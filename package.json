@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "build": "webpack public/javascripts/app.js --output dist/js/app.js && npm run react_build",
+    "build": "webpack ./public/javascripts/app.js --output ./public/dist/js/app.js && npm run react_build",
     "install_react": "cd admin && npm install",
     "dev": "(npm run start &) && cd admin && npm start",
     "seeder": "npm run install_users && npm run install_articles",
     "react_start": "cd admin && npm start",
+    "react_dev": "cd admin && npm run build_dev",
     "react_build": "cd admin && npm run build",
     "install_users": "node ./lib/saveUsers",
     "install_articles": "node ./lib/saveArticles"
@@ -17,6 +18,8 @@
     "@babel/core": "^7.3.4",
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.4",
+    "animate.css": "^3.7.0",
+    "array-unique": "^0.3.2",
     "babel-loader": "^8.0.5",
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
@@ -34,12 +37,16 @@
     "i18n": "^0.8.3",
     "jade": "~1.11.0",
     "jquery": "^3.3.1",
+    "jquery-bridget": "^2.0.1",
     "jsonwebtoken": "^8.5.0",
     "jwt-simple": "^0.5.5",
+    "masonry-layout": "^4.2.2",
+    "moment": "^2.24.0",
     "mongoose": "^5.4.18",
     "morgan": "~1.9.0",
     "multer": "^1.4.1",
-    "popper.js": "^1.14.7"
+    "popper.js": "^1.14.7",
+    "yargs": "^13.2.2"
   },
   "devDependencies": {
     "autoprefixer": "^9.5.0",

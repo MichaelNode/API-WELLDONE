@@ -28,8 +28,8 @@ class InstantLogout extends Component {
 }
 
 InstantLogout.propTypes = {
-    history: React.PropTypes.shape({
-        push: React.PropTypes.func.isRequired,
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
     }),
 };
 

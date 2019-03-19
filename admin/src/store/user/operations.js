@@ -30,7 +30,7 @@ export const auth = (email, password) => async dispatch =>{
 
     }catch (err) {
         console.log(err);
-        dispatch(actions.loginErrorAction(err));
+        dispatch(actions.loginErrorAction('Error connecting to the server'));
     }
 };
 
@@ -51,7 +51,7 @@ export const logout = (redirect) => async dispatch => {
 
     }catch (err) {
         console.log(err);
-        dispatch(actions.loginErrorAction(err));
+        dispatch(actions.loginErrorAction('Error connecting to the server'));
     }
     dispatch({type: types.LOGOUT});
 };

@@ -32,7 +32,7 @@ var ArticleSchema = Schema({
    publi_date: Date,
    author: {
        type: Schema.ObjectId, 
-       ref: 'user'
+       ref: 'users'
    },
    last_modification: Date,
    /* res_article: {
@@ -50,4 +50,22 @@ ArticleSchema.statics.allowedCategorys = function () {
     ];
 };
 
-module.exports = mongoose.model('article', ArticleSchema);
+ArticleSchema.statics.listArticles = async function(filters, sort,pages,perPage){
+     const query = Article.find(filters);
+     query.sort(sort);
+     if(pages !== undefined && perPage !== undefined){
+		query.skip((perPage * pages) - perPage);
+		query.limit(perPage)
+	}	
+     result = await query.exec();
+     return result;
+}
+
+ArticleSchema.statics.Count = function(filters){
+	const query = Article.find(filters);
+	return query.count().exec();
+}
+
+const Article = mongoose.model('articles', ArticleSchema);
+
+module.exports = Article;
