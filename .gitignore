@@ -32,6 +32,7 @@ node_modules
 .env
 
 public/dist
+dist
 
 .idea/
 .idea/*
