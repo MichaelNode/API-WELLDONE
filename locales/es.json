@@ -18,5 +18,16 @@
 	"Confirm Password": "Confirma la contraseña",
 	"Password confirmation does not match password": "Las contraseñas no coinciden",
 	"E-mail already in use": "El E-mail ya está en uso",
-	"Nick name already in use": "Nick name already in use"
+	"Nick name already in use": "Nick name already in use",
+	"CULTURE": "CULTURE",
+	"TECH": "TECH",
+	"POLITICS": "POLITICS",
+	"DESING": "DESING",
+	"SCIENCE": "SCIENCE",
+	"POPULAR": "POPULAR",
+	"CULTERE": "CULTERE",
+	"HEALTH": "HEALTH",
+	"MUSIC": "MUSIC",
+	"First": "First",
+	"Last": "Last"
 }

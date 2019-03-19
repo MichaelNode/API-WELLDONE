@@ -10,9 +10,6 @@ const MongoStore = require('connect-mongo')(session);
 var app = express();
 app.locals.moment = require('moment');
 require('./lib/connectMongoose');
-var articleRouter = require('./routes/article')
-
-
 
 
 // view engine setup
@@ -31,6 +28,9 @@ const i18n = require('./lib/i18n')();
 // Multilanguage setup
 app.use(i18n.init);
 app.locals.getLocales = i18n.getLocales();
+
+const Article = require('./models/article');
+app.locals.categories = Article.allowedCategories();
 
 // Use session
 app.use(session({
@@ -53,7 +53,6 @@ app.use(async (req, res, next) => {
 
 // Import router
 require('./routes/router')(app);
-app.use('/articles', articleRouter);
 
 app.use(express.static(path.join(__dirname, 'admin/build')));
 

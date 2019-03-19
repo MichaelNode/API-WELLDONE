@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+  - const categoryExists = typeof category !== 'undefined';
+  - const categoryParam = categoryExists ? `?category=${category}` : ''
+  include ../partials/header.jade
+  include ./_articles_cards
+  include ../includes/_pagination
+  +pagination(categoryLink, categoryParam)

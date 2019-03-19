@@ -1,64 +1,64 @@
-'use stritc'
+'use strict';
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+const User = require('./user');
 
 var ArticleSchema = Schema({
    title:{
-        type: String, 
-        index: true 
+        type: String,
+        index: true
    },
    file: String,
    summary:{
-        type: String, 
-        index: true 
+        type: String,
+        index: true
    },
    content: {
-        type: String, 
-        index: true 
+        type: String,
+        index: true
    },
    state: {
-        type: Boolean, 
-        index: true 
-    },  
+        type: Boolean,
+        index: true
+    },
    category: {
-        type: String, 
-        index: true 
+        type: String,
+        index: true
    },
-   create_at: { 
-        type: Date, 
-        default: Date.now 
+   create_at: {
+        type: Date,
+        default: Date.now
    },
    publi_date: Date,
    author: {
-       type: Schema.ObjectId, 
-       ref: 'users'
+       type: Schema.ObjectId,
+       ref: 'user'
    },
    last_modification: Date,
    /* res_article: {
-        type: Schema.ObjectId, 
+        type: Schema.ObjectId,
         ref: 'article'
    } */
 });
 
-ArticleSchema.statics.allowedCategorys = function () {
+ArticleSchema.statics.allowedCategories = function () {
     return [
-        'CULTERE', 
-        'TECH', 
-        'HEALTH', 
+        'CULTURE',
+        'TECH',
+        'HEALTH',
         'MUSIC'
     ];
 };
 
 ArticleSchema.statics.listArticles = async function(filters, sort,pages,perPage){
-     const query = Article.find(filters);
+     const query = Article.find(filters).populate('author', 'name nick_name');
      query.sort(sort);
      if(pages !== undefined && perPage !== undefined){
 		query.skip((perPage * pages) - perPage);
 		query.limit(perPage)
-	}	
-     result = await query.exec();
-     return result;
+	}
+     return await query.exec();
 }
 
 ArticleSchema.statics.Count = function(filters){

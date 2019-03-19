@@ -1,0 +1,30 @@
+mixin pagination(url, extraParams)
+    if (count >= recordsPerPage)
+        nav(aria-label='...', style='text-align: center')
+            ul.pagination
+                -if (current > 0)
+                    li.page-item
+                        -var pageUrl =  url + (lower_limit - pageButtonCount) + extraParams;
+                        a.page-link(href=pageUrl) #{__('First')}
+                -else
+                    li.page-item.disabled
+                        a.page-link(href='#', tabindex='-1') #{__('First')}
+                -for (i = 1; i < pageButtonCount + 1; i++)
+                    -if (count > (recordsPerPage * paginationNo))
+                        -paginationNo = paginationNo + 1
+                        -var pageUrl =  url + paginationNo + extraParams;
+                        -if (page != paginationNo)
+                            li.page-item
+                                a.page-link(href=pageUrl) #{paginationNo}
+                        -else
+                            li.page-item.active
+                                a.page-link(href='#')
+                                    | #{paginationNo}
+                            span.sr-only (current)
+                -if (current = pages)
+                    -var pageUrl = url + (pageButtonCount) + extraParams
+                    li.page-item
+                        a.page-link(href=pageUrl) #{__('Last')}
+                -else
+                    li.page-item.disabled
+                        a.page-link(href='#', tabindex='-1') #{__('Last')}

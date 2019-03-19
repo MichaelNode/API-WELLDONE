@@ -1,12 +1,12 @@
-{ 
+{
     "articles":[
        {
         "title": "Reseña Pizzeria Vesubio",
-        "file": "",
+        "file": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Supreme_pizza.jpg",
         "summary": "",
         "content": "Hace mucho tiempo que no leía una novela con el estilo de Pizzería Vesubio",
         "state": true,
-        "category": "",
+        "category": "culture",
         "create_at": "",
         "publi_date": "",
         "author": "",
@@ -18,7 +18,7 @@
         "summary": "",
         "content": "Hoy os traigo mi opinión sobre “Hotel de las Musas",
         "state": true,
-        "category": "",
+        "category": "culture",
         "create_at": "",
         "publi_date": "",
         "author": "",
@@ -30,7 +30,7 @@
         "summary": "",
         "content": "Me gustan los libros que son una madeja",
         "state": true,
-        "category": "",
+        "category": "tech",
         "create_at": "",
         "publi_date": "",
         "author": "",

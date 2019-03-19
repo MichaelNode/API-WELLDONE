@@ -2,36 +2,40 @@
 
 const express = require('express');
 const router = express.Router();
-const Articles = require('../models/article')
+const {renderArticles} = require('../lib/articleService');
+const User = require('../models/user');
+const createError = require('http-errors');
 
 
 /* GET anuncios page. */
 router.get('/:page?', async function (req, res, next) {
 
     try {
-        const filters = {}
-        filters.state = true;
-        const sort =  'publi_date';
-        const page =  parseInt(req.params.page) || 1;
-        const recordsPerPage = 6;
-        const articles = await Articles.listArticles(filters, sort,page,recordsPerPage); 
-        const count = await Articles.Count(filters);
-        const pageButtonCount =  Math.ceil( count / recordsPerPage);
-        const lower_limit = (parseInt((page)/pageButtonCount) * pageButtonCount) + 1
-        const upper_limit = lower_limit * pageButtonCount;
-        const paginationNo = lower_limit - 1
-     
-        console.log(count, parseInt(page) , recordsPerPage ,pageButtonCount ,lower_limit ,  upper_limit  , paginationNo )
-        res.render('articles', { 
-            articles:articles,
-            count, 
-            recordsPerPage, 
-            pageButtonCount,
-            lower_limit , 
-            upper_limit , 
-            paginationNo, current: page, pages: Math.ceil( count / recordsPerPage)  });
-    } catch(err){ 
-        return res.next(err);
+        await renderArticles(req, res);
+    } catch(err){
+        next(err);
+        return;
+    }
+});
+
+/**
+ * GET Route for get user articles filtered
+ */
+router.get('/user/:nick/:page?', async function (req, res, next) {
+    try {
+        // get user by nick
+        const nick = req.params.nick;
+        const user = await User.findOne({nick_name: nick});
+        // if no user, then return 404
+        if(!user){
+            next(createError(404));
+            return;
+        }
+
+        // show user articles
+        await renderArticles(req, res, user);
+    } catch(err){
+        next(err);
     }
 });
 

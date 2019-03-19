@@ -18,5 +18,16 @@
 	"Confirm Password": "Confirm Password",
 	"Password confirmation does not match password": "Password confirmation does not match password",
 	"E-mail already in use": "E-mail already in use",
-	"Nick name already in use": "Nick name already in use"
+	"Nick name already in use": "Nick name already in use",
+	"CULTURE": "CULTURE",
+	"TECH": "TECH",
+	"POLITICS": "POLITICS",
+	"DESING": "DESING",
+	"SCIENCE": "SCIENCE",
+	"POPULAR": "POPULAR",
+	"CULTERE": "CULTERE",
+	"HEALTH": "HEALTH",
+	"MUSIC": "MUSIC",
+	"First": "First",
+	"Last": "Last"
 }
