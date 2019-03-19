@@ -1,23 +1,59 @@
 extends layout
 
 block content
+  // HEADER
   div(class="jumbotron-fluid" id="header")
     div(class="container")
       h1(class="text-center display-2 d-block")= title
       h2(class="text-center font-weight-normal d-block text-muted") Home for writers around the world
+  // NAV
   nav(class="navbar sticky-top navbar-light bg-light navbar-expand-md")
     a(href="#header" class="navbar-brand")= title
     button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav")
       span(class="navbar-toggler-icon")
-    div(class="collapse navbar-collapse justify-content-between" id="mainNav")
+    div(class="collapse navbar-collapse" id="mainNav")
       div(class="navbar-nav")
-        a(class="nav-item mx-lg-4 mx-xl-6 nav-link" href="#") Culture
-        a(class="nav-item mx-lg-4 mx-xl-6 nav-link" href="#") Tech
-        a(class="nav-item mx-lg-4 mx-xl-6 nav-link" href="#") Health
-        a(class="nav-item mx-lg-4 mx-xl-6 nav-link" href="#") Music
+        a(class="nav-item mx-lg-3 mx-xl-5 nav-link" href="#") Culture
+        a(class="nav-item mx-lg-3 mx-xl-5 nav-link" href="#") Tech
+        a(class="nav-item mx-lg-3 mx-xl-5 nav-link" href="#") Health
+        a(class="nav-item mx-lg-3 mx-xl-5 nav-link" href="#") Music
+      button(class="btn btn-outline-secondary ml-auto") Log In
       form(class="form-inline")
         input(type="search" class="form-control mx-2" placeholder="Search")
-        button(type="submit" class="btn btn btn-outline-secondary")
+        button(type="submit" class="btn btn-outline-secondary")
           i(class="fas fa-search")
-  div(class="container")
-    p(class="text-justify my-2") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis architecto saepe explicabo harum cupiditate accusamus totam vel quam incidunt eveniet id inventore perferendis pariatur quo commodi ex dignissimos eaque asperiores ullam porro ut fuga, molestiae illo! Sed voluptatem illo laborum labore eaque in ex quia, eum odio vel nam fugiat tenetur impedit ea repudiandae fugit perspiciatis quo voluptas corporis? Culpa laboriosam maxime voluptatibus reiciendis consequuntur ab vero dolorem atque nemo dignissimos, qui quasi esse impedit accusantium quibusdam nesciunt quod sint repudiandae, porro nisi architecto temporibus magni deserunt beatae. Dolorum delectus vel dolore soluta optio in! Amet earum saepe atque ullam ex libero eum doloremque commodi quibusdam culpa obcaecati aliquid, perspiciatis explicabo. Nesciunt laudantium perferendis iure officiis sunt dolore quae aliquam ab vitae obcaecati cum sit quisquam magni consequuntur soluta hic, doloremque distinctio quaerat? Cum perferendis explicabo corporis sit, officia impedit. Molestias ad sint, excepturi suscipit similique blanditiis, dolore facere minima eos vel nobis. Quam voluptatum itaque, sint voluptatibus a illum blanditiis. Labore optio eligendi earum tempora deleniti in atque, animi corporis. Eligendi qui esse, dolores quaerat corporis autem distinctio? Placeat, sed, ratione ducimus doloremque mollitia fuga aliquam recusandae enim at inventore blanditiis ipsum ad obcaecati praesentium molestias animi beatae eaque.
+  // MAIN CONTENT
+  div(class="container-fluid my-2 mx-xl-8 mx-lg-5 mx-md-2 mx-sm-1" id="main")
+    div(class="card bg-light border-light m-2 d-inline-block")
+      div(class="card-body")
+        h4(class="card-title") Lorem ipsum dolor sit
+        p(class="card-text text-justify") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi nisi harum fugit, magni asperiores libero.
+    div(class="card bg-light border-light m-2 d-inline-block")
+      div(class="card-body")
+        h4(class="card-title") Lorem ipsum dolor sit
+        p(class="card-text text-justify") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi nisi harum fugit, magni asperiores libero.
+    div(class="card bg-light border-light m-2 d-inline-block")
+      div(class="card-body")
+        h4(class="card-title") Lorem ipsum dolor sit
+        p(class="card-text text-justify") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi nisi harum fugit, magni asperiores libero.
+    div(class="card bg-light border-light m-2 d-inline-block")
+      div(class="card-body")
+        h4(class="card-title") Lorem ipsum dolor sit
+        p(class="card-text text-justify") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi nisi harum fugit, magni asperiores libero.
+    div(class="card bg-light border-light m-2 d-inline-block")
+      div(class="card-body")
+        h4(class="card-title") Lorem ipsum dolor sit
+        p(class="card-text text-justify") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi nisi harum fugit, magni asperiores libero.
+    div(class="card bg-light border-light m-2 d-inline-block")
+      div(class="card-body")
+        h4(class="card-title") Lorem ipsum dolor sit
+        p(class="card-text text-justify") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi nisi harum fugit, magni asperiores libero.
+    div(class="card bg-light border-light m-2 d-inline-block")
+      div(class="card-body")
+        h4(class="card-title") Lorem ipsum dolor sit
+        p(class="card-text text-justify") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi nisi harum fugit, magni asperiores libero.
+  // FOOTER
+  div(class="footer jumbotron-fluid mt-auto bg-secondary text-light py-3" id="footer")
+    div(class="container text-center")
+      h5= title
+      p &copy; DevRock 2019
