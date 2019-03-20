@@ -18,12 +18,14 @@ var UserSchema = Schema({
     email: {
         type: String,
         index: true,
-        unique: true
+        unique: true,
+        required: true
     },
     nick_name: {
         type: String,
         index: true,
-        unique: true
+        unique: true,
+        required: true
     },
     /* article: [{
         type: Schema.ObjectId,
@@ -36,7 +38,9 @@ var UserSchema = Schema({
         type: Date,
         default: Date.now
     },
-    last_modification: Date
+    last_modification: Date,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
 });
 
 // function for hash a plain password
