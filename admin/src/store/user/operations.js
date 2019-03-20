@@ -55,3 +55,13 @@ export const logout = (redirect) => async dispatch => {
     }
     dispatch({type: types.LOGOUT});
 };
+
+export const deleteUser = () => {
+    return async function () {
+        try {
+            await asyncFetch(apiRoutes.delete_user, 'DELETE')
+        } catch (err) {
+            console.log('Hubo un error borrando le usuario', err)
+        }
+    }
+}

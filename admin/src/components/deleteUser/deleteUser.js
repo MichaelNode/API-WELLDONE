@@ -1,11 +1,13 @@
 // Dependencies
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {userOperations} from '../../store/user';
 
 class DeleteUser extends Component {
     render(){
         return (
-            <button>{this.context.t('Delete_User')}</button>
+            <button onClick={this.props.deleteUser}>{this.context.t('Delete_User')}</button>
         )
     }
 }
@@ -14,4 +16,12 @@ DeleteUser.contextTypes = {
     t: PropTypes.func
 };
 
-export default DeleteUser;
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteUser: () => {
+            dispatch(userOperations.deleteUser());
+      }
+    };
+  };
+
+export default connect(null, mapDispatchToProps)(DeleteUser);
