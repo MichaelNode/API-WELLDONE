@@ -57,9 +57,9 @@ export const logout = (redirect) => async dispatch => {
 };
 
 export const deleteUser = () => {
-    return async function () {
+    return async function (dispatch) {
         try {
-            await asyncFetch(apiRoutes.delete_user, 'DELETE')
+            await Promise.all([asyncFetch(apiRoutes.delete_user, 'DELETE'), dispatch(logout())]);
         } catch (err) {
             console.log('Hubo un error borrando le usuario', err)
         }
