@@ -4,7 +4,7 @@ mixin pagination(url, extraParams)
             ul.pagination
                 -if (current > 1)
                     li.page-item
-                        -var pageUrl =  '/articles/1' + extraParams
+                        -var pageUrl =  url + 1 + extraParams
                         a.page-link(href=pageUrl) #{__('First')}
                 -else
                     li.page-item.disabled
@@ -12,7 +12,7 @@ mixin pagination(url, extraParams)
                 -for (i = 1; i < pageButtonCount + 1; i++)
                     -if (count > 0 )
                         -paginationNo = paginationNo + 1
-                        -var pageUrl =   '/articles/' + paginationNo  + extraParams
+                        -var pageUrl =   url + paginationNo  + extraParams
                         -if (page != paginationNo)
                             li.page-item
                                 a.page-link(href=pageUrl) #{paginationNo} 
@@ -22,7 +22,7 @@ mixin pagination(url, extraParams)
                                     |#{paginationNo}
                           span.sr-only (current)
                 -if (current != pages)
-                    -var pageUrl = '/articles/' + pageButtonCount  + extraParams
+                    -var pageUrl = url + pageButtonCount  + extraParams
                     li.page-item
                         a.page-link(href=pageUrl) #{__('Last')}  
                 -else
