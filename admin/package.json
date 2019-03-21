@@ -123,5 +123,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.0"
   }
 }
