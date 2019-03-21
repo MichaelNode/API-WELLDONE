@@ -1,9 +1,12 @@
 var express = require('express');
+
 var router = express.Router();
 var nodemailer = require('nodemailer');
 var async = require('async');
 var crypto = require('crypto');
 const User = require('../models/user');
+const loadTemplate = require('../lib/email');
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -24,6 +27,8 @@ router.post('/forgot', function(req, res, next) {
         done(err, token);
       });
     },
+
+ 
    
     function(token, done) {
       User.findOne({ email: req.body.email }, function(err, user) {
@@ -40,29 +45,35 @@ router.post('/forgot', function(req, res, next) {
         });
       });
     },
+    
     function(token, user, done) {
-      var smtpTransport = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-          user: 'HERE EMAIL',
-          pass: 'HERE-PASS'
-        }
-      });
-      var mailOptions = {
-        to: user.email,
-        from: 'HERE EMAIL',
-        subject: 'Node.js Password Reset',
-        html:   { path: './public/template/2/index.html' }
-       /*  html: 'You are receiving this because you (or someone else)<h1> have requested the reset of the password for your account.\n\n' +
-          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'http://' + req.headers.host + '/users/reset/' + token + '\n\n' +
-          '<p style="color:yellow">f you did not request this, please ignore this email and your password will remain unchanged</p>.\n' */
-      };
-      smtpTransport.sendMail(mailOptions, function(err) {
-        req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
-        done(err, 'done');
-      });
-    }
+    const context = [{
+      token,
+      user,
+    }];
+    console.log(context)
+    loadTemplate.loadTemplate('forgot', context).then((results, err) => {
+      return Promise.all(results.map((result) => {
+        loadTemplate.sendEmail({
+              to: result.context.user.email,
+              from: 'Me :)',
+              subject: 'hola',
+              html: result.email.html,
+              attachments: [{
+                filename: 'blog-1.jpg',
+                path: './public/images/blog-1.jpg',
+                cid: 'blog',
+                contentDisposition: "inline"
+            }],
+          });
+          req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+          done(err, 'done');
+      }));
+    }).then(() => {
+        console.log('Yay!');
+    })
+  } 
+ 
   ], function(err) {
     if (err) return next(err);
     res.redirect('forgot');
@@ -104,13 +115,13 @@ router.post('/reset/:token', function(req, res) {
       var smtpTransport = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-          user: 'HERE EMAIL',
-          pass: 'HERE-PASS'
+          user: 'heremail@gmail.com',
+          pass: 'here_pass.'
         }
       });
       var mailOptions = {
         to: user.email,
-        from: 'HERE EMAIL',
+        from: 'hereemail@gmail.com',
         subject: 'Your password has been changed',
         text: 'Hello,\n\n' +
           'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
