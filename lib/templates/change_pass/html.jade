@@ -405,7 +405,7 @@ html(lang='en', xmlns='http://www.w3.org/1999/xhtml', xmlns:v='urn:schemas-micro
               td.bg_white.email-section
                 .heading-section(style='text-align: center; padding: 0 30px;')
                   h2 WellDone
-                  p Password Reset
+                  p Your password has been changed
                 table(role='presentation', border='0', cellpadding='0', cellspacing='0', width='100%')
                   tbody
                     tr
@@ -414,14 +414,10 @@ html(lang='en', xmlns='http://www.w3.org/1999/xhtml', xmlns:v='urn:schemas-micro
                           tbody
                             tr
                               td
-                              img(src='cid:blog' )
+                                img(src='cid:blog', style='width:100%; max-with:600px; height:auto; margin: auto; display: block' )
                             tr
                               td.text-services(style='text-align: left;')
                                 h3='Hello ' + user.name
-                                p
-                                  | You are receiving this because you (or someone else) have requested the reset of the password for your account.
-                                  | Please click on the following link.
-                                p
-                                  a.btn.btn-primary(href='http://localhost:3000' +  '/users/reset/' + token) Reset
-            // end: tr
-            // end:tr
+                                p(style='width=100%')='This is a confirmation that the password for your account ' + user.email + ' has just been changed'
+                                
+        
