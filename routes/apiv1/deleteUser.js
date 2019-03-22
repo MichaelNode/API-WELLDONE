@@ -1,23 +1,24 @@
 const express = require('express')
 const router = express.Router();
-const db = require('../../lib/connectMongoose');
-const ObjectId = require('mongodb').ObjectID;
-const jwt = require('jsonwebtoken');
+const Users = require('../../models/user');
 
 router.delete('/', async (req, res, next) => {
     
         try {
             const userId = req.session.user._id
-            await db.collection('users').deleteOne({
-                "_id": ObjectId(userId)})
+            await Users.findOne({_id: userId}, function (err, user){
+                if (err){
+                    console.log('hubo un error al borrar la cuenta del usuario', err)
+                    return
+                } 
+                user.remove();
+                console.log('Usuario borrado: ' + user.name + ' ' + user.last_name);
+            });
             res.json({success: true})
         } catch (err) {
             console.log('error al borrar', err)
             next(err)
         }
-
     })
-       
-
 
 module.exports = router;
