@@ -1,11 +1,47 @@
+// custom variables
+
+$body-bg: #FAFAFA;
+$body-color: #404E5C;
+
+$theme-colors: (
+  "primary": #4F6272,
+  "secondary": #998FC7,
+  "success": #96BBBB, 
+  "danger": #a5524e,
+  "warning": #f8e15d,
+  "info":  #96BBBB,
+  "light": #fafafa,
+  "dark": #404E5C
+);
+
+$font-family-sans-serif: 'Hind', sans-serif !default;
+$headings-font-family: 'Montserrat', sans-serif !default;
+
+// custom class modifiers 
+
 .navbar-nav {
     display: flex;
     justify-content: space-around;
 }
 
 .card {
-    width: 20rem;
+    width: 20rem !important;
 }
+
+// no consigo que me aplique esta regla ??
+div.card-body {
+    a {
+        h4:hover {
+            color: theme-color("primary") !important;
+        }
+    }
+}
+
+.btn-outline-secondary:hover {
+    color: $body-bg !important;
+}
+
+// custom id modifiers
 
 #main {
     justify-content: center;

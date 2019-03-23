@@ -4,7 +4,7 @@ block content
   // HEADER
   div(class="jumbotron-fluid" id="header")
     div(class="container")
-      h1(class="text-center display-2 d-block")= title
+      h1(class="text-center display-3")= title
       h2(class="text-center font-weight-normal d-block text-muted") Home for writers around the world
   // NAV
   nav(class="navbar sticky-top navbar-light bg-light navbar-expand-md")
@@ -26,7 +26,8 @@ block content
   div(class="container-fluid my-2 mx-xl-8 mx-lg-5 mx-md-2 mx-sm-1" id="main")
     div(class="card bg-light border-light m-2 d-inline-block")
       div(class="card-body")
-        h4(class="card-title") Lorem ipsum dolor sit
+        a(href="#")
+          h4(class="card-title") Lorem ipsum dolor sit
         p(class="card-text text-justify") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi nisi harum fugit, magni asperiores libero.
     div(class="card bg-light border-light m-2 d-inline-block")
       div(class="card-body")
@@ -53,7 +54,7 @@ block content
         h4(class="card-title") Lorem ipsum dolor sit
         p(class="card-text text-justify") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi nisi harum fugit, magni asperiores libero.
   // FOOTER
-  div(class="footer jumbotron-fluid mt-auto bg-secondary text-light py-3" id="footer")
+  div(class="footer jumbotron-fluid mt-auto bg-dark text-light py-3" id="footer")
     div(class="container text-center")
       h5= title
       p &copy; DevRock 2019
