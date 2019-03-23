@@ -3,5 +3,15 @@
 	"El nombre solo puede contener letras": "El nombre solo puede contener letras",
 	"El apellido solo puede contener letras": "El apellido solo puede contener letras",
 	"La contraseña debe tener al menos 8 caracteres": "La contraseña debe tener al menos 8 caracteres",
-	"El email no está correctamente escrito": "El email no está correctamente escrito"
+	"El email no está correctamente escrito": "El email no está correctamente escrito",
+	"Welldone Blog": "Welldone Blog",
+	"¿Quiéres estar al tanto de noticias de actualidad? ¿Eres un geek y necesitas un oasis donde escribir? Entra aquí y podrás dar compartir todas las ideas que tengas": "¿Quiéres estar al tanto de noticias de actualidad? ¿Eres un geek y necesitas un oasis donde escribir? Entra aquí y podrás dar compartir todas las ideas que tengas",
+	"noticias,geek,blog": "noticias,geek,blog",
+	"First Name": "First Name",
+	"Last Name": "Last Name",
+	"Email": "Email",
+	"Nick name": "Nick name",
+	"Password": "Password",
+	"Confirm Password": "Confirm Password",
+	"Sign up": "Sign up"
 }
