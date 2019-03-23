@@ -45,7 +45,10 @@ var UserSchema = Schema({
 
 // function for hash a plain password
 UserSchema.statics.hashPassword = (plainPassword) => {
-    return bcrypt.hash(plainPassword, 14);
+    bcrypt.hash(plainPassword, 14, function(err,hash){
+        if (err) err
+        return hash
+    });
 };
 
 module.exports = mongoose.model('user', UserSchema)
