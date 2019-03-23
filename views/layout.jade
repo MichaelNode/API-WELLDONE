@@ -4,7 +4,7 @@ html
     - var title = title || __("Welldone Blog")
     - var description = description || __('¿Quiéres estar al tanto de noticias de actualidad? ¿Eres un geek y necesitas un oasis donde escribir? Entra aquí y podrás dar compartir todas las ideas que tengas');
     - var keywords = keywords || __('noticias,geek,blog'); // TODO: añadir keywords
-    - var url = ''; // TODO: añadir dominio
+    - var url = 'http://18.222.50.33/'; // TODO: añadir dominio
     - var image = image || ''; // TODO: añadir imagen
   head
     title #{title}
@@ -45,6 +45,7 @@ html
     link(rel='icon', type='image/png', sizes='32x32', href='./images/favicon-32x32.png')
     link(rel='icon', type='image/png', sizes='96x96', href='./images/favicon-96x96.png')
     link(rel='icon', type='image/png', sizes='16x16', href='./images/favicon-16x16.png')
+    link(rel='canonical', href='#{url}')
     meta(name='theme-color', content='#ffffff')
     meta(http-equiv='Cache-control', content='public')
     link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous")
