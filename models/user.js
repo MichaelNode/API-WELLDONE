@@ -45,10 +45,7 @@ var UserSchema = Schema({
 
 // function for hash a plain password
 UserSchema.statics.hashPassword = (plainPassword) => {
-    bcrypt.hash(plainPassword, 14, function(err,hash){
-        if (err) err
-        return hash
-    });
+    return bcrypt.hash(plainPassword, 14)
 };
 
 UserSchema.pre('remove', function (next) {
