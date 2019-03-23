@@ -51,5 +51,10 @@ UserSchema.statics.hashPassword = (plainPassword) => {
     });
 };
 
+UserSchema.pre('remove', function (next) {
+    this.model('articles').deleteMany({ author: this._id }, next);
+    next();
+ });
+
 module.exports = mongoose.model('user', UserSchema)
 

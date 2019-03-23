@@ -25,7 +25,9 @@ router.post('/login', upload.any(), async (req, res, next) => {
         }, (err, token) => {
             // check if error exists
             if (err) {
-                res.json({'success': false, 'error': err});
+                console.log('AQUI');
+                console.log(err);
+                res.json({'success': false, 'error': res.__('Error in login process')});
                 return;
             }
             // save user in session
