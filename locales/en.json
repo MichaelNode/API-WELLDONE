@@ -19,7 +19,6 @@
 	"Password confirmation does not match password": "Password confirmation does not match password",
 	"E-mail already in use": "E-mail already in use",
 	"Nick name already in use": "Nick name already in use",
-	"CULTURE": "CULTURE",
 	"TECH": "TECH",
 	"POLITICS": "POLITICS",
 	"DESING": "DESING",
@@ -30,5 +29,16 @@
 	"MUSIC": "MUSIC",
 	"First": "First",
 	"Last": "Last",
-	"Last3": "Last3"
+	"Forgot Password": "Forgot Password",
+	"Reset Password": "Reset Password",
+	"New Password": "New Password",
+	"Update Password": "Update Password",
+	"No account with that email address exists.": "No account with that email address exists.",
+	"An e-mail has been sent to with further instructions.": "An e-mail has been sent to with further instructions.",
+	"Sign in": "Sign in",
+	"Create an account": "Create an account",
+	"Search": "Search",
+	"CULTURE": "CULTURA",
+	"Passwords Don't Match": "Passwords Don't Match",
+	"Password reset token is invalid or has expired.": "Password reset token is invalid or has expired."
 }

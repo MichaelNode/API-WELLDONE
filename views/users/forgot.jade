@@ -1,9 +1,9 @@
 extends ../layout
 
 block content
-    form(method='POST')
+    form(method='POST', data-toggle="validator")
         .container
-            legend Forgot Password
+            legend #{__('Forgot Password')}
             .container
             if messages.error
                 .alert.alert-danger
@@ -16,8 +16,8 @@ block content
                     div= messages.success
             .form-group
             label(for='email') Email
-            input.form-control(type='text', name='email', autofocus)
+            input.form-control(type='email', name='email', autofocus, required)
             br
-            button.btn.btn-primary(type='submit') Reset Password
+            button.btn.btn-primary(type='submit') #{__('Reset Password')} 
     
    
