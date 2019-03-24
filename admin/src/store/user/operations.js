@@ -60,6 +60,7 @@ export const deleteUser = () => {
     return async function (dispatch) {
         try {
             await Promise.all([asyncFetch(apiRoutes.delete_user, 'DELETE'), dispatch(logout())]);
+            dispatch(actions.hideModal())
         } catch (err) {
             console.log('Hubo un error borrando le usuario', err)
         }

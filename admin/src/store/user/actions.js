@@ -38,3 +38,15 @@ export const logoutAction = (redirect) => {
       payload: redirect
   }
 };
+
+export const showModal = () =>{
+  return {
+    type: types.SHOW_MODAL
+  }
+};
+
+export const hideModal = () =>{
+    return {
+      type: types.HIDE_MODAL
+    }
+  };

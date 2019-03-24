@@ -2,10 +2,14 @@ const LOGIN_STARTED = 'user/LOGIN_STARTED';
 const LOGIN_SUCCESS = 'user/LOGIN_SUCCESS';
 const LOGIN_ERROR = 'user/LOGIN_ERROR';
 const LOGOUT = 'user/LOGOUT';
+const SHOW_MODAL = 'SHOW_MODAL';
+const HIDE_MODAL = 'HIDE_MODAL';
 
 export {
     LOGIN_STARTED,
     LOGIN_ERROR,
     LOGIN_SUCCESS,
-    LOGOUT
+    LOGOUT,
+    SHOW_MODAL,
+    HIDE_MODAL
 };

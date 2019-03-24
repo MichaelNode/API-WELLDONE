@@ -73,7 +73,7 @@ class Login extends Component {
                     this.props.error &&
                     <span className="error">{this.props.error}</span>
                 }
-                <form class="form-inline">
+                <form className="form-inline">
                     <div className="form-group">
                         <label htmlFor="email">{this.context.t('Email')}</label>
                         <div className="col">

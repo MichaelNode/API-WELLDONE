@@ -7,7 +7,8 @@ const initialState = {
     isLoading: false,
     error: '',
     token: token,
-    redirect: false
+    redirect: false,
+    showModal: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,9 +21,13 @@ const reducer = (state = initialState, action) => {
         return {...state, isLoading: false, token: null, error: action.payload, redirect: false};
     case types.LOGOUT:
         return {...state, isLoading: false, token: null, error: '', redirect: action.payload};
+    case types.SHOW_MODAL:
+        return {...state, showModal: true}
+    case types.HIDE_MODAL:
+        return {...state, showModal: false}
     default:
         return state;
     }
 };
 
-export default reducer;
+export default reducer
