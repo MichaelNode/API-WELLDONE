@@ -1,14 +1,60 @@
 doctype html
 html
+  block head
+    - var title = title || __("Welldone Blog")
+    - var description = description || __('¿Quiéres estar al tanto de noticias de actualidad? ¿Eres un geek y necesitas un oasis donde escribir? Entra aquí y podrás dar compartir todas las ideas que tengas');
+    - var keywords = keywords || __('noticias,geek,blog'); // TODO: añadir keywords
+    - var url = 'http://18.222.50.33/'; // TODO: añadir dominio
+    - var image = image || ''; // TODO: añadir imagen
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
-    link(rel='stylesheet', href='/stylesheets/animate.min.css')
-    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+    title #{title}
     script(src="/dist/js/app.js")
-  body
-    block content
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Hind|Montserrat")
+    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous")
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    // Meta Tags
+    meta(name='description', content='#{description}')
+    meta(name='keywords', content='#{keywords}')
+    meta(name='author', content='Devrock')
+    // Open Graph
+    meta(property='og:title', content='#{title}')
+    meta(property='og:url', content='#{url}')
+    meta(property='og:type', content='website')
+    meta(property='og:description', content='#{description}')
+    meta(property='og:image', content='#{image}')
+    meta(property='og:site_name', content='Welldone Blog')
+    // Twitter card
+    meta(name='twitter:card', content='summary')
+    meta(name='twitter:title', content='#{title}')
+    meta(name='twitter:description', content='#{description}')
+    meta(name='twitter:url', content='#{url}')
+    meta(name='twitter:image', content='#{image}')
+    // TODO: añadir twitter
+    meta(name='twitter:creator', content='@AÑADIRTWITTER')
+    // Favicon // TODO: AÑADIR FAVICON EN LA CARPETA IMAGES
+    link(rel='apple-touch-icon', sizes='57x57', href='./images/apple-icon-57x57.png')
+    link(rel='apple-touch-icon', sizes='60x60', href='./images/apple-icon-60x60.png')
+    link(rel='apple-touch-icon', sizes='72x72', href='./images/apple-icon-72x72.png')
+    link(rel='apple-touch-icon', sizes='76x76', href='./images/apple-icon-76x76.png')
+    link(rel='apple-touch-icon', sizes='114x114', href='./images/apple-icon-114x114.png')
+    link(rel='apple-touch-icon', sizes='120x120', href='./images/apple-icon-120x120.png')
+    link(rel='apple-touch-icon', sizes='144x144', href='./images/apple-icon-144x144.png')
+    link(rel='apple-touch-icon', sizes='152x152', href='./images/apple-icon-152x152.png')
+    link(rel='apple-touch-icon', sizes='180x180', href='./images/apple-icon-180x180.png')
+    link(rel='icon', type='image/png', sizes='192x192', href='./images/android-icon-192x192.png')
+    link(rel='icon', type='image/png', sizes='32x32', href='./images/favicon-32x32.png')
+    link(rel='icon', type='image/png', sizes='96x96', href='./images/favicon-96x96.png')
+    link(rel='icon', type='image/png', sizes='16x16', href='./images/favicon-16x16.png')
+    link(rel='canonical', href='#{url}')
+    meta(name='theme-color', content='#ffffff')
+    meta(http-equiv='Cache-control', content='public')
 
+  body
+    include ./partials/header.jade
+    main(id="main")
+      block content
+
+  footer
+    include ./partials/footer.jade

@@ -1,6 +1,6 @@
 mixin pagination(url, extraParams)
     if (count >= recordsPerPage)
-        nav(aria-label='...', style='text-align: center')
+        nav(aria-label='Pagination', style='text-align: center')
             ul.pagination
                 -if (current > 1)
                     li.page-item
@@ -15,7 +15,7 @@ mixin pagination(url, extraParams)
                         -var pageUrl =   url + paginationNo  + extraParams
                         -if (page != paginationNo)
                             li.page-item
-                                a.page-link(href=pageUrl) #{paginationNo} 
+                                a.page-link(href=pageUrl) #{paginationNo}
                     -else
                           li.page-item.active
                               a.page-link(href='#')
@@ -24,7 +24,7 @@ mixin pagination(url, extraParams)
                 -if (current != pages)
                     -var pageUrl = url + pageButtonCount  + extraParams
                     li.page-item
-                        a.page-link(href=pageUrl) #{__('Last')}  
+                        a.page-link(href=pageUrl) #{__('Last')}
                 -else
                     li.page-item.disabled
                         a.page-link(href='#', tabindex='-1') #{__('Last')}

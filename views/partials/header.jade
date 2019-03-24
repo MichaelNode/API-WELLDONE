@@ -4,24 +4,17 @@
 - const categoryLink = userExists ? `/articles/user/${userBlog.nick_name}/` : '/articles/'
 
 header
-  nav.navbar.fixed-top.navbar-expand-lg.navbar-light.bg-light.main_nav
-    a(href='/')
-      h3 Welldone
-    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarColor02', aria-controls='navbarColor02', aria-expanded='false', aria-label='Toggle navigation')
-      span.navbar-toggler-icon
-    #navbarColor02.collapse.navbar-collapse
-      ul.navbar-nav.mr-auto
-        li.nav-item.dropdown
-          a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-            i.fas.fa-user-circle
-          .dropdown-menu(aria-labelledby='navbarDropdown')
-            a.dropdown-item(href='/login') #{__('Sign in')}
-            a.dropdown-item(href='/register') #{__('Create an account')}
-        form.form-inline.my-2.my-lg-0
-          input#search.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
-          button#btn-search.btn.btn-outline-info.my-2.my-sm-0(type='submit')   #{__('Search')}
-    div
-      ul.nav.justify-content-center
+  // Header
+  nav(class="navbar navbar-light bg-light navbar-expand-md shadow fixed-top")
+    a(href="/" class="navbar-brand")= title
+    button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav")
+      span(class="navbar-toggler-icon")
+    div(class="collapse navbar-collapse" id="mainNav")
+      div(class="navbar-nav")
         each category in categories
-          li.nav-item
-            a.nav-link(href=`${categoryLink }${pageIndex}?category=${category.toLowerCase()}`) #{__(category.toUpperCase())}
+          a(class="nav-item mx-lg-3 mx-xl-5 nav-link" href=`${categoryLink}${pageIndex}?category=${category.toLowerCase()}`) #{__(category.toUpperCase())}
+      a(class="btn btn-outline-secondary ml-auto" href='/admin') #{__('Sign In')}
+      form(class="form-inline")
+        input(type="search" class="form-control mx-2" placeholder="Search")
+        button(type="submit" class="btn btn-outline-secondary")
+          i(class="fas fa-search")

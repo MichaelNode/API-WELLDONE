@@ -1,14 +1,11 @@
 if articles
-    .container-fluid.card-columns
+    .card-columns
         for article in articles
-            .card.animated.bounceInLeft
-                .hovereffect
-                    img.card-img-top.img-fluid(src=article.file)
-                    .overlay
-                        h2 Category
-                        h2= article.category
-                h4.card-title=article.title
-                p.card-text=article.summary
-                h6
-                    a(href=`/articles/user/${article.author.nick_name}`)=article.author.name
-                p #{moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')}
+            .card.bg-light
+                img.card-img-top.img-fluid(src=article.file)
+                .card-body
+                    h5.card-title=article.title
+                    p.card-text=article.summary
+                    h6
+                        a(href=`/articles/user/${article.author.nick_name}`)=article.author.name
+                    p #{moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')}
