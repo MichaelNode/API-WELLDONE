@@ -7,7 +7,8 @@ import AdminPanel from './AdminPanel';
 import InstantLogout from './components/login/InstantLogout';
 import * as serviceWorker from './serviceWorker';
 import I18n from "redux-i18n"
-import {translations} from "./config/translations"
+import {translations} from "./config/translations";
+import 'bootstrap/dist/css/bootstrap.css';
 
 render(
     <Provider store={store}>

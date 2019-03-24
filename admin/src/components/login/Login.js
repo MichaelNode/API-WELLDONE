@@ -73,24 +73,29 @@ class Login extends Component {
                     this.props.error &&
                     <span className="error">{this.props.error}</span>
                 }
-                <div>
-                    <label htmlFor="email">{this.context.t('Email')}</label>
-                    <input type="text" id='email' name='email' value={email}
-                           onChange={this.handleInputChange}/>
-                    {this.state.emailError &&
-                    <span className="error">{this.context.t(this.state.emailError)}</span>
-                    }
-                </div>
-                <div>
-                    <label htmlFor="password">{this.context.t('Password')}</label>
-                    <input type="password" id='password' name='password' value={password}
-                           onChange={this.handleInputChange}/>
-                    {this.state.passwordError &&
-                    <span className="error">{this.context.t(this.state.passwordError)}</span>
-                    }
-                </div>
-                <input type="button" value='Send' onClick={this.handleSubmit}/>
+                <form class="form-inline">
+                    <div className="form-group">
+                        <label htmlFor="email">{this.context.t('Email')}</label>
+                        <div className="col">
+                            <input type="text" className="form-control mx-sm-3" id='email' name='email' value={email}
+                                onChange={this.handleInputChange}/>
+                            {this.state.emailError &&
+                            <span className="error">{this.context.t(this.state.emailError)}</span>
+                            }
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">{this.context.t('Password')}</label>
+                        <input type="password" className="form-control mx-sm-3" id='password' name='password' value={password}
+                            onChange={this.handleInputChange}/>
+                        {this.state.passwordError &&
+                        <span className="error">{this.context.t(this.state.passwordError)}</span>
+                        }
+                    </div>
+                    <input type="button" className="btn btn-primary" value='Login' onClick={this.handleSubmit}/>
+                </form>
             </div>
+                
         )
     }
 }

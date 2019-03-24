@@ -6,8 +6,14 @@ export default class Nav extends Component{
     render(){
         return(
             <nav>
-                <Logout/>
-                <DeleteUser/>
+                <ul className="nav flex-column">
+                    <li className="nav-item">
+                        <Logout/>
+                    </li>
+                    <li className="nav-item">
+                        <DeleteUser/>
+                    </li>
+                </ul>
             </nav>
         )
     }
