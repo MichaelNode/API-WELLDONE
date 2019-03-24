@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  .container
+    form(method='POST', data-toggle="validator")
+      legend #{__('Reset Password')}    
+      .container
+            if messages.error
+                .alert.alert-danger
+                    div= messages.error
+      .form-group
+        label(for='password') #{__('New Password')}    
+        input.form-control(type='password', name='password', value='', placeholder='New password', autofocus=true , minlength=6, required) 
+      .form-group
+        label(for='confirm') #{__('Confirm Password')}    
+        input.form-control(type='password', name='confirm', value='', placeholder='Confirm password', minlength=6, required)
+      .form-group
+        button.btn.btn-primary(type='submit') #{__('Update Password')}   

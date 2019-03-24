@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 const User = require('./user');
+const i18n = require('i18n');
 
 var ArticleSchema = Schema({
    title:{

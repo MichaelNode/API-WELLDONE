@@ -6,6 +6,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
+
+
+
+var flash = require('express-flash');
+
 const MongoStore = require('connect-mongo')(session);
 var app = express();
 app.locals.moment = require('moment');
@@ -15,7 +20,6 @@ require('./lib/connectMongoose');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -44,6 +48,8 @@ app.use(session({
     url: "mongodb://localhost:27017/welldone"
   })
 }));
+
+app.use(flash());
 
 // Helper middleware for get if user is auth
 app.use(async (req, res, next) => {
