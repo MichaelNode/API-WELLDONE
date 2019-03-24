@@ -8,10 +8,14 @@ export default class Nav extends Component{
             <nav>
                 <ul className="nav flex-column">
                     <li className="nav-item">
-                        <Logout/>
+                        <a href="#">
+                            <Logout/>
+                        </a>
                     </li>
                     <li className="nav-item">
-                        <DeleteUser/>
+                        <a href="#">
+                            <DeleteUser/>
+                        </a>
                     </li>
                 </ul>
             </nav>

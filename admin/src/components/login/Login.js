@@ -4,6 +4,7 @@ import {handleInputChange} from "../../utils/utils";
 import {connect} from 'react-redux';
 import {userOperations} from '../../store/user';
 import PropTypes from 'prop-types'
+import styled from 'styled-components';
 
 class Login extends Component {
     constructor(props) {
@@ -47,7 +48,7 @@ class Login extends Component {
         if (!this.checkEmail()) {
             this.setState({emailError: 'error_email'});
             errors = true;
-        }else{
+        } else {
             this.setState({emailError: ''});
         }
 
@@ -55,7 +56,7 @@ class Login extends Component {
         if (!this.checkPassword()) {
             this.setState({passwordError: 'error_password'});
             errors = true;
-        }else{
+        } else {
             this.setState({passwordError: ''});
         }
 
@@ -68,34 +69,48 @@ class Login extends Component {
         const {email, password} = this.state;
         console.log(this.props.error);
         return (
-            <div>
-                {
-                    this.props.error &&
-                    <span className="error">{this.props.error}</span>
-                }
-                <form className="form-inline">
-                    <div className="form-group">
-                        <label htmlFor="email">{this.context.t('Email')}</label>
-                        <div className="col">
-                            <input type="text" className="form-control mx-sm-3" id='email' name='email' value={email}
-                                onChange={this.handleInputChange}/>
-                            {this.state.emailError &&
-                            <span className="error">{this.context.t(this.state.emailError)}</span>
-                            }
+            <div className="bg-light">
+                <LoginWrapper className="container d-flex hv-100">
+                    <div className="row w-100 justify-content-center align-self-center">
+                        <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h5 className="card-title text-center">Sign In</h5>
+                                    {
+                                        this.props.error &&
+                                        <span className="error">{this.props.error}</span>
+                                    }
+                                    <form>
+                                        <div className="form-group">
+                                            <label htmlFor="email">{this.context.t('Email')}</label>
+                                                <input type="text" className="form-control" id='email'
+                                                       name='email'
+                                                       value={email}
+                                                       onChange={this.handleInputChange}/>
+                                                {this.state.emailError &&
+                                                <span className="error">{this.context.t(this.state.emailError)}</span>
+                                                }
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="password">{this.context.t('Password')}</label>
+                                            <input type="password" className="form-control" id='password'
+                                                   name='password'
+                                                   value={password}
+                                                   onChange={this.handleInputChange}/>
+                                            {this.state.passwordError &&
+                                            <span className="error">{this.context.t(this.state.passwordError)}</span>
+                                            }
+                                        </div>
+                                        <input type="button" className="btn btn-primary" value='Login'
+                                               onClick={this.handleSubmit}/>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="password">{this.context.t('Password')}</label>
-                        <input type="password" className="form-control mx-sm-3" id='password' name='password' value={password}
-                            onChange={this.handleInputChange}/>
-                        {this.state.passwordError &&
-                        <span className="error">{this.context.t(this.state.passwordError)}</span>
-                        }
-                    </div>
-                    <input type="button" className="btn btn-primary" value='Login' onClick={this.handleSubmit}/>
-                </form>
+                </LoginWrapper>
             </div>
-                
+
         )
     }
 }
@@ -103,6 +118,10 @@ class Login extends Component {
 Login.contextTypes = {
     t: PropTypes.func
 };
+
+const LoginWrapper = styled.div`
+    height: 100vh;
+`;
 
 export default connect(
     (state, props) => ({

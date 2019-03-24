@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import Login from './components/login/Login'
 import Loading from './components/loading/Loading'
 import Nav from "./components/nav/Nav";
+import styled from 'styled-components';
 
 class AdminPanel extends Component {
   render() {
@@ -12,7 +13,7 @@ class AdminPanel extends Component {
           {
             this.props.token &&  !this.props.isLoading && (
                 <div className="App">
-                  <h1>Welldone Admin Panel</h1>
+                  <NavTitle>Welldone Admin Panel</NavTitle>
                   <Nav/>
                 </div>
             )
@@ -29,6 +30,10 @@ class AdminPanel extends Component {
     );
   }
 }
+
+const NavTitle = styled.h1`
+  margin-bottom: 0;
+`;
 
 export default connect(state => ({
   token: state.user.token,

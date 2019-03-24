@@ -13,7 +13,10 @@ header
       div(class="navbar-nav")
         each category in categories
           a(class="nav-item mx-lg-3 mx-xl-5 nav-link" href=`${categoryLink}${pageIndex}?category=${category.toLowerCase()}`) #{__(category.toUpperCase())}
-      a(class="btn btn-outline-secondary ml-auto" href='/admin') #{__('Sign In')}
+      if isLogged
+        a(class="btn btn-outline-secondary ml-auto" href='/admin') #{__('My Area')}
+      else
+        a(class="btn btn-outline-secondary ml-auto" href='/admin') #{__('Sign In')}
       form(class="form-inline")
         input(type="search" class="form-control mx-2" placeholder="Search")
         button(type="submit" class="btn btn-outline-secondary")
