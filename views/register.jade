@@ -1,34 +1,46 @@
 extends layout
 include ./includes/_error_input
 
+block head
+  - var showFooter = false;
+
 block content
+    .container.d-flex.hv-80
+      .row.w-100.justify-content-center.align-self-center
+        .col-sm-9.col-md-7.col-lg-5.mx-auto
+          .card.bg-light
+            .card-body
+              h5.card-title.text-center #{__('Sign Up')}
+              form(method='POST' action='/register')
+                .form-group
+                  label(for='name') #{__('First Name')}:
+                  input#name.form-control(type='text', name='name', value=name, required=true)
+                  +error_input('name', errors)
+                .form-group
+                  label(for='last_name') #{__('Last Name')}:
+                  input#last_name.form-control(type='text', name='last_name', value=last_name, required=true)
+                  +error_input('last_name', errors)
+                .form-group
+                  label(for='email') #{__('Email')}:
+                  input#email.form-control(type='email', placeholder='name@email.com', name='email', value=email, required=true)
+                  +error_input('email', errors)
+                .form-group
+                  label(for='nick_name') #{__('Nick name')}:
+                  input#nick_name.form-control(type='text', name='nick_name', value=nick_name, required=true)
+                  +error_input('nick_name', errors)
+                .form-group
+                  label(for='description') #{__('Description')}:
+                  input#description.form-control(type='text', name='description', value=description, required=true)
+                  +error_input('description', errors)
+                .form-group
+                  label(for='pw') #{__('Password')}:
+                  input#pw.form-control(type='password' name='password' minlength=8 required=true)
+                  +error_input('password', errors)
+                .form-group
+                  label(for='confirmPassword') #{__('Confirm Password')}:
+                  input#confirmPassword.form-control(type='password' name='confirmPassword' minlength=8 required=true)
+                  +error_input('confirmPassword', errors)
+                div
+                  p= message
 
-  form(method='POST' action='/register')
-    div
-      label(for='name') #{__('First Name')}:
-      input#name.form-control(type='text', name='name', value=name, required=true)
-      +error_input('name', errors)
-    div
-      label(for='last_name') #{__('Last Name')}:
-      input#last_name.form-control(type='text', name='last_name', value=last_name, required=true)
-      +error_input('last_name', errors)
-    div
-      label(for='email') #{__('Email')}:
-      input#email.form-control(type='email', placeholder='name@email.com', name='email', value=email, required=true)
-      +error_input('email', errors)
-    div
-      label(for='nick_name') #{__('Nick name')}:
-      input#nick_name.form-control(type='text', name='nick_name', value=nick_name, required=true)
-      +error_input('nick_name', errors)
-    div
-      label(for='pw') #{__('Password')}:
-      input#pw.form-control(type='password' name='password' minlength=8 required=true)
-      +error_input('password', errors)
-    div
-      label(for='confirmPassword') #{__('Confirm Password')}:
-      input#confirmPassword.form-control(type='password' name='confirmPassword' minlength=8 required=true)
-      +error_input('confirmPassword', errors)
-    div
-      p= message
-
-    button.btn.btn-primary(type='submit') #{__('Sign up')}
+                button.btn.btn-primary(type='submit') #{__('Sign up')}

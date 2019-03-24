@@ -1,6 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 @import "custom";
 
+// Page Styles
 main {
   margin-top: 90px;
   min-height: 70vh;
@@ -8,4 +9,40 @@ main {
 
 footer {
   width: 100%;
+}
+
+.hv-{
+
+  &100 {
+    min-height: 100vh;
+  }
+
+  &80 {
+    min-height: 80vh;
+  }
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.22);
+}
+
+// User
+.user-header-image img{
+  width: 150px;
+  border-radius: 150px;
+}
+
+.user-header-info{
+  h1{
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
+
+// Form
+.error {
+  color: red;
 }

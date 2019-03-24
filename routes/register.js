@@ -21,6 +21,7 @@ router.post('/',  validation, async function (req, res, next) {
         last_name: req.body.last_name,
         nick_name: req.body.nick_name,
         email: req.body.email,
+        description: req.body.description
       });
       return;
     }
@@ -37,6 +38,7 @@ router.post('/',  validation, async function (req, res, next) {
       last_name: req.body.last_name,
       nick_name: req.body.nick_name,
       email: req.body.email,
+      description: req.body.description,
       message: res.__('There was an error entering the data')
     });
   }

@@ -1,95 +1,98 @@
 {
-    "articles":[
-       {
-        "title": "Reseña Pizzeria Vesubio",
-        "file": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Supreme_pizza.jpg",
-        "summary": "",
-        "content": "Hace mucho tiempo que no leía una novela con el estilo de Pizzería Vesubio",
-        "state": true,
-        "category": "culture",
-        "create_at": "",
-        "publi_date": "",
-        "author": "",
-        "last_modification": ""
-       },
-       {
-        "title": "Reseña Hotel de las Musas",
-        "file": "https://s-ec.bstatic.com/images/hotel/max1024x768/147/147997361.jpg",
-        "summary": "",
-        "content": "Hoy os traigo mi opinión sobre “Hotel de las Musas",
-        "state": true,
-        "category": "culture",
-        "create_at": "",
-        "publi_date": "",
-        "author": "",
-        "last_modification": ""
+  "articles": [
+    {
+      "title": "Reseña Pizzeria Vesubio",
+      "file": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Supreme_pizza.jpg",
+      "summary": "",
+      "content": "Hace mucho tiempo que no leía una novela con el estilo de Pizzería Vesubio",
+      "state": true,
+      "category": "culture",
+      "create_at": "",
+      "publi_date": "",
+      "author": "",
+      "last_modification": ""
     },
     {
-        "title": "Las siete Magníficas",
-        "file": "https://telemarinas.com/wp-content/uploads/2016/06/libro-1.jpg",
-        "summary": "",
-        "content": "Me gustan los libros que son una madeja",
-        "state": true,
-        "category": "tech",
-        "create_at": "",
-        "publi_date": "",
-        "author": "",
-        "last_modification": ""
+      "title": "Reseña Hotel de las Musas",
+      "file": "https://s-ec.bstatic.com/images/hotel/max1024x768/147/147997361.jpg",
+      "summary": "",
+      "content": "Hoy os traigo mi opinión sobre “Hotel de las Musas",
+      "state": true,
+      "category": "culture",
+      "create_at": "",
+      "publi_date": "",
+      "author": "",
+      "last_modification": ""
+    },
+    {
+      "title": "Las siete Magníficas",
+      "file": "https://telemarinas.com/wp-content/uploads/2016/06/libro-1.jpg",
+      "summary": "",
+      "content": "Me gustan los libros que son una madeja",
+      "state": true,
+      "category": "tech",
+      "create_at": "",
+      "publi_date": "",
+      "author": "",
+      "last_modification": ""
     }
-   ],
-   "users": [
-       {
-        "name": "Alex",
-        "last_name": "Cappa",
-        "address": "Juan duque 10",
-        "email": "alejandro@gmail.com",
-        "nick_name": "acappa",
-        "article": "",
-        "password": "aaa220",
-        "image": "",
-        "state": true,
-        "create_at": "",
-        "last_modification": ""
-       },
-       {
-        "name": "Miguel",
-        "last_name": "Zamora",
-        "address": "Juan duque 10",
-        "email": "miguel@gmail.com",
-        "nick_name": "mzamora",
-        "article": "",
-        "password": "aaa220",
-        "image": "",
-        "state": true,
-        "create_at": "",
-        "last_modification": ""
-       },
-       {
-        "name": "Michael",
-        "last_name": "Hidalgo",
-        "address": "Juan duque 10",
-        "email": "michael@gmail.com",
-        "nick_name": "mhidalgo",
-        "article": "",
-        "password": "mmm220",
-        "image": "",
-        "state": true,
-        "create_at": "",
-        "last_modification": ""
-       },
-       {
-        "name": "Inma",
-        "last_name": "Ordmar",
-        "address": "Juan duque 10",
-        "email": "inma@gmail.com",
-        "nick_name": "irodmar",
-        "article": "",
-        "password": "iii220",
-        "image": "",
-        "state": true,
-        "create_at": "",
-        "last_modification": ""
-       }
-
-   ]
+  ],
+  "users": [
+    {
+      "name": "Alex",
+      "last_name": "Cappa",
+      "address": "Juan duque 10",
+      "email": "alejandro@gmail.com",
+      "nick_name": "acappa",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "article": "",
+      "password": "aaa220",
+      "image": "",
+      "state": true,
+      "create_at": "",
+      "last_modification": ""
+    },
+    {
+      "name": "Miguel",
+      "last_name": "Zamora",
+      "address": "Juan duque 10",
+      "email": "miguel@gmail.com",
+      "nick_name": "mzamora",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "article": "",
+      "password": "aaa220",
+      "image": "miguel.png",
+      "state": true,
+      "create_at": "",
+      "last_modification": ""
+    },
+    {
+      "name": "Michael",
+      "last_name": "Hidalgo",
+      "address": "Juan duque 10",
+      "email": "michael@gmail.com",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "nick_name": "mhidalgo",
+      "article": "",
+      "password": "mmm220",
+      "image": "",
+      "state": true,
+      "create_at": "",
+      "last_modification": ""
+    },
+    {
+      "name": "Inma",
+      "last_name": "Ordmar",
+      "address": "Juan duque 10",
+      "email": "inma@gmail.com",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "nick_name": "irodmar",
+      "article": "",
+      "password": "iii220",
+      "image": "",
+      "state": true,
+      "create_at": "",
+      "last_modification": ""
+    }
+  ]
 }

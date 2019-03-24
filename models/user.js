@@ -14,6 +14,12 @@ var UserSchema = Schema({
         type: String,
         index: true,
     },
+    description: {
+        type: String,
+        index: true,
+        required: true,
+        default: ''
+    },
     address: String,
     email: {
         type: String,
@@ -27,13 +33,13 @@ var UserSchema = Schema({
         unique: true,
         required: true
     },
-    /* article: [{
-        type: Schema.ObjectId,
-        ref: 'article'
-    }], */
     password: String,
     image: String,
     state: Boolean,
+    followers: [{
+        type: Schema.ObjectId,
+        ref: 'user'
+    }],
     create_at : {
         type: Date,
         default: Date.now
@@ -48,10 +54,14 @@ UserSchema.statics.hashPassword = (plainPassword) => {
     return bcrypt.hash(plainPassword, 14)
 };
 
+UserSchema.methods.getFollowing = async function () {
+    return await this.model('user').find({followers: {$in: [this._id]}});
+};
+
 UserSchema.pre('remove', function (next) {
-    this.model('articles').deleteMany({ author: this._id }, next);
+    this.model('articles').deleteMany({author: this._id}, next);
     next();
- });
 
-module.exports = mongoose.model('user', UserSchema)
+});
 
+module.exports = mongoose.model('user', UserSchema);

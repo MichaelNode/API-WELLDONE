@@ -40,5 +40,9 @@
 	"Password reset token is invalid or has expired.": "Password reset token is invalid or has expired.",
 	"Sign up": "Sign up",
 	"Sign In": "Sign In",
-	"My Area": "My Area"
+	"My Area": "My Area",
+	"Sign Up": "Sign Up",
+	"Debes indicar una descripción": "Debes indicar una descripción",
+	"followers": "followers",
+	"following": "following"
 }

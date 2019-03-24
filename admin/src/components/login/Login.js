@@ -75,7 +75,7 @@ class Login extends Component {
                         <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                             <div className="card">
                                 <div className="card-body">
-                                    <h5 className="card-title text-center">Sign In</h5>
+                                    <h5 className="card-title text-center">{this.context.t('Sign In')}</h5>
                                     {
                                         this.props.error &&
                                         <span className="error">{this.props.error}</span>

@@ -1,0 +1,11 @@
+mixin user_header(user, following)
+    - const image = user.image || 'default.png'
+    .row.d-flex.align-items-center.flex-lg-nowrap.mb-1
+        .user-header-image.mr-3
+            img(src="/images/#{image}")
+        .user-header-info
+            h1=user.name
+            p.mb-1=user.description
+            p.text-muted.small.d-inline.mr-2=`${user.followers.length} ${__('followers')}`
+            p.text-muted.small.d-inline=`${following.length} ${__('following')}`
+    hr.w-100.mb-5

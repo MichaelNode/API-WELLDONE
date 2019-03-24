@@ -3,7 +3,11 @@ extends ../layout
 block content
   - const categoryExists = typeof category !== 'undefined';
   - const categoryParam = categoryExists ? `?category=${category}` : ''
+
   .container
+    if userExists
+      include ../users/_user_header
+      +user_header(userBlog, following)
     include ./_articles_cards
     include ../includes/_pagination
     .mt-3

@@ -1,4 +1,5 @@
 doctype html
+
 html
   block head
     - var title = title || __("Welldone Blog")
@@ -6,6 +7,7 @@ html
     - var keywords = keywords || __('noticias,geek,blog'); // TODO: añadir keywords
     - var url = 'http://18.222.50.33/'; // TODO: añadir dominio
     - var image = image || ''; // TODO: añadir imagen
+    - var showFooter = showFooter || true; // TODO: añadir imagen
   head
     title #{title}
     script(src="/dist/js/app.js")
@@ -56,5 +58,6 @@ html
     main(id="main")
       block content
 
-  footer
-    include ./partials/footer.jade
+  if showFooter
+    footer
+      include ./partials/footer.jade
