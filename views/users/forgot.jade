@@ -1,23 +1,27 @@
 extends ../layout
 
 block content
-    form(method='POST', data-toggle="validator")
-        .container
-            legend #{__('Forgot Password')}
-            .container
-            if messages.error
-                .alert.alert-danger
-                    div= messages.error
-            if messages.info
-                .alert.alert-info
-                    div= messages.info
-            if messages.success
-                .alert.alert-success
-                    div= messages.success
-            .form-group
-            label(for='email') Email
-            input.form-control(type='email', name='email', autofocus, required)
-            br
-            button.btn.btn-primary(type='submit') #{__('Reset Password')} 
-    
-   
+    .container.d-flex.hv-80
+        .row.w-100.justify-content-center.align-self-center
+            .col-sm-9.col-md-7.col-lg-5.mx-auto
+                .card.bg-light
+                    .card-body
+                        h5.card-title.text-center #{__('Forgot Password')}
+                        form(method='POST', data-toggle="validator")
+                            .container
+                            if messages.error
+                                .alert.alert-danger
+                                    div= messages.error
+                            if messages.info
+                                .alert.alert-info
+                                    div= messages.info
+                            if messages.success
+                                .alert.alert-success
+                                    div= messages.success
+                            .form-group
+                            label(for='email') Email
+                            input.form-control(type='email', name='email', autofocus, required)
+                            br
+                            button.btn.btn-primary(type='submit') #{__('Reset Password')}
+
+

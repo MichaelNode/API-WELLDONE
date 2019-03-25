@@ -101,6 +101,10 @@ class Login extends Component {
                                             <span className="error">{this.context.t(this.state.passwordError)}</span>
                                             }
                                         </div>
+                                        <div className="row mb-3">
+                                            <a className="col-12" href={`${process.env.REACT_APP_API_URL}/register`}>{this.context.t('You do not have an account yet?')}</a>
+                                            <a className="col-12" href={`${process.env.REACT_APP_API_URL}/users/forgot`}>{this.context.t('Have you forgotten your password?')}</a>
+                                        </div>
                                         <input type="button" className="btn btn-primary" value='Login'
                                                onClick={this.handleSubmit}/>
                                     </form>
