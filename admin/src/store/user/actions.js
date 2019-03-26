@@ -50,3 +50,37 @@ export const hideModal = () =>{
       type: types.HIDE_MODAL
     }
   };
+
+export const showUpdateForm = () =>{
+    return {
+      type: types.SHOW_UPDATE_FORM
+    }
+};
+
+export const getFirstName = username => {
+  return {
+    type: types.GET_FIRST_NAME,
+    payload: username
+  }
+};
+
+export const getLastName = lastname => {
+  return {
+    type: types.GET_LAST_NAME,
+    payload: lastname
+  }
+};
+
+export const getNickName = nickname => {
+  return {
+    type: types.GET_NICK_NAME,
+    payload: nickname
+  }
+};
+
+export const getAddress = address => {
+  return {
+    type: types.GET_ADDRESS,
+    payload: address
+  }
+};

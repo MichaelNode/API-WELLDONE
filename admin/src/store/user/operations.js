@@ -66,3 +66,22 @@ export const deleteUser = () => {
         }
     }
 }
+
+export const updateUser = (name, lastname, nickname, address) => {
+
+    const body = {
+        userName: name, 
+        userLastName: lastname,
+        userNickName: nickname, 
+        userAddress: address
+    };
+
+    return async function (dispatch) {
+        try {
+            await asyncFetch(apiRoutes.user, 'PUT', JSON.stringify(body));
+            
+        } catch (err) {
+            console.log('Hubo un error actualizando le usuario', err)
+        }
+    }
+}

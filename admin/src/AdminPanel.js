@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import Login from './components/login/Login'
 import Loading from './components/loading/Loading'
 import Nav from "./components/nav/Nav";
+import UpdateUserForm from './components/updateUser/updateUserForm';
 import styled from 'styled-components';
 
 class AdminPanel extends Component {
@@ -15,8 +16,13 @@ class AdminPanel extends Component {
                 <div className="App">
                   <NavTitle>Welldone Admin Panel</NavTitle>
                   <Nav/>
+                  
                 </div>
             )
+          }
+          {
+            this.props.showUpdateForm &&
+              <UpdateUserForm/>
           }
           {
             !this.props.token && !this.props.isLoading &&
@@ -24,7 +30,7 @@ class AdminPanel extends Component {
           }
           {
             this.props.isLoading &&
-            <Loading/>
+                <Loading/>
           }
         </div>
     );
@@ -37,5 +43,6 @@ const NavTitle = styled.h1`
 
 export default connect(state => ({
   token: state.user.token,
-  isLoading: state.user.isLoading
+  isLoading: state.user.isLoading,
+  showUpdateForm: state.user.updateAccount
 }))(AdminPanel);

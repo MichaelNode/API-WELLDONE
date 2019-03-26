@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Logout from '../login/Logout';
 import DeleteUser from '../deleteUser/deleteUser';
+import UpdateUser from '../updateUser/updateUser';
 
 export default class Nav extends Component{
     render(){
@@ -15,6 +16,11 @@ export default class Nav extends Component{
                     <li className="nav-item">
                         <a href="#">
                             <DeleteUser/>
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a href="#">
+                            <UpdateUser/>
                         </a>
                     </li>
                 </ul>

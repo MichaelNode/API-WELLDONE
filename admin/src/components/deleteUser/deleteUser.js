@@ -12,9 +12,9 @@ class DeleteUser extends Component {
   render() {
     return (
       <>
-        <a className="nav-link" onClick={this.props.showModal}>
+        <span className="nav-link" onClick={this.props.showModal}>
           {this.context.t("Delete_User")}
-        </a>
+        </span>
 
         <Modal show={this.props.show} onHide={this.props.hideModal}>
           <Modal.Header closeButton>
