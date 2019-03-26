@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  .container.article-detail
+    .col-12
+      img.article-detail-image(src=`${article.file}`)
+    .col-12.d-flex.align-items-center
+        img.pt-2.pb-2.mr-3.user-thumbnail(src=`/images/${article.author.image}`)
+        p.m-0=`${article.author.nick_name} - ${article.getFormattedDatePost()}`
+    .col-12.mt-4.mb-4
+      h1=article.title
+      div
+        !{article.content}
+

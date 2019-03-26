@@ -1,11 +1,12 @@
 if articles
     .card-columns
         for article in articles
-            .card.bg-light
-                img.card-img-top.img-fluid(src=article.file)
-                .card-body
-                    h5.card-title=article.title
-                    p.card-text=article.summary
-                    h6
-                        a(href=`/articles/user/${article.author.nick_name}`)=article.author.name
-                    p #{moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')}
+            a(href=`/article/${article.author.nick_name}\/${article.getSlug()}`)
+                .card.bg-light
+                    img.card-img-top.img-fluid(src=article.file)
+                    .card-body
+                        h5.card-title=article.title
+                        p.card-text=article.summary
+                        h6
+                            a(href=`/articles/user/${article.author.nick_name}`)=article.author.name
+                        p #{moment(article.create_at).format('MMMM Do YYYY, h:mm:ss a')}

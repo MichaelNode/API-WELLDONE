@@ -1,39 +1,28 @@
 'use strict';
 
+// Dependencies
 const express = require('express');
 const router = express.Router();
-const {renderArticles} = require('../lib/articleService');
-const User = require('../models/user');
+const Article = require('../models/article');
 const createError = require('http-errors');
 
-
-/* GET anuncios page. */
-router.get('/:page?', async function (req, res, next) {
-
-    try {
-        await renderArticles(req, res);
-    } catch(err){
-        next(err);
-        return;
-    }
-});
-
 /**
- * GET Route for get user articles filtered
+ *  GET article.
  */
-router.get('/user/:nick/:page?', async function (req, res, next) {
+router.get('/:user/:articleSlug', async function (req, res, next) {
+
     try {
-        // get user by nick
-        const nick = req.params.nick;
-        const user = await User.findOne({nick_name: nick});
-        // if no user, then return 404
-        if(!user){
+        const id = Article.getIdFromSlug(req.params.articleSlug);
+        const article = await Article.findOne({_id: id, state: true, publi_date: {$lt: new Date()}}).populate('author', '_id image nick_name');
+
+        if(!article){
             next(createError(404));
             return;
         }
 
-        // show user articles
-        await renderArticles(req, res, user);
+        res.render('articles/get.jade', {
+            article: article
+        })
     } catch(err){
         next(err);
     }

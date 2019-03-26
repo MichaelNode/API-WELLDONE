@@ -46,5 +46,11 @@
 	"followers": "followers",
 	"following": "following",
 	"Description": "Description",
-	"you are not authenticated": "you are not authenticated"
+	"you are not authenticated": "you are not authenticated",
+	"minutos": "minutos",
+	"Hace": "Hace",
+	"horas": "horas",
+	"hora": "hora",
+	"Hace menos de 1 minuto": "Hace menos de 1 minuto",
+	"minuto": "minuto"
 }
