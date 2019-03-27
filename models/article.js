@@ -15,6 +15,10 @@ var ArticleSchema = Schema({
         type: String,
         index: true
    },
+    shortDescription: {
+        type: String,
+        default: ''
+    },
    content: {
         type: String,
         index: false
@@ -130,6 +134,20 @@ ArticleSchema.methods.getSlug = function(){
 ArticleSchema.statics.getIdFromSlug = function (slug) {
     const slugArray = slug.split('-');
     return slugArray[slugArray.length - 1];
+}
+
+/**
+ * Function for get short description of article
+ * @param maxLength
+ * @returns {string}
+ */
+ArticleSchema.methods.getShortDescription = function (maxLength = 100) {
+    if(!this.shortDescription) return '';
+    // trim the string to the maximum length
+    let shortDescription = this.shortDescription.substr(0, maxLength);
+    shortDescription = shortDescription.substr(0, Math.min(shortDescription.length, shortDescription.lastIndexOf(" ")));
+    // re-trim if we are in the middle of a word
+    return `${shortDescription}...`;
 }
 
 const Article = mongoose.model('articles', ArticleSchema);

@@ -15,8 +15,9 @@ class AdminPanel extends Component {
             this.props.token &&  !this.props.isLoading && (
                 <div className="App">
                   <NavTitle>Welldone Admin Panel</NavTitle>
+
                   <Nav/>
-                  
+
                 </div>
             )
           }
