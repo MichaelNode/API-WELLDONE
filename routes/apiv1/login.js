@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const {getUserFromRequestLogged, isLogged} = require('../../lib/jwtAuth');
 var multer = require('multer');
 var upload = multer();
+const Users = require('../../models/user');
 
 /**
  * POST login by api, will return jwt token
@@ -63,5 +64,35 @@ router.get('/logout', (req, res, next) => {
         }
     })
 });
+
+router.put('/', async (req, res, next) => {
+    try {
+        const userId = req.session.user._id
+        await Users.findOne({_id: userId}, async function (err, user){
+            if (err){
+                console.log('hubo un error al borrar la cuenta del usuario', err)
+                return
+            } 
+
+            try {
+                await Users.updateOne({_id: userId}, {
+                    name: req.body.userName,
+                    last_name: req.body.userLastName,
+                    nick_name: req.body.userNickName,
+                    address: req.body.userAddress
+                })
+                console.log('actualizando usuario: ' + req.body.userName + req.body.userLastName);
+
+            } catch (err) {
+                console.log('Error actualizando el usuario ', err)
+            }
+        
+        });
+        res.json({success: true})
+    } catch (err) {
+        console.log('error al buscar el usuario en la base de datos', err)
+        next(err)
+    }
+})
 
 module.exports = router;
