@@ -1,5 +1,5 @@
-const TYPE = 'duck/TYPE';
+const SHOW_FORM = 'SHOW_FORM';
 
 export {
-    TYPE
+    SHOW_FORM
 };

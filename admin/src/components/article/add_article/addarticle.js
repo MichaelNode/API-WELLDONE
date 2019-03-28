@@ -1,32 +1,35 @@
 import React, { Component } from "react";
-import { connect  } from "react-redux";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import * as types from '../../../store/article';
 
-class AddArticle extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          email: ''
-        }
-    }
-      
-      changeHandler = event => {
-        this.setState({
-          email: event.target.value
-        });
-      }
-
+class addArticle extends Component {
     render() {
-        return (
-            <form>
-            <input type="email" 
-                   name="email"   
-                   value={this.state.email} 
-                   onChange={this.changeHandler} 
-            />
-            </form>
-        );
+      return <span className="nav-link" onClick={this.props.showUpdateForm}>
+              {this.context.t("add_article")}
+              </span>;
     }
-}
+  }
 
-export default AddArticle;
+  addArticle.contextTypes = {
+    t: PropTypes.func
+  };
+  
+  
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    showUpdateForm: () => {
+        dispatch({
+            type: types.SHOW_FORM
+          });
+      }
+  };
+};
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(addArticle);

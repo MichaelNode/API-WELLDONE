@@ -13,6 +13,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 render(
     <Provider store={store}>
         <I18n translations={translations} initialLang="es">
+        
           <BrowserRouter>
             <BrowserRouter>
               <Switch>

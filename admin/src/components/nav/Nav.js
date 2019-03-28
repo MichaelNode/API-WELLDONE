@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Logout from '../login/Logout';
 import DeleteUser from '../deleteUser/deleteUser';
 import UpdateUser from '../updateUser/updateUser';
-import AddArticle from '../article/add_article/addarticle'
+import AddArticle from '../article/add_article/addarticle_form'
 
 
 export default class Nav extends Component{
