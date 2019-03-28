@@ -8,20 +8,23 @@ import InstantLogout from './components/login/InstantLogout';
 import * as serviceWorker from './serviceWorker';
 import I18n from "redux-i18n"
 import {translations} from "./config/translations";
-import 'bootstrap/dist/css/bootstrap.css';
+//import 'bootstrap/dist/css/bootstrap.css';
+import Header from './components/sidebars/sidebras';
+//import Navbar from './components/navbar/navbar';
 
 render(
     <Provider store={store}>
         <I18n translations={translations} initialLang="es">
-        
-          <BrowserRouter>
+          <Header />
+         
+          {/* <BrowserRouter>
             <BrowserRouter>
               <Switch>
                 <Route exact path="/admin" component={AdminPanel}/>
                 <Route exact path="/admin/logout" component={InstantLogout}/>
               </Switch>
             </BrowserRouter>
-          </BrowserRouter>
+          </BrowserRouter> */}
         </I18n>
     </Provider>
     , document.getElementById('root')

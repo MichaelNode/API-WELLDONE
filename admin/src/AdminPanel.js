@@ -5,6 +5,7 @@ import Login from './components/login/Login'
 import Loading from './components/loading/Loading'
 import Nav from "./components/nav/Nav";
 import UpdateUserForm from './components/updateUser/updateUserForm';
+import AddArticleForm from './components/article/add_article/addarticle_form';
 import styled from 'styled-components';
 
 class AdminPanel extends Component {
@@ -21,8 +22,12 @@ class AdminPanel extends Component {
             )
           }
           {
-            this.props.showUpdateForm &&
+             this.props.token &&  this.props.showUpdateForm &&
               <UpdateUserForm/>
+          }
+          {
+             this.props.token &&  this.props.showArticleForm &&
+              <AddArticleForm />
           }
           {
             !this.props.token && !this.props.isLoading &&
@@ -44,5 +49,6 @@ const NavTitle = styled.h1`
 export default connect(state => ({
   token: state.user.token,
   isLoading: state.user.isLoading,
-  showUpdateForm: state.user.updateAccount
+  showUpdateForm: state.user.updateAccount,
+  showArticleForm: state.article.showform
 }))(AdminPanel);

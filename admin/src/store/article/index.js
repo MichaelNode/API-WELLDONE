@@ -1,13 +1,13 @@
 import reducer from './reducers';
 
-import * as duckSelectors from './selectors';
-import * as duckOperations from './operations';
-import * as duckTypes from './types';
+import * as articleSelectors from './selectors';
+import * as articleOperations from './operations';
+import * as articleTypes from './types';
 
 export {
-    duckSelectors,
-    duckOperations,
-    duckTypes,
+    articleSelectors,
+    articleOperations,
+    articleTypes,
 };
 
 export default reducer;

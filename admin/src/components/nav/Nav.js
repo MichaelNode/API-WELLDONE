@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Logout from '../login/Logout';
 import DeleteUser from '../deleteUser/deleteUser';
 import UpdateUser from '../updateUser/updateUser';
-import AddArticle from '../article/add_article/addarticle_form'
+import AddArticle from '../article/add_article/addarticle'
 
 
 export default class Nav extends Component{
@@ -19,6 +19,11 @@ export default class Nav extends Component{
                     <li className="nav-item">
                         <a href="#">
                             <DeleteUser/>
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a href="#">
+                            <AddArticle/>
                         </a>
                     </li>
                     <li className="nav-item">
