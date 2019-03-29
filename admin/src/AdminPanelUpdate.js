@@ -4,9 +4,10 @@ import {connect} from "react-redux";
 import Login from './components/login/Login'
 import Loading from './components/loading/Loading'
 import Nav from "./components/nav/Nav";
+import UpdateUserForm from './components/updateUser/updateUserForm';
 import styled from 'styled-components';
 
-class AdminPanel extends Component {
+class AdminPanelUpdate extends Component {
   render() {
     return (
         <div>
@@ -15,6 +16,7 @@ class AdminPanel extends Component {
                 <div className="App">
                   <NavTitle>Welldone Admin Panel</NavTitle>
                   <Nav/>
+                  <UpdateUserForm/>
                 </div>
             )
           }
@@ -38,4 +40,4 @@ const NavTitle = styled.h1`
 export default connect(state => ({
   token: state.user.token,
   isLoading: state.user.isLoading
-}))(AdminPanel);
+}))(AdminPanelUpdate);

@@ -6,11 +6,11 @@ import StorageWrapper from '../../utils/StorageWrapper';
  * @param userToken
  * @returns {{type: string, token: *}}
  */
-export const loginSuccessAction = (userToken) => {
-    StorageWrapper.saveValue('token', userToken);
+export const loginSuccessAction = (loginData) => {
+    StorageWrapper.saveValue('token', loginData.token);
     return {
         type: types.LOGIN_SUCCESS,
-        payload: userToken
+        payload: loginData
     }
 };
 
@@ -51,36 +51,3 @@ export const hideModal = () =>{
     }
   };
 
-export const showUpdateForm = () =>{
-    return {
-      type: types.SHOW_UPDATE_FORM
-    }
-};
-
-export const getFirstName = username => {
-  return {
-    type: types.GET_FIRST_NAME,
-    payload: username
-  }
-};
-
-export const getLastName = lastname => {
-  return {
-    type: types.GET_LAST_NAME,
-    payload: lastname
-  }
-};
-
-export const getNickName = nickname => {
-  return {
-    type: types.GET_NICK_NAME,
-    payload: nickname
-  }
-};
-
-export const getAddress = address => {
-  return {
-    type: types.GET_ADDRESS,
-    payload: address
-  }
-};
