@@ -3,19 +3,37 @@ import {Provider} from 'react-redux';
 import {render} from 'react-dom';
 import store from './store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import AdminPanel from './AdminPanel';
+//import AdminPanel from './AdminPanel';
 import InstantLogout from './components/login/InstantLogout';
+
 import * as serviceWorker from './serviceWorker';
 import I18n from "redux-i18n"
 import {translations} from "./config/translations";
-//import 'bootstrap/dist/css/bootstrap.css';
-import Header from './components/sidebars/sidebras';
-//import Navbar from './components/navbar/navbar';
+import 'bootstrap/dist/css/bootstrap.css';
+import Header from './components/sidebars/sidebars';
+import MainNavbar from './components/navbar/navbar';
+import AddArticleForm  from './components/article/add_article/addarticle_form';
+import './index.css'
 
 render(
     <Provider store={store}>
         <I18n translations={translations} initialLang="es">
+      
+        <BrowserRouter>
+        <BrowserRouter>
+          <div>
+          <MainNavbar />
           <Header />
+        
+          <div className="content-wrapper">
+  
+             <AddArticleForm />
+          
+          </div>
+          </div>
+          </BrowserRouter>
+          </BrowserRouter>
+         
          
           {/* <BrowserRouter>
             <BrowserRouter>

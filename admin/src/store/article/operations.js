@@ -4,18 +4,21 @@ import {asyncFetch, isSuccessResponse} from "../../utils/apiService";
 import apiRoutes from "../../config/apiRoutes";
 
 
-export const addArticle = (name, lastname, nickname, address) => {
+export const addArticle = (title,file,summary,content,state,category) => {
 
     const body = {
-        userName: name, 
-        userLastName: lastname,
-        userNickName: nickname, 
-        userAddress: address
+        title,
+        file,
+        summary,
+        content,
+        state,
+        category
+      
     };
 
     return async function (dispatch) {
         try {
-            await asyncFetch(apiRoutes.user, 'POST', JSON.stringify(body));
+            await asyncFetch(apiRoutes.article, 'POST', JSON.stringify(body));
             
         } catch (err) {
             console.log('Hubo un error actualizando le usuario', err)

@@ -5,5 +5,7 @@ export default {
     login: `${API_BASE}/user/login`,
     logout: `${API_BASE}/user/logout`,
     delete_user: `${API_BASE}/deleteuser`,
-    user: `${API_BASE}/user`
+    user: `${API_BASE}/user`,
+    article: `${API_BASE}/article`,
+
 };
