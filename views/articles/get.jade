@@ -1,4 +1,5 @@
 extends ../layout
+import ./comment
 
 block content
     .container.article-detail
@@ -11,6 +12,9 @@ block content
             .col-12.col-md-10.col-lg-8.d-flex.align-items-center.p-0
                 img.pt-2.pb-2.mr-3.user-thumbnail(src=`/images/${article.author.image}`)
                 p.m-0=`${article.author.nick_name} - ${article.getFormattedDatePost()}`
-            div.col-12.col-md-10.col-lg-8.p-0
+            .col-12.col-md-10.col-lg-8.p-0
                 !{article.content}
 
+            .col-12.col-md-10.col-lg-8.p-0.mt-5
+                +comment(comments)
+                textarea.col-12.comment

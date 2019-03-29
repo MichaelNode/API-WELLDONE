@@ -92,11 +92,21 @@ hr {
   color: red;
 }
 
+textarea {
+  resize: none;
+}
+
 // Articles
 .article-detail-image{
   width: 100%;
   max-height: 300px;
   object-fit: cover;
+}
+
+.article-detail{
+  .comment {
+    min-height: 200px;
+  }
 }
 
 .article-card{
