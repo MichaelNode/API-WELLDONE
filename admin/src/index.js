@@ -2,25 +2,22 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {render} from 'react-dom';
 import store from './store';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import AdminPanel from './AdminPanel';
-import InstantLogout from './components/login/InstantLogout';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 import I18n from "redux-i18n"
 import {translations} from "./config/translations";
 import 'bootstrap/dist/css/bootstrap.css';
+import AdminPanel from "./AdminPanel";
+import InstantLogout from "./components/login/InstantLogout";
 
 render(
     <Provider store={store}>
         <I18n translations={translations} initialLang="es">
-          <BrowserRouter>
             <BrowserRouter>
-              <Switch>
-                <Route exact path="/admin" component={AdminPanel}/>
-                <Route exact path="/admin/logout" component={InstantLogout}/>
-              </Switch>
+                <Switch>
+                    <Route path="/admin" component={AdminPanel}/>
+                </Switch>
             </BrowserRouter>
-          </BrowserRouter>
         </I18n>
     </Provider>
     , document.getElementById('root')

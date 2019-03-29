@@ -32,9 +32,15 @@ router.post('/login', upload.any(), async (req, res, next) => {
                 return;
             }
             // save user in session
-            req.session.user = {_id: user._id};
+            req.session.user = {
+                _id: user._id,
+                name: user.name,
+                last_name: user.last_name, 
+                address: user.address,
+                nick_name: user.nick_name,
+            };
             // return token with a success response
-            res.json({'success': true, token: token});
+            res.json({'success': true, token: token, user: req.session.user});
         });
     } catch (err) {
         console.log(err);

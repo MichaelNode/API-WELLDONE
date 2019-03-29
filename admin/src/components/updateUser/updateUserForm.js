@@ -4,48 +4,76 @@ import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { userOperations } from '../../store/user';
-import * as types from '../../store/user/types';
+import {handleInputChange} from '../../utils/utils';
 
 class UpdateUserForm extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        name: '',
+        last_name:'',
+        nick_name: '',
+        address: ''
+    }
+}
+
+componentDidMount() {
+  const {name, last_name, nick_name, address} = this.props.userData
+
+  this.setState({ name });
+  this.setState({ last_name });
+  this.setState({ nick_name });
+  this.setState({ address });
+}
   
-  changeUserName = e => this.props.getFirstName(e.target.value);
-  changeUserLastName = e => this.props.getLastName(e.target.value);
-  changeUserNickName = e => this.props.getNickName(e.target.value);
-  changeUserAddress = e => this.props.getAddress(e.target.value);
+handleInputChange = (evt) => {
+  this.setState(handleInputChange(evt));
+};
+
 
   render() {
+    const {name, last_name, nick_name, address} = this.state
     return (
       <>
         <Form className="update-form" >
 
           <Form.Group controlId="formGridAddress1">
             <Form.Label>{this.context.t("First_Name")}</Form.Label>
-            <Form.Control onChange={this.changeUserName} />
+            <Form.Control type="text" 
+                          name='name'
+                          onChange={this.handleInputChange} 
+                          value={name} />
           </Form.Group>
 
           <Form.Group controlId="formGridAddress2">
             <Form.Label>{this.context.t("Last_Name")}</Form.Label>
-            <Form.Control onChange={this.changeUserLastName} />
+            <Form.Control type="text" 
+                          name='last_name'
+                          onChange={this.handleInputChange} 
+                          value={last_name} />
           </Form.Group>
 
           <Form.Group controlId="formGridAddress1">
             <Form.Label>{this.context.t("Nick_Name")}</Form.Label>
-            <Form.Control onChange={this.changeUserNickName} />
+            <Form.Control type="text" 
+                          name='nick_name'
+                          onChange={this.handleInputChange} 
+                          value={nick_name} />
           </Form.Group>
 
           <Form.Group controlId="formGridAddress2">
             <Form.Label>{this.context.t("Address")}</Form.Label>
-            <Form.Control onChange={this.changeUserAddress} />
+            <Form.Control type="text" 
+                          name='address'
+                          onChange={this.handleInputChange} 
+                          value={address} />
           </Form.Group>
           
           <Button variant="primary" 
                   type="submit" 
-                  onClick={() => this.props.updateUser (
-                                                        this.props.userFirstName,
-                                                        this.props.userLastName, 
-                                                        this.props.userNickName, 
-                                                        this.props.userAddress
-                                                        )}>
+                  onClick={() => this.props.updateUser (name, last_name, nick_name, address)}>
                   {this.context.t("Submit")}
           </Button>
         </Form>
@@ -60,10 +88,7 @@ UpdateUserForm.contextTypes = {
 };
 
 const mapStateToProps = state => ({
-   userFirstName: state.user.userName,
-   userLastName: state.user.lastName,
-   userNickName: state.user.nickName,
-   userAddress: state.user.address
+   userData: state.user.userData
 });
 
 const mapDispatchToProps = dispatch => {
@@ -71,30 +96,6 @@ const mapDispatchToProps = dispatch => {
     updateUser: (name, lastname, nickname, address) => {
         dispatch(userOperations.updateUser(name, lastname, nickname, address));
     },
-    getFirstName: username => {
-      dispatch({
-        type: types.GET_FIRST_NAME,
-        payload: username
-      })
-    },
-    getLastName: lastname => {
-      dispatch({
-        type: types.GET_LAST_NAME,
-        payload: lastname
-      })
-    },
-    getNickName: nickname => {
-      dispatch({
-        type: types.GET_NICK_NAME,
-        payload: nickname
-      })
-    },
-    getAddress: address => {
-      dispatch({
-        type: types.GET_ADDRESS,
-        payload: address
-      })
-    }
   };
 };
 

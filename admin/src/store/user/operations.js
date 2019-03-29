@@ -26,7 +26,7 @@ export const auth = (email, password) => async dispatch =>{
             return dispatch(actions.loginErrorAction(response.error));
         }
         // dispatch login success with token
-        dispatch(actions.loginSuccessAction(response.token))
+        dispatch(actions.loginSuccessAction(response))
 
     }catch (err) {
         console.log(err);
