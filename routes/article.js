@@ -22,7 +22,7 @@ router.get('/:user/:articleSlug', async function (req, res, next) {
             return;
         }
 
-        const comments = await Comment.find({article: article._id}).sort({create_at: 1});
+        const comments = await Comment.find({article: article._id}).sort({create_at: 1}).populate('user', '_id nick_name');
 
         res.render('articles/get.jade', {
             article: article,

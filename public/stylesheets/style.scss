@@ -105,7 +105,17 @@ textarea {
 
 .article-detail{
   .comment {
-    min-height: 200px;
+    min-height: 3rem;
+  }
+
+  .comment-card {
+    border: 1px solid $gray-400;
+    background-color: $white;
+    padding: 1rem;
+
+    .author {
+      color: theme-color("secondary")
+    }
   }
 }
 
@@ -154,4 +164,10 @@ textarea {
   z-index: 100;
   background-color: $gray-900;
   opacity: .3;
+}
+
+// Utils
+
+.small {
+  font-size: .9rem;
 }

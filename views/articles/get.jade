@@ -1,5 +1,5 @@
 extends ../layout
-import ./comment
+include ./comment
 
 block content
     .container.article-detail
@@ -16,5 +16,8 @@ block content
                 !{article.content}
 
             .col-12.col-md-10.col-lg-8.p-0.mt-5
-                +comment(comments)
-                textarea.col-12.comment
+                p.h3-style=__('Comments')
+                .form-group
+                    textarea.col-12.comment.form-control(placeholder=`${__('Write here...')}`)
+
+                +commentsCards(comments)
