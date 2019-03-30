@@ -12,7 +12,8 @@
     "react_dev": "cd admin && npm run build_dev",
     "react_build": "cd admin && npm run build",
     "install_users": "node ./lib/saveUsers",
-    "install_articles": "node ./lib/saveArticles"
+    "install_articles": "node ./lib/saveArticles",
+    "install_comments": "node ./lib/saveComments"
   },
   "dependencies": {
     "@babel/core": "^7.3.4",

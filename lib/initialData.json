@@ -95,5 +95,15 @@
       "create_at": "",
       "last_modification": ""
     }
+  ],
+  "comments": [
+    {
+      "content": "Este artículo es una obra de arte, increible todo lo que cuenta y expresa, un aplauso a su creador",
+      "create_at": 1553510222342
+    },
+    {
+      "content": "La comida estaba genial, el trato muy bueno y todo a un precio razonable, repetiremos la experiencia. Nos ha faltado que nos invitaran a un chupito o algo por el estilo :)",
+      "create_at": 1553790622342
+    }
   ]
 }

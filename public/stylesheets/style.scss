@@ -92,11 +92,45 @@ hr {
   color: red;
 }
 
+.textarea-wrapper {
+  position:relative;
+  min-height: 170px;
+  border: 1px solid $gray-300;
+  background-color: $white;
+
+  input[type=submit] {
+    position:absolute;
+    bottom: 10px;
+    right: 15px;
+    width: 60px;
+  }
+}
+
 // Articles
 .article-detail-image{
   width: 100%;
   max-height: 300px;
   object-fit: cover;
+}
+
+.article-detail{
+  .comment {
+    min-height: 110px;
+    position:relative;
+    border:none;
+    resize: none;
+    outline: none;
+  }
+
+  .comment-card {
+    border: 1px solid $gray-400;
+    background-color: $white;
+    padding: 1rem;
+
+    .author {
+      color: theme-color("secondary")
+    }
+  }
 }
 
 .article-card{
@@ -144,4 +178,19 @@ hr {
   z-index: 100;
   background-color: $gray-900;
   opacity: .3;
+}
+
+// Utils
+
+.small {
+  font-size: .9rem;
+
+  &-2 {
+    font-size: 1rem;
+  }
+
+  &-3 {
+    font-size: 1.1rem;
+  }
+
 }
