@@ -1,15 +1,19 @@
 extends ../layout
 include ./comment
 include ../includes/_pagination
+include ../includes/_error_input
 
 block content
     - const link = `/article/${article.author.nick_name}\/${article.getSlug()}/`;
 
     .container.article-detail
+
+        // Article Image
         .p-0.row.d-flex.justify-content-center.overlay-wrapper
             .col-12.col-lg-10.overlay-grey
             img.col-12.col-lg-10.article-detail-image.p-0(src=`${article.file}`)
 
+        // Article Content
         .col-12.mt-5.mb-4.mr-0.ml-0.p-0.row.d-flex.justify-content-center
             h1.col-12.col-md-10.col-lg-8.p-0=article.title
             .col-12.col-md-10.col-lg-8.d-flex.align-items-center.p-0
@@ -18,12 +22,19 @@ block content
             .col-12.col-md-10.col-lg-8.p-0
                 !{article.content}
 
-            .col-12.col-md-10.col-lg-8.p-0.mt-5.row
+            // Comments
+            .col-12.col-md-10.col-lg-8.p-0.mt-5.mb-5.row
                 p.h3-style=__('Comments')
-                .textarea-wrapper.col-12.pr-0
-                    textarea.comment.col-12.p-0.pt-2.pr-2(placeholder=`${__('Write here...')}`)
-                    input.btn.btn-outline-secondary.mt-2(type='button' value=`${__('Send')}`)
 
+                // New Comment if user is logged
+                if isLogged
+                    form.col-12.p-0(method="post")
+                        .textarea-wrapper.col-12.pr-0
+                            textarea.comment.col-12.p-0.pt-2.pr-2(placeholder=`${__('Write here...')}`, name="content" required)=commentPosted
+                            input.btn.btn-outline-secondary.mt-2(type='submit' value=`${__('Send')}`)
+                        +error_input('content', errors)
+
+                // Comments of this article with pagination
                 +commentsCards(comments)
 
                 .mt-3

@@ -13,11 +13,14 @@ var CommentSchema = Schema({
         ref: 'articles'
     },
     content: String,
-    create_at: String,
+    create_at: {
+        type: Date,
+        default: Date.now
+    },
 });
 
 CommentSchema.statics.listComments = async function(filters, pages, perPage){
-    const query = this.model('comment').find(filters).sort({create_at: 1}).populate('user', '_id nick_name');
+    const query = this.model('comment').find(filters).sort({create_at: -1}).populate('user', '_id nick_name');
     if(pages !== undefined && perPage !== undefined){
         query.skip((perPage * pages) - perPage);
         query.limit(perPage)
@@ -27,7 +30,7 @@ CommentSchema.statics.listComments = async function(filters, pages, perPage){
 
 CommentSchema.statics.Count = function(filters){
     const query = Comment.find(filters);
-    return query.count().exec();
+    return query.countDocuments().exec();
 }
 
 const Comment = mongoose.model('comment', CommentSchema);

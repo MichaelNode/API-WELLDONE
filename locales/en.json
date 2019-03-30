@@ -59,5 +59,7 @@
 	"Write here": "Write here",
 	"Write here..": "Write here..",
 	"Write here...": "Write here...",
-	"Send": "Send"
+	"Send": "Send",
+	"You can not upload an empty comment": "You can not upload an empty comment",
+	"You are not authenticated": "You are not authenticated"
 }
