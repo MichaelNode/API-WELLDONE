@@ -10,7 +10,8 @@ const initialState = {
     token: token,
     redirect: false,
     showModal: false,
-    userData: userData
+    userData: userData,
+    message: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,11 +23,13 @@ const reducer = (state = initialState, action) => {
     case types.LOGIN_ERROR:
         return {...state, isLoading: false, token: null, error: action.payload, redirect: false};
     case types.LOGOUT:
-        return {...state, isLoading: false, token: null, error: '', redirect: action.payload};
+        return {...state, isLoading: false, token: null, error: '', redirect: action.payload, message: ''};
     case types.SHOW_MODAL:
         return {...state, showModal: true, }
     case types.HIDE_MODAL:
         return {...state, showModal: false}
+    case types.SUCCESS_MESSAGE:
+        return {...state, message: action.payload}
     default:
         return state;
     }

@@ -67,21 +67,30 @@ export const deleteUser = () => {
     }
 }
 
-export const updateUser = (name, lastname, nickname, address) => {
+export const updateUser = (name, lastname, nickname, address, color, description, selectedFile) => {
 
-    const body = {
-        userName: name, 
-        userLastName: lastname,
-        userNickName: nickname, 
-        userAddress: address
-    };
+    const fd = new FormData();
+
+    fd.append('userImage', selectedFile)
+    fd.append('userName', name)
+    fd.append('userLastName', lastname)
+    fd.append('userNickName', nickname)
+    fd.append('userAddress', address)
+    fd.append('userColor', color)
+    fd.append('userDescription', description)
+
+    const headers = {
+    //"Content-Type": "application/json",
+    'Accept': 'application/json',
+};
+    
 
     return async function (dispatch) {
         try {
-            await asyncFetch(apiRoutes.user, 'PUT', JSON.stringify(body));
-            
+            await asyncFetch(apiRoutes.user, 'PUT', fd, headers);
+            dispatch(actions.successMessage('Data_Updated'))
         } catch (err) {
-            console.log('Hubo un error actualizando le usuario', err)
+            console.log('Hubo un error actualizando el usuario', err)
         }
     }
 }

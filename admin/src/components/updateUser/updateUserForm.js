@@ -1,100 +1,133 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
 import { userOperations } from '../../store/user';
 import {handleInputChange} from '../../utils/utils';
+import { TwitterPicker } from 'react-color';
 
-class UpdateUserForm extends Component {
+function UpdateUserForm (props, context) {
 
-  constructor(props) {
-    super(props);
+  const {name, last_name, nick_name, address, description} = props.userData 
 
-    this.state = {
-        name: '',
-        last_name:'',
-        nick_name: '',
-        address: ''
-    }
-}
+  const [nameUpdated, setName] = useState(name)
+  const [last_nameUpdated, setLastName] = useState(last_name)
+  const [nick_nameUpdated, setNickName] = useState(nick_name)
+  const [addressUpdated, setAddress] = useState(address)
+  const [color, setColor] = useState('')
+  const [descriptionUpdated, setDescription] = useState(description)
+  const [selectedFile, setSelectedFile] = useState(null)
 
-componentDidMount() {
-  const {name, last_name, nick_name, address} = this.props.userData
-
-  this.setState({ name });
-  this.setState({ last_name });
-  this.setState({ nick_name });
-  this.setState({ address });
-}
+  function submit(e){
+    e.preventDefault()
+    props.updateUser (nameUpdated, last_nameUpdated, nick_nameUpdated, addressUpdated, color, descriptionUpdated, selectedFile)
+  }
   
-handleInputChange = (evt) => {
-  this.setState(handleInputChange(evt));
-};
-
-
-  render() {
-    const {name, last_name, nick_name, address} = this.state
     return (
       <>
-        <Form className="update-form" >
+        <Form className="update-form" 
+              onSubmit={submit}>
 
-          <Form.Group controlId="formGridAddress1">
-            <Form.Label>{this.context.t("First_Name")}</Form.Label>
-            <Form.Control type="text" 
+          <Form.Group  controlId="formGridAddress1">
+            <Form.Label>{context.t("First_Name")}</Form.Label>
+            <Form.Control type="text"
                           name='name'
-                          onChange={this.handleInputChange} 
-                          value={name} />
+                          onChange={(e) => {
+                            setName(e.target.value)
+                          }} 
+                          value={nameUpdated} />
           </Form.Group>
 
-          <Form.Group controlId="formGridAddress2">
-            <Form.Label>{this.context.t("Last_Name")}</Form.Label>
+          <Form.Group  controlId="formGridAddress2">
+            <Form.Label>{context.t("Last_Name")}</Form.Label>
             <Form.Control type="text" 
                           name='last_name'
-                          onChange={this.handleInputChange} 
-                          value={last_name} />
+                          onChange={(e) => {
+                            setLastName(e.target.value)
+                          }} 
+                          value={last_nameUpdated} />
           </Form.Group>
 
-          <Form.Group controlId="formGridAddress1">
-            <Form.Label>{this.context.t("Nick_Name")}</Form.Label>
+          <Form.Group  controlId="formGridAddress1">
+            <Form.Label>{context.t("Nick_Name")}</Form.Label>
             <Form.Control type="text" 
                           name='nick_name'
-                          onChange={this.handleInputChange} 
-                          value={nick_name} />
+                          onChange={(e) => {
+                            setNickName(e.target.value)
+                          }} 
+                          value={nick_nameUpdated} />
           </Form.Group>
 
-          <Form.Group controlId="formGridAddress2">
-            <Form.Label>{this.context.t("Address")}</Form.Label>
+          <Form.Group  controlId="formGridAddress2">
+            <Form.Label>{context.t("Address")}</Form.Label>
             <Form.Control type="text" 
                           name='address'
-                          onChange={this.handleInputChange} 
-                          value={address} />
+                          onChange={(e) => {
+                            setAddress(e.target.value)
+                          }} 
+                          value={addressUpdated} />
           </Form.Group>
-          
+
+          <Form.Group as={Col} md="3" controlId="formGridAddress2">
+            <Form.Label>{context.t("Pick_Color")}</Form.Label>
+            <TwitterPicker
+                    color={ color }
+                    onChangeComplete={(color) => {
+                      setColor(color.hex)
+                    }} 
+                  />
+    
+          </Form.Group>
+
+          <Form.Group  controlId="formGridAddress2">
+            <Form.Label>{context.t("Write_Description")}</Form.Label>
+            <Form.Control as="textarea" 
+                          size="lg"
+                          name="description"
+                          maxLength="500"
+                          value={descriptionUpdated}
+                          onChange={(e) => {
+                            setDescription(e.target.value)
+                          }} />
+          </Form.Group>     
+
+        <Form.Group  controlId="formGridAddress2">
+          <Form.Label>{context.t("Choose_Image")}</Form.Label>
+            <Form.Control type="file" 
+                          onChange={(e) => {
+                            setSelectedFile(e.target.files[0])
+                          }} />
+          </Form.Group>    
+
           <Button variant="primary" 
-                  type="submit" 
-                  onClick={() => this.props.updateUser (name, last_name, nick_name, address)}>
-                  {this.context.t("Submit")}
+                  type="submit">
+                  {context.t("Submit")}
           </Button>
+         <div>
+          <span>{context.t(props.message)}</span>
+         </div>             
+
         </Form>
-        
       </>
     );
   }
-}
+
 
 UpdateUserForm.contextTypes = {
   t: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-   userData: state.user.userData
+   userData: state.user.userData,
+   message: state.user.message
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateUser: (name, lastname, nickname, address) => {
-        dispatch(userOperations.updateUser(name, lastname, nickname, address));
+    updateUser: (name, lastname, nickname, address, color, description, selectedFile) => {
+        dispatch(userOperations.updateUser(name, lastname, nickname, address, color, description, selectedFile));
     },
   };
 };

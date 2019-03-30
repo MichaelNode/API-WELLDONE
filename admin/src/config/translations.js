@@ -15,7 +15,11 @@ export const translations = {
         "Last_Name": 'Last Name',
         "Address": 'Address',
         "Nick_Name": 'Nick Name',
-        "Submit": 'Submit'
+        "Submit": 'Submit',
+        "Pick_Color": 'Pick a color for your profile',
+        "Write_Description": 'Tell the world who you are',
+        "Data_Updated": 'Your account was successfully updated!',
+        "Choose_Image": 'Upload your profile picture'
     },
     es: {
         "Email": "Email",
@@ -33,6 +37,10 @@ export const translations = {
         "Last_Name": 'Apellido',
         "Address": 'Dirección',
         "Nick_Name": 'Nombre de usuario',
-        "Submit": 'Enviar'
+        "Submit": 'Enviar',
+        "Pick_Color": 'Elige un color para tu perfil',
+        "Write_Description": 'Dile al mundo quién eres',
+        "Data_Updated": '¡Tu cuenta ha sido actualizada con éxito!',
+        "Choose_Image": 'Elige una imagen para tu perfil'
     }
 };

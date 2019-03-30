@@ -6,6 +6,8 @@ const {getUserFromRequestLogged, isLogged} = require('../../lib/jwtAuth');
 var multer = require('multer');
 var upload = multer();
 const Users = require('../../models/user');
+const uploadImages = require('../../lib/uploadImages');
+
 
 /**
  * POST login by api, will return jwt token
@@ -38,6 +40,8 @@ router.post('/login', upload.any(), async (req, res, next) => {
                 last_name: user.last_name, 
                 address: user.address,
                 nick_name: user.nick_name,
+                description: user.description,
+                profileColor: user.color
             };
             // return token with a success response
             res.json({'success': true, token: token, user: req.session.user});
@@ -71,12 +75,12 @@ router.get('/logout', (req, res, next) => {
     })
 });
 
-router.put('/', async (req, res, next) => {
+router.put('/', uploadImages.single('userImage'), async (req, res, next) => {
     try {
         const userId = req.session.user._id
         await Users.findOne({_id: userId}, async function (err, user){
             if (err){
-                console.log('hubo un error al borrar la cuenta del usuario', err)
+                console.log('hubo un error al encontrar la cuenta del usuario', err)
                 return
             } 
 
@@ -85,9 +89,12 @@ router.put('/', async (req, res, next) => {
                     name: req.body.userName,
                     last_name: req.body.userLastName,
                     nick_name: req.body.userNickName,
-                    address: req.body.userAddress
+                    address: req.body.userAddress,
+                    color: req.body.userColor,
+                    description: req.body.userDescription,
+                    image: req.file.path
                 })
-                console.log('actualizando usuario: ' + req.body.userName + req.body.userLastName);
+                console.log('actualizando usuario: ' + req.body.userName + ' ' + req.body.userLastName);
 
             } catch (err) {
                 console.log('Error actualizando el usuario ', err)

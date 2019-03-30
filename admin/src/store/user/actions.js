@@ -52,3 +52,9 @@ export const hideModal = () =>{
     }
   };
 
+  export const successMessage = (message) => {
+      return {
+          type: types.SUCCESS_MESSAGE,
+          payload: message
+      }
+  };
