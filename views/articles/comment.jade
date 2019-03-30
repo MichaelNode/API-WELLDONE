@@ -6,7 +6,7 @@ mixin commentsCards(comments)
                     img.pt-2.pb-2.mr-3.user-thumbnail(src=`/images/${article.author.image}`)
                     .row
                         p.m-0.col-12
-                            span.author=`${comment.user.nick_name}`
+                            a.author(href=`/articles/user/${comment.user.nick_name}`)=`${comment.user.nick_name}`
                         p.small.m-0.col-12=`${moment(comment.create_at).format('lll')}`
             p.m-0=comment.content
     -});

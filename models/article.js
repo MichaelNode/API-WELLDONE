@@ -56,7 +56,7 @@ ArticleSchema.statics.allowedCategories = function () {
 };
 
 ArticleSchema.statics.listArticles = async function(filters, sort,pages,perPage){
-     const query = Article.find(filters).populate('author', 'name nick_name');
+     const query = Article.find(filters).populate('author', 'name nick_name image');
      query.sort(sort);
      if(pages !== undefined && perPage !== undefined){
 		query.skip((perPage * pages) - perPage);

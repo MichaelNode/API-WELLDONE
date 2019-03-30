@@ -4,11 +4,13 @@ if articles
             .card.article-card.bg-light
                 a(href=`/article/${article.author.nick_name}\/${article.getSlug()}`)
                     img.card-img-top.img-fluid(src=article.file)
-                .card-body
+                .card-body.pb-1
                     a(href=`/article/${article.author.nick_name}\/${article.getSlug()}`)
                         p.h5-style.card-title=article.title
                     p.card-text=article.summary
                     p=article.shortDescription
-                    p.h6-style
-                        a(href=`/articles/user/${article.author.nick_name}`)=article.author.name
-                    p #{article.getFormattedDatePost()}
+                    .col-12.d-flex.align-items-center.p-0.justify-content-between
+                        p.m-0.small-3
+                            if !userExists
+                                a.text-secondary.author(href=`/articles/user/${article.author.nick_name}`)=`${article.author.nick_name}`
+                        p.small-2.m-0 #{moment(article.publi_date).format('lll')}
