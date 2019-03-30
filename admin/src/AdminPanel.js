@@ -3,8 +3,10 @@ import './App.css';
 import {connect} from "react-redux";
 import Login from './components/login/Login'
 import Loading from './components/loading/Loading'
-import Nav from "./components/nav/Nav";
-import styled from 'styled-components';
+import {Route, Switch} from "react-router-dom";
+import InstantLogout from "./components/login/InstantLogout";
+import UpdateUserForm from "./components/updateUser/updateUserForm";
+import Header from "./Header";
 
 class AdminPanel extends Component {
   render() {
@@ -12,10 +14,13 @@ class AdminPanel extends Component {
         <div>
           {
             this.props.token &&  !this.props.isLoading && (
-                <div className="App">
-                  <NavTitle>Welldone Admin Panel</NavTitle>
-                  <Nav/>
-                </div>
+                <React.Fragment>
+                    <Header/>
+                    <Switch>
+                      <Route exact path="/admin/logout" component={InstantLogout}/>
+                      <Route exact path="/admin/update" component={UpdateUserForm}/>
+                    </Switch>
+                </React.Fragment>
             )
           }
           {
@@ -30,10 +35,6 @@ class AdminPanel extends Component {
     );
   }
 }
-
-const NavTitle = styled.h1`
-  margin-bottom: 0;
-`;
 
 export default connect(state => ({
   token: state.user.token,

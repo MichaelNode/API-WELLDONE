@@ -1,11 +1,14 @@
 if articles
-    .card-columns
+    .cards-masonry
         for article in articles
-            .card.bg-light
-                img.card-img-top.img-fluid(src=article.file)
+            .card.article-card.bg-light
+                a(href=`/article/${article.author.nick_name}\/${article.getSlug()}`)
+                    img.card-img-top.img-fluid(src=article.file)
                 .card-body
-                    h5.card-title=article.title
+                    a(href=`/article/${article.author.nick_name}\/${article.getSlug()}`)
+                        p.h5-style.card-title=article.title
                     p.card-text=article.summary
-                    h6
+                    p=article.shortDescription
+                    p.h6-style
                         a(href=`/articles/user/${article.author.nick_name}`)=article.author.name
-                    p #{moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')}
+                    p #{article.getFormattedDatePost()}

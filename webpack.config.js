@@ -3,30 +3,34 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 module.exports = {
     mode: 'development',
     module: {
-       rules: [
-         {
-           test: /\.js$/,
-           exclude: /node_modules/,
-           use: {
-             loader: "babel-loader"
-           }
-         },
-         {
-            test: /\.s(a|c)ss$/,
-            use: [{
-                loader: "style-loader"
-            }, {
-                loader: "css-loader",
-            }, {
-                loader: "postcss-loader",
-                options: {
-                    plugins: () => [ require('precss'), require('autoprefixer') ]
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader"
                 }
-            }, {
-                loader: "sass-loader"
-            }]
-        }
-       ]
+            },
+            {
+                test: /\.s(a|c)ss$/,
+                use: [{
+                    loader: "style-loader"
+                }, {
+                    loader: "css-loader",
+                }, {
+                    loader: "postcss-loader",
+                    options: {
+                        plugins: () => [require('precss'), require('autoprefixer')]
+                    }
+                }, {
+                    loader: "sass-loader"
+                }]
+            },
+            {
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                loader: 'url-loader?limit=100000'
+            }
+        ]
     },
     plugins: [
         new MiniCssExtractPlugin({
@@ -34,6 +38,6 @@ module.exports = {
             // both options are optional
             filename: "[name].css",
             chunkFilename: "[id].css"
-    })
+        })
     ]
- }
+}

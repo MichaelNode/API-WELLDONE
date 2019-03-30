@@ -50,5 +50,13 @@
 	"Debes indicar una descripción": "Debes indicar una descripción",
 	"followers": "followers",
 	"following": "following",
-	"Description": "Description"
+	"Description": "Description",
+	"minutos": "minutos",
+	"Hace": "Hace",
+	"horas": "horas",
+	"hora": "hora",
+	"Hace menos de 1 minuto": "Hace menos de 1 minuto",
+	"minuto": "minuto",
+	"días": "días",
+	"día": "día"
 }

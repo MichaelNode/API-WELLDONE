@@ -14,8 +14,13 @@ $theme-colors: (
   "dark": #404E5C
 );
 
+@font-face {
+    src: url('/fonts/Montserrat-Bold.ttf');
+    font-family: "Montserrat-Bold";
+}
+
 $font-family-sans-serif: 'Hind', sans-serif !default;
-$headings-font-family: 'Montserrat', sans-serif !default;
+$headings-font-family: 'Montserrat-Bold', sans-serif !default;
 
 // custom class modifiers
 
@@ -41,25 +46,6 @@ div.card-body {
 
 #main {
     justify-content: center;
-}
-
-.card-columns {
-
-    @include media-breakpoint-up(sm) {
-        column-count: 1;
-    }
-
-    @include media-breakpoint-up(md) {
-        column-count: 2;
-    }
-
-    @include media-breakpoint-up(lg) {
-        column-count: 3;
-    }
-
-    @include media-breakpoint-up(xl) {
-        column-count: 4;
-    }
 }
 
 .shadow{

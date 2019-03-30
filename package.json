@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "build": "webpack ./public/javascripts/app.js --output ./public/dist/js/app.js && npm run react_build",
+    "build": "webpack ./public/javascripts/app.js --output ./public/dist/js/app.js ",
     "install_react": "cd admin && npm install",
     "dev": "(npm run start &) && cd admin && npm start",
     "seeder": "npm run install_users && npm run install_articles",
@@ -58,6 +58,7 @@
   "devDependencies": {
     "autoprefixer": "^9.5.0",
     "css-loader": "^2.1.1",
+    "file-loader": "^3.0.1",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "nodemon": "^1.18.10",
@@ -67,6 +68,7 @@
     "precss": "^4.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.3.0"
   },

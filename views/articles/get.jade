@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+    .container.article-detail
+        .p-0.row.d-flex.justify-content-center.overlay-wrapper
+            .col-12.col-lg-10.overlay-grey
+            img.col-12.col-lg-10.article-detail-image.p-0(src=`${article.file}`)
+
+        .col-12.mt-5.mb-4.mr-0.ml-0.p-0.row.d-flex.justify-content-center
+            h1.col-12.col-md-10.col-lg-8.p-0=article.title
+            .col-12.col-md-10.col-lg-8.d-flex.align-items-center.p-0
+                img.pt-2.pb-2.mr-3.user-thumbnail(src=`/images/${article.author.image}`)
+                p.m-0=`${article.author.nick_name} - ${article.getFormattedDatePost()}`
+            div.col-12.col-md-10.col-lg-8.p-0
+                !{article.content}
+
