@@ -92,8 +92,17 @@ hr {
   color: red;
 }
 
-textarea {
-  resize: none;
+.textarea-wrapper {
+  position:relative;
+  min-height: 170px;
+  border: 1px solid $gray-300;
+
+  input[type=button] {
+    position:absolute;
+    bottom: 10px;
+    right: 15px;
+    width: 60px;
+  }
 }
 
 // Articles
@@ -105,7 +114,11 @@ textarea {
 
 .article-detail{
   .comment {
-    min-height: 3rem;
+    min-height: 110px;
+    position:relative;
+    border:none;
+    resize: none;
+    outline: none;
   }
 
   .comment-card {
