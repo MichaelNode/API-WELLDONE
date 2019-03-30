@@ -8,6 +8,7 @@ import StorageWrapper from '../../utils/StorageWrapper';
  */
 export const loginSuccessAction = (loginData) => {
     StorageWrapper.saveValue('token', loginData.token);
+    StorageWrapper.saveValue('userData', JSON.stringify(loginData.user));
     return {
         type: types.LOGIN_SUCCESS,
         payload: loginData

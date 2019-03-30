@@ -2,6 +2,7 @@ import * as types from "./types";
 import StorageWrapper from '../../utils/StorageWrapper';
 
 const token = StorageWrapper.getValue('token');
+const userData = JSON.parse(StorageWrapper.getValue('userData'));
 
 const initialState = {
     isLoading: false,
@@ -9,7 +10,7 @@ const initialState = {
     token: token,
     redirect: false,
     showModal: false,
-    userData: {}
+    userData: userData
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,7 +24,7 @@ const reducer = (state = initialState, action) => {
     case types.LOGOUT:
         return {...state, isLoading: false, token: null, error: '', redirect: action.payload};
     case types.SHOW_MODAL:
-        return {...state, showModal: true, updateAccount: false}
+        return {...state, showModal: true, }
     case types.HIDE_MODAL:
         return {...state, showModal: false}
     default:

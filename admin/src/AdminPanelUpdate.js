@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import Login from './components/login/Login'
 import Loading from './components/loading/Loading'
 import Nav from "./components/nav/Nav";
-import UpdateUserForm from './components/updateUser/updateUserForm';
+import UpdateUserFormHooks from './components/updateUser/updateUserFormHooks';
 import styled from 'styled-components';
 
 class AdminPanelUpdate extends Component {
@@ -16,7 +16,7 @@ class AdminPanelUpdate extends Component {
                 <div className="App">
                   <NavTitle>Welldone Admin Panel</NavTitle>
                   <Nav/>
-                  <UpdateUserForm/>
+                  <UpdateUserFormHooks/>
                 </div>
             )
           }
