@@ -19,7 +19,9 @@ export const translations = {
         "Pick_Color": 'Pick a color for your profile',
         "Write_Description": 'Tell the world who you are',
         "Data_Updated": 'Your account was successfully updated!',
-        "Choose_Image": 'Upload your profile picture'
+        "Choose_Image": 'Upload your profile picture',
+        "New_User_Account": 'You do not have an account yet?',
+        "Forgot_Password": 'Have you forgotten your password?'
     },
     es: {
         "Email": "Email",
@@ -41,6 +43,8 @@ export const translations = {
         "Pick_Color": 'Elige un color para tu perfil',
         "Write_Description": 'Dile al mundo quién eres',
         "Data_Updated": '¡Tu cuenta ha sido actualizada con éxito!',
-        "Choose_Image": 'Elige una imagen para tu perfil'
+        "Choose_Image": 'Elige una imagen para tu perfil',
+        "New_User_Account": '¿Todavía no tienes cuenta?',
+        "Forgot_Password": '¿Olvidaste tu contraseña?'
     }
 };
