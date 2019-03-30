@@ -1,7 +1,10 @@
 extends ../layout
 include ./comment
+include ../includes/_pagination
 
 block content
+    - const link = `/article/${article.author.nick_name}\/${article.getSlug()}/`;
+
     .container.article-detail
         .p-0.row.d-flex.justify-content-center.overlay-wrapper
             .col-12.col-lg-10.overlay-grey
@@ -21,3 +24,6 @@ block content
                     textarea.col-12.comment.form-control(placeholder=`${__('Write here...')}`)
 
                 +commentsCards(comments)
+
+                .mt-3
+                    +pagination(link, '')

@@ -16,6 +16,20 @@ var CommentSchema = Schema({
     create_at: String,
 });
 
-const Comment = mongoose.model('comment', CommentSchema)
+CommentSchema.statics.listComments = async function(filters, pages, perPage){
+    const query = this.model('comment').find(filters).sort({create_at: 1}).populate('user', '_id nick_name');
+    if(pages !== undefined && perPage !== undefined){
+        query.skip((perPage * pages) - perPage);
+        query.limit(perPage)
+    }
+    return await query.exec();
+};
+
+CommentSchema.statics.Count = function(filters){
+    const query = Comment.find(filters);
+    return query.count().exec();
+}
+
+const Comment = mongoose.model('comment', CommentSchema);
 
 module.exports = Comment;
