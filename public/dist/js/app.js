@@ -265,6 +265,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
+/***/ "./public/javascripts/Commons.js":
+/*!***************************************!*\
+  !*** ./public/javascripts/Commons.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Commons; });\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\nvar Commons =\n/*#__PURE__*/\nfunction () {\n  function Commons(props) {\n    _classCallCheck(this, Commons);\n\n    this.initialize();\n  }\n\n  _createClass(Commons, [{\n    key: \"initialize\",\n    value: function initialize() {\n      this.addSmoothScroll();\n    }\n    /**\n     * Function for add smooth scroll to the page\n     */\n\n  }, {\n    key: \"addSmoothScroll\",\n    value: function addSmoothScroll() {\n      jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a[href^=\"#\"]', function (event) {\n        event.preventDefault();\n        jquery__WEBPACK_IMPORTED_MODULE_0___default()('html, body').animate({\n          scrollTop: jquery__WEBPACK_IMPORTED_MODULE_0___default()(jquery__WEBPACK_IMPORTED_MODULE_0___default.a.attr(this, 'href')).offset().top\n        }, 500);\n      });\n    }\n  }]);\n\n  return Commons;\n}();\n\n\n\n//# sourceURL=webpack:///./public/javascripts/Commons.js?");
+
+/***/ }),
+
 /***/ "./public/javascripts/app.js":
 /*!***********************************!*\
   !*** ./public/javascripts/app.js ***!
@@ -273,7 +285,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ \"./node_modules/bootstrap/dist/js/bootstrap.js\");\n/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _stylesheets_style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../stylesheets/style.scss */ \"./public/stylesheets/style.scss\");\n/* harmony import */ var _stylesheets_style_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_stylesheets_style_scss__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _Cards__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Cards */ \"./public/javascripts/Cards.js\");\n\n\n\n\n(function () {\n  window.addEventListener('DOMContentLoaded', function () {\n    new _Cards__WEBPACK_IMPORTED_MODULE_2__[\"default\"]();\n  });\n})();\n\n//# sourceURL=webpack:///./public/javascripts/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ \"./node_modules/bootstrap/dist/js/bootstrap.js\");\n/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _stylesheets_style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../stylesheets/style.scss */ \"./public/stylesheets/style.scss\");\n/* harmony import */ var _stylesheets_style_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_stylesheets_style_scss__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _Cards__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Cards */ \"./public/javascripts/Cards.js\");\n/* harmony import */ var _Commons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Commons */ \"./public/javascripts/Commons.js\");\n\n\n\n\n\n(function () {\n  window.addEventListener('DOMContentLoaded', function () {\n    new _Cards__WEBPACK_IMPORTED_MODULE_2__[\"default\"]();\n    new _Commons__WEBPACK_IMPORTED_MODULE_3__[\"default\"]();\n  });\n})();\n\n//# sourceURL=webpack:///./public/javascripts/app.js?");
 
 /***/ }),
 
