@@ -5,13 +5,14 @@ export default class Cards {
         this.card = document.querySelector('.cards-masonry');
         this.initializeCards();
     }
-
+    
     initializeCards(){
         window.addEventListener("load", () => {
             if(!this.card){
                 return;
-            }
 
+            }
+            
             new Masonry('.cards-masonry');
         })
     }

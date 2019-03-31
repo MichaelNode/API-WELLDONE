@@ -19,6 +19,10 @@ block content
             .col-12.col-md-10.col-lg-8.d-flex.align-items-center.p-0
                 img.pt-2.pb-2.mr-3.user-thumbnail(src=`/images/${article.author.image}`)
                 p.m-0=`${article.author.nick_name} - ${article.getFormattedDatePost()}`
+                if isLogged
+                     //a(onclick=`fav('${article._id}', '${article.author._id}')`)
+                    i.far.fa-bookmark.fa-2x
+                    p.prueba Hola
             .col-12.col-md-10.col-lg-8.p-0
                 !{article.content}
 

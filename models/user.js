@@ -47,7 +47,8 @@ var UserSchema = Schema({
     last_modification: Date,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    color: String
+    color: String,
+    favArticles: Array
 });
 
 // function for hash a plain password

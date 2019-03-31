@@ -149,6 +149,10 @@ ArticleSchema.methods.getShortDescription = function (maxLength = 100) {
     return `${shortDescription}...`;
 }
 
+ArticleSchema.methods.favArticle = function () {
+    console.log('entra en el favArticle')
+}
+
 const Article = mongoose.model('articles', ArticleSchema);
 
 module.exports = Article;
