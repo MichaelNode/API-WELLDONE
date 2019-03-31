@@ -1,5 +1,6 @@
 'use strict';
 
+// Dependencies
 const express = require('express');
 const router = express.Router();
 const {renderArticles} = require('../lib/articleService');

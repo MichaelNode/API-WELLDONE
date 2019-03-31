@@ -11,6 +11,7 @@ const articlesRouter = require('./articles');
 const articleRouter = require('./article');
 const apiRouter = require('./apiv1/router');
 const designRouter = require('./design');
+const searchRouter = require('./search');
 
 // Router class
 class Router {
@@ -22,6 +23,7 @@ class Router {
         app.use(namedRoutes.articles, articlesRouter);
         app.use(namedRoutes.article, articleRouter);
         app.use(namedRoutes.design, designRouter);
+        app.use(namedRoutes.search, searchRouter);
         app.use(namedRoutes.register, anonymousAuth(), registerRouter);
         apiRouter(app);
     }

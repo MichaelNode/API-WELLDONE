@@ -17,7 +17,7 @@ header
         a(class="btn btn-outline-secondary ml-auto" href='/admin') #{__('My Area')}
       else
         a(class="btn btn-outline-secondary ml-auto" href='/admin') #{__('Sign In')}
-      form(class="form-inline")
+      form(class="form-inline", action="/search")
         input(type="search" class="form-control mx-2" placeholder="Search")
         button(type="submit" class="btn btn-outline-secondary")
           i(class="fas fa-search")

@@ -62,5 +62,8 @@
 	"Send": "Send",
 	"You can not upload an empty comment": "You can not upload an empty comment",
 	"You are not authenticated": "You are not authenticated",
-	"comments": "comments"
+	"comments": "comments",
+	"Logout": "Logout",
+	"Articles": "Articles",
+	"Users": "Users"
 }
