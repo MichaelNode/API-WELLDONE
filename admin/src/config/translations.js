@@ -15,7 +15,15 @@ export const translations = {
         "Last_Name": 'Last Name',
         "Address": 'Address',
         "Nick_Name": 'Nick Name',
-        "Submit": 'Submit'
+        "Submit": 'Submit',
+
+        "Title": 'Title',
+        "Category": 'Category',
+        "State": 'State',
+        "Summary": 'Summary',
+        "Content": 'Content',
+        "File": 'File',
+        
     },
     es: {
         "Email": "Email",
@@ -33,6 +41,12 @@ export const translations = {
         "Last_Name": 'Apellido',
         "Address": 'Dirección',
         "Nick_Name": 'Nombre de usuario',
-        "Submit": 'Enviar'
+        "Submit": 'Enviar',
+        "Title": 'Titulo',
+        "Category": 'Categorías',
+        "State": 'Estado',
+        "Summary": 'Resumen',
+        "Content": 'Contenido',
+        "File": 'Archivo',
     }
 };

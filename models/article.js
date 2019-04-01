@@ -6,41 +6,42 @@ const User = require('./user');
 const i18n = require('i18n');
 
 var ArticleSchema = Schema({
-   title:{
+     title:{
         type: String,
         index: true
-   },
-   file: String,
-   summary:{
-        type: String,
-        index: true
-   },
-   content: {
-        type: String,
-        index: true
-   },
-   state: {
-        type: Boolean,
-        index: true
-    },
-   category: {
-        type: String,
-        index: true
-   },
-   create_at: {
-        type: Date,
-        default: Date.now
-   },
-   publi_date: Date,
-   author: {
-       type: Schema.ObjectId,
-       ref: 'user'
-   },
-   last_modification: Date,
-   /* res_article: {
-        type: Schema.ObjectId,
-        ref: 'article'
-   } */
+     },
+     file_type: String, 
+     file_name: String,
+     summary:{
+          type: String,
+          index: true
+     },
+     content: {
+          type: String,
+          index: true
+     },
+     state: {
+          type: Boolean,
+          index: true
+     },
+     category: {
+          type: String,
+          index: true
+     },
+     create_at: {
+          type: Date,
+          default: Date.now
+     },
+     publi_date: Date,
+     author: {
+          type: Schema.ObjectId,
+          ref: 'user'
+     },
+     last_modification: Date,
+     /* res_article: {
+          type: Schema.ObjectId,
+          ref: 'article'
+     } */
 });
 
 ArticleSchema.statics.allowedCategories = function () {

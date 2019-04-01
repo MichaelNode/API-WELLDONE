@@ -6,6 +6,6 @@ export default {
     logout: `${API_BASE}/user/logout`,
     delete_user: `${API_BASE}/deleteuser`,
     user: `${API_BASE}/user`,
-    article: `${API_BASE}/article`,
+    article: `${API_BASE}/article/addarticle`,
 
 };

@@ -20,7 +20,7 @@ export default class MainNavbar extends Component {
             <Form inline>
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  <i class="fa fa-user"></i>
+                  <i className="fa fa-user"></i>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
