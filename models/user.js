@@ -59,6 +59,22 @@ UserSchema.methods.getFollowing = async function () {
     return await this.model('user').find({followers: {$in: [this._id]}});
 };
 
+UserSchema.statics.list = async function(filters, sort, pages, perPage){
+    const query = this.model('user').find(filters);
+    query.sort(sort);
+    if(pages !== undefined && perPage !== undefined){
+        query.skip((perPage * pages) - perPage);
+        query.limit(perPage);
+    }
+    return await query.exec();
+}
+
+UserSchema.statics.Count = function(filters){
+    const query = this.find(filters);
+    return query.countDocuments().exec();
+}
+
+
 UserSchema.pre('remove', function (next) {
     this.model('articles').deleteMany({author: this._id}, next);
     next();

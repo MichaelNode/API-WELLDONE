@@ -56,19 +56,19 @@ ArticleSchema.statics.allowedCategories = function () {
     ];
 };
 
-ArticleSchema.statics.listArticles = async function(filters, sort,pages,perPage){
+ArticleSchema.statics.list = async function(filters, sort, pages, perPage){
      const query = Article.find(filters).populate('author', 'name nick_name image');
      query.sort(sort);
      if(pages !== undefined && perPage !== undefined){
 		query.skip((perPage * pages) - perPage);
-		query.limit(perPage)
+		query.limit(perPage);
 	}
      return await query.exec();
 }
 
 ArticleSchema.statics.Count = function(filters){
 	const query = Article.find(filters);
-	return query.count().exec();
+	return query.countDocuments().exec();
 }
 
 /**
