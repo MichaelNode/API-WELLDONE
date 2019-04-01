@@ -13,6 +13,11 @@ import { EditorState , convertFromHTML,CompositeDecorator, convertToRaw, } from 
 import {stateToHTML} from 'draft-js-export-html'; 
 import { convertFromRaw } from 'draft-js';
 
+import '../style/input-file.css'
+
+
+
+
 import DatePicker from 'react-date-picker';
 
 
@@ -138,15 +143,25 @@ class AddArticleForm extends Component {
                     value={this.state.title} 
                   />
                 </Form.Group>
-                <Form.Group controlId="file" md="4">
-                  <Form.Label>{this.context.t("File")}</Form.Label>
+                <Form.Group controlId="file" md="4" className="upload-btn-wrapper">
+                  <Form.Label className="btn-file">{this.context.t("File")}</Form.Label>
                   <Form.Control
                     name="file" 
-                    type="file" 
+                    type="file"
+                    
                     onChange= {this.onChange}   
                   />
-                  
                 </Form.Group>
+                <Form.Group as={Col}  md="4" controlId="url">
+                  <Form.Label>{this.context.t("URL")}</Form.Label>
+                  <Form.Control
+                    type="url"
+                    name="url"
+                    onChange={this.handleInputChange}   
+                    value={this.state.title} 
+                  />
+                </Form.Group>
+    
                 <Form.Group as={Col}  md="4">
                 <Card style={{ width: '18rem' }}>
                   <Card.Img  src={this.state.imgSrc} />
