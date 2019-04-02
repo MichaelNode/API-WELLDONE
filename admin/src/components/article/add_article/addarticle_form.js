@@ -9,70 +9,37 @@ import { articleOperations } from '../../../store/article';
 import {handleInputChange} from '../../../utils/utils';
 import Category from '../../category/category'
 import EditorComponent from '../editor/editorComponent'
-import { EditorState , convertFromHTML,CompositeDecorator, convertToRaw, } from 'draft-js';
+import { EditorState , convertFromHTML,ContentState , convertToRaw } from 'draft-js';
 import {stateToHTML} from 'draft-js-export-html'; 
 import { convertFromRaw } from 'draft-js';
 
 import '../style/input-file.css'
-
-
-
-
+import '../style/inputDate.css'
 import DatePicker from 'react-date-picker';
 
+//https://codepen.io/atunnecliffe/pen/gpKzQw
 
 class AddArticleForm extends Component {
   constructor(props) {
+   
+    const html = '<div><p><h1>hello</h1></p></div>'
+    const blocksFromHTML = convertFromHTML(html)
+    const content = ContentState.createFromBlockArray(blocksFromHTML)
     super(props);
     this.onChange = this.onChange.bind(this)
     this.state = {
       title: '',
       summary: '',
       content: '',
-      state: null,
+      state: '',
       category: '',
       file: [],
       publi_date: new Date(),
-      editorState: EditorState.createEmpty(),
+      editorState: EditorState.createEmpty(),  // EditorState.createWithContent(content),
       url: '',
       ask_file: ''
     };
   }
-
-   /**
-     * Change inputs value on change
-     * @param evt
-     */
-
-
-
-/*   handleChange = event =>ummary: '',
-      content: '',
-      state: false,
-      category: '',
-      file: [],
-      editorState: EditorState.createEmpty(),
-      comment: "{\"blocks\":[{\"key\":\"fdin3\",\"text\":\"<script>console.log('hello world from text rich')</script>\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":58,\"style\":\"color-rgb(33,37,41)\"},{\"offset\":0,\"length\":58,\"style\":\"bgcolor-rgb(255,255,255)\"},{\"offset\":0,\"length\":58,\"style\":\"fontsize-16\"},{\"offset\":0,\"length\":58,\"style\":\"fontfamily--apple-system, BlinkMacSystemFont, \\\"Segoe UI\\\", Roboto, Oxygen, Ubuntu, Cantarell, \\\"Fira Sans\\\", \\\"Droid Sans\\\", \\\"Helvetica Neue\\\", sans-serif\"}],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}"     
-    };
-  }
-
-   /**
-     * Change inputs value on change
-     * @param evt
-     */
-
-
-
-/*   handleChange = event => {
-     //(event) => this.setState({title: event.target.value })
-     console.log(event.target.type)
-     this.setS {
-     //(event) => this.setState({title: event.target.value })
-     console.log(event.target.type)
-     this.setState({
-       [event.target.id]: event.target.type === 'checkbox'  ? event.target.checked : event.target.value
-     });
-   } */
 
 
   handleInputChange = (evt) => {
@@ -82,36 +49,26 @@ class AddArticleForm extends Component {
   };
 
   convertCommentFromJSONToHTML = (text) => { 
-    //console.log( stateToHTML(convertFromRaw(JSON.parse(text))))
     return stateToHTML(convertFromRaw(JSON.parse(text))) 
   };
 
- 
-
- /*  onEditorStateChange = (editorState) => {
-    const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
-    const value = blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
-    console.log(blocks)
-    console.log('entro a block', value)
-    this.setState({
-      editorState:value,
-    });
-  }; */
 
   onEditorStateChange = (editorState) => this.setState({editorState});
   
   onChangeDate = date => this.setState({ publi_date:date })
 
   onChange = (event) => {
-    console.log(event.target.files[0])
-    this.setState({file:event.target.files[0]});
-    var reader = new FileReader();
-    var url = reader.readAsDataURL(event.target.files[0]);
-    reader.onloadend = function (e) {
+    if(event.target.files[0])
+    {
+      this.setState({file:event.target.files[0]});
+      var reader = new FileReader();
+      var url = reader.readAsDataURL(event.target.files[0]);
+      reader.onloadend = function (e) {
         this.setState({
             imgSrc: [reader.result]
         })
       }.bind(this);
+    }
   };
 
 
@@ -147,6 +104,7 @@ class AddArticleForm extends Component {
                     name="title"
                     onChange={this.handleInputChange}   
                     value={this.state.title} 
+                    required
                   />
                 </Form.Group>
 
@@ -156,7 +114,7 @@ class AddArticleForm extends Component {
                 />
                
               
-                <Form.Group as={Col}  md="4" controlId="url">
+                <Form.Group as={Col}  md="12" controlId="url">
                   <Form.Label>{this.context.t("Imagen o video?")}</Form.Label>
                 
                   <Form.Control
@@ -164,6 +122,7 @@ class AddArticleForm extends Component {
                     as="select"
                     onChange={this.handleInputChange}  
                     value={this.state.ask_file} 
+                    required
                   >
                     <option>{this.context.t("Choose")}</option>
                     <option value="video" >{this.context.t("Video")}</option>
@@ -173,29 +132,32 @@ class AddArticleForm extends Component {
 
     
                 { this.state.ask_file === 'imagen' && ( 
-               
-               <Form.Group  md="4" >
-                 
-                  <Form.Control
-                    name="file" 
-                    type="file"
-                    onChange= {this.onChange}   
-                  />
-               
-                  <Card style={{ width: '18rem' }}>
+            
+                <Form.Group as={Col} md="12" >
+                <Form.Label>{this.context.t("Title")}</Form.Label>
+                    <Form.Control
+                      name="file" 
+                      type="file"
+                      onChange= {this.onChange}   
+                     
+                    />
+                    <Card style={{ width: '10rem' }}>
                   <Card.Img  src={this.state.imgSrc} />
                   <Card.Body>
                     <Card.Title>{this.state.file.name}</Card.Title>
                     <Card.Text>
-                      <p>{this.context.t("Type")} {this.state.file.type}</p>
+                      {this.context.t("Type")} {this.state.file.type}
                     </Card.Text>
                   </Card.Body>
-                </Card>
-                  
-                </Form.Group>
+                  </Card>
+
+                  </Form.Group>
+
+               
+              
             ) }
             { this.state.ask_file === 'video' && ( 
-              <Form.Group as={Col}  md="4" controlId="url">
+              <Form.Group as={Col}  md="12" controlId="url">
                   <Form.Label>{this.context.t("URL")}</Form.Label>
                   <Form.Control
                     type="url"
@@ -210,7 +172,7 @@ class AddArticleForm extends Component {
               </Form.Row>
                 
               <Form.Row>
-                <Form.Group as={Col} md="4" controlId="state">
+                <Form.Group as={Col} md="6" controlId="state">
                     <Form.Label>{this.context.t("State")}</Form.Label>
                     <Form.Control
                       name="state" 
@@ -224,14 +186,16 @@ class AddArticleForm extends Component {
                     </Form.Control>     
                 </Form.Group>
 
-              { this.state.state == false && ( 
+              { this.state.state === "true" && ( 
 
-                <Form.Group as={Col}  md="2">
+                <Form.Group as={Col}  md="6">
                 <Form.Label>{this.context.t("Publication date")}</Form.Label>
                   <DatePicker
+                    className="form-control"
                     name="publi_date"
                     onChange={this.onChangeDate}
                     value={this.state.publi_date}
+                    required
                   />
       
                 </Form.Group>
@@ -249,6 +213,7 @@ class AddArticleForm extends Component {
                     placeholder="Summary" 
                     onChange={this.handleInputChange}  
                     value={this.state.summary} 
+                  
                   />
                 </Form.Group>
                 <Form.Group controlId="content">

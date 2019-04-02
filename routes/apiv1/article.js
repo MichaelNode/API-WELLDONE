@@ -9,7 +9,7 @@ const upload = require('../../lib/uploadConfig');
 router.post('/addarticle',  upload.single('file'), async(req, res, next) => {
     try {
 	
-		console.log('entro en post', req.body.content)
+		console.log('entro en post', req.file)
 		console.log(req.body.url)
 		const data = {
 			title: req.body.title,
@@ -28,7 +28,7 @@ router.post('/addarticle',  upload.single('file'), async(req, res, next) => {
 			dist: '../../uploads' 
 		}
 	
-		generateImages(req.file.buffer, Options);
+	
 
 		const article = new Article(data);
 		const articleSave = await article.save();
@@ -36,6 +36,63 @@ router.post('/addarticle',  upload.single('file'), async(req, res, next) => {
 	} catch (err) {
 	    next(err);
 	}
+})
+
+
+router.get('/editArticle/:id', async (req, res, next) => {
+	try {
+		const articleId = req.params.id;
+		const article = await Article
+			.findById({_id: articleId})
+			.select(`
+				title 
+				file_type 
+				file_name 
+				summary 
+				content 
+				state  
+				publi_date url`)
+			.exec();
+		if(!article){
+			next(createError(404));
+			return;
+		}
+		res.json({result: article})
+	} catch (err) {
+		next(err);
+	}
+});
+
+router.put('/editArticle/:id', async (req, res, next) => {
+    try {
+        const articleId = req.params.id
+        await Article.findOne({_id: articleId}, async function (err, user){
+            if (err){
+                console.log('hubo un error al encontrar el artículo', err)
+                return
+            } 
+            try {
+                await Article.updateOne({_id: ArticleId}, {
+					title: req.body.title,
+					file_type: req.file.mimetype,
+					file_name: req.file.filename,
+					summary: req.body.summary,
+					content: req.body.content,
+					state:   req.body.state,
+					publi_date: req.body.publi_date,
+					url: req.body.url,
+					last_modification: Date.now()
+                })
+                console.log('actualizando artículo: ' + req.body.title);
+            } catch (err) {
+                console.log('Error ', err)
+            }
+        });
+        res.json({success: true})
+    } catch (err) {
+        console.log('hubo un error al encontrar el artículo', err)
+        next(err)
+    }
 })
 
 

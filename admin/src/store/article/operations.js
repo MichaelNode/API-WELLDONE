@@ -14,6 +14,7 @@ export const addArticle = (title,file,summary,content,state,category,publi_date,
     formData.append('content',  content);
     formData.append('state',    state);
     formData.append('category', category);
+    // eslint-disable-next-line no-unused-expressions
     formData.append('publi_date', publi_date),
     formData.append('url', url)
 

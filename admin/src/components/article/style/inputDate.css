@@ -1,0 +1,10 @@
+.react-date-picker {
+    display:  none ; 
+    display: none ; 
+    position: relative;
+}
+
+.react-date-picker__wrapper {
+     border: none !important;
+     width: 100%;
+}

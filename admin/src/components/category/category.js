@@ -42,6 +42,7 @@ export default class Category extends Component {
                     as="select"
                     onChange={this.props.handleChange}  
                     value={this.props.value}  
+                    required
                 >
                     <option>{this.context.t("Choose")}</option>
                     {this.state.categories.map((category) => <option key={category} value={category}>{category}</option>)}
