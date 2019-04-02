@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const Article = require('../../models/article');
 const upload = require('../../lib/uploadConfig');
-const generateImages = require('generate-responsive-images');
+
 
 
 
