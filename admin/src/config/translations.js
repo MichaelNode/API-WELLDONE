@@ -22,7 +22,13 @@ export const translations = {
         "State": 'State',
         "Summary": 'Summary',
         "Content": 'Content',
-        "File": 'File',
+        "Upload image": 'Upload File',
+        "Publication date": 'Publication date',
+        "Draft":'Draft',
+        "Published":'Published',
+        "Choose":'Choose..',
+        "New Article":'New Article',
+        "Type":'Type'
         
     },
     es: {
@@ -47,6 +53,12 @@ export const translations = {
         "State": 'Estado',
         "Summary": 'Resumen',
         "Content": 'Contenido',
-        "File": 'Archivo',
+        "Upload image": 'Subir imagen',
+        "Publication date": "Fecha de publicación",
+        "Draft":'Borrador',
+        "Published":'Publicado',
+        "Choose":'Escoge...',
+        "New Article":'Nuevo Artículo',
+        "Type":'Tipo'
     }
 };
