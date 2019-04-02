@@ -4,7 +4,7 @@ import {asyncFetch, isSuccessResponse} from "../../utils/apiService";
 import apiRoutes from "../../config/apiRoutes";
 
 
-export const addArticle = (title,file,summary,content,state,category,publi_date) => {
+export const addArticle = (title,file,summary,content,state,category,publi_date, url) => {
 
     const formData = new FormData();
   
@@ -14,7 +14,9 @@ export const addArticle = (title,file,summary,content,state,category,publi_date)
     formData.append('content',  content);
     formData.append('state',    state);
     formData.append('category', category);
-    formData.append('publi_date', publi_date)
+    formData.append('publi_date', publi_date),
+    formData.append('url', url)
+
 
     console.log('entro a operation ',content)
 

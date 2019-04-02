@@ -34,8 +34,8 @@ export default class Category extends Component {
     
     render() {
         return (
-        <div>
-            <Form.Group as={Col} controlId="category">
+       
+            <Form.Group as={Col}  md="4" controlId="category">
                 <Form.Label>{this.context.t("Category")}</Form.Label>
                 <Form.Control
                     name="category" 
@@ -43,15 +43,13 @@ export default class Category extends Component {
                     onChange={this.props.handleChange}  
                     value={this.props.value}  
                 >
-                    <option >Choose...</option>
+                    <option>{this.context.t("Choose")}</option>
                     {this.state.categories.map((category) => <option key={category} value={category}>{category}</option>)}
                 
                 </Form.Control>
             </Form.Group>
-            <div style={{color: 'red', marginTop: '5px'}}>
-            {this.state.validationError}
-            </div>
-        </div>
+           
+       
         )
     }
     }

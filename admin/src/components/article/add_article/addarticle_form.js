@@ -26,15 +26,16 @@ class AddArticleForm extends Component {
     super(props);
     this.onChange = this.onChange.bind(this)
     this.state = {
-      title: 'dfg',
+      title: '',
       summary: '',
       content: '',
-      state: false,
+      state: null,
       category: '',
       file: [],
       publi_date: new Date(),
       editorState: EditorState.createEmpty(),
-      comment: "<p>dfgf<strong>dfgdfg </strong><em><strong>dfg </strong></em><u><em><strong>dfg</strong></em></u></p>\n<p><u><em><strong>dfgdf&nbsp;</strong></em></u></p>\n<p><u><em><strong>dfgfdgdfg&nbsp;</strong></em></u></p>\n<p>&lt;script&gt;console.log('hello world from text"     
+      url: '',
+      ask_file: ''
     };
   }
 
@@ -75,6 +76,8 @@ class AddArticleForm extends Component {
 
 
   handleInputChange = (evt) => {
+    console.log(this.state.state)
+
     this.setState(handleInputChange(evt));
   };
 
@@ -96,9 +99,11 @@ class AddArticleForm extends Component {
   }; */
 
   onEditorStateChange = (editorState) => this.setState({editorState});
-  onChangeDate = date => this.setState({  publi_date:date })
+  
+  onChangeDate = date => this.setState({ publi_date:date })
 
   onChange = (event) => {
+    console.log(event.target.files[0])
     this.setState({file:event.target.files[0]});
     var reader = new FileReader();
     var url = reader.readAsDataURL(event.target.files[0]);
@@ -122,7 +127,8 @@ class AddArticleForm extends Component {
       content,
       this.state.state, 
       this.state.category,
-      this.state.publi_date
+      this.state.publi_date,
+      this.state.url
     )   
   };
 
@@ -131,11 +137,11 @@ class AddArticleForm extends Component {
     return (
       <>
         <Card className="text-center">
-          <Card.Header>New Article</Card.Header>
+          <Card.Header>{this.context.t("New Article")}</Card.Header>
           <Card.Body>
             <Form onSubmit={this.handleSubmit } encType="multipart/form-data"  >
               <Form.Row>
-                <Form.Group as={Col}  md="4" controlId="title">
+                <Form.Group as={Col}  md="6" controlId="title">
                   <Form.Label>{this.context.t("Title")}</Form.Label>
                   <Form.Control
                     name="title"
@@ -143,43 +149,97 @@ class AddArticleForm extends Component {
                     value={this.state.title} 
                   />
                 </Form.Group>
-                <Form.Group controlId="file" md="4" className="upload-btn-wrapper">
-                  <Form.Label className="btn-file">{this.context.t("File")}</Form.Label>
+
+                <Category
+                  handleChange={this.handleInputChange}  
+                  value={this.state.category}
+                />
+               
+              
+                <Form.Group as={Col}  md="4" controlId="url">
+                  <Form.Label>{this.context.t("Imagen o video?")}</Form.Label>
+                
+                  <Form.Control
+                    name="ask_file" 
+                    as="select"
+                    onChange={this.handleInputChange}  
+                    value={this.state.ask_file} 
+                  >
+                    <option>{this.context.t("Choose")}</option>
+                    <option value="video" >{this.context.t("Video")}</option>
+                    <option value="imagen">{this.context.t("Image")}</option>
+                  </Form.Control>
+                </Form.Group>
+
+    
+                { this.state.ask_file === 'imagen' && ( 
+               
+               <Form.Group  md="4" >
+                 
                   <Form.Control
                     name="file" 
                     type="file"
-                    
                     onChange= {this.onChange}   
                   />
+               
+                  <Card style={{ width: '18rem' }}>
+                  <Card.Img  src={this.state.imgSrc} />
+                  <Card.Body>
+                    <Card.Title>{this.state.file.name}</Card.Title>
+                    <Card.Text>
+                      <p>{this.context.t("Type")} {this.state.file.type}</p>
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+                  
                 </Form.Group>
-                <Form.Group as={Col}  md="4" controlId="url">
+            ) }
+            { this.state.ask_file === 'video' && ( 
+              <Form.Group as={Col}  md="4" controlId="url">
                   <Form.Label>{this.context.t("URL")}</Form.Label>
                   <Form.Control
                     type="url"
                     name="url"
                     onChange={this.handleInputChange}   
-                    value={this.state.title} 
+                    value={this.state.url} 
                   />
                 </Form.Group>
-    
-                <Form.Group as={Col}  md="4">
-                <Card style={{ width: '18rem' }}>
-                  <Card.Img  src={this.state.imgSrc} />
-                 
-                </Card>
-                </Form.Group>
+            ) }
 
-              <Form.Group as={Col}  md="2">
-              <Form.Label>{this.context.t("Date public")}</Form.Label>
-                <DatePicker
-                  name="publi_date"
-                  onChange={this.onChangeDate}
-                  value={this.state.publi_date}
-                />
-     
-              </Form.Group>
              
               </Form.Row>
+                
+              <Form.Row>
+                <Form.Group as={Col} md="4" controlId="state">
+                    <Form.Label>{this.context.t("State")}</Form.Label>
+                    <Form.Control
+                      name="state" 
+                      as="select"
+                      onChange={this.handleInputChange}  
+                      value={this.state.state} 
+                    >
+                      <option>{this.context.t("Choose")}</option>
+                      <option value={true} >{this.context.t("Published")}</option>
+                      <option value={false}>{this.context.t("Draft")}</option>
+                    </Form.Control>     
+                </Form.Group>
+
+              { this.state.state == false && ( 
+
+                <Form.Group as={Col}  md="2">
+                <Form.Label>{this.context.t("Publication date")}</Form.Label>
+                  <DatePicker
+                    name="publi_date"
+                    onChange={this.onChangeDate}
+                    value={this.state.publi_date}
+                  />
+      
+                </Form.Group>
+              
+              )}
+
+              </Form.Row>
+
                 <Form.Group controlId="summary">
                   <Form.Label>{this.context.t("Summary")}</Form.Label>
                   <Form.Control
@@ -200,28 +260,7 @@ class AddArticleForm extends Component {
                   />  
                 </Form.Group>
               <Form.Row>
-                <Form.Group as={Col} controlId="state">
-                  <Form.Label>{this.context.t("State")}</Form.Label>
-                  <Form.Control
-                    name="state" 
-                    as="select"
-                    onChange={this.handleInputChange}  
-                    value={this.state.state} 
-                  >
-                    <option value={true} >Choose...</option>
-                    <option value={false} >...</option>
-                  </Form.Control>
-
-                           
-                </Form.Group>
-
-                <Category
-                  handleChange={this.handleInputChange}  
-                  value={this.state.category}
-                />
-                <div 
-                dangerouslySetInnerHTML={{ __html: this.state.comment}}>  
-                </div>
+             
               </Form.Row>
               <Button variant="primary" type="submit">
                   {this.context.t("Submit")}  
@@ -245,8 +284,8 @@ class AddArticleForm extends Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-      addArticle: (title,file,summary,content,state,category,publi_date) => {
-          dispatch(articleOperations.addArticle(title,file,summary,content,state,category,publi_date));
+      addArticle: (title,file,summary,content,state,category,publi_date,url) => {
+          dispatch(articleOperations.addArticle(title,file,summary,content,state,category,publi_date,url));
       }
     };
   };

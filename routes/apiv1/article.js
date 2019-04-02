@@ -10,6 +10,7 @@ router.post('/addarticle',  upload.single('file'), async(req, res, next) => {
     try {
 	
 		console.log('entro en post', req.body.content)
+		console.log(req.body.url)
 		const data = {
 			title: req.body.title,
 			file_type: req.file.mimetype,
@@ -17,7 +18,8 @@ router.post('/addarticle',  upload.single('file'), async(req, res, next) => {
 			summary: req.body.summary,
 			content: req.body.content,
 			state:   req.body.state,
-			publi_date: req.body.publi_date
+			publi_date: req.body.publi_date,
+			url: req.body.url
 		};
 
 		Options = {

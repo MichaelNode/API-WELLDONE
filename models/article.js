@@ -12,6 +12,7 @@ var ArticleSchema = Schema({
      },
      file_type: String, 
      file_name: String,
+     url: String,
      summary:{
           type: String,
           index: true
