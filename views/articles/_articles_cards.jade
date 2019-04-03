@@ -6,11 +6,12 @@ if articles
                     img.card-img-top.img-fluid(src=article.file)
                 .card-body.pb-1
                     a(href=`/article/${article.author.nick_name}\/${article.getSlug()}`)
-                        p.h5-style.card-title=article.title
+                        p.h5-style.mb-1.card-title=article.title
+                    if !userExists
+                        a.small-3.text-secondary.author(href=`/articles/user/${article.author.nick_name}`)=`${article.author.nick_name}`
                     p.card-text=article.summary
                     p=article.shortDescription
                     .col-12.d-flex.align-items-center.p-0.justify-content-between
-                        p.m-0.small-3
-                            if !userExists
-                                a.text-secondary.author(href=`/articles/user/${article.author.nick_name}`)=`${article.author.nick_name}`
+                        a(href=`/article/${article.author.nick_name}\/${article.getSlug()}#comments`)
+                            p.m-0.small-2=`${article.numComments} ${__('comments')}`
                         p.small-2.m-0 #{moment(article.publi_date).format('lll')}

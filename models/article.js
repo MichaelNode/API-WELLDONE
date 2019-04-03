@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 const i18n = require('i18n');
+const Comment = require('./comment');
 
 var ArticleSchema = Schema({
    title:{
@@ -149,8 +150,12 @@ ArticleSchema.methods.getShortDescription = function (maxLength = 100) {
     return `${shortDescription}...`;
 }
 
-ArticleSchema.methods.favArticle = function () {
-    console.log('entra en el favArticle')
+/**
+ * Function for get comments length of one article
+ * @returns {Promise<void>}
+ */
+ArticleSchema.methods.getCommentsCount = async function () {
+    return await Comment.Count({article: this._id});
 }
 
 const Article = mongoose.model('articles', ArticleSchema);

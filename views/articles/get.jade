@@ -18,16 +18,18 @@ block content
             h1.col-12.col-md-10.col-lg-8.p-0=article.title
             .col-12.col-md-10.col-lg-8.d-flex.align-items-center.p-0
                 img.pt-2.pb-2.mr-3.user-thumbnail(src=`/images/${article.author.image}`)
-                p.m-0=`${article.author.nick_name} - ${article.getFormattedDatePost()}`
-        
-            if isLogged
-             i.far.fa-bookmark.fa-2x.fav(data-article=article._id)
+                .row
+                    p.m-0=`${article.author.nick_name} - ${article.getFormattedDatePost()}`
+                    a.col-12.small.text-secondary(href='#comments')=`${article.numComments} ${__('comments')}`
                     
+            if isLogged
+                    i.far.fa-bookmark.fa-2x.fav(data-article=article._id)
+         
             .col-12.col-md-10.col-lg-8.p-0
                 !{article.content}
 
             // Comments
-            .col-12.col-md-10.col-lg-8.p-0.mt-5.mb-5.row
+            .col-12.col-md-10.col-lg-8.p-0.pt-5.mb-5.row(id='comments')
                 p.h3-style=__('Comments')
 
                 // New Comment if user is logged
