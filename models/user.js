@@ -48,7 +48,10 @@ var UserSchema = Schema({
     resetPasswordToken: String,
     resetPasswordExpires: Date,
     color: String,
-    favArticles: Array
+    favArticles: [{
+        type: Schema.ObjectId,
+        ref: 'articles'
+    }],
 });
 
 // function for hash a plain password
@@ -58,6 +61,10 @@ UserSchema.statics.hashPassword = (plainPassword) => {
 
 UserSchema.methods.getFollowing = async function () {
     return await this.model('user').find({followers: {$in: [this._id]}});
+};
+
+UserSchema.methods.getFavArticles = async function () {
+    return await this.model('user').find({favArticles: {$in: [this._id]}});
 };
 
 UserSchema.pre('remove', function (next) {

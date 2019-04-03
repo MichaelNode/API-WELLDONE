@@ -1,28 +1,40 @@
 
-const Users = require("../../models/user.js");
-
 export default class Articles {
     constructor(){
-        this.bookmark = document.querySelector('.prueba');
-        this.eventListeners()
+        this.bookmark = document.querySelector('.far');
+       
     }
 
     eventListeners(){
+        
         this.bookmark.addEventListener('click', (e) => {
-            console.log('funciono')
+            e.stopPropagation()
+            e.preventDefault()
+            var article = this.bookmark.getAttribute('data-article')
+            var articleID = article.slice(1, -1)
+
+            const url = 'http://localhost:3000/apiv1/favarticle'
+            const data = {
+                articleID: articleID
+            }
+
+
+            fetch(url, {
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers:{
+                  'Content-Type': 'application/json'
+                }
+              }).then(res => res.json())
+              .catch(error => console.error('Error:', error))
+              .then(response => {
+                e.target.classList.add(response.add)
+                e.target.classList.remove(response.remove)
+              })
         })
+
     }
 
-/* 
-            fav (articleId, authorId) {
-                console.log(articleId)
-                const bookmark = document.querySelector('.fa-bookmark')
-                bookmark.classList.toggle('fas')
-        Users.updateOne(
-            { _id: authorId }, 
-            { $push: { favArticles: articleId } },
-            done
-        );  */
     }
     
 

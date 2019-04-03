@@ -41,7 +41,8 @@ router.post('/login', upload.any(), async (req, res, next) => {
                 address: user.address,
                 nick_name: user.nick_name,
                 description: user.description,
-                profileColor: user.color
+                profileColor: user.color,
+                favArticles: user.favArticles
             };
             // return token with a success response
             res.json({'success': true, token: token, user: req.session.user});
