@@ -8,28 +8,29 @@ const upload = require('../../lib/uploadConfig');
 
 router.post('/addarticle',  upload.single('file'), async(req, res, next) => {
     try {
-	
-		console.log('entro en post', req.file)
-		console.log(req.body.url)
-		const data = {
-			title: req.body.title,
-			file_type: req.file.mimetype,
-			file_name: req.file.filename,
-			summary: req.body.summary,
-			content: req.body.content,
-			state:   req.body.state,
-			publi_date: req.body.publi_date,
-			url: req.body.url
-		};
-
-		Options = {
-			name: req.file.filename,
-			ext: 'jpg',
-			dist: '../../uploads' 
+		var data = {};
+		if(req.file){
+			data = {
+				title: req.body.title,
+				file_type: req.file.mimetype,
+				file_name: req.file.filename,
+				summary: req.body.summary,
+				content: req.body.content,
+				state:   req.body.state,
+				publi_date: req.body.publi_date
+			}
 		}
-	
-	
-
+		else {
+			data = {
+				title: req.body.title,
+				summary: req.body.summary,
+				content: req.body.content,
+				state:   req.body.state,
+				publi_date: req.body.publi_date,
+				url: req.body.url
+			}
+		}
+		
 		const article = new Article(data);
 		const articleSave = await article.save();
 		res.json({ success: true, result: articleSave}); 

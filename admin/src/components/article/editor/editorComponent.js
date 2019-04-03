@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
+import {Form, Col} from "react-bootstrap";
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
@@ -15,7 +17,11 @@ export default class EditorComponent extends Component {
 
   render() {
     return (
-      <div>
+      <Form.Group as={Col}  md="12" controlId="content">
+         <Form.Label>{this.context.t("Content")}</Form.Label>
+         { this.props.editorStateError ?(
+                       <div className="errorValidation">{this.props.editorStateError}</div>
+                ): null }
         <Editor
             wrapperClassName="wrapper-class"
             editorClassName="editor-class"
@@ -23,9 +29,13 @@ export default class EditorComponent extends Component {
             editorClassName="editorState"
             editorState = {this.props.editorState}
             onEditorStateChange={this.props.handleChange}
-           
+      
         /> 
-      </div>
+       </Form.Group>
     );
   }
 }
+
+EditorComponent.contextTypes = {
+  t: PropTypes.func
+};
