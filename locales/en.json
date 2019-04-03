@@ -46,5 +46,6 @@
 	"followers": "followers",
 	"following": "following",
 	"Description": "Description",
-	"you are not authenticated": "you are not authenticated"
+	"you are not authenticated": "you are not authenticated",
+	"tipo de imagen no valida": "tipo de imagen no valida"
 }

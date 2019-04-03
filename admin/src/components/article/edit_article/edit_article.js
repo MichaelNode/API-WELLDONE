@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 
-class EditComponent extends Component {
+class EditArticleForm extends Component {
 handleEdit = (e) => {
   e.preventDefault();
   const newTitle = this.getTitle.value;

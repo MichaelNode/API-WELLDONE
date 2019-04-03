@@ -2,38 +2,45 @@ const express = require('express')
 const router = express.Router();
 const Article = require('../../models/article');
 const upload = require('../../lib/uploadConfig');
+const { check ,validationResult } = require('express-validator/check');
+const {validation} = require('../../lib/articleService');
 
 
-
-
-router.post('/addarticle',  upload.single('file'), async(req, res, next) => {
+router.post('/addarticle',validation ,  upload.single('file'), async(req, res, next) => {
     try {
 		var data = {};
-		if(req.file){
-			data = {
-				title: req.body.title,
-				file_type: req.file.mimetype,
-				file_name: req.file.filename,
-				summary: req.body.summary,
-				content: req.body.content,
-				state:   req.body.state,
-				publi_date: req.body.publi_date
-			}
+		console.log(req)
+		const validationErrors = validationResult(req);
+		if (!validationErrors.isEmpty()) {
+			return res.status(422).json({ errors: validationErrors.array() });
 		}
-		else {
-			data = {
-				title: req.body.title,
-				summary: req.body.summary,
-				content: req.body.content,
-				state:   req.body.state,
-				publi_date: req.body.publi_date,
-				url: req.body.url
+			if(req.file){
+				data = {
+					title: req.body.title,
+					file_type: req.file.mimetype,
+					file_name: req.file.filename,
+					summary: req.body.summary,
+					content: req.body.content,
+					state:   req.body.state,
+					publi_date: req.body.publi_date
+				}
 			}
-		}
-		
-		const article = new Article(data);
-		const articleSave = await article.save();
-		res.json({ success: true, result: articleSave}); 
+			else {
+				data = {
+					title: req.body.title,
+					summary: req.body.summary,
+					content: req.body.content,
+					state:   req.body.state,
+					publi_date: req.body.publi_date,
+					url: req.body.url
+				}
+			}
+			
+			const article = new Article(data);
+			const articleSave = await article.save();
+			res.json({ success: true, result: articleSave});
+	
+	
 	} catch (err) {
 	    next(err);
 	}

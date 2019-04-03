@@ -71,7 +71,8 @@ class AddArticleForm extends Component {
     if(this.state.ask_file == 'imagen' && this.state.file == null) {
       fileError = 'Image is required'
     }
-    if(this.state.ask_file == 'video' && this.state.url == '') {
+    if(this.state.ask_file == 'video' && !this.state.url) {
+      console.log('qwe')
       urlError = 'URL is required'
     }
     if(this.state.state == 'true' && this.state.publi_date <= Date.now()) {
@@ -150,6 +151,7 @@ class AddArticleForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    console.log(this.state.ask_file, this.state.url , "archivo")
     const isValid = this.validate();
     if (isValid) {
       const convertedData = convertToRaw(
@@ -220,9 +222,10 @@ class AddArticleForm extends Component {
                   <Form.Control
                     name="file" 
                     type="file"
-                    onChange= {this.onChange}    
+                    onChange= {this.onChange}  
+                    accept=".jpg,.jpge"  
                   />
-                  { this.state.file  && ( 
+                  { this.state.file !== null   && ( 
                   <Card className="preview" style={{ width: '18rem' }}>
                     <Card.Img  src={this.state.imgSrc} />
                     <Card.Body>
