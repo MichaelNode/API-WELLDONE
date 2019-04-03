@@ -63,10 +63,6 @@ UserSchema.methods.getFollowing = async function () {
     return await this.model('user').find({followers: {$in: [this._id]}});
 };
 
-UserSchema.methods.getFavArticles = async function () {
-    return await this.model('user').find({favArticles: {$in: [this._id]}});
-};
-
 UserSchema.pre('remove', function (next) {
     this.model('articles').deleteMany({author: this._id}, next);
     next();

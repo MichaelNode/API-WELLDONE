@@ -1,7 +1,7 @@
 
 export default class Articles {
     constructor(){
-        this.bookmark = document.querySelector('.far');
+        this.bookmark = document.querySelector('.fav');
        
     }
 

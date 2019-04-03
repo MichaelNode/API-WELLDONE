@@ -23,7 +23,7 @@ block content
                     a.col-12.small.text-secondary(href='#comments')=`${article.numComments} ${__('comments')}`
                     
             if isLogged
-                    i.far.fa-bookmark.fa-2x.fav(data-article=article._id)
+                i(class=bookmark).fa-bookmark.fa-2x.fav(data-article=article._id)
          
             .col-12.col-md-10.col-lg-8.p-0
                 !{article.content}
