@@ -56,10 +56,13 @@ export const logout = (redirect) => async dispatch => {
     dispatch({type: types.LOGOUT});
 };
 
-export const deleteUser = () => {
+export const deleteUser = (token) => {
     return async function (dispatch) {
         try {
-            await Promise.all([asyncFetch(apiRoutes.delete_user, 'DELETE'), dispatch(logout())]);
+            const body = {
+                token: token
+            };
+            await Promise.all([asyncFetch(apiRoutes.delete_user, 'DELETE', JSON.stringify(body)), dispatch(logout())]);
             dispatch(actions.hideModal())
         } catch (err) {
             console.log('Hubo un error borrando le usuario', err)
@@ -83,7 +86,7 @@ export const updateUser = (name, lastname, nickname, address, color, description
     //"Content-Type": "application/json",
     'Accept': 'application/json',
 };
-    
+
 
     return async function (dispatch) {
         try {

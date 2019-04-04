@@ -56,6 +56,14 @@ ArticleSchema.statics.allowedCategories = function () {
     ];
 };
 
+/**
+ * Function for list articles
+ * @param filters
+ * @param sort
+ * @param pages
+ * @param perPage
+ * @returns {Promise<Array>}
+ */
 ArticleSchema.statics.list = async function(filters, sort, pages, perPage){
      const query = Article.find(filters).populate('author', 'name nick_name image');
      query.sort(sort);
@@ -63,9 +71,24 @@ ArticleSchema.statics.list = async function(filters, sort, pages, perPage){
 		query.skip((perPage * pages) - perPage);
 		query.limit(perPage);
 	}
-     return await query.exec();
+     const articlesArr = await query.exec();
+
+    // Add num comments to all articles and create a new array with this
+    let articles = [];
+
+    for (const article of articlesArr){
+        article.numComments =  await article.getCommentsCount();
+        articles.push(article);
+    }
+    return articles;
 }
 
+/**
+ * Function for get article total number
+ * @param filters
+ * @returns {Promise}
+ * @constructor
+ */
 ArticleSchema.statics.Count = function(filters){
 	const query = Article.find(filters);
 	return query.countDocuments().exec();

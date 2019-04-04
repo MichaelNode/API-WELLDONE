@@ -7,7 +7,7 @@
     "build": "webpack ./public/javascripts/app.js --output ./public/dist/js/app.js ",
     "install_react": "cd admin && npm install",
     "dev": "(npm run start &) && cd admin && npm start",
-    "seeder": "npm run install_users && npm run install_articles",
+    "seeder": "npm run install_users && npm run install_articles && npm run install_comments",
     "react_start": "cd admin && npm start",
     "react_dev": "cd admin && npm run build_dev",
     "react_build": "cd admin && npm run build",

@@ -65,5 +65,8 @@
 	"comments": "comments",
 	"Logout": "Logout",
 	"Articles": "Articles",
-	"Users": "Users"
+	"Users": "Users",
+	"Follow": "Follow",
+	"We could not find articles": "We could not find articles",
+	"We could not find people": "We could not find people"
 }

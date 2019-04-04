@@ -1,10 +1,26 @@
 extends ../layout
+include ../includes/_pagination
 
 block content
     .container
-        a=__('Articles')
-        a(href=`/search/user?text=${text}`)=__('Users')
+        - const link = `/search/${searchType}/`
+        - const articleClass = searchType === 'article' ? 'bold' : '';
+        - const userClass = searchType === 'user' ? 'bold' : '';
+        a(href=`/search/article?text=${searchText}`, class=`mr-4 ${articleClass}`)=__('Articles')
+        a(href=`/search/user?text=${searchText}` class=userClass)=__('Users')
 
-        if type === 'article'
-            - const articles = models;
-            include ../articles/_articles_cards
+        hr
+
+        .mb-3
+            if searchType === 'article'
+                - const articles = models;
+                include ../articles/_articles_cards
+                if !articles || articles.length <= 0
+                    p.mt-5=__('We could not find articles')
+            if searchType === 'user'
+                - const users = models;
+                include ../users/_users_cards
+                if !users || users.length <= 0
+                    p.mt-5=__('We could not find people')
+        .mb-5.pl-2
+            +pagination(link, '?text=' + searchText)

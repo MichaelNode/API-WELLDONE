@@ -19,7 +19,18 @@ $theme-colors: (
     font-family: "Montserrat-Bold";
 }
 
-$font-family-sans-serif: 'Hind', sans-serif !default;
+@font-face {
+    src: url('/fonts/Hind-Regular.ttf');
+    font-family: "Hind-Regular";
+}
+
+@font-face {
+    src: url('/fonts/Hind-Bold.ttf');
+    font-family: "Hind-Bold";
+}
+
+$font-family-sans-serif: 'Hind-Regular', sans-serif !default;
+$font-family-sans-bold: 'Hind-Bold', sans-serif !default;
 $headings-font-family: 'Montserrat-Bold', sans-serif !default;
 
 // custom class modifiers

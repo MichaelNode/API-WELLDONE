@@ -194,3 +194,15 @@ hr {
   }
 
 }
+
+.bold {
+  font-family: $font-family-sans-bold;
+}
+
+// Buttons
+
+.btn {
+  padding-top: .4rem;
+  padding-bottom: .4rem;
+  height: fit-content;
+}
