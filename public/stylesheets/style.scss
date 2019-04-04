@@ -1,5 +1,6 @@
 @import "custom";
 @import "~bootstrap/scss/bootstrap";
+@import "animation";
 
 // Page Styles
 body{
@@ -131,6 +132,10 @@ hr {
       color: theme-color("secondary")
     }
   }
+
+  .fav {
+    cursor: pointer;
+  }
 }
 
 .article-card{
@@ -205,4 +210,8 @@ hr {
   padding-top: .4rem;
   padding-bottom: .4rem;
   height: fit-content;
+}
+
+.bubble{
+  animation: bubble .5s ease;
 }

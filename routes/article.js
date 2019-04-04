@@ -18,6 +18,7 @@ router.get('/:user/:articleSlug/:page?', async function (req, res, next) {
     try {
         const id = Article.getIdFromSlug(req.params.articleSlug);
         const article = await Article.findOne({_id: id, state: true, publi_date: {$lt: new Date()}}).populate('author', '_id image nick_name');
+        const userId = req.session.user;
 
         // if article not exists, return 404
         if(!article){
@@ -26,7 +27,7 @@ router.get('/:user/:articleSlug/:page?', async function (req, res, next) {
         }
 
         // render article detail
-        await renderArticleDetail(req, res, article);
+        await renderArticleDetail(req, res, article, userId);
 
     } catch(err){
         next(err);
@@ -49,7 +50,7 @@ router.post('/:user/:articleSlug/:page?', userAuth(), commentValidator, async fu
 
         const validationErrors = validationResult(req);
         if (!validationErrors.isEmpty()) {
-            return await renderArticleDetail(req, res, article, {
+            return await renderArticleDetail(req, res, article, req.user, {
                 errors: validationErrors.array({onlyFirstError: true}),
                 commentPosted: req.body.content
             });

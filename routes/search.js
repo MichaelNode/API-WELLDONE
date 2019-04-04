@@ -15,7 +15,7 @@ router.get('/:type?/:page?', async (req, res, next) => {
     const filter = filteredModel === User ? 'nick_name' : 'title';
     const type = filteredModel === User ? 'user' : 'article';
     const page = parseInt(req.params.page) || 1;
-    const recordsPerPage = 2;
+    const recordsPerPage = 15;
     const text = req.query.text;
 
     // get models that have a coincidence

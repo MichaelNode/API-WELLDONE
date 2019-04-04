@@ -1,12 +1,11 @@
-
 export default class Articles {
-    constructor(){
+    constructor() {
         this.bookmark = document.querySelector('.fav');
-       
+
     }
 
-    eventListeners(){
-        
+    eventListeners() {
+        if (!this.bookmark) return;
         this.bookmark.addEventListener('click', (e) => {
             e.stopPropagation()
             e.preventDefault()
@@ -22,22 +21,24 @@ export default class Articles {
             fetch(url, {
                 method: 'PUT',
                 body: JSON.stringify(data),
-                headers:{
-                  'Content-Type': 'application/json'
+                headers: {
+                    'Content-Type': 'application/json'
                 }
-              }).then(res => res.json())
-              .catch(error => console.error('Error:', error))
-              .then(response => {
-                e.target.classList.add(response.add)
-                e.target.classList.remove(response.remove)
-              })
+            }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(response => {
+                    e.target.classList.add(response.add)
+                    e.target.classList.remove(response.remove)
+                    e.target.classList.remove("bubble");
+                    void e.target.offsetWidth;
+                    e.target.classList.add("bubble");
+                })
         })
 
     }
 
-    }
-    
+}
 
 
 
-    
+

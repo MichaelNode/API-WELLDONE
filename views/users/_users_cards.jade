@@ -5,8 +5,8 @@ if users
             .card.article-card.bg-light
                 .card-body.p-2.row.m-0.justify-content-between.align-items-center
                     .d-flex.align-items-center.col-8.p-0
-                        a(href=`/article/${user.nick_name}`)
+                        a(href=`/articles/user/${user.nick_name}`)
                             img.user-thumbnail(src=`/images/${thumbnail}`)
-                        a(href=`/article/${user.nick_name}`)
+                        a(href=`/articles/user/${user.nick_name}`)
                             p.bold.m-0.pl-3=user.nick_name
                     button.btn.btn-outline-secondary.col-4=__('Follow')

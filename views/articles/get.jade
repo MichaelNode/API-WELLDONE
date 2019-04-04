@@ -16,15 +16,16 @@ block content
         // Article Content
         .col-12.mt-5.mb-4.mr-0.ml-0.p-0.row.d-flex.justify-content-center
             h1.col-12.col-md-10.col-lg-8.p-0=article.title
-            .col-12.col-md-10.col-lg-8.d-flex.align-items-center.p-0
-                img.pt-2.pb-2.mr-3.user-thumbnail(src=`/images/${article.author.image}`)
-                .row
-                    p.m-0=`${article.author.nick_name} - ${article.getFormattedDatePost()}`
-                    a.col-12.small.text-secondary(href='#comments')=`${article.numComments} ${__('comments')}`
-                    
-            if isLogged
-                i(class=bookmark).fa-bookmark.fa-2x.fav(data-article=article._id)
-         
+            .col-12.col-md-10.col-lg-8.d-flex.align-items-center.p-0.justify-content-between
+                .d-flex.align-items-center
+                    img.pt-2.pb-2.mr-3.user-thumbnail(src=`/images/${article.author.image}`)
+                    .row
+                        p.col-12.m-0=`${article.author.nick_name} - ${article.getFormattedDatePost()}`
+                        a.col-12.small.text-secondary(href='#comments')=`${article.numComments} ${__('comments')}`
+
+                if isLogged
+                    i(class=bookmark).fa-bookmark.fa-2x.fav(data-article=article._id)
+
             .col-12.col-md-10.col-lg-8.p-0
                 !{article.content}
 
