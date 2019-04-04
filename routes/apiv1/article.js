@@ -7,7 +7,7 @@ const {validation} = require('../../lib/articleService');
 const path = require("path");
 
 
-router.post('/addarticle', validation ,  upload.single('file'), async(req, res, next) => {
+router.post('/addarticle' ,  upload.single('file'),  validation, async(req, res, next) => {
     try {
 		var data = {};
 		const type_file = path.extname(req.file.filename).toLowerCase()

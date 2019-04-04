@@ -280,7 +280,7 @@ class AddArticleForm extends Component {
                   />
                 </Form.Group>
               )}
-              </Form.Row> 
+             
                 <Form.Group as={Col}  md="12" controlId="url">
                   <Form.Label>{this.context.t("Upload file")}</Form.Label>
                   { this.state.ask_fileError ?(
@@ -341,6 +341,7 @@ class AddArticleForm extends Component {
               <Button variant="primary" type="submit">
                   {this.context.t("Submit")}  
               </Button>
+              </Form.Row> 
             </Form>
           </Card.Body> 
         </Card>

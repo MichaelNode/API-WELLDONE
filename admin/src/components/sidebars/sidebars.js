@@ -19,6 +19,8 @@ import UpdateUserForm from "../updateUser/updateUserForm";
 import Logout from '../login/Logout';
 import AddArticleForm from '../article/add_article/addarticle_form'
 
+import './styles.css'
+
 class sideBars extends Component {
     render(){
         return (
@@ -80,9 +82,11 @@ class sideBars extends Component {
             this.props.token &&  !this.props.isLoading && (
                 <React.Fragment>
                     <Switch>
-                      <Route exact path="/admin/logout" component={InstantLogout}/>
-                      <Route exact path="/admin/update" component={UpdateUserForm}/>
-                      <Route exact path="/admin/add_article" component={AddArticleForm}/>
+                      <div className="div_main">
+                        <Route exact path="/admin/logout" component={InstantLogout}/>
+                        <Route exact path="/admin/update" component={UpdateUserForm}/>
+                        <Route exact path="/admin/add_article" component={AddArticleForm}/>
+                      </div>
                     </Switch>
                 </React.Fragment>
             )
