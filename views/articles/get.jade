@@ -19,8 +19,12 @@ block content
             .col-12.col-md-10.col-lg-8.d-flex.align-items-center.p-0
                 img.pt-2.pb-2.mr-3.user-thumbnail(src=`/images/${article.author.image}`)
                 .row
-                    p.col-12.m-0=`${article.author.nick_name} - ${article.getFormattedDatePost()}`
+                    p.m-0=`${article.author.nick_name} - ${article.getFormattedDatePost()}`
                     a.col-12.small.text-secondary(href='#comments')=`${article.numComments} ${__('comments')}`
+                    
+            if isLogged
+                i(class=bookmark).fa-bookmark.fa-2x.fav(data-article=article._id)
+         
             .col-12.col-md-10.col-lg-8.p-0
                 !{article.content}
 

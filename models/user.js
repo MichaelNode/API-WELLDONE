@@ -47,7 +47,11 @@ var UserSchema = Schema({
     last_modification: Date,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    color: String
+    color: String,
+    favArticles: [{
+        type: Schema.ObjectId,
+        ref: 'articles'
+    }],
 });
 
 // function for hash a plain password
