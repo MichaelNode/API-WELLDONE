@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import Logout from '../login/Logout';
 import DeleteUser from '../deleteUser/deleteUser';
-import UpdateUser from '../updateUser/updateUser';
-import AddArticle from '../article/add_article/addarticle'
-
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 export default class Nav extends Component{
     render(){
@@ -15,24 +14,24 @@ export default class Nav extends Component{
                             <Logout/>
                         </a>
                     </li>
-                   
                     <li className="nav-item">
                         <a href="#">
                             <DeleteUser/>
                         </a>
                     </li>
                     <li className="nav-item">
-                        <a href="#">
-                            <AddArticle/>
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a href="#">
-                            <UpdateUser/>
-                        </a>
+                        <Link to='/admin/update'>
+                            <span className="nav-link" >
+                                {this.context.t("Update_User")}
+                            </span>
+                        </Link>
                     </li>
                 </ul>
             </nav>
         )
     }
 }
+
+Nav.contextTypes = {
+    t: PropTypes.func
+  };

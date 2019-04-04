@@ -22,7 +22,6 @@ export default class Category extends Component {
             initialCategory = data.results.map((category) => {
                 return category
             });
-            console.log(initialCategory);
             this.setState({
                 categories: initialCategory,
             });
@@ -33,7 +32,7 @@ export default class Category extends Component {
     render() {
         return (
        
-            <Form.Group as={Col}  md="4" controlId="category">
+            <Form.Group as={Col}  md="6" controlId="category">
                 <Form.Label>{this.context.t("Category")}</Form.Label>
                 { this.props.categoryError ?(
                        <div className="errorValidation">{this.props.categoryError}</div>

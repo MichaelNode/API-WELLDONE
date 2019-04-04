@@ -8,13 +8,14 @@ var logger = require('morgan');
 var session = require('express-session');
 
 
-
 var flash = require('express-flash');
 
 const MongoStore = require('connect-mongo')(session);
 var app = express();
 app.locals.moment = require('moment');
 require('./lib/connectMongoose');
+
+  
 
 
 // view engine setup

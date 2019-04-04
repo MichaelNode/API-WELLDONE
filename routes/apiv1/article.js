@@ -4,26 +4,31 @@ const Article = require('../../models/article');
 const upload = require('../../lib/uploadConfig');
 const { check ,validationResult } = require('express-validator/check');
 const {validation} = require('../../lib/articleService');
+const path = require("path");
 
 
-router.post('/addarticle',validation ,  upload.single('file'), async(req, res, next) => {
+router.post('/addarticle', validation ,  upload.single('file'), async(req, res, next) => {
     try {
 		var data = {};
-		console.log(req)
-		const validationErrors = validationResult(req);
+		const type_file = path.extname(req.file.filename).toLowerCase()
+		const validationErrors = validationResult(req.body);
 		if (!validationErrors.isEmpty()) {
 			return res.status(422).json({ errors: validationErrors.array() });
 		}
 			if(req.file){
-				data = {
-					title: req.body.title,
-					file_type: req.file.mimetype,
-					file_name: req.file.filename,
-					summary: req.body.summary,
-					content: req.body.content,
-					state:   req.body.state,
-					publi_date: req.body.publi_date
-				}
+				if(type_file == '.jpg' || type_file == '.jpeg' || type_file == '.png'){
+					data = {
+						title: req.body.title,
+						file_type: type_file,
+						file_name: req.file.filename,
+						summary: req.body.summary,
+						content: req.body.content,
+						state:   req.body.state,
+						publi_date: req.body.publi_date
+					}
+				} else {
+					return res.json({ error: 'imagen no valida'});
+				}	
 			}
 			else {
 				data = {
@@ -35,9 +40,10 @@ router.post('/addarticle',validation ,  upload.single('file'), async(req, res, n
 					url: req.body.url
 				}
 			}
-			
+
 			const article = new Article(data);
 			const articleSave = await article.save();
+			console.log('create success')
 			res.json({ success: true, result: articleSave});
 	
 	

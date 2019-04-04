@@ -28,7 +28,8 @@ export const translations = {
         "Published":'Published',
         "Choose":'Choose..',
         "New Article":'New Article',
-        "Type":'Type'
+        "Type":'Type',
+        "Upload file":'Upload file'
         
     },
     es: {
@@ -59,6 +60,7 @@ export const translations = {
         "Published":'Publicado',
         "Choose":'Escoge...',
         "New Article":'Nuevo Artículo',
-        "Type":'Tipo'
+        "Type":'Tipo',
+        "Upload file":'Subir archivo'
     }
 };

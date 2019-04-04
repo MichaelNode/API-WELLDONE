@@ -1,23 +1,36 @@
-
-
 // Header.js
 import React, {Component} from 'react';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import {connect} from "react-redux";
 import {Icon} from 'react-fa'
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {Route, Switch} from "react-router-dom";
+
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import Content from '../content/content'
-export default class Header extends Component {
+import MainNavbar from '../navbar/navbar'
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+import Login from '../login/Login'
+import Loading from '../loading/Loading'
+import InstantLogout from "../login/InstantLogout";
+import UpdateUserForm from "../updateUser/updateUserForm";
+import Logout from '../login/Logout';
+import AddArticleForm from '../article/add_article/addarticle_form'
+
+class sideBars extends Component {
     render(){
         return (
-        <BrowserRouter>
+        
         <div>
+            {this.props.token &&  !this.props.isLoading && 
+            <MainNavbar />
+            }
+            {this.props.token &&  !this.props.isLoading && (
             <SideNav
-            onSelect={(selected) => {
-                // Add your code here
-            }}
-        >
+           
+            >
             <SideNav.Toggle />
             <SideNav.Nav defaultSelected="home">
                 <NavItem eventKey="home">
@@ -35,24 +48,64 @@ export default class Header extends Component {
                     <NavText>
                         Charts
                     </NavText>
-                    <NavItem eventKey="/add_article">
+                    <NavItem eventKey="/">
                         <NavText>
-                            Line Chart
+                            <Logout/>
+                        </NavText>
+                    </NavItem>
+                    <NavItem >
+                    <NavText>
+                        <Link to='/admin/add_article'>
+                                <span className="nav-link" >
+                                    {this.context.t("Add_Article")}
+                                </span>
+                        </Link>
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="charts/barchart">
                         <NavText>
-                            Bar Chart
+                        <Link to='/admin/update'>
+                            <span className="nav-link" >
+                                {this.context.t("Update_User")}
+                            </span>
+                        </Link>
                         </NavText>
                     </NavItem>
                 </NavItem>
             </SideNav.Nav>
         </SideNav>
-        <Switch>
-            <Route exact path='/add' component={Content} />
-        </Switch>
+        )}
+             
+        {
+            this.props.token &&  !this.props.isLoading && (
+                <React.Fragment>
+                    <Switch>
+                      <Route exact path="/admin/logout" component={InstantLogout}/>
+                      <Route exact path="/admin/update" component={UpdateUserForm}/>
+                      <Route exact path="/admin/add_article" component={AddArticleForm}/>
+                    </Switch>
+                </React.Fragment>
+            )
+          }
+          {
+            !this.props.token && !this.props.isLoading &&
+                <Login/>
+          }
+          {
+            this.props.isLoading &&
+                <Loading/>
+          }
+
         </div>
-        </BrowserRouter> 
         )
     }
 }
+
+sideBars.contextTypes = {
+    t: PropTypes.func
+};
+
+export default connect(state => ({
+    token: state.user.token,
+    isLoading: state.user.isLoading
+  }))(sideBars);

@@ -3,10 +3,10 @@ import './App.css';
 import {connect} from "react-redux";
 import Login from './components/login/Login'
 import Loading from './components/loading/Loading'
-import Nav from "./components/nav/Nav";
-import UpdateUserForm from './components/updateUser/updateUserForm';
-import AddArticleForm from './components/article/add_article/addarticle_form';
-import styled from 'styled-components';
+import {Route, Switch} from "react-router-dom";
+import InstantLogout from "./components/login/InstantLogout";
+import UpdateUserForm from "./components/updateUser/updateUserForm";
+import Header from "./Header";
 
 class AdminPanel extends Component {
   render() {
@@ -14,20 +14,14 @@ class AdminPanel extends Component {
         <div>
           {
             this.props.token &&  !this.props.isLoading && (
-                <div className="App">
-                  <NavTitle>Welldone Admin Panel</NavTitle>
-                  <Nav/>
-                  
-                </div>
+                <React.Fragment>
+                    <Header/>
+                    <Switch>
+                      <Route exact path="/admin/logout" component={InstantLogout}/>
+                      <Route exact path="/admin/update" component={UpdateUserForm}/>
+                    </Switch>
+                </React.Fragment>
             )
-          }
-          {
-             this.props.token &&  this.props.showUpdateForm &&
-              <UpdateUserForm/>
-          }
-          {
-             this.props.token &&  this.props.showArticleForm &&
-              <AddArticleForm />
           }
           {
             !this.props.token && !this.props.isLoading &&
@@ -42,13 +36,7 @@ class AdminPanel extends Component {
   }
 }
 
-const NavTitle = styled.h1`
-  margin-bottom: 0;
-`;
-
 export default connect(state => ({
   token: state.user.token,
-  isLoading: state.user.isLoading,
-  showUpdateForm: state.user.updateAccount,
-  showArticleForm: state.article.showform
+  isLoading: state.user.isLoading
 }))(AdminPanel);
