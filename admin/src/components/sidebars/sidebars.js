@@ -17,6 +17,7 @@ import InstantLogout from "../login/InstantLogout";
 import UpdateUserForm from "../updateUser/updateUserForm";
 import Logout from '../login/Logout';
 import AddArticleForm from '../article/add_article/addarticle_form'
+import DeleteUser from '../deleteUser/deleteUser'
 
 import './styles.css'
 
@@ -56,6 +57,15 @@ class sideBars extends Component {
                                     {this.context.t("New_Article")}
                                 </span>
                         </Link>
+                        </NavText>
+                    </NavItem>
+                    <NavItem >
+                    <NavText>
+                       
+                                <span className="nav-link" >
+                                   <DeleteUser />
+                                </span>
+                       
                         </NavText>
                     </NavItem>
             

@@ -11,6 +11,7 @@ var ArticleSchema = Schema({
         index: true
 
      },
+     file: String,
      file_type: String, 
      file_name: String,
      url: String,
@@ -22,8 +23,7 @@ var ArticleSchema = Schema({
           default: ''
       },
      content: {
-          type: String,
-          index: false
+          type: String
      },
      state: {
           type: Boolean,
