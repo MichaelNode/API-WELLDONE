@@ -386,7 +386,7 @@ class AddArticleForm extends Component {
                     <Card className="preview" style={{ width: '18rem', }}>
                     <Card.Header>{this.context.t("Preview")}</Card.Header>
                     <Card.Body>    
-                    <iframe frameborder="0" allowfullscreen  width="100%" height="100%"
+                    <iframe frameborder="0" allowFullScreen  width="100%" height="100%"
                       src={this.state.url.replace('watch?v=', 'embed/')}>
                     </iframe>
                     </Card.Body>

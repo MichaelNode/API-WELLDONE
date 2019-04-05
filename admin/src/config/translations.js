@@ -34,7 +34,10 @@ export const translations = {
         "Data_Updated": 'Your account was successfully updated!',
         "Choose_Image": 'Upload your profile picture',
         "New_User_Account": 'You do not have an account yet?',
-        "Forgot_Password": 'Have you forgotten your password?'
+        "Forgot_Password": 'Have you forgotten your password?',
+        "New_Article":'New Article',
+        "Articles":'Articles',
+        "User":'Usuario'
     },
     es: {
         "Email": "Email",
@@ -71,7 +74,9 @@ export const translations = {
         "Data_Updated": '¡Tu cuenta ha sido actualizada con éxito!',
         "Choose_Image": 'Elige una imagen para tu perfil',
         "New_User_Account": '¿Todavía no tienes cuenta?',
-        "Forgot_Password": '¿Olvidaste tu contraseña?'
-
+        "Forgot_Password": '¿Olvidaste tu contraseña?',
+        "New_Article":'Nuevo Artículo',
+        "Articles":'Artículos',
+        "User":'User'
     }
 };

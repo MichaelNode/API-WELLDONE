@@ -7,7 +7,6 @@ import {Route, Switch} from "react-router-dom";
 
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import Content from '../content/content'
 import MainNavbar from '../navbar/navbar'
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -48,31 +47,18 @@ class sideBars extends Component {
                         <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
                     </NavIcon>
                     <NavText>
-                        Charts
+                        {this.context.t("Articles")}
                     </NavText>
-                    <NavItem eventKey="/">
-                        <NavText>
-                            <Logout/>
-                        </NavText>
-                    </NavItem>
                     <NavItem >
                     <NavText>
                         <Link to='/admin/add_article'>
                                 <span className="nav-link" >
-                                    {this.context.t("Add_Article")}
+                                    {this.context.t("New_Article")}
                                 </span>
                         </Link>
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="charts/barchart">
-                        <NavText>
-                        <Link to='/admin/update'>
-                            <span className="nav-link" >
-                                {this.context.t("Update_User")}
-                            </span>
-                        </Link>
-                        </NavText>
-                    </NavItem>
+            
                 </NavItem>
             </SideNav.Nav>
         </SideNav>

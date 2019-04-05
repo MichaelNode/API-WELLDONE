@@ -7,6 +7,7 @@ import FormControl from "react-bootstrap/FormControl"
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav'
 import Dropdown from 'react-bootstrap/Dropdown'
+import PropTypes from "prop-types";
 // Be sure to include styles at some point, probably during your bootstraping
 
 
@@ -18,14 +19,14 @@ export default class MainNavbar extends Component {
             <Nav className="mr-auto">
             </Nav>
             <Form inline>
-              <Dropdown>
+              <Dropdown  drop='left'>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                   <i className="fa fa-user"></i>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                  <Dropdown.Header>{this.context.t("User")}</Dropdown.Header>
+                  <Dropdown.Item href="/admin/update"> {this.context.t("Update_User")}</Dropdown.Item>
+                  <Dropdown.Item href="/admin/logout"> {this.context.t("Logout")}</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Form>
@@ -34,3 +35,7 @@ export default class MainNavbar extends Component {
         )
     }
 }
+
+MainNavbar.contextTypes = {
+  t: PropTypes.func
+};
