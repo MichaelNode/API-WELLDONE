@@ -1,8 +1,7 @@
 if articles
-    .order-selector.col-2.p-0
-        select.form-control
-            option=__('Latest')
-            option=__('Oldest')
+    if typeof notOrder === 'undefined' || !notOrder
+        include ./_order
+        hr.ml-1.mr-1.mt-2
     .cards-masonry
         for article in articles
             .card.article-card.bg-light

@@ -3,7 +3,8 @@ extends ../layout
 block content
   - const categoryExists = typeof category !== 'undefined';
   - const categoryParam = categoryExists ? `?category=${category}` : ''
-
+  - const nextOperator = categoryExists ? '&' : '?';
+  - const link = `/articles/${current}${categoryParam}${nextOperator}`
   .container
     if userExists
       include ../users/_user_header
