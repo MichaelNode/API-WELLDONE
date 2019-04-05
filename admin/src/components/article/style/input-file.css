@@ -33,3 +33,7 @@
   margin-bottom: 10px;
   border-radius: .5rem;
 }
+
+.button-send {
+    width: 100%;
+}

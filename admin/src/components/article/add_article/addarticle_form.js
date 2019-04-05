@@ -17,10 +17,8 @@ import '../style/inputDate.css'
 import DatePicker from 'react-date-picker';
 import '../style/validation.css'
 import moment from 'moment';
+import '../style/main.css'
 
-
-
-//https://codepen.io/atunnecliffe/pen/gpKzQw
 
 class AddArticleForm extends Component {
   constructor(props) {
@@ -49,7 +47,9 @@ class AddArticleForm extends Component {
       fileError: '',
       publi_dateError: '',
       editorStateError: '',
-      showCard: false
+      showCard: false,
+      showCardtube: false,
+      showCardMP4: false
     };
   }
 
@@ -68,13 +68,15 @@ class AddArticleForm extends Component {
     let datepubli = null
     const fileMaxSize = 15 * 1000 * 1000; // 15MB
 
+    console.log(this.state.file, this.state.url )
+
     if(this.state.title == '') {
       titleError = 'Title required'
     }
-    if(this.state.ask_file == null) {
+    if(this.state.ask_file == null ) {
       ask_fileError = 'required'
     }
-    if(this.state.ask_file == 'imagen' && this.state.file == null) {
+    if(this.state.ask_file == 'imagen' && !this.state.file) {
       fileError = 'Image is required'
     }
     if(this.state.file && this.state.file.name !== undefined && this.state.ask_file == 'imagen' && !(
@@ -93,6 +95,17 @@ class AddArticleForm extends Component {
     if(this.state.ask_file == 'video' && !this.state.url) {
       urlError = 'URL is required'
     }
+
+    // validate video youtebe or mp4
+
+    if(this.state.ask_file == 'video' 
+      && this.state.url 
+      && !(this.state.url.includes('.mp4') 
+        || this.state.url.includes('https://www.youtube.com/'))) {
+        urlError = 'URL is not valid'
+    }
+  
+    
     if(this.state.publi_date) {
       datepubli = moment(this.state.publi_date).format('DD-MM-YYYY');
       datenow = moment(Date.now()).format('DD-MM-YYYY');
@@ -120,7 +133,9 @@ class AddArticleForm extends Component {
     }
     if(summaryError || categoryError || 
         editorStateError || titleError ||
-        ask_fileError || stateError) {
+        ask_fileError || stateError || 
+        publi_dateError || 
+        fileError|| urlError) {
           this.setState({
             summaryError,
             categoryError, 
@@ -138,8 +153,10 @@ class AddArticleForm extends Component {
   } 
 
   handleInputChange = (evt) => {
+    console.log('entro red')
     if(this.state.ask_file === "imagen"){
        this.setState({url: null})
+       console.log('zxczx',this.state.url)
     }
     if(this.state.ask_file === "video"){
       this.setState({ file: null})
@@ -147,6 +164,28 @@ class AddArticleForm extends Component {
     if(this.state.state === "false"){
       this.setState({ publi_date: null})
     }
+  
+   if(evt.target.name == 'url'){
+      if(evt.target.value.includes('.mp4')){
+        this.setState({
+          showCardMP4: true, 
+          showCardtube: false})
+      }
+      if (evt.target.value.includes('https://www.youtube.com/')){
+        this.setState({
+          showCardtube:true, 
+          showCardMP4: false,  
+        })
+      }
+      if(!(evt.target.value.includes('https://www.youtube.com/') ||
+          evt.target.value.includes('.mp4'))){
+            this.setState({
+              showCardtube:false, 
+              showCardMP4: false,  
+            })
+          }
+    }
+
     this.setState(handleInputChange(evt));
   };
 
@@ -159,7 +198,6 @@ class AddArticleForm extends Component {
   onChangeDate = date => this.setState({ publi_date:date })
 
   onChange = (event) => {
-    console.log(event.target.files[0])
     if(event.target.files[0])
     {
       if( event.target.files[0].name.includes('.jpg') ||
@@ -184,6 +222,7 @@ class AddArticleForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    console.log(this.state.url)
     const isValid = this.validate();
     if (isValid) {
       const convertedData = convertToRaw(
@@ -205,18 +244,18 @@ class AddArticleForm extends Component {
   render() {
     return (
       <>
-        <Card className="text-center">
+        <Card className="text-center card-main">
           <Card.Header>{this.context.t("New Article")}</Card.Header>
           <Card.Body>
             <Form onSubmit={this.handleSubmit } noValidate encType="multipart/form-data"  >
               <Form.Row>
                 <Form.Group as={Col}  md="6" controlId="title">
-                  <Form.Label for="title" ><span>{this.context.t("Title")}</span></Form.Label>
+                  <Form.Label className="label"  ><span>{this.context.t("Title")}</span></Form.Label>
                   { this.state.titleError ?(
                        <div className="errorValidation">{this.state.titleError}</div>
                   ): null}
                   <Form.Control
-                    className="question"
+                    className="inp"
                     name="title"
                     onChange={this.handleInputChange}   
                     value={this.state.title} 
@@ -293,7 +332,7 @@ class AddArticleForm extends Component {
                     value={this.state.ask_file} 
                     required
                   >
-                    <option value={null}>{this.context.t("Choose")}</option>
+                    <option >{this.context.t("Choose")}</option>
                     <option value="video" >Video</option>
                     <option value="imagen">Imagen</option>
                   </Form.Control>
@@ -313,6 +352,7 @@ class AddArticleForm extends Component {
                   />
                   { this.state.file !== null && this.state.showCard == true   && ( 
                   <Card className="preview" style={{ width: '18rem' }}>
+                   <Card.Header>{this.context.t("Preview")}</Card.Header>
                     <Card.Img  src={this.state.imgSrc} />
                     <Card.Body>
                       <Card.Title>{this.state.file.name}</Card.Title>
@@ -336,9 +376,31 @@ class AddArticleForm extends Component {
                     onChange={this.handleInputChange}   
                     value={this.state.url} 
                   />
+                  <br/>
+                  { this.state.url && this.state.showCardtube  && ( 
+                    <Card className="preview" style={{ width: '18rem', }}>
+                    <Card.Header>{this.context.t("Preview")}</Card.Header>
+                    <Card.Body>    
+                    <iframe frameborder="0" allowfullscreen  width="100%" height="100%"
+                      src={this.state.url.replace('watch?v=', 'embed/')}>
+                    </iframe>
+                    </Card.Body>
+                  </Card> 
+                  )}
+                  <br/>
+                  { this.state.url && this.state.showCardMP4  && ( 
+                  <Card className="preview" style={{ width: '18rem', }}>
+                    <Card.Header>{this.context.t("Preview")}</Card.Header>
+                    <Card.Body>    
+                    <video width="100%" height="100%" controls>
+                      <source  src={this.state.url} type="video/mp4" />
+                      </video>
+                    </Card.Body>
+                  </Card>
+                  )}
                 </Form.Group>
             ) }
-              <Button variant="primary" type="submit">
+              <Button className="button-send" variant="primary" type="submit">
                   {this.context.t("Submit")}  
               </Button>
               </Form.Row> 
@@ -361,7 +423,7 @@ class AddArticleForm extends Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-      addArticle: (title,file,summary,content,state,category,publi_date,url) => {
+      addArticle: (title,file,summary,content,state,category,publi_date,url,token, nickName) => {
           dispatch(articleOperations.addArticle(
             title,
             file,
@@ -370,7 +432,9 @@ class AddArticleForm extends Component {
             state,
             category,
             publi_date,
-            url
+            url,
+            token,
+            nickName
           ));
       }
     };

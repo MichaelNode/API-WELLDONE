@@ -10,12 +10,12 @@ const path = require("path");
 router.post('/addarticle' ,  upload.single('file'),  validation, async(req, res, next) => {
     try {
 		var data = {};
-		const type_file = path.extname(req.file.filename).toLowerCase()
 		const validationErrors = validationResult(req.body);
 		if (!validationErrors.isEmpty()) {
 			return res.status(422).json({ errors: validationErrors.array() });
 		}
 			if(req.file){
+				const type_file = path.extname(req.file.filename).toLowerCase()
 				if(type_file == '.jpg' || type_file == '.jpeg' || type_file == '.png'){
 					data = {
 						title: req.body.title,

@@ -4,7 +4,7 @@ import {asyncFetch, isSuccessResponse} from "../../utils/apiService";
 import apiRoutes from "../../config/apiRoutes";
 
 
-export const addArticle = (title,file,summary,content,state,category,publi_date, url) => {
+export const addArticle = (title,file,summary,content,state,category,publi_date, url, token, nickname) => {
 
     const formData = new FormData();
   
@@ -16,10 +16,11 @@ export const addArticle = (title,file,summary,content,state,category,publi_date,
     formData.append('category', category);
     // eslint-disable-next-line no-unused-expressions
     formData.append('publi_date', publi_date),
-    formData.append('url', url)
+    formData.append('url', url),
+    formData.append('token', token),
+    formData.append('nickname', nickname)
 
-
-    console.log('entro a operation ',content)
+    console.log(token,nickname)
 
     const headers = {
         'Accept': 'application/json application/x-www-form-urlencoded',

@@ -14,12 +14,10 @@ var ArticleSchema = Schema({
      file_name: String,
      url: String,
      summary:{
-          type: String,
-          index: true
+          type: String
      },
      content: {
-          type: String,
-          index: true
+          type: String
      },
      state: {
           type: Boolean,
