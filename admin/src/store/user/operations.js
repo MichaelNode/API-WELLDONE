@@ -26,7 +26,7 @@ export const auth = (email, password) => async dispatch =>{
             return dispatch(actions.loginErrorAction(response.error));
         }
         // dispatch login success with token
-        dispatch(actions.loginSuccessAction(response.token))
+        dispatch(actions.loginSuccessAction(response))
 
     }catch (err) {
         console.log(err);
@@ -56,10 +56,13 @@ export const logout = (redirect) => async dispatch => {
     dispatch({type: types.LOGOUT});
 };
 
-export const deleteUser = () => {
+export const deleteUser = (token) => {
     return async function (dispatch) {
         try {
-            await Promise.all([asyncFetch(apiRoutes.delete_user, 'DELETE'), dispatch(logout())]);
+            const body = {
+                token: token
+            };
+            await Promise.all([asyncFetch(apiRoutes.delete_user, 'DELETE', JSON.stringify(body)), dispatch(logout())]);
             dispatch(actions.hideModal())
         } catch (err) {
             console.log('Hubo un error borrando le usuario', err)
@@ -67,21 +70,30 @@ export const deleteUser = () => {
     }
 }
 
-export const updateUser = (name, lastname, nickname, address) => {
+export const updateUser = (name, lastname, nickname, address, color, description, selectedFile) => {
 
-    const body = {
-        userName: name, 
-        userLastName: lastname,
-        userNickName: nickname, 
-        userAddress: address
-    };
+    const fd = new FormData();
+
+    fd.append('userImage', selectedFile)
+    fd.append('userName', name)
+    fd.append('userLastName', lastname)
+    fd.append('userNickName', nickname)
+    fd.append('userAddress', address)
+    fd.append('userColor', color)
+    fd.append('userDescription', description)
+
+    const headers = {
+    //"Content-Type": "application/json",
+    'Accept': 'application/json',
+};
+
 
     return async function (dispatch) {
         try {
-            await asyncFetch(apiRoutes.user, 'PUT', JSON.stringify(body));
-            
+            await asyncFetch(apiRoutes.user, 'PUT', fd, headers);
+            dispatch(actions.successMessage('Data_Updated'))
         } catch (err) {
-            console.log('Hubo un error actualizando le usuario', err)
+            console.log('Hubo un error actualizando el usuario', err)
         }
     }
 }

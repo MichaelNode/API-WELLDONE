@@ -1,10 +1,52 @@
-@import "~bootstrap/scss/bootstrap";
 @import "custom";
+@import "~bootstrap/scss/bootstrap";
+@import "animation";
 
 // Page Styles
+body{
+  font-size: 20px;
+}
+
+.h1-style,
+.h2-style,
+.h3-style,
+.h4-style,
+.h5-style,
+.h6-style {
+  font-family: $headings-font-family;
+}
+
+h1, .h1-style {
+  font-size: 2rem;
+}
+
+h2, .h2-style {
+  font-size: 1.8rem;
+}
+
+h3, .h3-style {
+  font-size: 1.6rem;
+}
+
+h4, .h4-style {
+  font-size: 1.4rem;
+}
+
+h5, .h5-style {
+  font-size: 1.2rem;
+}
+
+h6, .h6-style {
+  font-size: 1.1rem;
+}
+
 main {
-  margin-top: 90px;
+  margin-top: 110px;
   min-height: 70vh;
+}
+
+img {
+  max-width: 100%;
 }
 
 footer {
@@ -42,7 +84,134 @@ hr {
   }
 }
 
+.user-thumbnail{
+  width: 50px;
+}
+
 // Form
 .error {
   color: red;
+}
+
+.textarea-wrapper {
+  position:relative;
+  min-height: 170px;
+  border: 1px solid $gray-300;
+  background-color: $white;
+
+  input[type=submit] {
+    position:absolute;
+    bottom: 10px;
+    right: 15px;
+    width: 60px;
+  }
+}
+
+// Articles
+.article-detail-image{
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.article-detail{
+  .comment {
+    min-height: 110px;
+    position:relative;
+    border:none;
+    resize: none;
+    outline: none;
+  }
+
+  .comment-card {
+    border: 1px solid $gray-400;
+    background-color: $white;
+    padding: 1rem;
+
+    .author {
+      color: theme-color("secondary")
+    }
+  }
+
+  .fav {
+    cursor: pointer;
+  }
+}
+
+.article-card{
+  width: 98%;
+  margin: 1.16%;
+
+  @include media-breakpoint-up(md) {
+    width: 48%;
+    margin: 1%;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: 31%;
+  }
+}
+
+// Card Columns
+
+.card-columns {
+
+  @include media-breakpoint-up(sm) {
+    column-count: 1;
+  }
+
+  @include media-breakpoint-up(md) {
+    column-count: 2;
+  }
+
+  @include media-breakpoint-up(lg) {
+    column-count: 3;
+  }
+
+}
+
+// Overlay
+
+.overlay-wrapper{
+  position: relative;
+}
+
+.overlay-grey{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 100;
+  background-color: $gray-900;
+  opacity: .3;
+}
+
+// Utils
+
+.small {
+  font-size: .9rem;
+
+  &-2 {
+    font-size: 1rem;
+  }
+
+  &-3 {
+    font-size: 1.1rem;
+  }
+
+}
+
+.bold {
+  font-family: $font-family-sans-bold;
+}
+
+// Buttons
+
+.btn {
+  padding-top: .4rem;
+  padding-bottom: .4rem;
+  height: fit-content;
+}
+
+.bubble{
+  animation: bubble .5s ease;
 }

@@ -39,4 +39,8 @@ class AdminPanel extends Component {
 export default connect(state => ({
   token: state.user.token,
   isLoading: state.user.isLoading
+<<<<<<< HEAD
 }))(AdminPanel);
+=======
+}))(AdminPanel);
+>>>>>>> develop

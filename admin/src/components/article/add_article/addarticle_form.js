@@ -145,7 +145,8 @@ class AddArticleForm extends Component {
             stateError,
             publi_dateError,
             fileError,
-            urlError
+            urlError,
+          
           })
           return false;
     }
@@ -153,7 +154,8 @@ class AddArticleForm extends Component {
   } 
 
   handleInputChange = (evt) => {
-    console.log('entro red')
+
+   
     if(this.state.ask_file === "imagen"){
        this.setState({url: null})
        console.log('zxczx',this.state.url)
@@ -222,7 +224,8 @@ class AddArticleForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log(this.state.url)
+    let nick =  this.props.userData.nickName
+    let token = this.props.token
     const isValid = this.validate();
     if (isValid) {
       const convertedData = convertToRaw(
@@ -236,7 +239,9 @@ class AddArticleForm extends Component {
         this.state.state, 
         this.state.category,
         this.state.publi_date,
-        this.state.url
+        this.state.url,
+        token,
+        nick
       )  
     } 
   };
@@ -417,9 +422,9 @@ class AddArticleForm extends Component {
   };
 
   const mapStateToProps = state => ({
-      userNickName: state.user.nickName
-  });
-
+    userData: state.user.userData,
+    token: state.user.token
+ });
 
   const mapDispatchToProps = dispatch => {
     return {

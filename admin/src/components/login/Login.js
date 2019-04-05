@@ -102,8 +102,8 @@ class Login extends Component {
                                             }
                                         </div>
                                         <div className="row mb-3">
-                                            <a className="col-12" href={`${process.env.REACT_APP_API_URL}/register`}>{this.context.t('You do not have an account yet?')}</a>
-                                            <a className="col-12" href={`${process.env.REACT_APP_API_URL}/users/forgot`}>{this.context.t('Have you forgotten your password?')}</a>
+                                            <a className="col-12" href={`${process.env.REACT_APP_API_URL}/register`}>{this.context.t('New_User_Account')}</a>
+                                            <a className="col-12" href={`${process.env.REACT_APP_API_URL}/users/forgot`}>{this.context.t('Forgot_Password')}</a>
                                         </div>
                                         <input type="button" className="btn btn-primary" value='Login'
                                                onClick={this.handleSubmit}/>

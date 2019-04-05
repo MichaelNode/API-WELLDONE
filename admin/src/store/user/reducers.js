@@ -2,6 +2,7 @@ import * as types from "./types";
 import StorageWrapper from '../../utils/StorageWrapper';
 
 const token = StorageWrapper.getValue('token');
+const userData = JSON.parse(StorageWrapper.getValue('userData'));
 
 const initialState = {
     isLoading: false,
@@ -9,37 +10,26 @@ const initialState = {
     token: token,
     redirect: false,
     showModal: false,
-    updateAccount: false,
-    userName: '',
-    lastName: '',
-    nickName: '',
-    address: ''
+    userData: userData,
+    message: ''
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOGIN_STARTED:
-        return {...state, isLoading: true, token: false, error: '', redirect: false, updateAccount: false};
+        return {...state, isLoading: true, token: false, error: '', redirect: false};
     case types.LOGIN_SUCCESS:
-        return {...state, isLoading: false, token: action.payload, error: '', redirect: false, updateAccount: false};
+        return {...state, isLoading: false, token: action.payload.token, userData: action.payload.user, error: '', redirect: false};
     case types.LOGIN_ERROR:
-        return {...state, isLoading: false, token: null, error: action.payload, redirect: false, updateAccount: false};
+        return {...state, isLoading: false, token: null, error: action.payload, redirect: false};
     case types.LOGOUT:
-        return {...state, isLoading: false, token: null, error: '', redirect: action.payload, updateAccount: false};
+        return {...state, isLoading: false, token: null, error: '', redirect: action.payload, message: ''};
     case types.SHOW_MODAL:
-        return {...state, showModal: true, updateAccount: false}
+        return {...state, showModal: true, }
     case types.HIDE_MODAL:
         return {...state, showModal: false}
-    case types.SHOW_UPDATE_FORM:
-        return {...state, updateAccount: true}
-    case types.GET_FIRST_NAME:
-        return {...state, userName: action.payload}
-    case types.GET_LAST_NAME:
-        return {...state, lastName: action.payload}
-    case types.GET_NICK_NAME:
-        return {...state, nickName: action.payload}
-    case types.GET_ADDRESS:
-        return {...state, address: action.payload}
+    case types.SUCCESS_MESSAGE:
+        return {...state, message: action.payload}
     default:
         return state;
     }

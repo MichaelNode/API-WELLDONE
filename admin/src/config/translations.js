@@ -16,7 +16,6 @@ export const translations = {
         "Address": 'Address',
         "Nick_Name": 'Nick Name',
         "Submit": 'Submit',
-
         "Title": 'Title',
         "Category": 'Category',
         "State": 'State',
@@ -29,8 +28,13 @@ export const translations = {
         "Choose":'Choose..',
         "New Article":'New Article',
         "Type":'Type',
-        "Upload file":'Upload file'
-        
+        "Upload file":'Upload file',
+        "Pick_Color": 'Pick a color for your profile',
+        "Write_Description": 'Tell the world who you are',
+        "Data_Updated": 'Your account was successfully updated!',
+        "Choose_Image": 'Upload your profile picture',
+        "New_User_Account": 'You do not have an account yet?',
+        "Forgot_Password": 'Have you forgotten your password?'
     },
     es: {
         "Email": "Email",
@@ -61,6 +65,13 @@ export const translations = {
         "Choose":'Escoge...',
         "New Article":'Nuevo Artículo',
         "Type":'Tipo',
-        "Upload file":'Subir archivo'
+        "Upload file":'Subir archivo',
+        "Pick_Color": 'Elige un color para tu perfil',
+        "Write_Description": 'Dile al mundo quién eres',
+        "Data_Updated": '¡Tu cuenta ha sido actualizada con éxito!',
+        "Choose_Image": 'Elige una imagen para tu perfil',
+        "New_User_Account": '¿Todavía no tienes cuenta?',
+        "Forgot_Password": '¿Olvidaste tu contraseña?'
+
     }
 };

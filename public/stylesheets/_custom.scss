@@ -14,8 +14,24 @@ $theme-colors: (
   "dark": #404E5C
 );
 
-$font-family-sans-serif: 'Hind', sans-serif !default;
-$headings-font-family: 'Montserrat', sans-serif !default;
+@font-face {
+    src: url('/fonts/Montserrat-Bold.ttf');
+    font-family: "Montserrat-Bold";
+}
+
+@font-face {
+    src: url('/fonts/Hind-Regular.ttf');
+    font-family: "Hind-Regular";
+}
+
+@font-face {
+    src: url('/fonts/Hind-Bold.ttf');
+    font-family: "Hind-Bold";
+}
+
+$font-family-sans-serif: 'Hind-Regular', sans-serif !default;
+$font-family-sans-bold: 'Hind-Bold', sans-serif !default;
+$headings-font-family: 'Montserrat-Bold', sans-serif !default;
 
 // custom class modifiers
 
@@ -43,25 +59,7 @@ div.card-body {
     justify-content: center;
 }
 
-.card-columns {
-
-    @include media-breakpoint-up(sm) {
-        column-count: 1;
-    }
-
-    @include media-breakpoint-up(md) {
-        column-count: 2;
-    }
-
-    @include media-breakpoint-up(lg) {
-        column-count: 3;
-    }
-
-    @include media-breakpoint-up(xl) {
-        column-count: 4;
-    }
-}
-
 .shadow{
     box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.15) !important
 }
+

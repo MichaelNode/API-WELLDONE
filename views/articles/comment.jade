@@ -1,0 +1,12 @@
+mixin commentsCards(comments)
+    -comments.forEach(comment => {
+        .col-12.mt-4.comment-card
+            .comment-title
+                .col-12.col-md-10.col-lg-8.d-flex.align-items-center.p-0.mb-3
+                    img.pt-2.pb-2.mr-3.user-thumbnail(src=`/images/${article.author.image}`)
+                    .row
+                        p.m-0.col-12
+                            a.author(href=`/articles/user/${comment.user.nick_name}`)=`${comment.user.nick_name}`
+                        p.small.m-0.col-12=`${moment(comment.create_at).format('lll')}`
+            p.m-0=comment.content
+    -});

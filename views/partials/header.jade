@@ -2,6 +2,11 @@
 - const pageIndex = pageExists ? current : 1;
 - const userExists = typeof userBlog !== 'undefined';
 - const categoryLink = userExists ? `/articles/user/${userBlog.nick_name}/` : '/articles/'
+- const searchTypeExists = typeof searchType !== 'undefined';
+- const searchLink = searchTypeExists ? `/search/${searchType}` : '/search';
+- const searchTextExists = typeof searchText !== 'undefined';
+- const searchTextValue = searchTextExists ? searchText : '';
+
 
 header
   // Header
@@ -17,7 +22,7 @@ header
         a(class="btn btn-outline-secondary ml-auto" href='/admin') #{__('My Area')}
       else
         a(class="btn btn-outline-secondary ml-auto" href='/admin') #{__('Sign In')}
-      form(class="form-inline")
-        input(type="search" class="form-control mx-2" placeholder="Search")
+      form(class="form-inline", action=searchLink)
+        input(type="search" name="text" class="form-control mx-2" placeholder="Search" value=searchTextValue)
         button(type="submit" class="btn btn-outline-secondary")
           i(class="fas fa-search")
