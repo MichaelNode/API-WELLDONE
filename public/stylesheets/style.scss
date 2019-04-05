@@ -71,6 +71,10 @@ hr {
   border-top: 1px solid rgba(0, 0, 0, 0.22);
 }
 
+.pagination-wrapper, .order-selector {
+  margin: 1%;
+}
+
 // User
 .user-header-image img{
   width: 150px;

@@ -1,30 +1,30 @@
 mixin pagination(url, extraParams)
-    if (count >= recordsPerPage)
-        nav(aria-label='Pagination', style='text-align: center')
-            ul.pagination
-                -if (current > 1)
-                    li.page-item
-                        -var pageUrl =  url + 1 + extraParams
-                        a.page-link(href=pageUrl) #{__('First')}
+    //if (count >= recordsPerPage)
+    nav.pagination-wrapper(aria-label='Pagination', style='text-align: center')
+        ul.pagination
+            -if (current > 1)
+                li.page-item
+                    -var pageUrl =  url + 1 + extraParams
+                    a.page-link(href=pageUrl) #{__('First')}
+            -else
+                li.page-item.disabled
+                    a.page-link(href='#', tabindex='-1') #{__('First')}
+            -for (i = 1; i < pageButtonCount + 1; i++)
+                -if (count > 0 )
+                    -paginationNo = paginationNo + 1
+                    -var pageUrl =   url + paginationNo  + extraParams
+                    -if (page != paginationNo)
+                        li.page-item
+                            a.page-link(href=pageUrl) #{paginationNo}
                 -else
-                    li.page-item.disabled
-                        a.page-link(href='#', tabindex='-1') #{__('First')}
-                -for (i = 1; i < pageButtonCount + 1; i++)
-                    -if (count > 0 )
-                        -paginationNo = paginationNo + 1
-                        -var pageUrl =   url + paginationNo  + extraParams
-                        -if (page != paginationNo)
-                            li.page-item
-                                a.page-link(href=pageUrl) #{paginationNo}
-                    -else
-                          li.page-item.active
-                              a.page-link(href='#')
-                                    |#{paginationNo}
-                          span.sr-only (current)
-                -if (current != pages)
-                    -var pageUrl = url + pageButtonCount  + extraParams
-                    li.page-item
-                        a.page-link(href=pageUrl) #{__('Last')}
-                -else
-                    li.page-item.disabled
-                        a.page-link(href='#', tabindex='-1') #{__('Last')}
+                      li.page-item.active
+                          a.page-link(href='#')
+                                |#{paginationNo}
+                      span.sr-only (current)
+            -if (current != pages)
+                -var pageUrl = url + pageButtonCount  + extraParams
+                li.page-item
+                    a.page-link(href=pageUrl) #{__('Last')}
+            -else
+                li.page-item.disabled
+                    a.page-link(href='#', tabindex='-1') #{__('Last')}

@@ -1,4 +1,8 @@
 if articles
+    .order-selector.col-2.p-0
+        select.form-control
+            option=__('Latest')
+            option=__('Oldest')
     .cards-masonry
         for article in articles
             .card.article-card.bg-light

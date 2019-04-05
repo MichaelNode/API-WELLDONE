@@ -22,5 +22,5 @@ block content
                 include ../users/_users_cards
                 if !users || users.length <= 0
                     p.mt-5=__('We could not find people')
-        .mb-5.pl-2
+        .mb-5
             +pagination(link, '?text=' + searchText)
