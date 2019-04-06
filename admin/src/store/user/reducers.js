@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
     case types.SUCCESS_MESSAGE:
         return {...state, message: action.payload}
     case types.USER_DATA_UPDATE:
-        return {...state, userData: userDataUpdated}
+        return {...state, userData: action.payload}
     default:
         return state;
     }
