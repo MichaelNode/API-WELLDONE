@@ -68,7 +68,7 @@ class AddArticleForm extends Component {
     let datepubli = null
     const fileMaxSize = 15 * 1000 * 1000; // 15MB
 
-    console.log(this.state.file, this.state.url )
+
 
     if(this.state.title == '') {
       titleError = 'Title required'
@@ -154,11 +154,9 @@ class AddArticleForm extends Component {
   } 
 
   handleInputChange = (evt) => {
-
    
     if(this.state.ask_file === "imagen"){
        this.setState({url: null})
-       console.log('zxczx',this.state.url)
     }
     if(this.state.ask_file === "video"){
       this.setState({ file: null})
@@ -224,7 +222,7 @@ class AddArticleForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    let nick =  this.props.userData.nickName
+    let idUser =  this.props.userData._id
     let token = this.props.token
     const isValid = this.validate();
     if (isValid) {
@@ -241,7 +239,7 @@ class AddArticleForm extends Component {
         this.state.publi_date,
         this.state.url,
         token,
-        nick
+        idUser
       )  
     } 
   };
@@ -428,7 +426,7 @@ class AddArticleForm extends Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-      addArticle: (title,file,summary,content,state,category,publi_date,url,token, nickName) => {
+      addArticle: (title,file,summary,content,state,category,publi_date,url,token, userId) => {
           dispatch(articleOperations.addArticle(
             title,
             file,
@@ -439,7 +437,7 @@ class AddArticleForm extends Component {
             publi_date,
             url,
             token,
-            nickName
+            userId
           ));
       }
     };

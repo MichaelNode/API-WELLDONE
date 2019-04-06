@@ -4,7 +4,7 @@ import {asyncFetch, isSuccessResponse} from "../../utils/apiService";
 import apiRoutes from "../../config/apiRoutes";
 
 
-export const addArticle = (title,file,summary,content,state,category,publi_date, url, token, nickname) => {
+export const addArticle = (title,file,summary,content,state,category,publi_date, url, token, idUSer) => {
 
     const formData = new FormData();
   
@@ -18,9 +18,9 @@ export const addArticle = (title,file,summary,content,state,category,publi_date,
     formData.append('publi_date', publi_date),
     formData.append('url', url),
     formData.append('token', token),
-    formData.append('nickname', nickname)
+    formData.append('idUSer', idUSer)
 
-    console.log(token,nickname)
+   
 
     const headers = {
         'Accept': 'application/json application/x-www-form-urlencoded',

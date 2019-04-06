@@ -18,7 +18,8 @@ import UpdateUserForm from "../updateUser/updateUserForm";
 import Logout from '../login/Logout';
 import AddArticleForm from '../article/add_article/addarticle_form'
 import DeleteUser from '../deleteUser/deleteUser'
-
+import {Form , Col} from "react-bootstrap";
+import CardUSer from '../usercard/usercard'
 import './styles.css'
 
 class sideBars extends Component {
@@ -78,11 +79,18 @@ class sideBars extends Component {
             this.props.token &&  !this.props.isLoading && (
                 <React.Fragment>
                     <Switch>
-                      <div className="div_main">
-                        <Route exact path="/admin/logout" component={InstantLogout}/>
-                        <Route exact path="/admin/update" component={UpdateUserForm}/>
-                        <Route exact path="/admin/add_article" component={AddArticleForm}/>
-                      </div>
+                        <Form.Row>
+                            <Form.Group className="div_main" as={Col}  md="6" >
+                           
+                                <Route exact path="/admin/logout" component={InstantLogout}/>
+                                <Route exact path="/admin/update" component={UpdateUserForm}/>
+                                <Route exact path="/admin/add_article" component={AddArticleForm}/>
+                          
+                            </Form.Group>
+                            <Form.Group  as={Col}  md="6" >
+                                <CardUSer userData={this.props.userData}/>
+                       </Form.Group>
+                        </Form.Row>
                     </Switch>
                 </React.Fragment>
             )
@@ -107,5 +115,6 @@ sideBars.contextTypes = {
 
 export default connect(state => ({
     token: state.user.token,
+    userData: state.user.userData,
     isLoading: state.user.isLoading
   }))(sideBars);

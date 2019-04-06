@@ -8,6 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav'
 import Dropdown from 'react-bootstrap/Dropdown'
 import PropTypes from "prop-types";
+import Logout from '../login/Logout';
 // Be sure to include styles at some point, probably during your bootstraping
 
 
@@ -26,7 +27,7 @@ export default class MainNavbar extends Component {
                 <Dropdown.Menu>
                   <Dropdown.Header>{this.context.t("User")}</Dropdown.Header>
                   <Dropdown.Item href="/admin/update"> {this.context.t("Update_User")}</Dropdown.Item>
-                  <Dropdown.Item href="/admin/logout"> {this.context.t("Logout")}</Dropdown.Item>
+                  <Dropdown.Item>  <Logout/> </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Form>

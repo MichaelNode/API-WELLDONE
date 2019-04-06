@@ -5,9 +5,9 @@ const upload = require('../../lib/uploadConfig');
 const { check ,validationResult } = require('express-validator/check');
 const {validation} = require('../../lib/articleService');
 const path = require("path");
+const {jwtAuth} = require('../../lib/jwtAuth');
 
-
-router.post('/addarticle' ,  upload.single('file'),  validation, async(req, res, next) => {
+router.post('/addarticle' , upload.single('file'),  validation, async(req, res, next) => {
     try {
 		var data = {};
 		const validationErrors = validationResult(req.body);
@@ -24,7 +24,8 @@ router.post('/addarticle' ,  upload.single('file'),  validation, async(req, res,
 						summary: req.body.summary,
 						content: req.body.content,
 						state:   req.body.state,
-						publi_date: req.body.publi_date
+						publi_date: req.body.publi_date,
+						author: req.body.idUSer
 					}
 				} else {
 					return res.json({ error: 'imagen no valida'});
@@ -37,7 +38,8 @@ router.post('/addarticle' ,  upload.single('file'),  validation, async(req, res,
 					content: req.body.content,
 					state:   req.body.state,
 					publi_date: req.body.publi_date,
-					url: req.body.url
+					url: req.body.url,
+					author: req.body.idUSer
 				}
 			}
 
