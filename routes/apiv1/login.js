@@ -93,7 +93,7 @@ router.put('/', uploadImages.single('userImage'), async (req, res, next) => {
                     address: req.body.userAddress,
                     color: req.body.userColor,
                     description: req.body.userDescription,
-                    image: req.file.path
+                    image: req.file ? req.file.path : req.session.user.image
                 })
                 console.log('actualizando usuario: ' + req.body.userName + ' ' + req.body.userLastName);
 

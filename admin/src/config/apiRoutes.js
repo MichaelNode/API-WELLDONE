@@ -7,5 +7,5 @@ export default {
     delete_user: `${API_BASE}/deleteuser`,
     user: `${API_BASE}/user`,
     article: `${API_BASE}/article/addarticle`,
-
+    categories: `${API_BASE}/article/categories`
 };

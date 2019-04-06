@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 import Col from "react-bootstrap/Col";
+import apiRoutes from '../../config/apiRoutes';
 
 export default class Category extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export default class Category extends Component {
 
     componentDidMount() {
         let initialCategory = [];
-        fetch('http://localhost:3002/apiv1/article/categories')
+        fetch(apiRoutes.categories)
             .then(results => {
                 return results.json();
             }).then(data => {

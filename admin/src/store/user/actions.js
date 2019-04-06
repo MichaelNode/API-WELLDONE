@@ -53,9 +53,25 @@ export const hideModal = () =>{
     }
   };
 
-  export const successMessage = (message) => {
+export const successMessage = (message) => {
       return {
           type: types.SUCCESS_MESSAGE,
           payload: message
       }
   };
+
+export const userDataUpdate = (_id, name, lastname, nickname, address, description) => {
+    const userDataUpdated = {
+        _id, _id,
+        name: name,
+        last_name: lastname, 
+        address: address,
+        description: description,
+        nick_name: nickname
+    }
+    StorageWrapper.saveValue('userData', JSON.stringify(userDataUpdated));
+    return {
+        type: types.USER_DATA_UPDATE,
+        payload: userDataUpdated
+    }
+};

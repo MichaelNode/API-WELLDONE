@@ -11,7 +11,7 @@ import {Card} from 'react-bootstrap'
 
 function UpdateUserForm (props, context) {
 
-  const {name, last_name, nick_name, address, description} = props.userData 
+  const {_id, name, last_name, nick_name, address, description} = props.userData 
 
   const [nameUpdated, setName] = useState(name)
   const [last_nameUpdated, setLastName] = useState(last_name)
@@ -23,7 +23,7 @@ function UpdateUserForm (props, context) {
 
   function submit(e){
     e.preventDefault()
-    props.updateUser (nameUpdated, last_nameUpdated, nick_nameUpdated, addressUpdated, color, descriptionUpdated, selectedFile)
+    props.updateUser (_id, nameUpdated, last_nameUpdated, nick_nameUpdated, addressUpdated, color, descriptionUpdated, selectedFile)
   }
   
     return (
@@ -132,8 +132,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateUser: (name, lastname, nickname, address, color, description, selectedFile) => {
-        dispatch(userOperations.updateUser(name, lastname, nickname, address, color, description, selectedFile));
+    updateUser: (_id, name, lastname, nickname, address, color, description, selectedFile) => {
+        dispatch(userOperations.updateUser(_id, name, lastname, nickname, address, color, description, selectedFile));
     },
   };
 };
