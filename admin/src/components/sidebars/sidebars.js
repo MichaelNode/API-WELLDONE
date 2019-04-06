@@ -60,16 +60,6 @@ class sideBars extends Component {
                         </Link>
                         </NavText>
                     </NavItem>
-                    <NavItem >
-                    <NavText>
-                       
-                                <span className="nav-link" >
-                                   <DeleteUser />
-                                </span>
-                       
-                        </NavText>
-                    </NavItem>
-            
                 </NavItem>
             </SideNav.Nav>
         </SideNav>

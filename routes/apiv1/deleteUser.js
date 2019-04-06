@@ -5,6 +5,7 @@ const {jwtAuth} = require('../../lib/jwtAuth');
 
 router.delete('/', jwtAuth(), async (req, res, next) => {
 
+
         try {
             const userId = req.user;
             await Users.findOne({_id: userId}, function (err, user){
@@ -12,8 +13,13 @@ router.delete('/', jwtAuth(), async (req, res, next) => {
                     console.log('hubo un error al borrar la cuenta del usuario', err)
                     return
                 }
-                user.remove();
-                console.log('Usuario borrado: ' + user.name + ' ' + user.last_name);
+                if (userId != user._id){
+                    console.log('You don´t have permission to perform this action')
+                    return
+                } else {
+                    user.remove();
+                    console.log('Usuario borrado: ' + user.name + ' ' + user.last_name)
+                }
             });
             res.json({success: true})
         } catch (err) {
