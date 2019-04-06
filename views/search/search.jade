@@ -11,6 +11,7 @@ block content
                 a(href=`/search/article?text=${searchText}`, class=`mr-4 ${articleClass}`)=__('Articles')
                 a(href=`/search/user?text=${searchText}` class=userClass)=__('Users')
             if searchType === 'article'
+                - const linkOrder = `/search/${searchType}?text=${searchText}&`
                 .col-6.text-right
                     include ../articles/_order
         hr.mt-2

@@ -1,3 +1,5 @@
 .order-selector.text-right
-    a.pl-1.pr-1(href=`${link}order=-1`)=__('Latest')
-    a.pl-1.pr-1(href=`${link}order=1`)=__('Oldest')
+    - const latestClass = order === '-1' ? 'bold' : '';
+    - const oldestClass = order === '1' ? 'bold' : '';
+    a(href=`${linkOrder}order=-1`, class=`pl-1 pr-1 ${latestClass}`)=__('Latest')
+    a(href=`${linkOrder}order=1`, class=`pl-1 pr-1 ${oldestClass}`)=__('Oldest')
