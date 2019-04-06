@@ -17,7 +17,6 @@ export default class Articles {
                 articleID: articleID
             }
 
-
             fetch(url, {
                 method: 'PUT',
                 body: JSON.stringify(data),

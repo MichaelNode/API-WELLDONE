@@ -51,6 +51,12 @@
 	"followers": "followers",
 	"following": "following",
 	"Description": "Description",
+	"tipo de imagen no valida": "tipo de imagen no valida",
+	"Debes indicar un titulo": "Debes indicar un titulo",
+	"Debes indicar un resumen": "Debes indicar un resumen",
+	"Debes indicar un contenido": "Debes indicar un contenido",
+	"Debes indicar un estado": "Debes indicar un estado",
+	"Debes indicar una categoría": "Debes indicar una categoría",
 	"minutos": "minutos",
 	"Hace": "Hace",
 	"horas": "horas",
@@ -75,5 +81,6 @@
 	"Latest": "Latest",
 	"Oldest": "Oldest",
 	"Yes": "Yes",
-	"No": "No"
+	"No": "No",
+	"Debes indicar un author": "Debes indicar un author"
 }

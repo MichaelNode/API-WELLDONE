@@ -9,7 +9,7 @@ export const isSuccessResponse = (response) => {
 
 const initialHeaders = {
     "Content-Type": "application/json",
-    'Accept': 'application/json',
+    'Accept': 'application/json'
 };
 
 /**
@@ -26,6 +26,7 @@ export const asyncFetch = async (url, method = 'GET', body = null, headers = ini
         mode: "cors",
         cache: "no-cache",
         credentials: "same-origin",
+      
     };
 
     // add body to the request if exist

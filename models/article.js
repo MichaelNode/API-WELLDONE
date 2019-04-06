@@ -6,45 +6,44 @@ const i18n = require('i18n');
 const Comment = require('./comment');
 
 var ArticleSchema = Schema({
-   title:{
+     title:{
         type: String,
         index: true
-   },
-   file: String,
-   summary:{
-        type: String,
-        index: true
-   },
-    shortDescription: {
-        type: String,
-        default: ''
-    },
-   content: {
-        type: String,
-        index: false
-   },
-   state: {
-        type: Boolean,
-        index: true
-    },
-   category: {
-        type: String,
-        index: true
-   },
-   create_at: {
-        type: Date,
-        default: Date.now
-   },
-   publi_date: Date,
-   author: {
-       type: Schema.ObjectId,
-       ref: 'user'
-   },
-   last_modification: Date,
-   /* res_article: {
-        type: Schema.ObjectId,
-        ref: 'article'
-   } */
+
+     },
+     file: String,
+     file_type: String, 
+     file_name: String,
+     url: String,
+     summary:{
+          type: String
+     },
+     shortDescription: {
+          type: String,
+          default: ''
+      },
+     content: {
+          type: String
+     },
+     state: {
+          type: Boolean,
+          index: true
+      },
+     category: {
+          type: String,
+          index: true
+     },
+     create_at: {
+          type: Date,
+          default: Date.now
+     },
+     publi_date: Date,
+     author: {
+         type: Schema.ObjectId,
+         ref: 'user'
+     },
+     last_modification: Date,
+    
 });
 
 ArticleSchema.statics.allowedCategories = function () {

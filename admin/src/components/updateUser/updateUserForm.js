@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import { userOperations } from '../../store/user';
 import {handleInputChange} from '../../utils/utils';
 import { TwitterPicker } from 'react-color';
+import {Card} from 'react-bootstrap'
 
 function UpdateUserForm (props, context) {
 
@@ -27,97 +28,102 @@ function UpdateUserForm (props, context) {
   
     return (
       <>
-        <Form className="update-form" 
-              onSubmit={submit}>
+      <Card className="text-center card-main">
+          <Card.Header>Perfil</Card.Header>
+          <Card.Body>
+            <Form className="update-form" 
+                  onSubmit={submit}>
 
-          <Form.Group  controlId="formGridAddress1">
-            <Form.Label>{context.t("First_Name")}</Form.Label>
-            <Form.Control type="text"
-                          name='name'
-                          onChange={(e) => {
-                            setName(e.target.value)
-                          }} 
-                          value={nameUpdated} />
-          </Form.Group>
+              <Form.Group  controlId="formGridAddress1">
+                <Form.Label>{context.t("First_Name")}</Form.Label>
+                <Form.Control type="text"
+                              name='name'
+                              onChange={(e) => {
+                                setName(e.target.value)
+                              }} 
+                              value={nameUpdated} />
+              </Form.Group>
 
-          <Form.Group  controlId="formGridAddress2">
-            <Form.Label>{context.t("Last_Name")}</Form.Label>
-            <Form.Control type="text" 
-                          name='last_name'
-                          onChange={(e) => {
-                            setLastName(e.target.value)
-                          }} 
-                          value={last_nameUpdated} />
-          </Form.Group>
+              <Form.Group  controlId="formGridAddress2">
+                <Form.Label>{context.t("Last_Name")}</Form.Label>
+                <Form.Control type="text" 
+                              name='last_name'
+                              onChange={(e) => {
+                                setLastName(e.target.value)
+                              }} 
+                              value={last_nameUpdated} />
+              </Form.Group>
 
-          <Form.Group  controlId="formGridAddress1">
-            <Form.Label>{context.t("Nick_Name")}</Form.Label>
-            <Form.Control type="text" 
-                          name='nick_name'
-                          onChange={(e) => {
-                            setNickName(e.target.value)
-                          }} 
-                          value={nick_nameUpdated} />
-          </Form.Group>
+              <Form.Group  controlId="formGridAddress1">
+                <Form.Label>{context.t("Nick_Name")}</Form.Label>
+                <Form.Control type="text" 
+                              name='nick_name'
+                              onChange={(e) => {
+                                setNickName(e.target.value)
+                              }} 
+                              value={nick_nameUpdated} />
+              </Form.Group>
 
-          <Form.Group  controlId="formGridAddress2">
-            <Form.Label>{context.t("Address")}</Form.Label>
-            <Form.Control type="text" 
-                          name='address'
-                          onChange={(e) => {
-                            setAddress(e.target.value)
-                          }} 
-                          value={addressUpdated} />
-          </Form.Group>
+              <Form.Group  controlId="formGridAddress2">
+                <Form.Label>{context.t("Address")}</Form.Label>
+                <Form.Control type="text" 
+                              name='address'
+                              onChange={(e) => {
+                                setAddress(e.target.value)
+                              }} 
+                              value={addressUpdated} />
+              </Form.Group>
 
-          <Form.Group as={Col} md="3" controlId="formGridAddress2">
-            <Form.Label>{context.t("Pick_Color")}</Form.Label>
-            <TwitterPicker
-                    color={ color }
-                    onChangeComplete={(color) => {
-                      setColor(color.hex)
-                    }} 
-                  />
-    
-          </Form.Group>
+              <Form.Group as={Col} md="3" controlId="formGridAddress2">
+                <Form.Label>{context.t("Pick_Color")}</Form.Label>
+                <TwitterPicker
+                        color={ color }
+                        onChangeComplete={(color) => {
+                          setColor(color.hex)
+                        }} 
+                      />
+        
+              </Form.Group>
 
-          <Form.Group  controlId="formGridAddress2">
-            <Form.Label>{context.t("Write_Description")}</Form.Label>
-            <Form.Control as="textarea" 
-                          size="lg"
-                          name="description"
-                          maxLength="500"
-                          value={descriptionUpdated}
-                          onChange={(e) => {
-                            setDescription(e.target.value)
-                          }} />
-          </Form.Group>     
+              <Form.Group  controlId="formGridAddress2">
+                <Form.Label>{context.t("Write_Description")}</Form.Label>
+                <Form.Control as="textarea" 
+                              size="lg"
+                              name="description"
+                              maxLength="500"
+                              value={descriptionUpdated}
+                              onChange={(e) => {
+                                setDescription(e.target.value)
+                              }} />
+              </Form.Group>     
 
-        <Form.Group  controlId="formGridAddress2">
-          <Form.Label>{context.t("Choose_Image")}</Form.Label>
-            <Form.Control type="file" 
-                          onChange={(e) => {
-                            setSelectedFile(e.target.files[0])
-                          }} />
-          </Form.Group>    
+            <Form.Group  controlId="formGridAddress2">
+              <Form.Label>{context.t("Choose_Image")}</Form.Label>
+                <Form.Control type="file" 
+                              onChange={(e) => {
+                                setSelectedFile(e.target.files[0])
+                              }} />
+              </Form.Group>    
 
-          <Button variant="primary" 
-                  type="submit">
-                  {context.t("Submit")}
-          </Button>
-         <div>
-          <span>{context.t(props.message)}</span>
-         </div>             
+              <Button variant="primary" className="button-send" 
+                      type="submit">
+                      {context.t("Submit")}
+              </Button>
+            <div>
+              <span>{context.t(props.message)}</span>
+            </div>             
 
-        </Form>
+            </Form>
+          </Card.Body>
+          </Card>
       </>
     );
   }
 
 
-UpdateUserForm.contextTypes = {
-  t: PropTypes.func
-};
+  UpdateUserForm.contextTypes = {
+    t: PropTypes.func
+  };
 
 const mapStateToProps = state => ({
    userData: state.user.userData,

@@ -12,3 +12,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.content-wrapper {
+  padding-left: 50px;
+}
+
+.sidenav---sidenav---_2tBP {
+  background: #015abb !important;
+}
