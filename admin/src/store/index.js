@@ -1,6 +1,7 @@
 // Dependencies
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import userReducer from './user';
+import articleReducer from './article';
 import thunk from 'redux-thunk';
 import {i18nState} from "redux-i18n"
 import {checkTokenExpirationMiddleware} from "../utils/logoutMiddleware";
@@ -10,6 +11,7 @@ const initialState = {};
 
 const rootReducer = combineReducers({
   user: userReducer,
+  article:articleReducer,
   i18nState
 });
 
