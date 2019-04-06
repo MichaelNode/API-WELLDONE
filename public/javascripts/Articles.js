@@ -12,11 +12,7 @@ export default class Articles {
             var article = this.bookmark.getAttribute('data-article')
             var articleID = article.slice(1, -1)
 
-<<<<<<< HEAD
             const url = '/apiv1/favarticle'
-=======
-            const url = 'http://localhost:3002/apiv1/favarticle'
->>>>>>> 6d5f62fdb72cbaa9fac2d954a7073c7149ece77c
             const data = {
                 articleID: articleID
             }
