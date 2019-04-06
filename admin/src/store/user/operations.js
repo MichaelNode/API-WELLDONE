@@ -87,11 +87,13 @@ export const updateUser = (name, lastname, nickname, address, color, description
     'Accept': 'application/json',
 };
 
-
     return async function (dispatch) {
         try {
             await asyncFetch(apiRoutes.user, 'PUT', fd, headers);
-            dispatch(actions.successMessage('Data_Updated'))
+            if(isSuccessResponse){
+                dispatch(actions.successMessage('Data_Updated'))
+                dispatch(actions.userDataUpdate(name, lastname, nickname, address, description))
+            }
         } catch (err) {
             console.log('Hubo un error actualizando el usuario', err)
         }
