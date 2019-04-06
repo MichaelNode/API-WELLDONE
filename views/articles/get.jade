@@ -23,8 +23,12 @@ block content
                         p.col-12.m-0=`${article.author.nick_name} - ${article.getFormattedDatePost()}`
                         a.col-12.small.text-secondary(href='#comments')=`${article.numComments} ${__('comments')}`
 
-                if isLogged
-                    i(class=bookmark).fa-bookmark.fa-2x.fav(data-article=article._id)
+
+                .small
+                    i.mx-2.fa-facebook-square.fa-2x.fab
+                    i.mx-2.fa-twitter.fa-2x.fab
+                    if isLogged
+                        i.mx-2.fa-bookmark.fa-2x.fav(data-article=article._id, class=bookmark)
 
             .col-12.col-md-10.col-lg-8.p-0
                 !{article.content}
