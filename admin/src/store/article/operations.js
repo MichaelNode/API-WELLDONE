@@ -20,8 +20,6 @@ export const addArticle = (title,file,summary,content,state,category,publi_date,
     formData.append('token', token),
     formData.append('idUSer', idUSer)
 
-   
-
     const headers = {
         'Accept': 'application/json application/x-www-form-urlencoded',
     }

@@ -70,7 +70,7 @@ export const deleteUser = (token) => {
     }
 }
 
-export const updateUser = (name, lastname, nickname, address, color, description, selectedFile) => {
+export const updateUser = (_id, name, lastname, nickname, address, color, description, selectedFile) => {
 
     const fd = new FormData();
 
@@ -92,7 +92,7 @@ export const updateUser = (name, lastname, nickname, address, color, description
             await asyncFetch(apiRoutes.user, 'PUT', fd, headers);
             if(isSuccessResponse){
                 dispatch(actions.successMessage('Data_Updated'))
-                dispatch(actions.userDataUpdate(name, lastname, nickname, address, description))
+                dispatch(actions.userDataUpdate(_id, name, lastname, nickname, address, description))
             }
         } catch (err) {
             console.log('Hubo un error actualizando el usuario', err)

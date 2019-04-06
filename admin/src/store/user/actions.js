@@ -59,8 +59,9 @@ export const successMessage = (message) => {
       }
   };
 
-export const userDataUpdate = (name, lastname, nickname, address, description) => {
+export const userDataUpdate = (_id, name, lastname, nickname, address, description) => {
     const userDataUpdated = {
+        _id, _id,
         name: name,
         last_name: lastname, 
         address: address,
