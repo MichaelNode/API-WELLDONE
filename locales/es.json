@@ -45,7 +45,7 @@
 	"¿Quiéres estar al tanto de noticias de actualidad? ¿Eres un geek y necesitas un oasis donde escribir? Entra aquí y podrás dar compartir todas las ideas que tengas": "¿Quiéres estar al tanto de noticias de actualidad? ¿Eres un geek y necesitas un oasis donde escribir? Entra aquí y podrás dar compartir todas las ideas que tengas",
 	"noticias,geek,blog": "noticias,geek,blog",
 	"Sign In": "Sign In",
-	"My Area": "My Area",
+	"My Area": "Mi Área",
 	"Sign Up": "Sign Up",
 	"Debes indicar una descripción": "Debes indicar una descripción",
 	"followers": "followers",
@@ -74,7 +74,7 @@
 	"comments": "comments",
 	"Articles": "Articles",
 	"Users": "Users",
-	"Follow": "Follow",
+	"Follow": "Seguir",
 	"We could not find articles": "We could not find articles",
 	"We could not find people": "We could not find people",
 	"": "",
@@ -87,9 +87,11 @@
 	"tech": "tech",
 	"health": "health",
 	"music": "music",
-	"Culture": "Culture",
+	"Culture": "Cultura",
 	"Tech": "Tech",
-	"Health": "Health",
-	"Music": "Music",
-	"WB": "WB"
+	"Health": "Salud",
+	"Music": "Música",
+	"WB": "WB",
+	"Followe": "Followe",
+	"Unfollow": "No seguir"
 }
