@@ -15,9 +15,10 @@ header
     button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav")
       span(class="navbar-toggler-icon")
     div(class="collapse navbar-collapse" id="mainNav")
-      div(class="navbar-nav")
+      div(class="navbar-nav pl-2")
         each category in categories
-          a(class="nav-item mx-lg-3 mx-xl-5 nav-link" href=`${categoryLink}${pageIndex}?category=${category.toLowerCase()}`) #{__(category.toUpperCase())}
+          - const categoryClass = categorySelected === category.toLowerCase() ? 'bold' : '';
+          a(class=`nav-item mx-lg-2 nav-link ${categoryClass}` href=`${categoryLink}${pageIndex}?category=${category.toLowerCase()}`) #{__(category)}
       if isLogged
         a(class="btn btn-outline-secondary ml-auto" href='/admin') #{__('My Area')}
       else

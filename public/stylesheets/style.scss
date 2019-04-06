@@ -3,8 +3,14 @@
 @import "animation";
 
 // Page Styles
-body{
+html {
+  height: 100%;
+}
+
+body {
   font-size: 20px;
+  min-height: 100vh;
+  position: relative;
 }
 
 .h1-style,
@@ -41,8 +47,9 @@ h6, .h6-style {
 }
 
 main {
-  margin-top: 110px;
+  padding-top: 110px;
   min-height: 70vh;
+  padding-bottom: $footer-height + 20px;
 }
 
 img {
@@ -51,6 +58,10 @@ img {
 
 footer {
   width: 100%;
+  align-self: flex-end;
+  position: absolute;
+  bottom: 0;
+  height: $footer-height;
 }
 
 .hv-{

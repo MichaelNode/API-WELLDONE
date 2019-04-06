@@ -82,5 +82,13 @@
 	"Oldest": "Oldest",
 	"Yes": "Yes",
 	"No": "No",
-	"Debes indicar un author": "Debes indicar un author"
+	"Debes indicar un author": "Debes indicar un author",
+	"culture": "culture",
+	"tech": "tech",
+	"health": "health",
+	"music": "music",
+	"Culture": "Culture",
+	"Tech": "Tech",
+	"Health": "Health",
+	"Music": "Music"
 }
