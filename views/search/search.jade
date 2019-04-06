@@ -6,7 +6,7 @@ block content
         - const link = `/search/${searchType}/`
         - const articleClass = searchType === 'article' ? 'bold' : '';
         - const userClass = searchType === 'user' ? 'bold' : '';
-        .row
+        .row.m-percent
             .col-6
                 a(href=`/search/article?text=${searchText}`, class=`mr-4 ${articleClass}`)=__('Articles')
                 a(href=`/search/user?text=${searchText}` class=userClass)=__('Users')
@@ -14,7 +14,7 @@ block content
                 - const linkOrder = `/search/${searchType}?text=${searchText}&`
                 .col-6.text-right
                     include ../articles/_order
-        hr.mt-2
+        hr.mt-2.m-percent
 
         .mb-3
             if searchType === 'article'

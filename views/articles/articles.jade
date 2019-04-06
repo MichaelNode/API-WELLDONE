@@ -5,8 +5,10 @@ block content
   - const categoryParam = categoryExists ? `?category=${category}` : ''
   - const nextOperator = categoryExists ? '&' : '?';
   - const linkOrder = `/articles/${current}${categoryParam}${nextOperator}`
+  - let notOrder = false;
   .container
     if userExists
+      - notOrder = true
       include ../users/_user_header
       +user_header(userBlog, following)
     include ./_articles_cards

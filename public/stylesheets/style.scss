@@ -82,7 +82,12 @@ hr {
   border-top: 1px solid rgba(0, 0, 0, 0.22);
 }
 
-.pagination-wrapper, .order-selector {
+.m-percent > div {
+  margin: 0;
+  padding: 0;
+}
+
+.pagination-wrapper, .m-percent {
   margin: 1.16%;
 
   @include media-breakpoint-up(md) {

@@ -1,4 +1,4 @@
-.order-selector.text-right
+.text-right
     - const latestClass = order === '-1' ? 'bold' : '';
     - const oldestClass = order === '1' ? 'bold' : '';
     a(href=`${linkOrder}order=-1`, class=`pl-1 pr-1 ${latestClass}`)=__('Latest')

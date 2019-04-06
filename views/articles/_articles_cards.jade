@@ -1,7 +1,8 @@
 if articles
     if typeof notOrder === 'undefined' || !notOrder
-        include ./_order
-        hr.ml-1.mr-1.mt-2
+        .m-percent
+            include ./_order
+        hr.m-percent.mt-2
     .cards-masonry
         for article in articles
             .card.article-card.bg-light
