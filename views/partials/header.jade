@@ -11,18 +11,23 @@
 header
   // Header
   nav(class="navbar navbar-light bg-light navbar-expand-md shadow fixed-top")
-    a(href="/" class="navbar-brand")= title
-    button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav")
+    a(href="/" class="navbar-brand")= __('WB')
+    if isLogged
+      a(class="btn btn-outline-secondary ml-auto d-inline d-md-none" href='/admin') #{__('My Area')}
+    else
+      a(class="btn btn-outline-secondary ml-auto d-inline md-none" href='/admin') #{__('Sign In')}
+    button(class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#mainNav")
       span(class="navbar-toggler-icon")
     div(class="collapse navbar-collapse" id="mainNav")
-      div(class="navbar-nav")
+      div(class="navbar-nav pl-md-2")
         each category in categories
-          a(class="nav-item mx-lg-3 mx-xl-5 nav-link" href=`${categoryLink}${pageIndex}?category=${category.toLowerCase()}`) #{__(category.toUpperCase())}
+          - const categoryClass = categorySelected === category.toLowerCase() ? 'bold' : '';
+          a(class=`nav-item mx-lg-2 nav-link ${categoryClass}` href=`${categoryLink}${pageIndex}?category=${category.toLowerCase()}`) #{__(category)}
       if isLogged
-        a(class="btn btn-outline-secondary ml-auto" href='/admin') #{__('My Area')}
+        a(class="btn btn-outline-secondary ml-auto d-md-inline d-none" href='/admin') #{__('My Area')}
       else
-        a(class="btn btn-outline-secondary ml-auto" href='/admin') #{__('Sign In')}
-      form(class="form-inline", action=searchLink)
-        input(type="search" name="text" class="form-control mx-2" placeholder="Search" value=searchTextValue)
+        a(class="btn btn-outline-secondary ml-auto d-md-inline d-none" href='/admin') #{__('Sign In')}
+      form.form-inline.d-flex.mt-2.mt-md-0.ml-md-2.flex-nowrap(action=searchLink)
+        input(type="search" name="text" class="form-control mx-lg-2" placeholder="Search" value=searchTextValue)
         button(type="submit" class="btn btn-outline-secondary")
           i(class="fas fa-search")

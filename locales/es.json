@@ -77,5 +77,19 @@
 	"Follow": "Follow",
 	"We could not find articles": "We could not find articles",
 	"We could not find people": "We could not find people",
-	"Debes indicar un author": "Debes indicar un author"
+	"": "",
+	"Latest": "Latest",
+	"Oldest": "Oldest",
+	"Yes": "Yes",
+	"No": "No",
+	"Debes indicar un author": "Debes indicar un author",
+	"culture": "culture",
+	"tech": "tech",
+	"health": "health",
+	"music": "music",
+	"Culture": "Culture",
+	"Tech": "Tech",
+	"Health": "Health",
+	"Music": "Music",
+	"WB": "WB"
 }

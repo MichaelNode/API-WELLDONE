@@ -22,6 +22,7 @@ export const loginSuccessAction = (loginData) => {
  */
 export const loginErrorAction = (error) => {
     StorageWrapper.removeValue('token');
+    StorageWrapper.removeValue('userData');
     return {
         type: types.LOGIN_ERROR,
         payload: error

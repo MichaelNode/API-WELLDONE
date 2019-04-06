@@ -1,6 +1,6 @@
 mixin pagination(url, extraParams)
     if (count >= recordsPerPage)
-        nav(aria-label='Pagination', style='text-align: center')
+        nav.pagination-wrapper(aria-label='Pagination', style='text-align: center')
             ul.pagination
                 -if (current > 1)
                     li.page-item

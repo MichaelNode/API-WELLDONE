@@ -48,10 +48,10 @@ var ArticleSchema = Schema({
 
 ArticleSchema.statics.allowedCategories = function () {
     return [
-        'CULTURE',
-        'TECH',
-        'HEALTH',
-        'MUSIC'
+        'Culture',
+        'Tech',
+        'Health',
+        'Music'
     ];
 };
 
