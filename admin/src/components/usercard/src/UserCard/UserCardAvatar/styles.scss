@@ -1,0 +1,16 @@
+.user-card-avatar {
+  position: absolute;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+  height: 13rem;
+  width: 13rem;
+  top: calc(33% - 3rem);
+  left: calc(43% - 4.5rem);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 100%;
+  z-index: 10;
+}

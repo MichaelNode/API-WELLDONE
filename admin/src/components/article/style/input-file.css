@@ -1,0 +1,48 @@
+.form-control-file {
+  margin: 0 auto;
+  float: none;
+  width: 40% !important;
+  padding-bottom: 20px;
+}
+
+.btn-file {
+  border: 2px solid #007bff;
+  color: #007bff;
+  background-color: white;
+ /* padding: 8px 20px;*/
+  border-radius: 8px;
+  font-weight: bold;
+  width: 40%;
+  text-align: center;
+}
+
+.upload-btn-wrapper input[type=file] {
+ 
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 40%;
+  margin: 0 auto;
+  float: none;
+}
+
+.preview {
+  box-shadow: 0 15px 30px 0 rgba(0,0,0,.11), 0 5px 15px 0 rgba(0,0,0,.08);
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+  border-radius: .5rem;
+}
+
+.button-send {
+    width: 100%;
+}
+
+.card-header {
+  background-color: #305abb;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 10px 10px 0px 0px;
+}
+

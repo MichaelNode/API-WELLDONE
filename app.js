@@ -8,13 +8,14 @@ var logger = require('morgan');
 var session = require('express-session');
 
 
-
 var flash = require('express-flash');
 
 const MongoStore = require('connect-mongo')(session);
 var app = express();
 app.locals.moment = require('moment');
 require('./lib/connectMongoose');
+
+  
 
 
 // view engine setup
@@ -23,6 +24,11 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+/* var bodyParser = require('body-parser');            a
+pp.use(bodyParser.json({limit:'50mb'})); 
+app.use(bodyParser.urlencoded({extended:true, limit:'50mb'}));
+app.use(express.json({limit: '50mb'})); */
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

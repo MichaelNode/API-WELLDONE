@@ -12,3 +12,5 @@ export function handleInputChange(event) {
     [name]: value
   };
 }
+
+
