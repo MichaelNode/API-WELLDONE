@@ -37,7 +37,8 @@ export const translations = {
         "Forgot_Password": 'Have you forgotten your password?',
         "New_Article":'New Article',
         "Articles":'Articles',
-        "User":'Usuario'
+        "User":'Usuario',
+        "Browse": "Browse"
     },
     es: {
         "Email": "Email",
@@ -77,6 +78,7 @@ export const translations = {
         "Forgot_Password": '¿Olvidaste tu contraseña?',
         "New_Article":'Nuevo Artículo',
         "Articles":'Artículos',
-        "User":'User'
+        "User":'User',
+        "Browse": "Elije"
     }
 };

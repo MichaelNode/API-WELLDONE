@@ -98,11 +98,15 @@ function UpdateUserForm (props, context) {
               </Form.Group>     
 
             <Form.Group  controlId="formGridAddress2">
-              <Form.Label>{context.t("Choose_Image")}</Form.Label>
-                <Form.Control type="file" 
-                              onChange={(e) => {
-                                setSelectedFile(e.target.files[0])
-                              }} />
+              <div class="custom-file">
+                <input type="file" 
+                       class="custom-file-input" 
+                       onChange={(e) => {
+                        setSelectedFile(e.target.files[0])
+                      }}/>
+                <label class="custom-file-label" >{context.t("Choose_Image")}</label>
+              </div>
+
               </Form.Group>    
 
               <Button variant="primary" className="button-send" 
