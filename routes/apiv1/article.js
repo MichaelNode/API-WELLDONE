@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const Article = require('../../models/article');
+const Users = require('../../models/user');
 const upload = require('../../lib/uploadConfig');
 const { check ,validationResult } = require('express-validator/check');
 const {validation} = require('../../lib/articleService');
@@ -120,6 +121,33 @@ router.get('/categories', (req, res, next) => {
 	    next(err);
 	}
 })
+
+router.get('/favourites', async (req, res, next) => {
+	try {
+	  const userId = req.session.user._id;
+	  let articles = [];
+	  await Users.findOne({ _id: userId }, async function(err, user) {
+		if (err) {
+		  console.log("Hubo un error recuperando el usuario");
+		  return
+		} else {
+		  try {
+			articles = await Article.find({
+			  _id: { $in: user.favArticles }
+			}).populate('author', 'nick_name');
+		} catch (err) {
+			console.log("Error recuperando los artículos favoritos", err);
+			return
+		}
+		console.log(articles)
+		res.json({ success: "ok", articles: articles });
+		}
+	  });
+	} catch (err) {
+	  next(err);
+	}
+  });
+  
 
 
 module.exports = router;

@@ -15,6 +15,7 @@ import Login from '../login/Login'
 import Loading from '../loading/Loading'
 import InstantLogout from "../login/InstantLogout";
 import UpdateUserForm from "../updateUser/updateUserForm";
+import FavArticles from '../favArticles/favArticles';
 import Logout from '../login/Logout';
 import AddArticleForm from '../article/add_article/addarticle_form'
 import DeleteUser from '../deleteUser/deleteUser'
@@ -58,7 +59,13 @@ class sideBars extends Component {
                                     {this.context.t("New_Article")}
                                 </span>
                         </Link>
+                        <Link to='/admin/favorites'>
+                                <span className="nav-link" >
+                                    {this.context.t("Favourites")}
+                                </span>
+                        </Link>
                         </NavText>
+                        
                     </NavItem>
                 </NavItem>
             </SideNav.Nav>
@@ -75,6 +82,7 @@ class sideBars extends Component {
                                 <Route exact path="/admin/logout" component={InstantLogout}/>
                                 <Route exact path="/admin/update" component={UpdateUserForm}/>
                                 <Route exact path="/admin/add_article" component={AddArticleForm}/>
+                                <Route exact path="/admin/favorites" component={FavArticles}/>
                           
                             </Form.Group>
                             <Form.Group  as={Col}  md="6" >
