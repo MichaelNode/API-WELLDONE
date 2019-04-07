@@ -1,5 +1,7 @@
 .text-right
     - const latestClass = order === '-1' ? 'bold' : '';
     - const oldestClass = order === '1' ? 'bold' : '';
+    - const favClass = favourites === 'true' ? 'bold' : '';
+    a(href=`${linkOrder}favourites=true`, class=`fav-link ${favClass}`)=__('Favourites')
     a(href=`${linkOrder}order=-1`, class=`pl-1 pr-1 ${latestClass}`)=__('Latest')
     a(href=`${linkOrder}order=1`, class=`pl-1 pr-1 ${oldestClass}`)=__('Oldest')

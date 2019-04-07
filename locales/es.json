@@ -82,7 +82,7 @@
 	"Oldest": "Oldest",
 	"Yes": "Yes",
 	"No": "No",
-	"Debes indicar un author": "Debes indicar un author",
+	"Debes indicar un author": "Debes indicar un autor",
 	"culture": "culture",
 	"tech": "tech",
 	"health": "health",
@@ -93,5 +93,6 @@
 	"Music": "Música",
 	"WB": "WB",
 	"Followe": "Followe",
-	"Unfollow": "No seguir"
+	"Unfollow": "No seguir",
+	"Favourites": "Mis favoritos"
 }
