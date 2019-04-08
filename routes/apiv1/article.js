@@ -49,6 +49,12 @@ router.post('/addarticle' , upload.single('file'),  validation, async(req, res, 
 				if(req.body.state == 'true'){
 					data.publi_date = req.body.publi_date 
 				}
+				if(data.url){ 
+					if(data.url.includes('youtube.com'))
+					data.url_type = 'youtube'
+					else
+					data.url_type = 'mp4'
+				}
 			}
 
 			const article = new Article(data);
@@ -124,13 +130,16 @@ router.put('/editArticle/:id',upload.single('file'), async (req, res, next) => {
 						dato.file_name = null;
 						dato.url = req.body.url
 					}
-					console.log('res',dato.content)
+					if(dato.url){ 
+						if(dato.url.includes('youtube.com'))
+						dato.url_type = 'youtube'
+						else
+						dato.url_type = 'mp4'
+					}
 					const article = await Article.
 						updateOne({_id: req.params.id}, 
 						dato
 					)
-					console.log('res',article)
-					console.log('actualizando artículo: ' + req.body.title);
 				} catch (err) {
 					console.log('Error ', err)
 				}

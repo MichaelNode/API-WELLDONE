@@ -15,6 +15,7 @@ var ArticleSchema = Schema({
      file_type: String, 
      file_name: String,
      url: String,
+     url_type: String,
      summary:{
           type: String
      },
