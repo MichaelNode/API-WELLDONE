@@ -23,8 +23,14 @@ block content
                         p.col-12.m-0=`${article.author.nick_name} - ${article.getFormattedDatePost()}`
                         a.col-12.small.text-secondary(href='#comments')=`${article.numComments} ${__('comments')}`
 
-                if isLogged
-                    i(class=bookmark).fa-bookmark.fa-2x.fav(data-article=article._id)
+
+                .small
+                    a(href='https://www.facebook.com/dialog/share?app_id=#{facebook_app_id}&display=popup&href=#{requested_url}&redirect_uri=#{requested_url}')
+                        i.mx-2.fa-facebook-square.fa-2x.fab
+                    a(href='http://twitter.com/share?text=#{article.title}&url=#{requested_url}')
+                        i.mx-2.fa-twitter.fa-2x.fab
+                    if isLogged
+                        i.mx-2.fa-bookmark.fa-2x.fav(data-article=article._id, class=bookmark)
 
             .col-12.col-md-10.col-lg-8.p-0
                 !{article.content}

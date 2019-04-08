@@ -13,7 +13,7 @@ router.put('/', userAuth(), async (req, res, next) => {
                    console.log('hubo un error buscando usuario')
                    return
                }
-               if (user.favArticles.indexOf(articleID)){
+               if (user.favArticles.indexOf(articleID) === -1){
                 await Users.updateOne(
                     { _id: userId },
                     { $push: { favArticles: articleID }});
