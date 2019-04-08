@@ -2,11 +2,12 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+var path =require('path');
 const {getUserFromRequestLogged, isLogged} = require('../../lib/jwtAuth');
 var multer = require('multer');
 var upload = multer();
 const Users = require('../../models/user');
-const uploadImages = require('../../lib/uploadImages');
+const uploadConfig = require('../../lib/uploadConfig');
 
 
 /**
@@ -77,7 +78,7 @@ router.get('/logout', (req, res, next) => {
     })
 });
 
-router.put('/', uploadImages.single('userImage'), async (req, res, next) => {
+router.put('/', uploadConfig.single('userImage'), async (req, res, next) => {
     try {
         const userId = req.session.user._id
         await Users.findOne({_id: userId}, async function (err, user){
@@ -85,8 +86,8 @@ router.put('/', uploadImages.single('userImage'), async (req, res, next) => {
                 console.log('hubo un error al encontrar la cuenta del usuario', err)
                 return
             } 
-
             try {
+                const filename = req.file != null ? path.basename(req.file.path) : req.session.user.image
                 await Users.updateOne({_id: userId}, {
                     name: req.body.userName,
                     last_name: req.body.userLastName,
@@ -94,7 +95,7 @@ router.put('/', uploadImages.single('userImage'), async (req, res, next) => {
                     address: req.body.userAddress,
                     color: req.body.userColor,
                     description: req.body.userDescription,
-                    image: req.file ? req.file.path : req.session.user.image
+                    image: filename
                 })
                 console.log('actualizando usuario: ' + req.body.userName + ' ' + req.body.userLastName);
 
