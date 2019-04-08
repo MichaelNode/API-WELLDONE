@@ -15,7 +15,7 @@ var app = express();
 app.locals.moment = require('moment');
 require('./lib/connectMongoose');
 
-  
+
 
 
 // view engine setup
@@ -25,7 +25,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 /* var bodyParser = require('body-parser');            a
-pp.use(bodyParser.json({limit:'50mb'})); 
+pp.use(bodyParser.json({limit:'50mb'}));
 app.use(bodyParser.urlencoded({extended:true, limit:'50mb'}));
 app.use(express.json({limit: '50mb'})); */
 
@@ -60,6 +60,9 @@ app.use(flash());
 // Helper middleware for get if user is auth
 app.use(async (req, res, next) => {
   res.locals.isLogged = require('./lib/jwtAuth').isLogged(req);
+  const port = req.app.settings.port || 3000  ;
+  res.locals.requested_url = req.protocol + '://' + req.host  + ( port == 80 || port == 443 ? '' : ':'+port ) + req.path;
+  res.locals.facebook_app_id = process.env.FACEBOOK_APP_ID;
   next();
 });
 
