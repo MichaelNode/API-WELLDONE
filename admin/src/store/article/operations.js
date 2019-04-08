@@ -32,7 +32,7 @@ export const addArticle = (title,file,summary,content,state,category,publi_date,
             await asyncFetch(apiRoutes.article, 'POST', formData , headers);
             
         } catch (err) {
-            console.log('Hubo un error actualizando le usuario', err)
+            console.log('Hubo un error actualizando el artículo', err)
         }
     }
 }
@@ -69,17 +69,18 @@ export const EditArticle = (title,file,summary,content,state,category,publi_date
 
     const headers = {
            
-            'Accept': 'application/json application%2Fx-www-form-urlencoded'          
+            'Accept': 'application/x-www-form-urlencoded'          
       
     }
 
     return async function (dispatch) {
         try {
             const url_api = apiRoutes.article_edit + id
-            await asyncFetch(url_api , 'PUT',  JSON.stringify(body));
+            await asyncFetch(url_api , 'PUT',  fd, headers);
+            //await asyncFetch(url_api , 'PUT',  JSON.stringify(body));
             
         } catch (err) {
-            console.log('Hubo un error actualizando le usuario', err)
+            console.log('Hubo un error actualizando el artículo', err)
         }                      
     }
 }

@@ -110,72 +110,43 @@ onChange = (event) => {
   }
 };
 
-// async  componentDidMount() {
-//   let id = this.props.match.params.id;
-//   await fetch(apiRoutes.article_edit + id)
-//       .then(result => {
-//          return result.json();
-//       }).then(data =>  {
-//         const article =  data.result
-//         const blocksFromHTML = convertFromHTML(article.content)
-//         const content = ContentState.createFromBlockArray(blocksFromHTML)
-//         var datePublic = null
-//         if(article.publi_date){
-//           datePublic = new Date(article.publi_date) 
-//         } else {
-//           datePublic = null
-//         }
-//         if (article)
-//         await this.setState({
-//           title:   article.title,
-//           summary: article.summary,
-//           content: article.content,
-//           state: article.state,
-//           category: article.category,
-//           publi_date: datePublic ,
-//           url: article.url,
-//           file_name: article.file_name,
-//           file_type: article.file_type,
-//           id: article._id,
-//           editorState :  EditorState.createWithContent(content),
-//           file: article.file_name
-//       }) 
-//   });
-// }
-
 async  componentDidMount() {
   let id = this.props.match.params.id;
   const data = await fetch(apiRoutes.article_edit + id)
       .then(result => {
          return result.json();
+      }).then(data => {
+        console.log('data', data)
+        const article = data.result
+        const blocksFromHTML = convertFromHTML(article.content)
+        const content = ContentState.createFromBlockArray(blocksFromHTML)
+        var datePublic = null
+  
+          if(article.publi_date){
+            datePublic = new Date(article.publi_date) 
+            } else {
+              datePublic = null
+               }
+               if (article) {
+  
+       this.setState({
+            title:   article.title,
+            summary: article.summary,
+            content: article.content,
+            state: article.state,
+            category: article.category,
+            publi_date: datePublic ,
+            url: article.url,
+            file_name: article.file_name,
+            file_type: article.file_type,
+            id: article._id,
+            editorState :  EditorState.createWithContent(content),
+            file: article.file_name
+        }) 
+      }
+
       })
-      const article = data.result
-      const blocksFromHTML = convertFromHTML(article.content)
-      const content = ContentState.createFromBlockArray(blocksFromHTML)
-      var datePublic = null
-
-        if(article.publi_date){
-          datePublic = new Date(article.publi_date) 
-          } else {
-            datePublic = null
-             }
-             if (article) {
-
-    await this.setState({
-          title:   article.title,
-          summary: article.summary,
-          content: article.content,
-          state: article.state,
-          category: article.category,
-          publi_date: datePublic ,
-          url: article.url,
-          file_name: article.file_name,
-          file_type: article.file_type,
-          id: article._id,
-          editorState :  EditorState.createWithContent(content),
-          file: article.file_name
-      }) 
-    }
+    
   
 }
 
@@ -293,7 +264,7 @@ render() {
           <Form method="PUT" onSubmit={this.handleSubmit } noValidate encType="multipart/form-data">
             <Form.Row>
               <Form.Group as={Col}  md="6" controlId="title">
-                <Form.Label className="label"  ><span>{this.context.t("Title")}  {this.state.category}</span></Form.Label>
+                <Form.Label className="label"  ><span>{this.context.t("Title")}</span></Form.Label>
                 { this.state.titleError ?(
                      <div className="errorValidation">{this.state.titleError}</div>
                 ): null}

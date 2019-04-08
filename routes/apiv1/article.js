@@ -28,7 +28,8 @@ router.post('/addarticle' , upload.single('file'),  validation, async(req, res, 
 						author: req.body.idUSer,
 						category: req.body.category
 					}
-					if(req.body.state == true){
+					console.log('entro a',req.body.publi_date, req.body.state)
+					if(req.body.state == 'true'){
 						data.publi_date = req.body.publi_date 
 					}
 				} else {
@@ -45,7 +46,7 @@ router.post('/addarticle' , upload.single('file'),  validation, async(req, res, 
 					author: req.body.idUSer,
 					category: req.body.category
 				}
-				if(req.body.state == true){
+				if(req.body.state == 'true'){
 					data.publi_date = req.body.publi_date 
 				}
 			}
@@ -74,7 +75,9 @@ router.get('/editArticle/:id', async (req, res, next) => {
 				summary 
 				content 
 				state  
-				publi_date url`)
+				publi_date 
+				category
+				url`)
 			.exec();
 		if(!article){
 			next(createError(404));
@@ -86,52 +89,57 @@ router.get('/editArticle/:id', async (req, res, next) => {
 	}
 });
 
-router.put('/editArticle/:id', async (req, res, next) => {
-	console.log(req.body.category)
+router.put('/editArticle/:id',upload.single('file'), async (req, res, next) => {
+	console.log(req.body)
 	const articleId = req.params.id
     try {
-		
-        await Article.findOne({_id: articleId}, async function (err, user){
-            if (err){
-                console.log('hubo un error al encontrar el artículo', err)
-                return
-			}
-            try {
-				const dato = {
-					title: req.body.title,
-					summary: req.body.summary,
-					content: req.body.content,
-					state:   req.body.state,
-					publi_date: req.body.publi_date,
-					last_modification: Date.now(),
-					category: req.body.category
+		if(req.body.title)
+		{ 
+			await Article.findOne({_id: articleId}, async function (err, user){
+				if (err){
+					console.log('hubo un error al encontrar el artículo', err)
+					return
 				}
-			
-				if(req.file && req. req.body.url){
-					dato.file_type = req.file.mimetype;
-					dato.file_name = req.file.filename;
-					dato.url = null
-				} else if (req.file && req.req.body.url == null){
-					dato.file_type = req.file.mimetype;
-					dato.file_name = req.file.filename;
-					dato.url = null
-				} else {
-					dato.file_type = null;
-					dato.file_name = null;
-					dato.url = req.body.url
+				try {
+					const dato = {
+						title: req.body.title,
+						summary: req.body.summary,
+						content: req.body.content,
+						state:   req.body.state,
+						publi_date: req.body.publi_date,
+						last_modification: Date.now(),
+						category: req.body.category
+					}
+				
+					if(req.file && req. req.body.url){
+						dato.file_type = req.file.mimetype;
+						dato.file_name = req.file.filename;
+						dato.url = null
+					} else if (req.file && req.req.body.url == null){
+						dato.file_type = req.file.mimetype;
+						dato.file_name = req.file.filename;
+						dato.url = null
+					} else {
+						dato.file_type = null;
+						dato.file_name = null;
+						dato.url = req.body.url
+					}
+					console.log('res',dato.content)
+					const article = await Article.
+						updateOne({_id: req.params.id}, 
+						dato
+					)
+					console.log('res',article)
+					console.log('actualizando artículo: ' + req.body.title);
+				} catch (err) {
+					console.log('Error ', err)
 				}
-				console.log('res',dato.content)
-				const article = await Article.
-					updateOne({_id: req.params.id}, 
-					dato
-				)
-				console.log('res',article)
-                console.log('actualizando artículo: ' + req.body.title);
-            } catch (err) {
-                console.log('Error ', err)
-            }
-        });
-        res.json({success: true, req: req.body})
+			});
+			res.json({success: true, req: req.body})
+		}
+		else {
+			console.log('body null')
+		}
     } catch (err) {
         console.log('hubo un error al encontrar el artículo', err)
         next(err)
