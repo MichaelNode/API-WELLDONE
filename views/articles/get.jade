@@ -25,7 +25,7 @@ block content
 
 
                 .small
-                    a(href='https://www.facebook.com/sharer/sharer.php?u=#{requested_url}')
+                    a(href='https://www.facebook.com/dialog/share?app_id=#{facebook_app_id}&display=popup&href=#{requested_url}&redirect_uri=#{requested_url}')
                         i.mx-2.fa-facebook-square.fa-2x.fab
                     a(href='http://twitter.com/share?text=#{article.title}&url=#{requested_url}')
                         i.mx-2.fa-twitter.fa-2x.fab
