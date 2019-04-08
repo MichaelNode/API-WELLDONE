@@ -10,13 +10,14 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import MainNavbar from '../navbar/navbar'
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-
 import Login from '../login/Login'
 import Loading from '../loading/Loading'
 import InstantLogout from "../login/InstantLogout";
 import UpdateUserForm from "../updateUser/updateUserForm";
 import Logout from '../login/Logout';
 import AddArticleForm from '../article/add_article/addarticle_form'
+import EditArticleForm from '../article/edit_article/edit_article'
+
 import DeleteUser from '../deleteUser/deleteUser'
 import {Form , Col} from "react-bootstrap";
 import CardUSer from '../usercard/usercard'
@@ -62,11 +63,9 @@ class sideBars extends Component {
                     </NavItem>
                     <NavItem >
                     <NavText>
-                       
-                                <span className="nav-link" >
-                                   <DeleteUser />
-                                </span>
-                       
+                            <span className="nav-link">
+                                <DeleteUser />
+                            </span>
                         </NavText>
                     </NavItem>
             
@@ -80,14 +79,15 @@ class sideBars extends Component {
                 <React.Fragment>
                     <Switch>
                         <Form.Row>
-                            <Form.Group className="div_main" as={Col}  md="6" >
+                            <Form.Group className="div_main" as={Col}  md="8" >
                            
                                 <Route exact path="/admin/logout" component={InstantLogout}/>
                                 <Route exact path="/admin/update" component={UpdateUserForm}/>
                                 <Route exact path="/admin/add_article" component={AddArticleForm}/>
-                          
+                                <Route exact path="/admin/edit_article/:id" component={EditArticleForm}/>
+
                             </Form.Group>
-                            <Form.Group  as={Col}  md="6" >
+                            <Form.Group  as={Col}  md="4" >
                                 <CardUSer userData={this.props.userData}/>
                        </Form.Group>
                         </Form.Row>

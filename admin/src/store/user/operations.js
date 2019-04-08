@@ -83,7 +83,6 @@ export const updateUser = (_id, name, lastname, nickname, address, color, descri
     fd.append('userDescription', description)
 
     const headers = {
-    //"Content-Type": "application/json",
     'Accept': 'application/json',
 };
 

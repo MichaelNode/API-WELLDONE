@@ -2,6 +2,7 @@ import * as actions from './actions';
 import * as types from "./types";
 import {asyncFetch, isSuccessResponse} from "../../utils/apiService";
 import apiRoutes from "../../config/apiRoutes";
+import { ModalTitle } from 'react-bootstrap';
 
 
 export const addArticle = (title,file,summary,content,state,category,publi_date, url, token, idUSer) => {
@@ -20,8 +21,10 @@ export const addArticle = (title,file,summary,content,state,category,publi_date,
     formData.append('token', token),
     formData.append('idUSer', idUSer)
 
+    
+
     const headers = {
-        'Accept': 'application/json application/x-www-form-urlencoded',
+        'Accept': 'application/json',
     }
 
     return async function (dispatch) {
@@ -31,5 +34,52 @@ export const addArticle = (title,file,summary,content,state,category,publi_date,
         } catch (err) {
             console.log('Hubo un error actualizando le usuario', err)
         }
+    }
+}
+
+export const EditArticle = (title,file,summary,content,state,category,publi_date, url, token, idUSer, id) => {
+
+    const fd = new FormData();
+
+    const body = {
+        title: title,
+        file:    file,
+        summary:  summary,
+        content:  content,
+        state:    state,
+        category: category,
+        publi_date: publi_date,
+        url: url,
+        token:token,
+        idUSer: idUSer,
+        id: id
+    };
+  
+    fd.append('title',   title)
+    fd.append('file',     file)
+    fd.append('summary',  summary)
+    fd.append('content',  content)
+    fd.append('state',    state)
+    fd.append('category', category)
+    fd.append('publi_date', publi_date)
+    fd.append('url', url)
+    fd.append('token', token)
+    fd.append('idUSer', idUSer)
+    fd.append('id', id)
+
+    const headers = {
+           
+            'Accept': 'application/json application%2Fx-www-form-urlencoded'          
+      
+    }
+
+    return async function (dispatch) {
+        try {
+            const url_api = apiRoutes.article_edit + id
+            await asyncFetch(url_api , 'PUT',  JSON.stringify(body));
+            
+        } catch (err) {
+            console.log('Hubo un error actualizando le usuario', err)
+        }                      
     }
 }
