@@ -33,7 +33,7 @@ node_modules
 .env
 
 uploads/*
-
+public/images/uploads/*
 public/dist
 dist
 
