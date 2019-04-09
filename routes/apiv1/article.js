@@ -9,13 +9,15 @@ const {jwtAuth} = require('../../lib/jwtAuth');
 var fs = require('fs');
 
 
-router.post('/addarticle' , upload.single('file'),  validation, async(req, res, next) => {
+router.post('/addarticle/:id?' , upload.single('file'),  validation, async(req, res, next) => {
+	console.log('asdas',req.body.id)
     try {
 		var data = {};
 		const validationErrors = validationResult(req.body);
 		if (!validationErrors.isEmpty()) {
 			return res.status(422).json({ errors: validationErrors.array() });
 		}
+	
 		const date_public = null;
 			if(req.file){
 				const type_file = path.extname(req.file.filename).toLowerCase()
@@ -30,9 +32,13 @@ router.post('/addarticle' , upload.single('file'),  validation, async(req, res, 
 						author: req.body.idUSer,
 						category: req.body.category
 					}
-					console.log('entro a',req.body.publi_date, req.body.state)
+					
 					if(req.body.state == 'true'){
 						data.publi_date = req.body.publi_date 
+					}
+					if(req.body.id && req.body.id !== 'undefined')
+					{	
+						data.article = req.body.id
 					}
 				} else {
 					return res.json({ error: 'imagen no valida'});
@@ -56,6 +62,10 @@ router.post('/addarticle' , upload.single('file'),  validation, async(req, res, 
 					data.url_type = 'youtube'
 					else
 					data.url_type = 'mp4'
+				}
+				if(req.body.id && req.body.id !== 'undefined')
+				{	
+					data.article = req.body.id
 				}
 			}
 
@@ -98,18 +108,19 @@ router.get('/editArticle/:id', async (req, res, next) => {
 });
 
 router.put('/editArticle/:id', upload.single('file'),  validation, async (req, res, next) => {
-	console.log(req.body.file)
+	console.log(req.body)
 	const articleId = req.params.id
     try {
 		if(req.body.title)
 		{ 
+		
 			try {
 				await Article.findOne({_id: articleId}, async function (err, article){
 					if (err){
 						console.log('hubo un error al encontrar el artículo', err)
 						
 					}
-	
+					
 					const dato = {
 						title: req.body.title,
 						summary: req.body.summary,
@@ -120,7 +131,7 @@ router.put('/editArticle/:id', upload.single('file'),  validation, async (req, r
 						category: req.body.category
 					}
 					
-					if(req.file && req.body.url !=='undefined'){
+					if(req.file && (req.body.url =='undefined'||req.body.url =='') ){
 						
 						if(article.file_name){
 							if(req.file.filename !== article.file_name){
@@ -129,7 +140,7 @@ router.put('/editArticle/:id', upload.single('file'),  validation, async (req, r
 						}
 						dato.file_type = req.file.mimetype;
 						dato.file_name = req.file.filename;
-						dato.url = null
+						dato.url = ''
 					// } else if (req.file &&  (req.body.url == 'undefined' || req.body.url == '') ){
 					// 	console.log('wnto 2')
 					// 	if(req.file.filename !== article.file_name){
@@ -140,13 +151,13 @@ router.put('/editArticle/:id', upload.single('file'),  validation, async (req, r
 					// 	dato.file_name = req.file.filename;
 					// 	dato.url = null
 						
-					} else if (!req.file && req.body.url && req.body.url !== 'undefined') {
-					console.log('2')
+					} else if (!req.file  && !(req.body.url =='undefined'||req.body.url =='')) {
+					
 						if(article.file_name !== 'null'){
 							fs.unlinkSync(`public/images/uploads/${article.file_name}`);
 						}
-						dato.file_type = null;
-						dato.file_name = null;
+						dato.file_type = '';
+						dato.file_name = '';
 						dato.url = req.body.url
 					}
 					if(dato.url){ 

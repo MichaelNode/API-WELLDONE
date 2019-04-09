@@ -271,6 +271,8 @@ class AddArticleForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    let id = this.props.match.params.id
+    console.log('asdas',id)
     let idUser =  this.props.userData._id
     let token = this.props.token
     const isValid = this.validate();
@@ -288,7 +290,8 @@ class AddArticleForm extends Component {
         this.state.publi_date,
         this.state.url,
         token,
-        idUser
+        idUser,
+        id,
       )  
     } 
   };
@@ -475,7 +478,7 @@ class AddArticleForm extends Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-      addArticle: (title,file,summary,content,state,category,publi_date,url,token, userId) => {
+      addArticle: (title,file,summary,content,state,category,publi_date,url,token, userId,id) => {
           dispatch(articleOperations.addArticle(
             title,
             file,
@@ -486,7 +489,8 @@ class AddArticleForm extends Component {
             publi_date,
             url,
             token,
-            userId
+            userId,
+            id
           ));
       }
     };

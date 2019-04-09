@@ -43,9 +43,11 @@ block content
                 !{article.content}
 
             // Comments
+          
             .col-12.col-md-10.col-lg-8.p-0.pt-5.mb-5.row(id='comments')
                 p.h3-style=__('Comments')
-
+                    br/
+                    a.btn(href=`/admin/add_article/${article._id}`) Response whith article
                 // New Comment if user is logged
                 if isLogged
                     form.col-12.p-0(method="post")

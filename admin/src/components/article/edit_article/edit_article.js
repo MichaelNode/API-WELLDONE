@@ -51,11 +51,13 @@ class EditArticleForm extends Component {
 
 
 handleInputChange = (evt) => {
-
+console.log(this.state.url)
   if(this.state.state === false){
     this.setState({ publi_date: null})
   }
-  if(this.state.url !== undefined){
+  if(this.state.url !== undefined  
+    || this.state.url !== 'null' 
+    || this.state.url !== ''){
     this.setState({ file: null})
   }
 
@@ -89,7 +91,7 @@ onChangeDate = date => this.setState({ publi_date:date })
 onChange = (event) => {
   if(event.target.files[0])
   {
-   
+   this.setState({url:''})
     if( event.target.files[0].name.includes('.jpg') ||
         event.target.files[0].name.includes('.jpg') || 
         event.target.files[0].name.includes('.png'))
@@ -170,7 +172,7 @@ validate = () => {
   }
 
   
-  if(!this.state.file) {
+  if(!this.state.file &&  this.state.url == 'undefined') {
     fileError = 'Image is required'
   } else if (this.state.file){ 
     this.setState({ fileError: ''})

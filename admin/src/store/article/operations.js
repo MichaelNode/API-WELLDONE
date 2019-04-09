@@ -5,7 +5,7 @@ import apiRoutes from "../../config/apiRoutes";
 import { ModalTitle } from 'react-bootstrap';
 
 
-export const addArticle = (title,file,summary,content,state,category,publi_date, url, token, idUSer) => {
+export const addArticle = (title,file,summary,content,state,category,publi_date, url, token, idUSer, id) => {
 
     const formData = new FormData();
   
@@ -20,7 +20,7 @@ export const addArticle = (title,file,summary,content,state,category,publi_date,
     formData.append('url', url),
     formData.append('token', token),
     formData.append('idUSer', idUSer)
-
+    formData.append('id', id)
     
 
     const headers = {
