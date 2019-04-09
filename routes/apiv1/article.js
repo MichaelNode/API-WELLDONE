@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const Article = require('../../models/article');
+const Users = require('../../models/user');
 const upload = require('../../lib/uploadConfig');
 const { check ,validationResult } = require('express-validator/check');
 const {validation} = require('../../lib/articleService');
@@ -26,17 +27,17 @@ router.post('/addarticle' , upload.single('file'),  validation, async(req, res, 
 						file_name: req.file.filename,
 						summary: req.body.summary,
 						content: req.body.content,
-						state:   req.body.state,					
+						state:   req.body.state,
 						author: req.body.idUSer,
 						category: req.body.category
 					}
 					console.log('entro a',req.body.publi_date, req.body.state)
 					if(req.body.state == 'true'){
-						data.publi_date = req.body.publi_date 
+						data.publi_date = req.body.publi_date
 					}
 				} else {
 					return res.json({ error: 'imagen no valida'});
-				}	
+				}
 			}
 			else {
 				data = {
@@ -49,9 +50,9 @@ router.post('/addarticle' , upload.single('file'),  validation, async(req, res, 
 					category: req.body.category
 				}
 				if(req.body.state == 'true'){
-					data.publi_date = req.body.publi_date 
+					data.publi_date = req.body.publi_date
 				}
-				if(data.url){ 
+				if(data.url){
 					if(data.url.includes('youtube.com'))
 					data.url_type = 'youtube'
 					else
@@ -63,8 +64,8 @@ router.post('/addarticle' , upload.single('file'),  validation, async(req, res, 
 			const articleSave = await article.save();
 			console.log('create success')
 			res.json({ success: true, result: articleSave});
-	
-	
+
+
 	} catch (err) {
 	    next(err);
 	}
@@ -102,14 +103,14 @@ router.put('/editArticle/:id', upload.single('file'),  validation, async (req, r
 	const articleId = req.params.id
     try {
 		if(req.body.title)
-		{ 
+		{
 			try {
 				await Article.findOne({_id: articleId}, async function (err, article){
 					if (err){
 						console.log('hubo un error al encontrar el artículo', err)
-						
+
 					}
-	
+
 					const dato = {
 						title: req.body.title,
 						summary: req.body.summary,
@@ -119,9 +120,9 @@ router.put('/editArticle/:id', upload.single('file'),  validation, async (req, r
 						last_modification: Date.now(),
 						category: req.body.category
 					}
-					
+
 					if(req.file && req.body.url !=='undefined'){
-						
+
 						if(article.file_name){
 							if(req.file.filename !== article.file_name){
 								fs.unlinkSync(path.join('public/images/uploads/', article.file_name ));
@@ -139,7 +140,7 @@ router.put('/editArticle/:id', upload.single('file'),  validation, async (req, r
 					// 	dato.file_type = req.file.mimetype;
 					// 	dato.file_name = req.file.filename;
 					// 	dato.url = null
-						
+
 					} else if (!req.file && req.body.url && req.body.url !== 'undefined') {
 					console.log('2')
 						if(article.file_name !== 'null'){
@@ -149,14 +150,14 @@ router.put('/editArticle/:id', upload.single('file'),  validation, async (req, r
 						dato.file_name = null;
 						dato.url = req.body.url
 					}
-					if(dato.url){ 
+					if(dato.url){
 						if(dato.url.includes('youtube.com'))
 						dato.url_type = 'youtube'
 						else
 						dato.url_type = 'mp4'
 					}
 					const articleObj = await Article.
-						updateOne({_id: req.params.id}, 
+						updateOne({_id: req.params.id},
 						dato
 					)
 					res.json({success: true})
@@ -164,7 +165,7 @@ router.put('/editArticle/:id', upload.single('file'),  validation, async (req, r
 		} catch (err) {
 			console.log('Error ', err)
 		}
-			
+
 		}
 		else {
 			console.log('body null')
@@ -186,6 +187,33 @@ router.get('/categories', (req, res, next) => {
 	    next(err);
 	}
 })
+
+router.get('/favourites', async (req, res, next) => {
+	try {
+		const userId = req.session.user._id;
+		let articles = [];
+		await Users.findOne({ _id: userId }, async function(err, user) {
+			if (err) {
+				console.log("Hubo un error recuperando el usuario");
+				return
+			} else {
+				try {
+					articles = await Article.find({
+						_id: { $in: user.favArticles }
+					}).populate('author', 'nick_name');
+				} catch (err) {
+					console.log("Error recuperando los artículos favoritos", err);
+					return
+				}
+				res.json({ success: "ok", articles: articles });
+			}
+		});
+	} catch (err) {
+		next(err);
+	}
+});
+
+
 
 
 module.exports = router;

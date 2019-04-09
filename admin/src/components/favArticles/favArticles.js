@@ -14,22 +14,22 @@ function FavArticles(props, context) {
     .catch(error => console.error("Error: ", error))
     .then(response => setArticles(response.articles));
   }, [])
-  
+
 
   return (
-    
+
       <ul>
-        {articles.map(item => (
+        {articles && articles.map(item => (
             <ArticleList>
-                <li key={item._id}>{item.title} - 
+                <li key={item._id}>{item.title} -
                     <a href={`${apiRoutes.articles}/${item.author.nick_name}/${item.title}-${item._id}`}>
                        leer
                     </a>
                 </li>
-            </ArticleList>    
+            </ArticleList>
         ))}
       </ul>
-    
+
   );
 }
 

@@ -21,7 +21,7 @@ if articles
                     if !userExists
                         a.small-3.text-secondary.author(href=`/articles/user/${article.author.nick_name}`)=`${article.author.nick_name}`
                     p.card-text=article.summary
-                    p=article.shortDescription
+                    p=article.getShortDescription()
                     .col-12.d-flex.align-items-center.p-0.justify-content-between
                         a(href=`/article/${article.author.nick_name}\/${article.getSlug()}#comments`)
                             p.m-0.small-2=`${article.numComments} ${__('comments')}`

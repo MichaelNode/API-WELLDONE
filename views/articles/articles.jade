@@ -1,5 +1,17 @@
 extends ../layout
 
+block head
+  - var title = __("Welldone Blog");
+  - var description = __('¿Quiéres estar al tanto de noticias de actualidad? ¿Eres un geek y necesitas un oasis donde escribir? Entra aquí y podrás dar compartir todas las ideas que tengas');
+  - var image = '';
+  if typeof userBlog !== 'undefined'
+    - title = userBlog.nick_name + ` - ${__("Welldone Blog")}`
+    - description = userBlog.description;
+    - image = userBlog.image ? `/images/uploads/${userBlog.image}` : '';
+  - var keywords = __(`article,blog`);
+  - var showFooter = true;
+  - var url = requested_url;
+
 block content
   - const categoryExists = typeof category !== 'undefined';
   - const categoryParam = categoryExists ? `?category=${category}` : ''

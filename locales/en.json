@@ -93,5 +93,8 @@
 	"Followe": "Followe",
 	"Unfollow": "Unfollow",
 	"Favourites": "My Favourites",
-	"El usuario no existe": "El usuario no existe"
+	"El usuario no existe": "El usuario no existe",
+	"article,blog,culture": "article,blog,culture",
+	"article,blog,tech": "article,blog,tech",
+	"article,blog": "article,blog"
 }

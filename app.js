@@ -61,7 +61,7 @@ app.use(flash());
 app.use(async (req, res, next) => {
   res.locals.isLogged = require('./lib/jwtAuth').isLogged(req);
   const port = req.app.settings.port || 3000  ;
-  res.locals.requested_url = req.protocol + '://' + req.host  + ( port == 80 || port == 443 ? '' : ':'+port ) + req.path;
+  res.locals.requested_url = req.protocol + '://' + req.hostname  + ( port == 80 || port == 443 ? '' : ':'+port ) + req.path;
   res.locals.facebook_app_id = process.env.FACEBOOK_APP_ID;
   next();
 });
@@ -84,7 +84,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  console.log(err);
+   console.log(err);
   res.json('error');
 });
 

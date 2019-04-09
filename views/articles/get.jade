@@ -3,11 +3,19 @@ include ./comment
 include ../includes/_pagination
 include ../includes/_error_input
 
+block head
+    - var title = article.title + ` - ${__("Welldone Blog")}`
+    - var description = article.getShortDescription() || __('¿Quiéres estar al tanto de noticias de actualidad? ¿Eres un geek y necesitas un oasis donde escribir? Entra aquí y podrás dar compartir todas las ideas que tengas');
+    - var keywords = __(`article,blog,${article.category}`);
+    - var url = requested_url;
+    - var image = article.file_name ? `/images/uploads/${article.file_name}` : '';
+    - var showFooter = true;
+
 block content
-    - const link = `/article/${article.author.nick_name}\/${article.getSlug()}/`;
+
+    - const link = `/article/${article.author.nick_name}\/${article.getSlug()}/`
 
     .container.article-detail
-
         // Article Image
         .p-0.row.d-flex.justify-content-center.overlay-wrapper
             .col-12.col-lg-10.overlay-grey
@@ -27,8 +35,10 @@ block content
                 .d-flex.align-items-center
                     img.pt-2.pb-2.mr-3.user-thumbnail(src=`/images/${article.author.image}`)
                     .row
-                        p.col-12.m-0=`${article.author.nick_name} - ${article.getFormattedDatePost()}`
-                        a.col-12.small.text-secondary(href='#comments')=`${article.numComments} ${__('comments')}`
+                        p.col-12.m-0
+                            a.text-secondary(href=`/articles/user/${article.author.nick_name}`)=`${article.author.nick_name}`
+                            span=` - ${article.getFormattedDatePost()}`
+                        a.col-12.small(href='#comments')=`${article.numComments} ${__('comments')}`
 
 
                 .small
