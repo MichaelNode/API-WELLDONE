@@ -15,6 +15,7 @@ var ArticleSchema = Schema({
      file_type: String, 
      file_name: String,
      url: String,
+     url_type: String,
      summary:{
           type: String
      },
@@ -37,7 +38,10 @@ var ArticleSchema = Schema({
           type: Date,
           default: Date.now
      },
-     publi_date: Date,
+     publi_date: {
+         type: Date,
+         require:false
+     },
      author: {
          type: Schema.ObjectId,
          ref: 'user'

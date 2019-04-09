@@ -22,10 +22,7 @@ import '../style/main.css'
 
 class AddArticleForm extends Component {
   constructor(props) {
-   
-    const html = '<div><p><h1>hello</h1></p></div>'
-    const blocksFromHTML = convertFromHTML(html)
-    const content = ContentState.createFromBlockArray(blocksFromHTML)
+  
     super(props);
     this.onChange = this.onChange.bind(this)
     this.state = {
@@ -33,20 +30,21 @@ class AddArticleForm extends Component {
       summary: '',
       content: '',
       state: '',
-      category: null,
-      file: [],
+      category: '',
+      file: null,
       publi_date: new Date(),
-      editorState: EditorState.createEmpty(),  // EditorState.createWithContent(content),
+      editorState: EditorState.createEmpty(),
       url: '',
       ask_file: null,
       titleError: '',
       summaryError: '',
-      contentError: '',
       stateError: '',
       categoryError: '',
       fileError: '',
       publi_dateError: '',
       editorStateError: '',
+      urlError: '',
+      ask_fileError: '',
       showCard: false,
       showCardtube: false,
       showCardMP4: false
@@ -54,9 +52,9 @@ class AddArticleForm extends Component {
   }
 
   validate = () => {
+
     let titleError = ''
     let summaryError =  ''
-    let contentError =  ''
     let stateError =  ''
     let categoryError =  ''
     let fileError =  ''
@@ -68,84 +66,138 @@ class AddArticleForm extends Component {
     let datepubli = null
     const fileMaxSize = 15 * 1000 * 1000; // 15MB
 
-
-
     if(this.state.title == '') {
       titleError = 'Title required'
-    }
-    if(this.state.ask_file == null ) {
-      ask_fileError = 'required'
-    }
-    if(this.state.ask_file == 'imagen' && !this.state.file) {
-      fileError = 'Image is required'
-    }
-    if(this.state.file && this.state.file.name !== undefined && this.state.ask_file == 'imagen' && !(
-        this.state.file.name.includes('.jpg') ||
-        this.state.file.name.includes('.jpg') || 
-        this.state.file.name.includes('.png')))
-    {
-      fileError = 'Invalid image'
+    } else if (!this.state.title == ''){ 
+      this.setState({ titleError: ''})
     }
 
-    if(this.state.file && this.state.file.size > fileMaxSize && this.state.ask_file == 'imagen')
-    {
+    if(this.state.ask_file == null ) {
+      ask_fileError = 'required'
+    } else if (!this.state.ask_file == ''){ 
+      this.setState({ ask_fileError: ''})
+    }
+
+    if(this.state.ask_file == 'imagen' && !this.state.file) {
+      fileError = 'Image is required'
+    } else if (!this.state.ask_file == 'imagen' && this.state.file){ 
+      this.setState({ fileError: ''})
+    }
+
+    if(this.state.file && 
+        this.state.file.name !== undefined && 
+        this.state.ask_file == 'imagen' && !(
+          this.state.file.name.includes('.jpg') ||
+          this.state.file.name.includes('.jpg') || 
+          this.state.file.name.includes('.png'))){
+            fileError = 'Invalid image'
+
+    } else if (this.state.file && 
+        this.state.file.name !== undefined && 
+        this.state.ask_file == 'imagen' && (
+          this.state.file.name.includes('.jpg') ||
+          this.state.file.name.includes('.jpg') || 
+          this.state.file.name.includes('.png'))){ 
+            this.setState({ fileError: ''})
+    }
+
+    if(this.state.file && 
+        this.state.file.size > fileMaxSize && 
+        this.state.ask_file == 'imagen'){
         fileError = 'The image must be less than 15 mb'
+
+    } else if (this.state.file && 
+        this.state.file.size < fileMaxSize && 
+        this.state.ask_file == 'imagen'){ 
+          this.setState({ fileError: ''})
     }
     
     if(this.state.ask_file == 'video' && !this.state.url) {
       urlError = 'URL is required'
+
+    } else if (this.state.ask_file == 'video' && this.state.url){ 
+      this.setState({ urlError: ''})
     }
 
     // validate video youtebe or mp4
 
     if(this.state.ask_file == 'video' 
-      && this.state.url 
-      && !(this.state.url.includes('.mp4') 
-        || this.state.url.includes('https://www.youtube.com/'))) {
-        urlError = 'URL is not valid'
+        && this.state.url 
+        && !(this.state.url.includes('.mp4') 
+          || this.state.url.includes('https://www.youtube.com/'))) {
+            urlError = 'URL is not valid'
+
+    }  else if (this.state.ask_file == 'video' 
+        && this.state.url 
+        &&  (this.state.url.includes('.mp4') 
+          || this.state.url.includes('https://www.youtube.com/'))){ 
+            this.setState({ urlError: ''})
     }
   
-    
     if(this.state.publi_date) {
       datepubli = moment(this.state.publi_date).format('DD-MM-YYYY');
       datenow = moment(Date.now()).format('DD-MM-YYYY');
-     
       if(this.state.state == 'true' && datepubli < datenow) {
         publi_dateError = "the publication date cannot be less than today's"
+
+      } else { 
+        this.setState({ publi_dateError: ''})
       }
     }
     
     if(this.state.state == 'true' && this.state.publi_date === null) {
       publi_dateError = "the publication date is required"
+
+    } else if (this.state.state == 'true' && !this.state.publi_date === null){ 
+      this.setState({ publi_dateError: ''})
     }
+
     if(this.state.state == '') {
       stateError = 'State required'
+
+    } else if (!this.state.state == ''){ 
+      this.setState({ stateError: ''})
     }
+
     if(this.state.summary == '') {
       summaryError = 'Summary required'
+    } else if (!this.state.summary == ''){ 
+      this.setState({ summaryError: ''})
     }
-    if(this.state.category == null) {
+     
+    if(this.state.category == '') {
       categoryError = 'Category required'
+    } else if (!this.state.category == ''){ 
+      this.setState({ categoryError: ''})
     }
-    if(!convertToRaw(this.state.editorState.getCurrentContent()).blocks[0].text)
-    {
-      editorStateError = "Content required"
+   
+    
+    if(!convertToRaw(
+        this.state.editorState.getCurrentContent()).blocks[0].text){
+          editorStateError = "Content required"
+
+    } else if (convertToRaw(
+        this.state.editorState.getCurrentContent()).blocks[0].text){ 
+          this.setState({ editorStateError: ''})
     }
+
     if(summaryError || categoryError || 
         editorStateError || titleError ||
         ask_fileError || stateError || 
         publi_dateError || 
         fileError|| urlError) {
+         
           this.setState({
-            summaryError,
-            categoryError, 
-            editorStateError,
-            titleError,
-            ask_fileError,
-            stateError,
-            publi_dateError,
-            fileError,
-            urlError,
+          
+            titleError: titleError,
+            summaryError: summaryError,
+            stateError: stateError,
+            categoryError: categoryError,
+            fileError: fileError,
+            publi_dateError:  publi_dateError,
+            editorStateError: editorStateError,
+            urlError: urlError,
+            ask_fileError:  ask_fileError
           
           })
           return false;
@@ -189,10 +241,7 @@ class AddArticleForm extends Component {
     this.setState(handleInputChange(evt));
   };
 
-  convertCommentFromJSONToHTML = (text) => { 
-    return stateToHTML(convertFromRaw(JSON.parse(text))) 
-  };
-
+ 
   onEditorStateChange = (editorState) => this.setState({editorState});
   
   onChangeDate = date => this.setState({ publi_date:date })

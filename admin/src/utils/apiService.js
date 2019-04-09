@@ -41,6 +41,7 @@ export const asyncFetch = async (url, method = 'GET', body = null, headers = ini
 
     // get data from url
     const response = await fetch(url, options);
+ 
     return await response.json();
 };
 

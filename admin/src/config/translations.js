@@ -38,7 +38,8 @@ export const translations = {
         "New_Article":'New Article',
         "Articles":'Articles',
         "User":'Usuario',
-        "Favourites": "My favorites"
+        "Favourites": "My favorites",
+        "Edit Article":'Edit Article'
     },
     es: {
         "Email": "Email",
@@ -79,6 +80,7 @@ export const translations = {
         "New_Article":'Nuevo Artículo',
         "Articles":'Artículos',
         "User":'User',
-        "Favourites": "Mis favoritos"
+        "Favourites": "Mis favoritos",
+        "Edit Article":'Editar Artículo'
     }
 };

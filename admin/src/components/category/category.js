@@ -25,7 +25,7 @@ export default class Category extends Component {
             });
             this.setState({
                 categories: initialCategory,
-            });
+            })
         });
     }
 
@@ -47,7 +47,7 @@ export default class Category extends Component {
                     <option 
                         value={null}>{this.context.t("Choose")}
                     </option>
-                    {this.state.categories.map((category) => 
+                    {this.state.categories && this.state.categories.map((category) => 
                     <option 
                         key={category} 
                         value={category}
