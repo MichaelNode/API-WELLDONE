@@ -6,6 +6,8 @@ const { check ,validationResult } = require('express-validator/check');
 const {validation} = require('../../lib/articleService');
 const path = require("path");
 const {jwtAuth} = require('../../lib/jwtAuth');
+var fs = require('fs');
+
 
 router.post('/addarticle' , upload.single('file'),  validation, async(req, res, next) => {
     try {
@@ -95,18 +97,19 @@ router.get('/editArticle/:id', async (req, res, next) => {
 	}
 });
 
-router.put('/editArticle/:id',upload.single('file'), async (req, res, next) => {
-	console.log(req.body)
+router.put('/editArticle/:id',upload.single('file'),  validation, async (req, res, next) => {
+	
 	const articleId = req.params.id
     try {
 		if(req.body.title)
 		{ 
-			await Article.findOne({_id: articleId}, async function (err, user){
-				if (err){
-					console.log('hubo un error al encontrar el artículo', err)
-					return
-				}
-				try {
+			try {
+				await Article.findOne({_id: articleId}, async function (err, article){
+					if (err){
+						console.log('hubo un error al encontrar el artículo', err)
+						
+					}
+	
 					const dato = {
 						title: req.body.title,
 						summary: req.body.summary,
@@ -116,16 +119,22 @@ router.put('/editArticle/:id',upload.single('file'), async (req, res, next) => {
 						last_modification: Date.now(),
 						category: req.body.category
 					}
+					
+					if(req.file && req.body.url !=='null'){
+						if(article.file_name){
+							if(req.file.filename !== article.file_name){
+								fs.unlinkSync(path.join('public/images/uploads/', article.file_name ));
+							}
+						}
+						dato.file_type = req.file.mimetype;
+						dato.file_name = req.file.filename;
+						dato.url = null
 				
-					if(req.file && req. req.body.url){
-						dato.file_type = req.file.mimetype;
-						dato.file_name = req.file.filename;
-						dato.url = null
-					} else if (req.file && req.req.body.url == null){
-						dato.file_type = req.file.mimetype;
-						dato.file_name = req.file.filename;
-						dato.url = null
-					} else {
+					} else if (!req.file && req.body.url && req.body.url !== 'null') {
+					
+						if(article.file_name){
+							fs.unlinkSync(`public/images/uploads/${article.file_name}`);
+						}
 						dato.file_type = null;
 						dato.file_name = null;
 						dato.url = req.body.url
@@ -136,15 +145,16 @@ router.put('/editArticle/:id',upload.single('file'), async (req, res, next) => {
 						else
 						dato.url_type = 'mp4'
 					}
-					const article = await Article.
+					const articleObj = await Article.
 						updateOne({_id: req.params.id}, 
 						dato
 					)
-				} catch (err) {
-					console.log('Error ', err)
-				}
+					res.json({success: true})
 			});
-			res.json({success: true, req: req.body})
+		} catch (err) {
+			console.log('Error ', err)
+		}
+			
 		}
 		else {
 			console.log('body null')

@@ -52,11 +52,11 @@ class EditArticleForm extends Component {
 
 
 handleInputChange = (evt) => {
-   console.log(this.state.state )
+
   if(this.state.state === false){
     this.setState({ publi_date: null})
   }
-  if(this.state.url  !== ''){
+  if(this.state.url  !== null){
     this.setState({ file: null})
   }
 
@@ -90,6 +90,7 @@ onChangeDate = date => this.setState({ publi_date:date })
 onChange = (event) => {
   if(event.target.files[0])
   {
+   
     this.setState({url:''})
     if( event.target.files[0].name.includes('.jpg') ||
         event.target.files[0].name.includes('.jpg') || 
@@ -116,7 +117,6 @@ async  componentDidMount() {
       .then(result => {
          return result.json();
       }).then(data => {
-        console.log('data', data)
         const article = data.result
         const blocksFromHTML = convertFromHTML(article.content)
         const content = ContentState.createFromBlockArray(blocksFromHTML)
@@ -167,63 +167,119 @@ validate = () => {
 
   if(this.state.title == '') {
     titleError = 'Title required'
+  } else if (!this.state.title == ''){ 
+    this.setState({ titleError: ''})
   }
 
   
-  if(this.state.file && this.state.file.name !== undefined  && !(
-      this.state.file.name.includes('.jpg') ||
-      this.state.file.name.includes('.jpg') || 
-      this.state.file.name.includes('.png')))
-  {
-    fileError = 'Invalid image'
+  if(!this.state.file) {
+    fileError = 'Image is required'
+  } else if (this.state.file){ 
+    this.setState({ fileError: ''})
   }
 
-  if(this.state.file && this.state.file.size > fileMaxSize)
-  {
-      fileError = 'The image must be less than 15 mb'
+  if(this.state.file && 
+    this.state.file.name !== undefined && !(
+      this.state.file.name.includes('.jpg') ||
+      this.state.file.name.includes('.jpg') || 
+      this.state.file.name.includes('.png'))){
+        fileError = 'Invalid image'
+
+  } else if (this.state.file && 
+      this.state.file.name !== undefined &&  (
+        this.state.file.name.includes('.jpg') ||
+        this.state.file.name.includes('.jpg') || 
+        this.state.file.name.includes('.png'))){ 
+          this.setState({ fileError: ''})
+  }
+
+  if(this.state.file && 
+    this.state.file.size > fileMaxSize){
+    fileError = 'The image must be less than 15 mb'
+
+  } else if (this.state.file && 
+    this.state.file.size < fileMaxSize ){ 
+      this.setState({ fileError: ''})
   }
   
   if(this.state.publi_date) {
     datepubli = moment(this.state.publi_date).format('DD-MM-YYYY');
     datenow = moment(Date.now()).format('DD-MM-YYYY');
-   
-  if(this.state.state == 'true' && datepubli < datenow) {
+    if(this.state.state == 'true' && datepubli < datenow) {
       publi_dateError = "the publication date cannot be less than today's"
+
+    } else { 
+      this.setState({ publi_dateError: ''})
     }
+  }
+
+
+  if(this.state.url 
+  && !(this.state.url.includes('.mp4') 
+    || this.state.url.includes('https://www.youtube.com/'))) {
+      urlError = 'URL is not valid'
+
+  }  else if (  this.state.url 
+      &&  (this.state.url.includes('.mp4') 
+        || this.state.url.includes('https://www.youtube.com/'))){ 
+          this.setState({ urlError: ''})
   }
   
   if(this.state.state == 'true' && this.state.publi_date === null) {
     publi_dateError = "the publication date is required"
+
+  } else if (this.state.state == 'true' && !this.state.publi_date === null){ 
+    this.setState({ publi_dateError: ''})
   }
+
   if(this.state.state == '') {
     stateError = 'State required'
+
+  } else if (!this.state.state == ''){ 
+    this.setState({ stateError: ''})
   }
+
   if(this.state.summary == '') {
     summaryError = 'Summary required'
+  } else if (!this.state.summary == ''){ 
+    this.setState({ summaryError: ''})
   }
-  if(this.state.category == null) {
+   
+  if(this.state.category == '') {
     categoryError = 'Category required'
+  } else if (!this.state.category == ''){ 
+    this.setState({ categoryError: ''})
   }
-  if(!convertToRaw(this.state.editorState.getCurrentContent()).blocks[0].text)
-  {
-    editorStateError = "Content required"
+ 
+  
+  if(!convertToRaw(
+      this.state.editorState.getCurrentContent()).blocks[0].text){
+        editorStateError = "Content required"
+
+  } else if (convertToRaw(
+      this.state.editorState.getCurrentContent()).blocks[0].text){ 
+        this.setState({ editorStateError: ''})
   }
+
   if(summaryError || categoryError || 
-      editorStateError || titleError ||
-      stateError || 
-      publi_dateError || 
-      fileError|| urlError) {
-        this.setState({
-          summaryError,
-          categoryError, 
-          editorStateError,
-          titleError,
-          stateError,
-          publi_dateError,
-          fileError,
-          urlError
-        })
-        return false;
+        editorStateError || titleError ||
+        stateError || 
+        publi_dateError || 
+        fileError|| urlError) {
+         
+          this.setState({
+          
+            titleError: titleError,
+            summaryError: summaryError,
+            stateError: stateError,
+            categoryError: categoryError,
+            fileError: fileError,
+            publi_dateError:  publi_dateError,
+            editorStateError: editorStateError,
+            urlError: urlError
+          
+          })
+          return false;
   }
   return true;
 } 
@@ -348,12 +404,10 @@ render() {
                 { this.state.file    && ( 
                 <Card className="preview" style={{ width: '18rem' }}>
                  <Card.Header>{this.context.t("Preview")}</Card.Header>
-                  <Card.Img  src={this.state.imgSrc} />
+                  <Card.Img  src={this.state.imgSrc || `/images/uploads/${this.state.file_name}`} />
                   <Card.Body>
-                    <Card.Title>{this.state.file.name}</Card.Title>
-                    <Card.Text>
-                      {this.context.t("Type")} {this.state.file_type}
-                    </Card.Text>
+                    <Card.Title>{this.state.file.name || this.state.file_name }</Card.Title>
+                   
                   </Card.Body>
                 </Card>
               )}
