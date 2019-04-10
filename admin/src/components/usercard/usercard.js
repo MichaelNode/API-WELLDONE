@@ -25,19 +25,19 @@ export default class CardUSer extends Component {
                 name={this.props.userData.name}
                 positionName='Software Developer'
                 stats={[
-                {
-                    name: 'followers',
-                    value: 21
-                },
-                {
-                    name: 'following',
-                    value: 37
-                },
-                {
-                    name: 'posts',
-                    value: 117
-                }
-                ]}
+                    {
+                        name: 'followers',
+                        value: 0
+                    },
+                    {
+                        name: 'following',
+                        value: 0
+                    },
+                    {
+                        name: 'articles',
+                        value: 0
+                    }
+                    ]}
             />
            
             </div>

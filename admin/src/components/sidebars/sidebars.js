@@ -48,7 +48,7 @@ class sideBars extends Component {
                 </NavItem>
                 <NavItem eventKey="charts">
                     <NavIcon>
-                        <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
+                        <i className="fa fa-fw fa-list-alt" style={{ fontSize: '1.75em' }} />
                     </NavIcon>
                     <NavText>
                         {this.context.t("Articles")}
@@ -66,18 +66,10 @@ class sideBars extends Component {
                                     {this.context.t("Favourites")}
                                 </span>
                         </Link>
-=======
-                        </NavText>
-                    </NavItem>
-                    <NavItem >
-                    <NavText>
-                            <span className="nav-link">
-                                <DeleteUser />
-                            </span>
 
                         </NavText>
-                        
                     </NavItem>
+            
                 </NavItem>
             </SideNav.Nav>
         </SideNav>
@@ -92,7 +84,7 @@ class sideBars extends Component {
                            
                                 <Route exact path="/admin/logout" component={InstantLogout}/>
                                 <Route exact path="/admin/update" component={UpdateUserForm}/>
-                                <Route exact path="/admin/add_article" component={AddArticleForm}/>
+                                <Route exact path="/admin/add_article/:id?" component={AddArticleForm}/>
                                 <Route exact path="/admin/favorites" component={FavArticles}/>     
                                 <Route exact path="/admin/edit_article/:id" component={EditArticleForm}/>
 

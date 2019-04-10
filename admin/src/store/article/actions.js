@@ -12,3 +12,18 @@ export const showForm = (userToken) =>{
       type: types.SHOW_FORM
     }
 };
+
+export const successMessage = (message) => {
+  return {
+      type: types.SUCCESS_MESSAGE,
+      payload: message
+  }
+};
+
+export const successMessageEdit = (message) => {
+  return {
+      type: types.SUCCESS_MESSAGE_EDIT,
+      payload: message
+  }
+};
+

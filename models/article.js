@@ -46,6 +46,10 @@ var ArticleSchema = Schema({
          type: Schema.ObjectId,
          ref: 'user'
      },
+    article: {
+        type: Schema.ObjectId,
+        ref: 'articles'
+    },
      last_modification: Date,
     
 });

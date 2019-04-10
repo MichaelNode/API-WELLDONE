@@ -39,7 +39,9 @@ export const translations = {
         "Articles":'Articles',
         "User":'Usuario',
         "Favourites": "My favorites",
-        "Edit Article":'Edit Article'
+        "Edit Article":'Edit Article',
+        "Article_Add": 'Saved article',
+        "Article_Updated": 'Updated article',
     },
     es: {
         "Email": "Email",
@@ -81,6 +83,8 @@ export const translations = {
         "Articles":'Artículos',
         "User":'User',
         "Favourites": "Mis favoritos",
-        "Edit Article":'Editar Artículo'
+        "Edit Article":'Editar Artículo',
+        "Article_Add": 'Artículo guardado',
+        "Article_Updated": 'Artículo actualizado',
     }
 };

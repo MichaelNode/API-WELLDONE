@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
-import Card from 'react-bootstrap/Card'
+import {Card, Alert} from 'react-bootstrap'
 import { articleOperations } from '../../../store/article';
 import {handleInputChange} from '../../../utils/utils';
 import Category from '../../category/category'
@@ -271,6 +271,8 @@ class AddArticleForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    let id = this.props.match.params.id
+    console.log('asdas',id)
     let idUser =  this.props.userData._id
     let token = this.props.token
     const isValid = this.validate();
@@ -288,7 +290,8 @@ class AddArticleForm extends Component {
         this.state.publi_date,
         this.state.url,
         token,
-        idUser
+        idUser,
+        id,
       )  
     } 
   };
@@ -298,7 +301,7 @@ class AddArticleForm extends Component {
       <>
         <Card className="text-center card-main">
           <Card.Header>{this.context.t("New Article")}</Card.Header>
-          <Card.Body>
+          <Card.Body> 
             <Form onSubmit={this.handleSubmit } noValidate encType="multipart/form-data"  >
               <Form.Row>
                 <Form.Group as={Col}  md="6" controlId="title">
@@ -452,6 +455,13 @@ class AddArticleForm extends Component {
                   )}
                 </Form.Group>
             ) }
+            { this.props.message && ( 
+              <Form.Group as={Col}  md="12" >
+                <Alert   md="12" variant= 'success'>
+                  {this.context.t(this.props.message)} 
+                </Alert> 
+              </Form.Group>
+            )}
               <Button className="button-send" variant="primary" type="submit">
                   {this.context.t("Submit")}  
               </Button>
@@ -470,12 +480,13 @@ class AddArticleForm extends Component {
 
   const mapStateToProps = state => ({
     userData: state.user.userData,
-    token: state.user.token
+    token: state.user.token,
+    message: state.article.message
  });
 
   const mapDispatchToProps = dispatch => {
     return {
-      addArticle: (title,file,summary,content,state,category,publi_date,url,token, userId) => {
+      addArticle: (title,file,summary,content,state,category,publi_date,url,token, userId,id) => {
           dispatch(articleOperations.addArticle(
             title,
             file,
@@ -486,7 +497,8 @@ class AddArticleForm extends Component {
             publi_date,
             url,
             token,
-            userId
+            userId,
+            id
           ));
       }
     };
