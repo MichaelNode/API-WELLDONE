@@ -180,12 +180,12 @@ ArticleSchema.statics.getIdFromSlug = function (slug) {
  * @returns {string}
  */
 ArticleSchema.methods.getShortDescription = function (maxLength = 100) {
-    if (!this.shortDescription) return '';
+    if (!this.summary) return '';
     // trim the string to the maximum length
-    let shortDescription = this.shortDescription.substr(0, maxLength);
-    shortDescription = shortDescription.substr(0, Math.min(shortDescription.length, shortDescription.lastIndexOf(" ")));
+    let summary = this.summary.substr(0, maxLength);
+    summary = summary.substr(0, Math.min(summary.length, summary.lastIndexOf(" ")));
     // re-trim if we are in the middle of a word
-    return `${shortDescription}...`;
+    return `${summary}...`;
 }
 
 /**
