@@ -6,52 +6,52 @@ const i18n = require('i18n');
 const Comment = require('./comment');
 
 var ArticleSchema = Schema({
-     title:{
+    title: {
         type: String,
         index: true
 
-     },
-     file: String,
-     file_type: String, 
-     file_name: String,
-     url: String,
-     url_type: String,
-     summary:{
-          type: String
-     },
-     shortDescription: {
-          type: String,
-          default: ''
-      },
-     content: {
-          type: String
-     },
-     state: {
-          type: Boolean,
-          index: true
-      },
-     category: {
-          type: String,
-          index: true
-     },
-     create_at: {
-          type: Date,
-          default: Date.now
-     },
-     publi_date: {
-         type: Date,
-         require:false
-     },
-     author: {
-         type: Schema.ObjectId,
-         ref: 'user'
-     },
+    },
+    file: String,
+    file_type: String,
+    file_name: String,
+    url: String,
+    url_type: String,
+    summary: {
+        type: String
+    },
+    shortDescription: {
+        type: String,
+        default: ''
+    },
+    content: {
+        type: String
+    },
+    state: {
+        type: Boolean,
+        index: true
+    },
+    category: {
+        type: String,
+        index: true
+    },
+    create_at: {
+        type: Date,
+        default: Date.now
+    },
+    publi_date: {
+        type: Date,
+        require: false
+    },
+    author: {
+        type: Schema.ObjectId,
+        ref: 'user'
+    },
     article: {
         type: Schema.ObjectId,
         ref: 'articles'
     },
-     last_modification: Date,
-    
+    last_modification: Date,
+
 });
 
 ArticleSchema.statics.allowedCategories = function () {
@@ -71,20 +71,28 @@ ArticleSchema.statics.allowedCategories = function () {
  * @param perPage
  * @returns {Promise<Array>}
  */
-ArticleSchema.statics.list = async function(filters, sort, pages, perPage){
-     const query = Article.find(filters).populate('author', 'name nick_name image');
-     query.sort(sort);
-     if(pages !== undefined && perPage !== undefined){
-		query.skip((perPage * pages) - perPage);
-		query.limit(perPage);
-	}
-     const articlesArr = await query.exec();
+ArticleSchema.statics.list = async function (filters, sort, pages, perPage) {
+    // add filter for not show articles draft
+    if(!filters.state) {
+        filters.state = true;
+    }
+    // add filter for not show not published articles
+    if(!filters.publi_date){
+        filters.publi_date = {$lt: new Date()}
+    }
+    const query = Article.find(filters).populate('author', 'name nick_name image');
+    query.sort(sort);
+    if (pages !== undefined && perPage !== undefined) {
+        query.skip((perPage * pages) - perPage);
+        query.limit(perPage);
+    }
+    const articlesArr = await query.exec();
 
     // Add num comments to all articles and create a new array with this
     let articles = [];
 
-    for (const article of articlesArr){
-        article.numComments =  await article.getCommentsCount();
+    for (const article of articlesArr) {
+        article.numComments = await article.getCommentsCount();
         articles.push(article);
     }
     return articles;
@@ -96,9 +104,9 @@ ArticleSchema.statics.list = async function(filters, sort, pages, perPage){
  * @returns {Promise}
  * @constructor
  */
-ArticleSchema.statics.Count = function(filters){
-	const query = Article.find(filters);
-	return query.countDocuments().exec();
+ArticleSchema.statics.Count = function (filters) {
+    const query = Article.find(filters);
+    return query.countDocuments().exec();
 }
 
 /**
@@ -106,7 +114,7 @@ ArticleSchema.statics.Count = function(filters){
  * @param date
  * @returns {string}
  */
-ArticleSchema.methods.getFormattedDatePost = function() {
+ArticleSchema.methods.getFormattedDatePost = function () {
     // get difference in milliseconds
     const date = this.create_at;
     const dateNow = new Date();
@@ -150,10 +158,10 @@ ArticleSchema.methods.getFormattedDatePost = function() {
  * Function for get url slug of one article
  * @returns {string}
  */
-ArticleSchema.methods.getSlug = function(){
+ArticleSchema.methods.getSlug = function () {
     let slug = this.title;
     let slugFormatted = slug.split(' ').join('-');
-    return `${slugFormatted }-${this._id}`;
+    return `${slugFormatted}-${this._id}`;
 }
 
 /**
@@ -172,7 +180,7 @@ ArticleSchema.statics.getIdFromSlug = function (slug) {
  * @returns {string}
  */
 ArticleSchema.methods.getShortDescription = function (maxLength = 100) {
-    if(!this.shortDescription) return '';
+    if (!this.shortDescription) return '';
     // trim the string to the maximum length
     let shortDescription = this.shortDescription.substr(0, maxLength);
     shortDescription = shortDescription.substr(0, Math.min(shortDescription.length, shortDescription.lastIndexOf(" ")));

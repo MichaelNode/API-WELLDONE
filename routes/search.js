@@ -8,7 +8,11 @@ const User = require('../models/user');
 const {pagination} = require('../lib/utils');
 
 router.get('/:type?/:page?', async (req, res, next) => {
-  const userId = req.session.user._id
+  const user = req.session.user;
+  let userId = null;
+  if(user){
+    userId = user._id;
+  }
   // get model for search
   const filteredModel = req.params.type === 'user' ? User : Article;
   // get sort field ASC or DESC
@@ -32,7 +36,7 @@ router.get('/:type?/:page?', async (req, res, next) => {
   const models = await filteredModel.list(filters, sort, page, recordsPerPage);
 
   if (req.params.type === 'user') {
-    
+
       try {
         const user = userId ? await User.findOne({_id: userId}) : null;
         models.forEach(item => {
@@ -47,14 +51,12 @@ router.get('/:type?/:page?', async (req, res, next) => {
         next(err);
         return;
       }
-    
+
   }
-  
+
   const count = await filteredModel.Count(filters);
   // create paginator
   const paginator = pagination(models, count, page, recordsPerPage);
-  
-  
 
   res.render('search/search', {
     models,

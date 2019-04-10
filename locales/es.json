@@ -101,5 +101,8 @@
 	"article,blog": "article,blog",
 	"Response with article": "Respuesta con artículo",
 	"article,blog,Culture": "article,blog,Culture",
-	"article,blog,Tech": "article,blog,Tech"
+	"article,blog,Tech": "article,blog,Tech",
+	"User profile": "User profile",
+	"User Avatar": "User Avatar",
+	"Article image": "Article image"
 }

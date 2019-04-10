@@ -13,5 +13,6 @@ mixin user_header(user, following)
                         p.text-muted.small.d-inline=`${following.length} ${__('following')}`
                     - const linkOrder = `/articles/user/${user.nick_name}?`
                     .col-6.text-right
+                        - const favorite = false;
                         include ../articles/_order
     hr.mt-0.mb-5.m-percent
