@@ -30,7 +30,9 @@ export const addArticle = (title,file,summary,content,state,category,publi_date,
     return async function (dispatch) {
         try {
             await asyncFetch(apiRoutes.article, 'POST', formData , headers);
-            
+            if(isSuccessResponse){
+                dispatch(actions.successMessage('Article_Add'))
+            } 
         } catch (err) {
             console.log('Hubo un error actualizando el artículo', err)
         }
@@ -75,7 +77,9 @@ export const EditArticle = (title,file,summary,content,state,category,publi_date
         try {
             const url_api = apiRoutes.article_edit + id
             await asyncFetch(url_api , 'PUT',  fd, headers);
-            //await asyncFetch(url_api , 'PUT',  JSON.stringify(body));
+            if(isSuccessResponse){
+                dispatch(actions.successMessageEdit('Article_Updated'))
+            } 
             
         } catch (err) {
             console.log('Hubo un error actualizando el artículo', err)

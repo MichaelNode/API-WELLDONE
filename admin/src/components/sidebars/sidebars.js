@@ -48,7 +48,7 @@ class sideBars extends Component {
                 </NavItem>
                 <NavItem eventKey="charts">
                     <NavIcon>
-                        <i className="fa fa-fw fa-editr" style={{ fontSize: '1.75em' }} />
+                        <i className="fa fa-fw fa-list-alt" style={{ fontSize: '1.75em' }} />
                     </NavIcon>
                     <NavText>
                         {this.context.t("Articles")}

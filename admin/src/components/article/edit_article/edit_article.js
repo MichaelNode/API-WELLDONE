@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
-import Card from 'react-bootstrap/Card'
+import {Card, Alert} from 'react-bootstrap'
 import { articleOperations } from '../../../store/article';
 import {handleInputChange} from '../../../utils/utils';
 import Category from '../../category/category'
@@ -51,14 +51,13 @@ class EditArticleForm extends Component {
 
 
 handleInputChange = (evt) => {
-console.log(this.state.url)
+ 
   if(this.state.state === false){
     this.setState({ publi_date: null})
   }
-  if(this.state.url !== undefined  
-    || this.state.url !== 'null' 
-    || this.state.url !== ''){
-    this.setState({ file: null})
+
+  if(( this.state.url.length > 0)  ){
+      this.setState({ file: null})
   }
 
  if(evt.target.name == 'url'){
@@ -91,7 +90,7 @@ onChangeDate = date => this.setState({ publi_date:date })
 onChange = (event) => {
   if(event.target.files[0])
   {
-   this.setState({url:''})
+    this.setState({url:''})
     if( event.target.files[0].name.includes('.jpg') ||
         event.target.files[0].name.includes('.jpg') || 
         event.target.files[0].name.includes('.png'))
@@ -232,9 +231,8 @@ validate = () => {
     this.setState({ publi_dateError: ''})
   }
 
-  if(this.state.state == '') {
+  if(this.state.state == 'false' || this.state.state == null ) {
     stateError = 'State required'
-
   } else if (!this.state.state == ''){ 
     this.setState({ stateError: ''})
   }
@@ -245,7 +243,7 @@ validate = () => {
     this.setState({ summaryError: ''})
   }
    
-  if(this.state.category == '') {
+  if(this.state.category == '' ||  this.state.category == 'Escoge...') {
     categoryError = 'Category required'
   } else if (!this.state.category == ''){ 
     this.setState({ categoryError: ''})
@@ -370,8 +368,8 @@ render() {
                     value={this.state.state} 
                   >
                     <option>{this.context.t("Choose")}</option>
-                    <option value={true} >{this.context.t("Published")}</option>
-                    <option value={false}>{this.context.t("Draft")}</option>
+                    <option key={true} value={true} >{this.context.t("Published")}</option>
+                    <option key={false} value={false}>{this.context.t("Draft")}</option>
                   </Form.Control>     
               </Form.Group>
             { (this.state.publi_date )  && ( 
@@ -450,7 +448,14 @@ render() {
                 </Card>
                 )}
               </Form.Group>
-        
+           
+            { this.props.message && ( 
+              <Form.Group as={Col}  md="12" >
+                <Alert   md="12" variant= 'success'>
+                  {this.context.t(this.props.message)} 
+                </Alert> 
+              </Form.Group>
+            )}  
             <Button className="button-send" variant="primary" type="submit">
                 {this.context.t("Submit")}  
             </Button>
@@ -469,7 +474,8 @@ EditArticleForm.contextTypes = {
 
 const mapStateToProps = state => ({
   userData: state.user.userData,
-  token: state.user.token
+  token: state.user.token,
+  message: state.article.message
 });
 
 const mapDispatchToProps = dispatch => {

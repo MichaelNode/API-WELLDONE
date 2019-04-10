@@ -41,15 +41,16 @@ block content
 
             .col-12.col-md-10.col-lg-8.p-0
                 !{article.content}
-
+                if isLogged
+                    .col-12.col-md-10.col-lg-8.row  
+                        a.btn.btn-outline-secondary.mt-2(href=`/admin/add_article/${article._id}`) #{__('Response with article')}
+           
             // Comments
-          
             .col-12.col-md-10.col-lg-8.p-0.pt-5.mb-5.row(id='comments')
-                p.h3-style=__('Comments')
-                    br/
-                    a.btn(href=`/admin/add_article/${article._id}`) Response whith article
+               
                 // New Comment if user is logged
                 if isLogged
+                    p.h3-style=__('Comments')
                     form.col-12.p-0(method="post")
                         .textarea-wrapper.col-12.pr-0
                             textarea.comment.col-12.p-0.pt-2.pr-2(placeholder=`${__('Write here...')}`, name="content" required)=commentPosted
