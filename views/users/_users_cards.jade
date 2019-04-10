@@ -9,4 +9,5 @@ if users
                             img.user-thumbnail(src=`/images/${thumbnail}`)
                         a(href=`/articles/user/${user.nick_name}`)
                             p.bold.m-0.pl-3=user.nick_name
-                    button.btn.btn-outline-secondary.col-4.follow(data-user=user._id)=__(user.btnText)
+                    if isLogged
+                        button.btn.btn-outline-secondary.col-4.follow(data-user=user._id)=__(user.btnText)

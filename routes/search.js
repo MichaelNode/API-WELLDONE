@@ -33,6 +33,9 @@ router.get('/:type?/:page?', async (req, res, next) => {
 
   // get models that have a coincidence
   filters[filter] = new RegExp(text, 'i');
+  if(type === 'user' && userId) {
+    filters._id = {$ne: userId};
+  }
   const models = await filteredModel.list(filters, sort, page, recordsPerPage);
 
   if (req.params.type === 'user') {
@@ -40,10 +43,10 @@ router.get('/:type?/:page?', async (req, res, next) => {
       try {
         const user = userId ? await User.findOne({_id: userId}) : null;
         models.forEach(item => {
-          if(user.followers.indexOf(item._id) === -1) {
-            item.btnText = 'Follow'
+          if(user && item.followers.indexOf(user._id) === -1) {
+            item.btnText = res.__('Follow')
           } else {
-            item.btnText = 'Unfollow'
+            item.btnText = res.__('Unfollow')
           }
         })
 
