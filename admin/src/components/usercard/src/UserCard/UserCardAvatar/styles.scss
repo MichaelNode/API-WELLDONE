@@ -5,9 +5,10 @@
   -webkit-flex: 0 0 auto;
   flex: 0 0 auto;
   height: 13rem;
-  width: 13rem;
+  width: 200px;
+  object-fit: contain;
   top: calc(33% - 3rem);
-  left: calc(43% - 4.5rem);
+  left: calc(50% - 100px);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

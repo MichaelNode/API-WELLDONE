@@ -15,32 +15,31 @@ import Loading from '../loading/Loading'
 import InstantLogout from "../login/InstantLogout";
 import UpdateUserForm from "../updateUser/updateUserForm";
 import FavArticles from '../favArticles/favArticles';
-import Logout from '../login/Logout';
 import AddArticleForm from '../article/add_article/addarticle_form'
 import EditArticleForm from '../article/edit_article/edit_article'
-
-import DeleteUser from '../deleteUser/deleteUser'
-import {Form , Col} from "react-bootstrap";
-import CardUSer from '../usercard/usercard'
+import {Form , Col, Row} from "react-bootstrap";
+import CardUser from '../usercard/usercard'
 import './styles.css'
 
 class sideBars extends Component {
     render(){
         return (
-        
+
         <div>
-            {this.props.token &&  !this.props.isLoading && 
+            {this.props.token &&  !this.props.isLoading &&
             <MainNavbar />
             }
             {this.props.token &&  !this.props.isLoading && (
             <SideNav
-           
+
             >
             <SideNav.Toggle />
             <SideNav.Nav defaultSelected="home">
                 <NavItem eventKey="home">
                     <NavIcon>
-                        <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                        <Link to='/admin'>
+                            <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                        </Link>
                     </NavIcon>
                     <NavText>
                         Home
@@ -69,29 +68,30 @@ class sideBars extends Component {
 
                         </NavText>
                     </NavItem>
-            
+
                 </NavItem>
             </SideNav.Nav>
         </SideNav>
         )}
-             
+
         {
             this.props.token &&  !this.props.isLoading && (
                 <React.Fragment>
                     <Switch>
-                        <Form.Row>
-                            <Form.Group className="div_main" as={Col}  md="9" >
-                           
+                        <Form.Row className="w-100">
+                            <Form.Group className="div_main" as={Col}  md="12" >
+
                                 <Route exact path="/admin/logout" component={InstantLogout}/>
                                 <Route exact path="/admin/update" component={UpdateUserForm}/>
                                 <Route exact path="/admin/add_article/:id?" component={AddArticleForm}/>
-                                <Route exact path="/admin/favorites" component={FavArticles}/>     
+                                <Route exact path="/admin/favorites" component={FavArticles}/>
                                 <Route exact path="/admin/edit_article/:id" component={EditArticleForm}/>
-
+                                <Row className="justify-content-around">
+                                    <Col md={9} lg={6}>
+                                        <Route exact path="/admin" component={CardUser}/>
+                                    </Col>
+                                </Row>
                             </Form.Group>
-                            <Form.Group  as={Col}  md="3" >
-                                <CardUSer userData={this.props.userData}/>
-                       </Form.Group>
                         </Form.Row>
                     </Switch>
                 </React.Fragment>
@@ -117,6 +117,5 @@ sideBars.contextTypes = {
 
 export default connect(state => ({
     token: state.user.token,
-    userData: state.user.userData,
     isLoading: state.user.isLoading
   }))(sideBars);
