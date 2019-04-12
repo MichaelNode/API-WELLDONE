@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import { connect  } from "react-redux";
 import PropTypes from "prop-types";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import {Card, Alert} from 'react-bootstrap'
+import {Card, Alert, Form,  Button, Col } from 'react-bootstrap'
 import { articleOperations } from '../../../store/article';
-import {handleInputChange} from '../../../utils/utils';
+import { handleInputChange} from '../../../utils/utils';
 import Category from '../../category/category'
 import EditorComponent from '../editor/editorComponent'
-import { EditorState , convertFromHTML,ContentState , convertToRaw } from 'draft-js';
+import { EditorState , convertToRaw } from 'draft-js';
 import {stateToHTML} from 'draft-js-export-html'; 
 import { convertFromRaw } from 'draft-js';
 import '../style/input-file.css'
@@ -18,6 +15,7 @@ import DatePicker from 'react-date-picker';
 import '../style/validation.css'
 import moment from 'moment';
 import '../style/main.css'
+import FileComponent from '../fileUpload/file'
 
 
 class AddArticleForm extends Component {
@@ -48,6 +46,7 @@ class AddArticleForm extends Component {
       showCard: false,
       showCardtube: false,
       showCardMP4: false
+
     };
   }
 
@@ -206,6 +205,7 @@ class AddArticleForm extends Component {
   } 
 
   handleInputChange = (evt) => {
+    console.log(this.state.ask_file)
    
     if(this.state.ask_file === "imagen"){
        this.setState({url: null})
@@ -299,7 +299,8 @@ class AddArticleForm extends Component {
   render() {
     return (
       <>
-        <Card className="text-center card-main">
+      <Form.Row>
+        <Card as={Col}  md="4"  className="text-center card-main">
           <Card.Header>{this.context.t("New Article")}</Card.Header>
           <Card.Body> 
             <Form onSubmit={this.handleSubmit } noValidate encType="multipart/form-data"  >
@@ -336,11 +337,7 @@ class AddArticleForm extends Component {
                     value={this.state.summary}                  
                   />
                 </Form.Group>
-                <EditorComponent
-                  handleChange={this.onEditorStateChange}  
-                  editorState={this.state.editorState}
-                  editorStateError={this.state.editorStateError} 
-                /> 
+                
               </Form.Row>
               <Form.Row>
                 <Form.Group as={Col} md="6" controlId="state">
@@ -374,87 +371,23 @@ class AddArticleForm extends Component {
                   />
                 </Form.Group>
               )}
-             
-                <Form.Group as={Col}  md="12" controlId="url">
-                  <Form.Label>{this.context.t("Upload file")}</Form.Label>
-                  { this.state.ask_fileError ?(
-                       <div className="errorValidation">{this.state.ask_fileError}</div>
-                  ): null}
-                  <Form.Control
-                    name="ask_file" 
-                    as="select"
-                    onChange={this.handleInputChange}  
-                    value={this.state.ask_file} 
-                    required
-                  >
-                    <option >{this.context.t("Choose")}</option>
-                    <option value="video" >Video</option>
-                    <option value="imagen">Imagen</option>
-                  </Form.Control>
-                </Form.Group>
+           
+             <FileComponent 
+                ask_fileError={this.state.ask_fileError}
+                fileError={this.state.fileError}
+                urlError={this.state.urlError}
+                ask_file={this.state.ask_file}
+                file={this.state.file}
+                showCard={this.state.showCardMP4}
+                imgSrc={this.state.imgSrc}
+                url={this.state.url}
+                showCardtube={this.state.showCardtube}
+                showCardMP4={this.state.showCardMP4}
+                onChange={this.state.onChange}
+                handleInputChange={this.state.handleInputChange}
+             />
+               
 
-                { this.state.ask_file === 'imagen'  && ( 
-                <Form.Group as={Col} md="12" >
-                <Form.Label>{this.context.t("Upload image")}</Form.Label>
-                { this.state.fileError  ?(
-                       <div className="errorValidation">{this.state.fileError}</div>
-                    ): null}
-                  <Form.Control
-                    name="file" 
-                    type="file"
-                    onChange= {this.onChange}  
-                    accept=".jpg,.jpge,.png"  
-                  />
-                  { this.state.file !== null && this.state.showCard == true   && ( 
-                  <Card className="preview" style={{ width: '18rem' }}>
-                   <Card.Header>{this.context.t("Preview")}</Card.Header>
-                    <Card.Img  src={this.state.imgSrc} />
-                    <Card.Body>
-                      <Card.Title>{this.state.file.name}</Card.Title>
-                      <Card.Text>
-                        {this.context.t("Type")} {this.state.file.type}
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                )}
-                </Form.Group>
-            ) }
-            { this.state.ask_file === 'video' && ( 
-              <Form.Group as={Col}  md="12" controlId="url">
-                  <Form.Label>{this.context.t("Video URL")}</Form.Label>
-                  { this.state.urlError ?(
-                       <div className="errorValidation">{this.state.urlError}</div>
-                  ): null}
-                  <Form.Control
-                    type="url"
-                    name="url"
-                    onChange={this.handleInputChange}   
-                    value={this.state.url} 
-                  />
-                  <br/>
-                  { this.state.url && this.state.showCardtube  && ( 
-                    <Card className="preview" style={{ width: '18rem', }}>
-                    <Card.Header>{this.context.t("Preview")}</Card.Header>
-                    <Card.Body>    
-                    <iframe frameborder="0" allowFullScreen  width="100%" height="100%"
-                      src={this.state.url.replace('watch?v=', 'embed/')}>
-                    </iframe>
-                    </Card.Body>
-                  </Card> 
-                  )}
-                  <br/>
-                  { this.state.url && this.state.showCardMP4  && ( 
-                  <Card className="preview" style={{ width: '18rem', }}>
-                    <Card.Header>{this.context.t("Preview")}</Card.Header>
-                    <Card.Body>    
-                    <video width="100%" height="100%" controls>
-                      <source  src={this.state.url} type="video/mp4" />
-                      </video>
-                    </Card.Body>
-                  </Card>
-                  )}
-                </Form.Group>
-            ) }
             { this.props.message && ( 
               <Form.Group as={Col}  md="12" >
                 <Alert   md="12" variant= 'success'>
@@ -469,6 +402,25 @@ class AddArticleForm extends Component {
             </Form>
           </Card.Body> 
         </Card>
+        <Card as={Col}  md="8"  className="text-center card-main">
+          <Card.Header>{this.context.t("Content")}</Card.Header>
+          <Card.Body> 
+          <Form.Row className="formeditor"> 
+
+                <EditorComponent
+                  handleChange={this.onEditorStateChange}  
+                  editorState={this.state.editorState}
+                  editorStateError={this.state.editorStateError} 
+                /> 
+          </Form.Row>
+            
+             
+             
+        
+          
+          </Card.Body> 
+        </Card>
+        </Form.Row>
       </>
         );
       }

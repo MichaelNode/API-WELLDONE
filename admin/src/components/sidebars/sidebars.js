@@ -80,7 +80,7 @@ class sideBars extends Component {
                 <React.Fragment>
                     <Switch>
                         <Form.Row>
-                            <Form.Group className="div_main" as={Col}  md="9" >
+                            <Form.Group className="div_main" as={Col}  md="11" >
                            
                                 <Route exact path="/admin/logout" component={InstantLogout}/>
                                 <Route exact path="/admin/update" component={UpdateUserForm}/>
@@ -89,9 +89,9 @@ class sideBars extends Component {
                                 <Route exact path="/admin/edit_article/:id" component={EditArticleForm}/>
 
                             </Form.Group>
-                            <Form.Group  as={Col}  md="3" >
+                            {/* <Form.Group  as={Col}  md="3" >
                                 <CardUSer userData={this.props.userData}/>
-                       </Form.Group>
+                            </Form.Group> */}
                         </Form.Row>
                     </Switch>
                 </React.Fragment>
