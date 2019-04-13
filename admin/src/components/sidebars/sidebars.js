@@ -1,6 +1,6 @@
 // Header.js
 import React, {Component} from 'react';
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
 import {connect} from "react-redux";
 import {Icon} from 'react-fa'
 import {Route, Switch} from "react-router-dom";
@@ -8,114 +8,122 @@ import {Route, Switch} from "react-router-dom";
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import MainNavbar from '../navbar/navbar'
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import Login from '../login/Login'
 import Loading from '../loading/Loading'
 import InstantLogout from "../login/InstantLogout";
 import UpdateUserForm from "../updateUser/updateUserForm";
 import FavArticles from '../favArticles/favArticles';
+import ArticleList from '../article/list/ArticleList';
 import AddArticleForm from '../article/add_article/addarticle_form'
 import EditArticleForm from '../article/edit_article/edit_article'
-import {Form , Col, Row} from "react-bootstrap";
+import {Form, Col, Row} from "react-bootstrap";
 import CardUser from '../usercard/usercard'
 import './styles.css'
 
 class sideBars extends Component {
-    render(){
-        return (
+  render() {
+    return (
 
         <div>
-            {this.props.token &&  !this.props.isLoading &&
-            <MainNavbar />
-            }
-            {this.props.token &&  !this.props.isLoading && (
-            <SideNav
+          {this.props.token && !this.props.isLoading &&
+          <MainNavbar/>
+          }
+          {this.props.token && !this.props.isLoading && (
+              <SideNav
 
-            >
-            <SideNav.Toggle />
-            <SideNav.Nav defaultSelected="home">
-                <NavItem eventKey="home">
+              >
+                <SideNav.Toggle/>
+                <SideNav.Nav defaultSelected="home">
+                  <NavItem eventKey="home">
                     <NavIcon>
-                        <Link to='/admin'>
-                            <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
-                        </Link>
+                      <Link to='/admin'>
+                        <i className="fa fa-fw fa-home" style={{fontSize: '1.75em'}}/>
+                      </Link>
                     </NavIcon>
                     <NavText>
-                        Home
+                      Home
                     </NavText>
-                </NavItem>
-                <NavItem eventKey="charts">
+                  </NavItem>
+                  <NavItem eventKey="charts">
                     <NavIcon>
-                        <i className="fa fa-fw fa-list-alt" style={{ fontSize: '1.75em' }} />
+                      <i className="fa fa-fw fa-list-alt" style={{fontSize: '1.75em'}}/>
                     </NavIcon>
                     <NavText>
-                        {this.context.t("Articles")}
+                      {this.context.t("Articles")}
                     </NavText>
-                    <NavItem >
-                    <NavText>
+                    <NavItem>
+                      <NavText>
                         <Link to='/admin/add_article'>
-                                <span className="nav-link" >
+                                <span className="nav-link">
                                     {this.context.t("New_Article")}
                                 </span>
                         </Link>
 
                         <Link to='/admin/favorites'>
-                                <span className="nav-link" >
+                                <span className="nav-link">
                                     {this.context.t("Favourites")}
                                 </span>
                         </Link>
 
-                        </NavText>
+                        <Link to='/admin/articles'>
+                                <span className="nav-link">
+                                    {this.context.t("My articles")}
+                                </span>
+                        </Link>
+
+                      </NavText>
                     </NavItem>
 
-                </NavItem>
-            </SideNav.Nav>
-        </SideNav>
-        )}
+                  </NavItem>
+                </SideNav.Nav>
+              </SideNav>
+          )}
 
-        {
-            this.props.token &&  !this.props.isLoading && (
+          {
+            this.props.token && !this.props.isLoading && (
                 <React.Fragment>
-                    <Switch>
-                        <Form.Row className="w-100">
-                            <Form.Group className="div_main" as={Col}  md="12" >
+                  <Switch>
+                    <Form.Row className="w-100">
+                      <Form.Group className="div_main" as={Col} md="12">
 
-                                <Route exact path="/admin/logout" component={InstantLogout}/>
-                                <Route exact path="/admin/update" component={UpdateUserForm}/>
-                                <Route exact path="/admin/add_article/:id?" component={AddArticleForm}/>
-                                <Route exact path="/admin/favorites" component={FavArticles}/>
-                                <Route exact path="/admin/edit_article/:id" component={EditArticleForm}/>
-                                <Row className="justify-content-around">
-                                    <Col md={9} lg={6}>
-                                        <Route exact path="/admin" component={CardUser}/>
-                                    </Col>
-                                </Row>
-                            </Form.Group>
-                        </Form.Row>
-                    </Switch>
+                        <Route exact path="/admin/logout" component={InstantLogout}/>
+                        <Route exact path="/admin/update" component={UpdateUserForm}/>
+                        <Route exact path="/admin/add_article/:id?" component={AddArticleForm}/>
+                        <Route exact path="/admin/favorites" component={FavArticles}/>
+                        <Route exact path="/admin/edit_article/:id" component={EditArticleForm}/>
+                        <Route exact path="/admin/articles" component={ArticleList}/>
+                        <Row className="justify-content-around">
+                          <Col md={9} lg={6}>
+                            <Route exact path="/admin" component={CardUser}/>
+                          </Col>
+                        </Row>
+                      </Form.Group>
+                    </Form.Row>
+                  </Switch>
                 </React.Fragment>
             )
           }
           {
             !this.props.token && !this.props.isLoading &&
-                <Login/>
+            <Login/>
           }
           {
             this.props.isLoading &&
-                <Loading/>
+            <Loading/>
           }
 
         </div>
-        )
-    }
+    )
+  }
 }
 
 sideBars.contextTypes = {
-    t: PropTypes.func
+  t: PropTypes.func
 };
 
 export default connect(state => ({
-    token: state.user.token,
-    isLoading: state.user.isLoading
-  }))(sideBars);
+  token: state.user.token,
+  isLoading: state.user.isLoading
+}))(sideBars);

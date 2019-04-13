@@ -44,11 +44,6 @@ var UserSchema = Schema({
         type: Date,
         default: Date.now
     },
-    subrayado: [{
-       article: Schema.ObjectId,
-       ref: 'article',
-       position: Number
-    }],
     last_modification: Date,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
