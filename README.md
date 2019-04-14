@@ -2,6 +2,10 @@
 
 Welldone blog project
 
+## Dependecies
+
+- redis-server
+
 ## Installation
 
 - Install all dependencies
