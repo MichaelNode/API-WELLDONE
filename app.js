@@ -6,8 +6,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-
-
 var flash = require('express-flash');
 
 const MongoStore = require('connect-mongo')(session);
@@ -15,7 +13,8 @@ var app = express();
 app.locals.moment = require('moment');
 require('./lib/connectMongoose');
 
-
+const server = require('http').Server(app);
+const {Socket} = require('./lib/socket');
 
 
 // view engine setup
@@ -23,7 +22,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 /* var bodyParser = require('body-parser');            a
 pp.use(bodyParser.json({limit:'50mb'}));
 app.use(bodyParser.urlencoded({extended:true, limit:'50mb'}));
@@ -42,8 +41,7 @@ app.locals.getLocales = i18n.getLocales();
 const Article = require('./models/article');
 app.locals.categories = Article.allowedCategories();
 
-// Use session
-app.use(session({
+const sessionMware = session({
   name: "session-devrock",
   secret: 'thisisnotasecret',
   resave: false,
@@ -53,15 +51,20 @@ app.use(session({
     // conectar a la base de datos para guardar la session allí
     url: "mongodb://localhost:27017/welldone"
   })
-}));
+});
+
+// Use session
+app.use(sessionMware);
+// Socket library
+const io = new Socket(server, sessionMware);
 
 app.use(flash());
 
 // Helper middleware for get if user is auth
 app.use(async (req, res, next) => {
   res.locals.isLogged = require('./lib/jwtAuth').isLogged(req);
-  const port = req.app.settings.port || 3000  ;
-  res.locals.requested_url = req.protocol + '://' + req.hostname  + ( port == 80 || port == 443 ? '' : ':'+port ) + req.path;
+  const port = req.app.settings.port || 3000;
+  res.locals.requested_url = req.protocol + '://' + req.hostname + (port == 80 || port == 443 ? '' : ':' + port) + req.path;
   next();
 });
 
@@ -71,20 +74,24 @@ require('./routes/router')(app);
 app.use(express.static(path.join(__dirname, 'admin/build')));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-   console.log(err);
+  console.log(err);
   res.json('error');
 });
 
-module.exports = app;
+module.exports = {
+  app,
+  server,
+  io
+};
