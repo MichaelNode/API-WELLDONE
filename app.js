@@ -14,9 +14,7 @@ app.locals.moment = require('moment');
 require('./lib/connectMongoose');
 
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
-const redis = require('socket.io-redis');
-io.adapter(redis({ host: 'localhost', port: 6379 }));
+const {Socket} = require('./lib/socket');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,18 +54,8 @@ const sessionMware = session({
 
 // Use session
 app.use(sessionMware);
-
-io.use(function (socket, next) {
-  sessionMware(socket.request, socket.request.res, next);
-});
-
-io.on('connection', function(socket){
-  socket.on('disconnect', () => console.log('User disconnected'));
-  const user = socket.request.session.user;
-  if(user) {
-    socket.join(user._id); // Add user in a room with his id
-  }
-});
+// Socket library
+const io = new Socket(server, sessionMware);
 
 app.use(flash());
 

@@ -9,7 +9,7 @@ const createError = require('http-errors');
 const {renderArticleDetail, commentValidator} = require('../lib/articleService');
 const { validationResult } = require('express-validator/check');
 const {userAuth} = require('../lib/jwtAuth');
-const io = require('socket.io-emitter')({ host: '127.0.0.1', port: 6379 });
+const {sendToRoom} = require('../lib/socket');
 
 /**
  *  GET article.
@@ -25,7 +25,7 @@ router.get('/:user/:articleSlug/:page?', async function (req, res, next) {
             next(createError(404));
             return;
         }
-
+        sendToRoom('test', 'Hola', 'Adioooos');
         // render article detail
         await renderArticleDetail(req, res, article, user);
 
