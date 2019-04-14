@@ -218,6 +218,15 @@ router.get('/favourites', async (req, res, next) => {
 	}
   });
 
+router.delete('/deleteArticle', async (req, res, next) => {
+	try{
+		await Article.deleteOne({_id: "5cacd7e195bdc40d533beefb"})
+		console.log('artículo borrado')
+	} catch (error) {
+		console.log('no se pudo borrar el artículo')
+	}
+})
+
 
 
 module.exports = router;
