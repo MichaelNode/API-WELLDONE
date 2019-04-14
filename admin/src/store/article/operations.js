@@ -86,3 +86,14 @@ export const EditArticle = (title,file,summary,content,state,category,publi_date
         }                      
     }
 }
+
+export const deleteArticle = (id) => {
+    return async function (dispatch){
+        try {
+            await asyncFetch(apiRoutes.article_delete, 'DELETE')
+    
+        } catch (error) {
+            console.log('hubo un error al borrar el artículo', error)
+        }
+    }
+}

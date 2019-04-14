@@ -8,6 +8,7 @@ import { userOperations } from '../../store/user';
 import { TwitterPicker } from 'react-color';
 import {Card} from 'react-bootstrap';
 import styled from 'styled-components';
+import DeleteArticle from '../../components/article/deleteArticle/deleteArticle';
 
 function UpdateUserForm (props, context) {
 
@@ -60,6 +61,7 @@ function UpdateUserForm (props, context) {
   
     return (
       <>
+      <DeleteArticle/>
       <Card className="text-center card-main">
           <Card.Header>Perfil</Card.Header>
           <Card.Body>
