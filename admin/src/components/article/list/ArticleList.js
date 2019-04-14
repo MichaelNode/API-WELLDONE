@@ -24,7 +24,7 @@ const ArticleList = (props) => {
 
   useEffect(() => {
     fetchArticles();
-  }, []);
+  }, articles);
 
   return(
       <Row>
