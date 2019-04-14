@@ -6,8 +6,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-
-
 var flash = require('express-flash');
 
 const MongoStore = require('connect-mongo')(session);
@@ -15,8 +13,10 @@ var app = express();
 app.locals.moment = require('moment');
 require('./lib/connectMongoose');
 
-  
-
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const redis = require('socket.io-redis');
+io.adapter(redis({ host: 'localhost', port: 6379 }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,8 +42,7 @@ app.locals.getLocales = i18n.getLocales();
 const Article = require('./models/article');
 app.locals.categories = Article.allowedCategories();
 
-// Use session
-app.use(session({
+const sessionMware = session({
   name: "session-devrock",
   secret: 'thisisnotasecret',
   resave: false,
@@ -53,7 +52,19 @@ app.use(session({
     // conectar a la base de datos para guardar la session allí
     url: "mongodb://localhost:27017/welldone"
   })
-}));
+});
+
+// Use session
+app.use(sessionMware);
+
+io.use(function (socket, next) {
+  sessionMware(socket.request, socket.request.res, next);
+});
+
+io.on('connection', function(socket){
+  socket.emit('Hola', 'Holaaaa');
+  socket.on('disconnect', () => console.log('User disconnected'))
+});
 
 app.use(flash());
 
@@ -81,8 +92,11 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  console.log(err);
+  //console.log(err);
   res.json('error');
 });
 
-module.exports = app;
+module.exports = {
+  app,
+  server
+};

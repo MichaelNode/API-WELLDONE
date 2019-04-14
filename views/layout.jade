@@ -60,3 +60,8 @@ html
     if showFooter
       footer
         include ./partials/footer.jade
+
+    script(src="/socket.io/socket.io.js")
+    script.
+      var socket = io();
+      socket.on('Hola', (data) => console.log(data));
