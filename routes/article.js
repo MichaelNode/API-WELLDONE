@@ -19,8 +19,7 @@ router.get('/:user/:articleSlug/:page?', async function (req, res, next) {
     try {
         const id = Article.getIdFromSlug(req.params.articleSlug);
         const article = await Article.findOne({_id: id, state: true, publi_date: {$lt: new Date()}}).populate('author', '_id image nick_name');
-        const userId = req.session.user;
-        io.emit('Hola', 'Probando desde article');
+        const user = req.session.user;
         // if article not exists, return 404
         if(!article){
             next(createError(404));
@@ -28,7 +27,7 @@ router.get('/:user/:articleSlug/:page?', async function (req, res, next) {
         }
 
         // render article detail
-        await renderArticleDetail(req, res, article, userId);
+        await renderArticleDetail(req, res, article, user);
 
     } catch(err){
         next(err);
@@ -62,6 +61,12 @@ router.post('/:user/:articleSlug/:page?', userAuth(), commentValidator, async fu
         comment.user = req.user;
         comment.article = article._id;
         await comment.save();
+
+        const user = req.user;
+        // TODO: HACER ESTO
+        // user.followers.forEach(follower => {
+        //     io.to(follower._id).emit('Hola', 'Probando desde article');
+        // });
 
         // render article detail
         return res.redirect(`/article/${article.author.nick_name}/${article.getSlug()}`)

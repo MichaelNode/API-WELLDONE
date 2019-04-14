@@ -62,8 +62,11 @@ io.use(function (socket, next) {
 });
 
 io.on('connection', function(socket){
-  socket.emit('Hola', 'Holaaaa');
-  socket.on('disconnect', () => console.log('User disconnected'))
+  socket.on('disconnect', () => console.log('User disconnected'));
+  const user = socket.request.session.user;
+  if(user) {
+    socket.join(user._id); // Add user in a room with his id
+  }
 });
 
 app.use(flash());
@@ -98,5 +101,6 @@ app.use(function(err, req, res, next) {
 
 module.exports = {
   app,
-  server
+  server,
+  io
 };
