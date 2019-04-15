@@ -5,7 +5,6 @@ const {jwtAuth} = require('../../lib/jwtAuth');
 
 router.delete('/', jwtAuth(), async (req, res, next) => {
 
-
         try {
             const userId = req.user;
             await Users.findOne({_id: userId}, function (err, user){

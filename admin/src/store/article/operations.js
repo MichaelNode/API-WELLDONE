@@ -74,6 +74,7 @@ export const EditArticle = (title,file,summary,content,state,category,publi_date
     }
 
     return async function (dispatch) {
+        
         try {
             const url_api = apiRoutes.article_edit + id
             await asyncFetch(url_api , 'PUT',  fd, headers);
@@ -87,10 +88,13 @@ export const EditArticle = (title,file,summary,content,state,category,publi_date
     }
 }
 
-export const deleteArticle = (id) => {
+export const deleteArticle = (id, token) => {
     return async function (dispatch){
         try {
-            await asyncFetch(apiRoutes.article_delete, 'DELETE')
+            const body = {
+                token: token
+            }
+            await asyncFetch(apiRoutes.article_delete, 'DELETE', JSON.stringify(body), dispatch(actions.hideModal()))
     
         } catch (error) {
             console.log('hubo un error al borrar el artículo', error)

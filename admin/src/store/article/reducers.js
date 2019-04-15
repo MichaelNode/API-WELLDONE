@@ -8,7 +8,8 @@ const initialState = {
     token: token,
     showform: false,
     updateAccount : false,
-    message: ''
+    message: '',
+    show_modal: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +20,10 @@ const reducer = (state = initialState, action) => {
         return {...state, message: action.payload}
     case types.SUCCESS_MESSAGE_EDIT:
         return {...state, message: action.payload}
+    case types.SHOW_ARTCILE_MODAL:
+        return {...state, show_modal: true }
+    case types.HIDE_ARTCILE_MODAL:
+        return {...state, show_modal: false }
     default:
         return state;
     }

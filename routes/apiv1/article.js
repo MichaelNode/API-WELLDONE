@@ -218,10 +218,22 @@ router.get('/favourites', async (req, res, next) => {
 	}
   });
 
-router.delete('/deleteArticle', async (req, res, next) => {
+router.delete('/deleteArticle', jwtAuth(), async (req, res, next) => {
+	const userId = req.user
 	try{
-		await Article.deleteOne({_id: "5cacd7e195bdc40d533beefb"})
-		console.log('artículo borrado')
+		await Article.findOne({_id: "5cacd7e195bdc40d533beefc"}, function (err, doc) {
+			if (err){
+				console.log('hubo un error al borrar el artículo', err)
+				return
+			}
+			if (userId != doc.author){
+				console.log('You don´t have permission to perform this action')
+				return
+			} else {
+				doc.remove();
+			}
+			console.log('artículo borrado')
+		})
 	} catch (error) {
 		console.log('no se pudo borrar el artículo')
 	}
