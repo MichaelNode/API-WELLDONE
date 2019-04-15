@@ -42,9 +42,9 @@ block content
 
 
                 .small
-                    a(href='https://www.facebook.com/sharer/sharer.php?u=#{requested_url}')
+                    a(href='https://www.facebook.com/sharer/sharer.php?u=#{requested_url}' target="_blank")
                         i.mx-2.fa-facebook-square.fa-2x.fab
-                    a(href='http://twitter.com/share?text=#{article.title}&url=#{requested_url}' aria-label="Twitter")
+                    a(href='http://twitter.com/share?text=#{article.title}&url=#{requested_url}' target="_blank" aria-label="Twitter")
                         i.mx-2.fa-twitter.fa-2x.fab
                     if isLogged
                         i.mx-2.fa-bookmark.fa-2x.fav(data-article=article._id, class=bookmark)

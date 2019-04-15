@@ -227,7 +227,7 @@ router.delete('/deleteArticle', jwtAuth(), async (req, res, next) => {
 				return
 			}
 			if (userId != doc.author){
-				console.log('You don´t have permission to perform this action')
+				console.log('No tienes permiso para realizar esta acción')
 				return
 			} else {
 				doc.remove();
