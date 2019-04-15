@@ -12,5 +12,6 @@ export default {
     favourites: `${API_BASE}/article/favourites`,
     articles: `${APP_BASE}/article`,
     article_edit: `${API_BASE}/article/editarticle/`,
-    article_me: `${API_BASE}/article/me`
+    article_me: `${API_BASE}/article/me`,
+    article_delete: `${API_BASE}/article/deleteArticle/`
 };

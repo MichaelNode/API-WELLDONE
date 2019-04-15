@@ -42,6 +42,8 @@ export const translations = {
         "Edit Article":'Edit Article',
         "Article_Add": 'Saved article',
         "Article_Updated": 'Updated article',
+        "Delete_Article": "Delete Article",
+        "Confirm delete article": "Do you want to delete the article?"
     },
     es: {
         "Email": "Email",
@@ -86,5 +88,7 @@ export const translations = {
         "Edit Article":'Editar Artículo',
         "Article_Add": 'Artículo guardado',
         "Article_Updated": 'Artículo actualizado',
+        "Delete_Article": "Borrar Artículo",
+        "Confirm delete article": "¿Quieres borrar el artículo?"
     }
 };

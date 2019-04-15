@@ -226,5 +226,28 @@ router.get('/me', jwtAuth(), async (req, res, next) => {
 	const {articles, pagination} = await filter(req, res,{author: userId});
 	res.json({articles: articles, pagination: pagination});
 });
+router.delete('/deleteArticle', jwtAuth(), async (req, res, next) => {
+	const userId = req.user
+	const artId = req.body.id
+	try{
+		await Article.findOne({_id: artId}, function (err, doc) {
+			if (err){
+				console.log('hubo un error al borrar el artículo', err)
+				return
+			}
+			if (userId != doc.author){
+				console.log('No tienes permiso para realizar esta acción')
+				return
+			} else {
+				doc.remove();
+			}
+			console.log('artículo borrado')
+		})
+	} catch (error) {
+		console.log('no se pudo borrar el artículo')
+	}
+})
+
+
 
 module.exports = router;

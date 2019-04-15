@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import {Row, Col} from 'react-bootstrap'
+import DeleteArticle from '../deleteArticle/deleteArticle';
 
 const Article = (props, context) => {
   const {title, summary, _id, file_name, state} = props.article;
@@ -21,7 +22,7 @@ const Article = (props, context) => {
         </Col>
         <Col xs={3} md={2} lg={1}>
           <button>{context.t('Edit')}</button>
-          <button>{context.t('Remove')}</button>
+          <DeleteArticle id={_id}/>
         </Col>
       </Row>
   );

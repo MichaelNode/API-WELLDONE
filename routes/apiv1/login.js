@@ -87,7 +87,7 @@ router.put('/', uploadConfig.single('userImage'), async (req, res, next) => {
                 return
             } 
             try {
-                const filename = req.file != null ? path.basename(req.file.path) : req.session.user.image
+                const filename = req.file != null ? path.basename(req.file.path) : user.image
                 await Users.updateOne({_id: userId}, {
                     name: req.body.userName,
                     last_name: req.body.userLastName,
