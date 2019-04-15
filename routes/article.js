@@ -9,6 +9,7 @@ const createError = require('http-errors');
 const {renderArticleDetail, commentValidator} = require('../lib/articleService');
 const { validationResult } = require('express-validator/check');
 const {userAuth} = require('../lib/jwtAuth');
+var io = require('socket.io-emitter')({ host: 'localhost', port: 6379 });
 
 /**
  *  GET article.
@@ -19,7 +20,7 @@ router.get('/:user/:articleSlug/:page?', async function (req, res, next) {
         const id = Article.getIdFromSlug(req.params.articleSlug);
         const article = await Article.findOne({_id: id, state: true, publi_date: {$lt: new Date()}}).populate('author', '_id image nick_name');
         const userId = req.session.user;
-
+        io.emit('Hola','probando') 
         // if article not exists, return 404
         if(!article){
             next(createError(404));
