@@ -51,45 +51,43 @@ class ArticleForm extends Component {
     };
   }
 
- 
   async  componentDidMount() {
     if(this.props.type=='EDIT'){
-        let id = this.props.id;
-        console.log(id)
-        const data = await fetch(apiRoutes.article_edit + id)
+      let id = this.props.id;
+      const data = await fetch(apiRoutes.article_edit + id)
         .then(result => {
            return result.json();
         }).then(data => {
             if(data.result){
-                const article = data.result
-                const blocksFromHTML = convertFromHTML(article.content)
-                const content = ContentState.createFromBlockArray(blocksFromHTML)
-                var datePublic = null
-            
-                    if(article.publi_date){
-                    datePublic = new Date(article.publi_date) 
-                    } else {
-                        datePublic = null
-                        }
-                        if (article) {
-                            this.setState({
-                                title:   article.title,
-                                summary: article.summary,
-                                content: article.content,
-                                state: article.state,
-                                category: article.category,
-                                publi_date: datePublic ,
-                                url: article.url,
-                                file_name: article.file_name,
-                                file_type: article.file_type,
-                                id: article._id,
-                                editorState :  EditorState.createWithContent(content),
-                                file: article.file_name
-                            }) 
-                        }}
-                    }) 
+              const article = data.result
+              const blocksFromHTML = convertFromHTML(article.content)
+              const content = ContentState.createFromBlockArray(blocksFromHTML)
+              var datePublic = null
+              if(article.publi_date){
+                datePublic = new Date(article.publi_date) 
+              }else {
+                datePublic = null
+              }
+              if(article) {
+                this.setState({
+                  title:   article.title,
+                  summary: article.summary,
+                  content: article.content,
+                  state: article.state,
+                  category: article.category,
+                  publi_date: datePublic ,
+                  url: article.url,
+                  file_name: article.file_name,
+                  file_type: article.file_type,
+                  id: article._id,
+                  editorState :  EditorState.createWithContent(content),
+                  file: article.file_name
+                }) 
+              }
+            }
+        }) 
     }
-    }
+  }
 
   validate = () => {
     let titleError = ''
@@ -103,29 +101,30 @@ class ArticleForm extends Component {
     let editorStateError= ''
     let datenow = null
     let datepubli = null
+    let date_fin = null
     const fileMaxSize = 15 * 1000 * 1000; // 15MB
 
     if(this.state.title == '') {
-      titleError = 'Title required'
+      titleError = this.context.t('Title required')
     } else if (!this.state.title == ''){ 
       this.setState({ titleError: ''})
     }
 
     if(this.props.type=='ADD'){
         if(this.state.ask_file == null ) {
-        ask_fileError = 'required'
+        ask_fileError = this.context.t('required') 
         } else if (!this.state.ask_file == ''){ 
         this.setState({ ask_fileError: ''})
         }
 
         if(this.state.ask_file == 'imagen' && !this.state.file) {
-            fileError = 'Image is required'
+            fileError = this.context.t('Image is required') 
         } else if (!this.state.ask_file == 'imagen' && this.state.file){ 
             this.setState({ fileError: ''})
         }
 
         if(this.state.ask_file == 'video' && !this.state.url) {
-            urlError = 'URL is required'
+            urlError = this.context.t('URL is required')  
         } else if (this.state.ask_file == 'video' && this.state.url){ 
             this.setState({ urlError: ''})
         }
@@ -136,7 +135,7 @@ class ArticleForm extends Component {
               && this.state.url 
               && !(this.state.url.includes('.mp4') 
                 || this.state.url.includes('https://www.youtube.com/'))) {
-                  urlError = 'URL is not valid'
+                  urlError = this.context.t('URL is not valid')   
       
         }  else if (this.state.ask_file == 'video' 
               && this.state.url 
@@ -148,7 +147,7 @@ class ArticleForm extends Component {
 
     if(this.props.type=='EDIT'){
         if(!this.state.file &&  this.state.url == 'undefined') {
-            fileError = 'Image is required'
+            fileError = this.context.t('Image is required')   
         } else if (this.state.file){ 
             this.setState({ fileError: ''})
         }
@@ -156,16 +155,13 @@ class ArticleForm extends Component {
         if(this.state.url 
             && !(this.state.url.includes('.mp4') 
               || this.state.url.includes('https://www.youtube.com/'))) {
-                urlError = 'URL is not valid'
+                urlError = this.context.t('URL is not valid')  
           
         }  else if (  this.state.url 
                 &&  (this.state.url.includes('.mp4') 
                   || this.state.url.includes('https://www.youtube.com/'))){ 
                     this.setState({ urlError: ''})
-        }
-
-            
-
+        }       
     }
 
 
@@ -175,7 +171,7 @@ class ArticleForm extends Component {
           this.state.file.name.includes('.jpg') ||
           this.state.file.name.includes('.jpg') || 
           this.state.file.name.includes('.png'))){
-            fileError = 'Invalid image'
+            fileError = this.context.t('Invalid image')
 
     } else if (this.state.file && 
         this.state.file.name !== undefined && 
@@ -189,7 +185,7 @@ class ArticleForm extends Component {
     if(this.state.file && 
         this.state.file.size > fileMaxSize && 
         this.state.ask_file == 'imagen'){
-        fileError = 'The image must be less than 15 mb'
+        fileError = this.context.t('The image must be less than 15 mb')
 
     } else if (this.state.file && 
         this.state.file.size < fileMaxSize && 
@@ -197,39 +193,37 @@ class ArticleForm extends Component {
           this.setState({ fileError: ''})
     }
     
-   
-  
     if(this.state.publi_date) {
-
-      datepubli = moment(new Date(this.state.publi_date)).format('DD-MM-YYYY');
-      datenow = moment(Date.now()).format('DD-MM-YYYY');
-      if(this.state.state == 'true' && datepubli < datenow) {
-        publi_dateError = "the publication date cannot be less than today's"
-
+      datepubli = new Date( this.state.publi_date ) 
+      datenow = moment(Date()).format('YYYY-MM-DD');
+      date_fin = new Date(datenow + ' 00:00:00')
+      if(( this.state.state == 'true'|| this.state.state == true) && 
+        datepubli <= (new Date(date_fin.setDate(date_fin.getDate()-1)))) {
+          publi_dateError = this.context.t("the publication date cannot be less than today's")
       } else { 
         this.setState({ publi_dateError: ''})
       }
     }
-    
-    if(this.state.state == 'true' && this.state.publi_date === null) {
-      publi_dateError = "the publication date is required"
 
-    } else if (this.state.state == 'true' && !this.state.publi_date === null){ 
-      this.setState({ publi_dateError: ''})
+    if(( this.state.state == 'true'|| this.state.state == true) && 
+      this.state.publi_date === null) {
+        publi_dateError = this.context.t("the publication date is required")
+
+    } else if (( this.state.state == 'true'|| this.state.state == true) && 
+      !this.state.publi_date === null){ 
+        this.setState({ publi_dateError: ''})
     }
 
     if( this.state.state == null ||
         this.state.state == 'Escoge...' ||
         this.state.state == 'Choose..' ) {
-        stateError = 'State required'
+        stateError = this.context.t('State required')
       } else if (!this.state.state == ''){ 
         this.setState({ stateError: ''})
       }
 
-    
-
     if(this.state.summary == '') {
-      summaryError = 'Summary required'
+      summaryError = this.context.t('Summary required')
     } else if (!this.state.summary == ''){ 
       this.setState({ summaryError: ''})
     }
@@ -237,16 +231,14 @@ class ArticleForm extends Component {
     if(this.state.category == '' ||
         this.state.category == 'Escoge...' ||
         this.state.category == 'Choose..') {
-      categoryError = 'Category required'
+      categoryError = this.context.t('Category required')
     } else if (!this.state.category == ''){ 
       this.setState({ categoryError: ''})
     }
 
-   
-    
     if(!convertToRaw(
         this.state.editorState.getCurrentContent()).blocks[0].text){
-          editorStateError = "Content required"
+          editorStateError = this.context.t("Content required")
 
     } else if (convertToRaw(
         this.state.editorState.getCurrentContent()).blocks[0].text){ 
@@ -258,9 +250,7 @@ class ArticleForm extends Component {
         ask_fileError || stateError || 
         publi_dateError || 
         fileError|| urlError) {
-         
           this.setState({
-          
             titleError: titleError,
             summaryError: summaryError,
             stateError: stateError,
@@ -270,7 +260,6 @@ class ArticleForm extends Component {
             editorStateError: editorStateError,
             urlError: urlError,
             ask_fileError:  ask_fileError
-          
           })
           return false;
     }
@@ -294,11 +283,9 @@ class ArticleForm extends Component {
     if(this.props.type=='EDIT'){
         if(( this.state.url && this.state.url.length > 0)  ){
             this.setState({ file: null})
-        }
-      
+        } 
     }
    
-  
    if(evt.target.name == 'url'){
       if(evt.target.value.includes('.mp4')){
         this.setState({
@@ -319,7 +306,6 @@ class ArticleForm extends Component {
             })
           }
     }
-
     this.setState(handleInputChange(evt));
   };
 
@@ -329,7 +315,6 @@ class ArticleForm extends Component {
   onChangeDate = date => this.setState({ publi_date:date })
 
   onChange = (event) => {
-      console.log(event.target.files[0])
     if(event.target.files[0])
     {
       if( event.target.files[0].name.includes('.jpg') ||
@@ -340,6 +325,7 @@ class ArticleForm extends Component {
           } else {
             this.setState({showCard: false})
           }
+      this.setState({url:''});
       this.setState({file:event.target.files[0]});
       var reader = new FileReader();
       var url = reader.readAsDataURL(event.target.files[0]);
@@ -390,7 +376,7 @@ class ArticleForm extends Component {
                 idUser,
                 this.state.id
               )  
-        }
+          }
         }
     };
 
@@ -399,12 +385,17 @@ class ArticleForm extends Component {
       <>
       <Form.Row>
         <Card as={Col}  md="4"  className="text-center card-main">
-          <Card.Header>{this.context.t("New Article")}</Card.Header>
+          { this.props.type == 'ADD' && (
+            <Card.Header>{this.props.title}</Card.Header>
+          )}
+          { this.props.type == 'EDIT' && (
+            <Card.Header>{this.props.title} : {this.state.title}</Card.Header>
+          )}
           <Card.Body> 
             <Form onSubmit={this.handleSubmit } noValidate encType="multipart/form-data"  >
               <Form.Row>
                 <Form.Group as={Col}  md="6" controlId="title">
-                  <Form.Label className="label"  ><span>{this.context.t("Title")}</span></Form.Label>
+                  <Form.Label className="label"><span>{this.context.t("Title")}</span></Form.Label>
                   { this.state.titleError ?(
                        <div className="errorValidation">{this.state.titleError}</div>
                   ): null}
@@ -421,6 +412,39 @@ class ArticleForm extends Component {
                   value={this.state.category}
                   categoryError={this.state.categoryError}
                 />
+                 <Form.Group as={Col} md="12" controlId="state">
+                    <Form.Label>{this.context.t("State")}</Form.Label>
+                    { this.state.stateError ?(
+                       <div className="errorValidation">{this.state.stateError}</div>
+                    ): null}
+                    <Form.Control
+                      name="state" 
+                      as="select"
+                      onChange={this.handleInputChange}  
+                      value={this.state.state} 
+                    >
+                      <option>{this.context.t("Choose")}</option>
+                      <option value={true} >{this.context.t("Published")}</option>
+                      <option value={false}>{this.context.t("Draft")}</option>
+                    </Form.Control>     
+                </Form.Group>
+                {((this.props.type == 'ADD' && this.state.state === "true") || 
+                  (this.props.type == 'EDIT')) && ( 
+                    <Form.Group as={Col}  md="12">
+                    <Form.Label>{this.context.t("Publication date")}</Form.Label>
+                    { this.state.publi_dateError ?(
+                          <div className="errorValidation">{this.state.publi_dateError}</div>
+                      ): null}
+                      <DatePicker
+                        className="form-control"
+                        name="publi_date"
+                        onChange={this.onChangeDate}
+                        value={this.state.publi_date}
+                        required
+                      />
+                    </Form.Group>
+                )}
+
                 <Form.Group as={Col}  md="12" controlId="summary">
                   <Form.Label>{this.context.t("Summary")}</Form.Label>
                   { this.state.summaryError ?(
@@ -438,38 +462,6 @@ class ArticleForm extends Component {
                 
               </Form.Row>
               <Form.Row>
-                <Form.Group as={Col} md="6" controlId="state">
-                    <Form.Label>{this.context.t("State")}</Form.Label>
-                    { this.state.stateError ?(
-                       <div className="errorValidation">{this.state.stateError}</div>
-                    ): null}
-                    <Form.Control
-                      name="state" 
-                      as="select"
-                      onChange={this.handleInputChange}  
-                      value={this.state.state} 
-                    >
-                      <option>{this.context.t("Choose")}</option>
-                      <option value={true} >{this.context.t("Published")}</option>
-                      <option value={false}>{this.context.t("Draft")}</option>
-                    </Form.Control>     
-                </Form.Group>
-              {((this.props.type == 'ADD' && this.state.state === "true") || (this.props.type == 'EDIT')) && ( 
-                <Form.Group as={Col}  md="6">
-                <Form.Label>{this.context.t("Publication date")}</Form.Label>
-                { this.state.publi_dateError ?(
-                       <div className="errorValidation">{this.state.publi_dateError}</div>
-                  ): null}
-                  <DatePicker
-                    className="form-control"
-                    name="publi_date"
-                    onChange={this.onChangeDate}
-                    value={this.state.publi_date}
-                    required
-                  />
-                </Form.Group>
-              )}
-
                 <FileComponent 
                   ask_fileError={this.state.ask_fileError}
                   fileError={this.state.fileError}
@@ -486,7 +478,6 @@ class ArticleForm extends Component {
                   handleInputChange={this.handleInputChange}
                   type={this.props.type}
                />
-
             { this.props.message && ( 
               <Form.Group as={Col}  md="12" >
                 <Alert   md="12" variant= 'success'>
@@ -495,7 +486,7 @@ class ArticleForm extends Component {
               </Form.Group>
             )}
               <Button className="button-send" variant="primary" type="submit">
-                  {this.context.t("Submit")}  
+                  {this.context.t("Save")}  
               </Button>
               </Form.Row> 
             </Form>
@@ -531,7 +522,17 @@ class ArticleForm extends Component {
 
   const mapDispatchToProps = dispatch => {
     return {
-      addArticle: (title,file,summary,content,state,category,publi_date,url,token, userId,id) => {
+      addArticle: (
+        title,
+        file,
+        summary,
+        content,
+        state,
+        category,
+        publi_date,
+        url,token, 
+        userId,
+        id) => {
           dispatch(articleOperations.addArticle(
             title,
             file,
@@ -546,21 +547,32 @@ class ArticleForm extends Component {
             id
           ));
       },
-      EditArticle: (title,file,summary,content,state,category,publi_date,url,token, userId, id) => {
-        dispatch(articleOperations.EditArticle(
-          title,
-          file,
-          summary,
-          content,
-          state,
-          category,
-          publi_date,
-          url,
-          token,
-          userId,
-          id
-        ));
-    }
+      EditArticle: (
+        title,
+        file,
+        summary,
+        content,
+        state,
+        category,
+        publi_date,
+        url,
+        token, 
+        userId, 
+        id) => {
+          dispatch(articleOperations.EditArticle(
+            title,
+            file,
+            summary,
+            content,
+            state,
+            category,
+            publi_date,
+            url,
+            token,
+            userId,
+            id
+          ));
+      } 
     };
   };
 
