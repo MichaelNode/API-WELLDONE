@@ -15,11 +15,11 @@ const rootReducer = combineReducers({
   i18nState
 });
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 
 const store = createStore(
     rootReducer,
-    applyMiddleware(thunk, checkTokenExpirationMiddleware),
+    composeEnhancers(applyMiddleware(thunk, checkTokenExpirationMiddleware)),
 );
 
 export default store;

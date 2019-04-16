@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {articleUtils} from "../../../store/article";
 import Article from './Article';
 import {Row} from 'react-bootstrap';
+import * as types from '../../../store/article/types';
 
 const ArticleList = (props) => {
   const [error, setError] = useState('');
@@ -20,11 +21,12 @@ const ArticleList = (props) => {
       setError(err);
     }
     setLoading(false);
+    props.articlesLoaded()
   };
 
   useEffect(() => {
     fetchArticles();
-  }, []);
+  }, [props.getArticles]);
 
   return(
       <Row>
@@ -39,6 +41,17 @@ const ArticleList = (props) => {
 const mapStateToProps = state => ({
   articles: state.article.userArticles,
   token: state.user.token,
+  getArticles: state.article.getArticles
 });
 
-export default connect(mapStateToProps)(ArticleList)
+const mapDispatchToProps = dispatch => {
+  return {
+    articlesLoaded: () => {
+        dispatch({
+          type: types.ARTICLES_LOADED
+        });
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleList)

@@ -12,6 +12,7 @@ class DeleteArticle extends Component {
     }
   delete = () => {
     this.props.deleteArticle(this.props.id, this.props.token);
+    this.props.hideModal()
   };
 
   render() {

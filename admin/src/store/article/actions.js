@@ -39,3 +39,14 @@ export const hideModal = () =>{
     }
   };
 
+  export const getArticles = () =>{
+    return {
+      type: types.GET_ARTICLES
+    }
+  };
+
+  export const articlesLoaded = () =>{
+    return {
+      type: types.ARTICLES_LOADED
+    }
+  };

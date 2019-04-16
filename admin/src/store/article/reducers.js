@@ -9,7 +9,8 @@ const initialState = {
     showform: false,
     updateAccount : false,
     message: '',
-    show_modal: false
+    show_modal: false,
+    getArticles: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,6 +25,11 @@ const reducer = (state = initialState, action) => {
         return {...state, show_modal: true }
     case types.HIDE_ARTCILE_MODAL:
         return {...state, show_modal: false }
+    case types.GET_ARTICLES:
+        return {...state, getArticles: true }
+    case types.ARTICLES_LOADED:
+        return {...state, getArticles: false }
+        ARTICLES_LOADED
     default:
         return state;
     }

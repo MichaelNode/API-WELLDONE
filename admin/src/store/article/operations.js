@@ -95,7 +95,7 @@ export const deleteArticle = (id, token) => {
                 token: token,
                 id: id
             }
-            await asyncFetch(apiRoutes.article_delete, 'DELETE', JSON.stringify(body), dispatch(actions.hideModal()))
+            await asyncFetch(apiRoutes.article_delete, 'DELETE', JSON.stringify(body), dispatch(actions.getArticles()))
     
         } catch (error) {
             console.log('hubo un error al borrar el artículo', error)
