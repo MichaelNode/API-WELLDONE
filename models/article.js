@@ -93,6 +93,7 @@ ArticleSchema.statics.list = async function (filters, sort, pages, perPage) {
 
     for (const article of articlesArr) {
         article.numComments = await article.getCommentsCount();
+        article.shortDescription = article.getShortDescription();
         articles.push(article);
     }
     return articles;

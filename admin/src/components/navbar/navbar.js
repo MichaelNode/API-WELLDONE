@@ -17,7 +17,7 @@ export default class MainNavbar extends Component {
     render(){
         return (
           <>
-          <Navbar bg="light" variant="light">
+          <Navbar bg="white" variant="light">
             <Nav className="mr-auto">
             </Nav>
             <Form inline>

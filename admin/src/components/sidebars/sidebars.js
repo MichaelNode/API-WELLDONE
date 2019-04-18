@@ -24,6 +24,7 @@ import './styles.css'
 
 class sideBars extends Component {
   render() {
+    const path = this.props.location.pathname.slice(1).replace('admin/', '');
     return (
 
         <div>
@@ -87,7 +88,13 @@ class sideBars extends Component {
                   <Switch>
                     <Form.Row className="w-100">
                       <Form.Group className="div_main" as={Col} md="12">
+                        {
+                          // Section title
+                          path !== 'admin' &&
+                          <h1 className='text-capitalize mb-3 mb-lg-5 mt-2'>{this.context.t(path)}</h1>
+                        }
 
+                        {/* ROUTES */}
                         <Route exact path="/admin/logout" component={InstantLogout}/>
                         <Route exact path="/admin/update" component={UpdateUserForm}/>
                         <Route exact path="/admin/add_article/:id?" component={AddArticleForm}/>

@@ -43,7 +43,13 @@ export const translations = {
         "Article_Add": 'Saved article',
         "Article_Updated": 'Updated article',
         "Delete_Article": "Delete Article",
-        "Confirm delete article": "Do you want to delete the article?"
+        "Confirm delete article": "Do you want to delete the article?",
+        "articles": "Articles",
+        "add_article": "Add Article",
+        "favorites": "Favorites",
+        "Image": "Image",
+        "Action": "Action",
+        "My articles": "My Articles"
     },
     es: {
         "Email": "Email",
@@ -89,6 +95,12 @@ export const translations = {
         "Article_Add": 'Artículo guardado',
         "Article_Updated": 'Artículo actualizado',
         "Delete_Article": "Borrar Artículo",
-        "Confirm delete article": "¿Quieres borrar el artículo?"
+        "Confirm delete article": "¿Quieres borrar el artículo?",
+        "articles": "Artículos",
+        "add_article": "Añadir Artículo",
+        "favorites": "Favoritos",
+        "Image": "Imagen",
+        "Action": "Acción",
+        "My articles": "Mis Artículos"
     }
 };
