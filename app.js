@@ -6,26 +6,38 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-
-
 var flash = require('express-flash');
-
+const toastr = require('express-toastr');
 const MongoStore = require('connect-mongo')(session);
 var app = express();
 app.locals.moment = require('moment');
 require('./lib/connectMongoose');
 
+
+//const {Socket} = require('./lib/socket');
+
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const redis = require('socket.io-redis');
+
+
+const sessionMware = session({
+  name: "session-devrock",
+  secret: 'thisisnotasecret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true},
+  store: new MongoStore({
+    // conectar a la base de datos para guardar la session allí
+    url: "mongodb://localhost:27017/welldone"
+  })
+});
+
+// Use session
+app.use(sessionMware);
+
+
 io.adapter(redis({ host: 'localhost', port: 6379 }));
-
-
-
-
-
-
-
 
 
 // view engine setup
@@ -52,32 +64,36 @@ app.locals.getLocales = i18n.getLocales();
 const Article = require('./models/article');
 app.locals.categories = Article.allowedCategories();
 
-const sessionMware = session({
-  name: "session-devrock",
-  secret: 'thisisnotasecret',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true},
-  store: new MongoStore({
-    // conectar a la base de datos para guardar la session allí
-    url: "mongodb://localhost:27017/welldone"
-  })
-});
 
-// Use session
-app.use(sessionMware);
 
-io.use(function (socket, next) {
-  sessionMware(socket.request, socket.request.res, next);
-});
+
+ io.use(function (socket, next) {
+   sessionMware(socket.request, socket.request.res, next);
+ });
+
+
 
 io.on('connection', function(socket){
-  socket.emit('Hola', 'Holaaaa');
-  socket.on('disconnect', () => console.log('User disconnected'))
-});
+  //console.log(socket.adapter.rooms)
+  //socket.emit('Hola', 'Holaaaa');
+  console.log('a user connected');
+  console.log(socket.conn.Server)
+
+ 
+  //console.log(io.sockets.sockets)
+ 
+
+
+ /*  socket.on('chat message', function(msg){
+    console.log('message: ' + msg);
+  }); */
+  //socket.on('login', (data) =>  {console.log(data)})
+})
+
 
 
 app.use(flash());
+app.use(toastr());
 
 // Helper middleware for get if user is auth
 app.use(async (req, res, next) => {
@@ -97,19 +113,22 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
    console.log(err);
   res.json('error');
 });
 
+
 module.exports = {
   app,
-  server
+  server,
+  io
 };
