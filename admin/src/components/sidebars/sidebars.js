@@ -4,7 +4,7 @@ import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText} from '@trendmicro/react
 import {connect} from "react-redux";
 import {Icon} from 'react-fa'
 import {Route, Switch} from "react-router-dom";
-
+import socketIOClient from "socket.io-client";
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import MainNavbar from '../navbar/navbar'
@@ -23,6 +23,23 @@ import CardUser from '../usercard/usercard'
 import './styles.css'
 
 class sideBars extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      response: false,
+      endpoint: "http://127.0.0.1:3002"
+    };
+  }
+
+  componentDidMount() {
+    const { endpoint } = this.state;
+    const socket = socketIOClient(endpoint);
+   
+    socket.on('res', function(data){
+      console.log('entrooo', data)
+    });
+  }
 
   toggleMain() {
     const main = document.querySelector('#div_main');
