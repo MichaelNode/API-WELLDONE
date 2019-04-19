@@ -25,7 +25,7 @@ router.get('/:user/:articleSlug/:page?', async function (req, res, next) {
             next(createError(404));
             return;
         }
-        sendToRoom('test', 'Hola', 'Adioooos');
+        //sendToRoom('test', 'Hola', 'Adioooos');
         // render article detail
         await renderArticleDetail(req, res, article, user);
 
