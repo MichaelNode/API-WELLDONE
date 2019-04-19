@@ -7,8 +7,7 @@ const Comment = require('./comment');
 
 var ArticleSchema = Schema({
     title: {
-        type: String,
-        index: true
+        type: String
 
     },
     file: String,

@@ -23,6 +23,7 @@ router.post('/login', upload.any(), async (req, res, next) => {
             return;
         }
 
+       
         // get jwt token from this user
         jwt.sign({_id: user.id}, process.env.JWT_SECRET, {
             expiresIn: '1d'
@@ -45,6 +46,8 @@ router.post('/login', upload.any(), async (req, res, next) => {
                 favArticles: user.favArticles,
                 image: user.image
             };
+
+            
             // return token with a success response
             res.json({'success': true, token: token, user: req.session.user});
         });

@@ -8,6 +8,7 @@ const {validation, filter} = require('../../lib/articleService');
 const path = require("path");
 const {jwtAuth} = require('../../lib/jwtAuth');
 var fs = require('fs');
+const { ioEmitter } = require('../../lib/socket');
 
 
 router.post('/addarticle/:id?' , upload.single('file'),  validation, async(req, res, next) => {
