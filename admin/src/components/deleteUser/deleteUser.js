@@ -15,7 +15,7 @@ class DeleteUser extends Component {
   render() {
     return (
       <>
-        <span className="nav-link" onClick={this.props.showModal}>
+        <span className="nav-link px-0" onClick={this.props.showModal}>
           {this.context.t("Delete_User")}
         </span>
 

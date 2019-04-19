@@ -7,10 +7,10 @@ import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
 import {Link} from "react-router-dom";
 
-const Article = (props, context) => {
+const Article = (props) => {
   const {title, shortDescription, _id, file_name, state} = props.article;
   return (
-      <Row className="align-items-center mt-2" as={Col} xs={12}>
+      <Row className="align-items-center mt-2 px-0" as={Col} xs={12}>
         <Col xs={6} md={6} lg={3}>
           <Paragraph>{title}</Paragraph>
         </Col>
@@ -18,13 +18,13 @@ const Article = (props, context) => {
           <Paragraph>{shortDescription}</Paragraph>
         </Col>
         <Col xs={3} md={2} lg={1}>
-          <Paragraph>{state ? context.t('Published') : context.t('Draft')}</Paragraph>
+          <Paragraph className={`check-icon text-${state ? 'success' : 'danger' }`}><i className={`fa fa-fw fa-${state ? 'check' : 'times' }`}/></Paragraph>
         </Col>
         <Col className='d-none d-md-block' md={2} xl={1}>
           <Image src={`/images/uploads/${file_name}`} alt={title}/>
         </Col>
-        <Col xs={3} md={2}>
-          <Button className='icon-button'><Link to={`/admin/edit_article/${_id}`}><i className="text-white fa fa-fw fa-pencil"/></Link></Button>
+        <Col xs={3} md={2} className='pr-0'>
+          <Button className='icon-button'><Link to={`/admin/edit_article/${_id}`}><i className="fa fa-fw fa-pencil"/></Link></Button>
           <DeleteArticle id={_id}/>
         </Col>
       </Row>

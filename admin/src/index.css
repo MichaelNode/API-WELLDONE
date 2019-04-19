@@ -21,6 +21,7 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -47,6 +48,36 @@ img {
 }
 
 .icon-button {
-    padding: .2rem .4rem;
+    padding: 0;
     margin: 0 .1rem;
+    border: none;
+    background-color: transparent;
+}
+
+.icon-button i {
+    color: var(--gray-dark);
+}
+
+.check-icon {
+    font-size: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+    .icon-button {
+        padding: .2rem .4rem;
+    }
+
+    .icon-button.btn-primary{
+        background-color: var(--primary);
+        border: 1px solid var(--primary);
+    }
+
+    .icon-button.btn-danger{
+        background-color: var(--danger);
+        border: 1px solid var(--danger);
+    }
+
+    .icon-button i {
+        color: var(--white);
+    }
 }

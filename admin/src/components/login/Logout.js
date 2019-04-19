@@ -11,7 +11,7 @@ class Logout extends Component{
 
     render(){
         return(
-            <span className="nav-link" onClick={this.handleLogout}>{this.context.t('Logout')}</span>
+            <span className="nav-link px-0" onClick={this.handleLogout}>{this.context.t('Logout')}</span>
         )
     }
 }

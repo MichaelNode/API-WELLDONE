@@ -6,24 +6,20 @@ import Article from './Article';
 import {Col, Row} from 'react-bootstrap';
 import * as types from '../../../store/article/types';
 import PropTypes from 'prop-types';
-import EditorComponent from "../editor/editorComponent";
 import styled from "styled-components";
 
 const ArticleList = (props, context) => {
   const [error, setError] = useState('');
   const [articles, setArticles] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const fetchArticles = async () => {
     try {
-      setLoading(true);
       // add my articles to the state
       const data = await articleUtils.getMyArticles(props.token);
       setArticles(data.articles);
     } catch (err) {
-      setError(err);
+      setError(context.t('There was an error in the connection to the server'))
     }
-    setLoading(false);
     props.articlesLoaded()
   };
 
@@ -31,9 +27,14 @@ const ArticleList = (props, context) => {
     fetchArticles();
   }, [props.getArticles]);
 
-  return(
-      <Row className='mx-0'>
-        <Row className='pb-2 border-bottom' as={Col} xs={12}>
+  return (
+      <Row className='mx-0 mx-lg-3'>
+        {
+          error &&
+          <p>{error}</p>
+        }
+        {!error &&
+        <Row className='pb-2 border-bottom px-0' as={Col} xs={12}>
           <Col xs={6} md={6} lg={3}>
             <Paragraph>{context.t('Title')}</Paragraph>
           </Col>
@@ -41,7 +42,7 @@ const ArticleList = (props, context) => {
             <Paragraph>{context.t('Summary')}</Paragraph>
           </Col>
           <Col xs={3} md={2} lg={1}>
-            <Paragraph>{context.t('State')}</Paragraph>
+            <Paragraph>{context.t('Published')}</Paragraph>
           </Col>
           <Col className='d-none d-md-block' md={2} xl={1}>
             <Paragraph>{context.t('Image')}</Paragraph>
@@ -50,10 +51,12 @@ const ArticleList = (props, context) => {
             <Paragraph>{context.t('Action')}</Paragraph>
           </Col>
         </Row>
-        {articles && articles.map(article => {
+        }
+        {!error && articles && articles.map(article => {
           return (
-              <Article key={article._id} article={article} />
-          )})}
+              <Article key={article._id} article={article}/>
+          )
+        })}
       </Row>
   );
 };
@@ -76,9 +79,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     articlesLoaded: () => {
-        dispatch({
-          type: types.ARTICLES_LOADED
-        });
+      dispatch({
+        type: types.ARTICLES_LOADED
+      });
     }
   };
 };

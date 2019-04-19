@@ -69,17 +69,19 @@ ArticleSchema.statics.allowedCategories = function () {
  * @param sort
  * @param pages
  * @param perPage
+ * @param stateAll
  * @returns {Promise<Array>}
  */
-ArticleSchema.statics.list = async function (filters, sort, pages, perPage) {
+ArticleSchema.statics.list = async function (filters, sort, pages, perPage, stateAll = false) {
     // add filter for not show articles draft
-    if(!filters.state) {
+    if(!filters.state && !stateAll) {
         filters.state = true;
     }
     // add filter for not show not published articles
-    if(!filters.publi_date){
+    if(!filters.publi_date && !stateAll){
         filters.publi_date = {$lt: new Date()}
     }
+
     const query = Article.find(filters).populate('author', 'name nick_name image');
     query.sort(sort);
     if (pages !== undefined && perPage !== undefined) {
