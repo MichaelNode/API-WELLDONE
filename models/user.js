@@ -52,6 +52,7 @@ var UserSchema = Schema({
         type: Schema.ObjectId,
         ref: 'articles'
     }],
+    socket: String
 });
 
 // function for hash a plain password
