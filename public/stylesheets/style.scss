@@ -257,3 +257,15 @@ hr {
 .bubble{
   animation: bubble .5s ease;
 }
+
+.pencil {
+  visibility: hidden;
+  position: absolute;
+  background-color: black;
+  color: white;
+  padding: 1%;
+}
+
+.pencil:hover {
+  cursor: pointer;
+}

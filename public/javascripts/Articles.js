@@ -1,7 +1,8 @@
 export default class Articles {
     constructor() {
         this.bookmark = document.querySelector('.fav');
-
+        this.content = document.querySelector('.art-content')
+        this.pencil = document.querySelector('.pencil')
     }
 
     eventListeners() {
@@ -33,6 +34,37 @@ export default class Articles {
                     e.target.classList.add("bubble");
                 })
         })
+
+        this.content.addEventListener('mouseup', (e) => {
+
+            let selection = window.getSelection().getRangeAt(0)
+            let { x, y, width } = selection.getBoundingClientRect() 
+            const startNode = selection.startContainer.parentNode
+            const endNode = selection.endContainer.parentNode
+
+            console.log(x, y, width, selection)
+
+            if (!width) {
+                this.pencil.style.visibility = 'hidden'
+                return
+            }
+
+            let ypos = startNode.offsetTop
+
+            this.pencil.style.visibility = 'visible'
+            this.pencil.style.left = x + 'px'
+            this.pencil.style.top = ypos -20 + 'px'
+
+            this.pencil.addEventListener('click', () => {
+                let selectedText = selection.extractContents()
+                let span = document.createElement('span')
+                span.style.backgroundColor = 'yellow'
+                span.appendChild(selectedText)
+                selection.insertNode(span)
+            })
+
+        })
+
 
     }
 
