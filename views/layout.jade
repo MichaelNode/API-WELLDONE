@@ -85,8 +85,8 @@ html(lang=getLocale())
         "hideMethod": "fadeOut"
       }
 
-    socket.on('notification-article', function(msg){
-      toastr.info('<a href="https://medium.com/@carlosazaustre/usando-websockets-con-nodejs-y-socketio-b02f66bcb58d">' + msg + '</a>',' Are you the 6 fingered man')
+    socket.on('notification-article', function(title,msg,url){
+      toastr.info('<a href="'+ url +'">'  + msg + '</a>', title)
     });
     socket.on('follow', (data) => toastr.info(data));
       
