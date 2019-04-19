@@ -18,8 +18,8 @@ class DeleteArticle extends Component {
   render() {
     return (
       <>
-        <Button variant="danger" onClick={this.props.showModal}>
-          {this.context.t("Delete_Article")}
+        <Button className='icon-button' variant="danger" onClick={this.props.showModal}>
+          <i className="fa fa-fw fa-trash"/>
         </Button>
 
         <Modal

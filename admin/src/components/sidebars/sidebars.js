@@ -23,18 +23,25 @@ import CardUser from '../usercard/usercard'
 import './styles.css'
 
 class sideBars extends Component {
+
+  toggleMain() {
+    const main = document.querySelector('#div_main');
+    main.classList.toggle('expanded');
+  }
+
   render() {
+    let path = this.props.location.pathname.slice(1).replace('admin/', '');
+    if(path.includes('edit_article')) path = 'edit_article';
+
     return (
 
-        <div>
+        <div className='position-relative'>
           {this.props.token && !this.props.isLoading &&
           <MainNavbar/>
           }
           {this.props.token && !this.props.isLoading && (
-              <SideNav
-
-              >
-                <SideNav.Toggle/>
+              <SideNav id='sidenav' className='h-100 sidenav'>
+                <SideNav.Toggle onClick={this.toggleMain}/>
                 <SideNav.Nav defaultSelected="home">
                   <NavItem eventKey="home">
                     <NavIcon>
@@ -56,19 +63,25 @@ class sideBars extends Component {
                     <NavItem>
                       <NavText>
                         <Link to='/admin/add_article'>
-                                <span className="nav-link">
+                                <span className="nav-link px-0">
                                     {this.context.t("New_Article")}
                                 </span>
                         </Link>
-
+                      </NavText>
+                    </NavItem>
+                    <NavItem>
+                      <NavText>
                         <Link to='/admin/favorites'>
-                                <span className="nav-link">
+                                <span className="nav-link px-0">
                                     {this.context.t("Favourites")}
                                 </span>
                         </Link>
-
+                      </NavText>
+                    </NavItem>
+                    <NavItem>
+                      <NavText>
                         <Link to='/admin/articles'>
-                                <span className="nav-link">
+                                <span className="nav-link px-0">
                                     {this.context.t("My articles")}
                                 </span>
                         </Link>
@@ -85,9 +98,16 @@ class sideBars extends Component {
             this.props.token && !this.props.isLoading && (
                 <React.Fragment>
                   <Switch>
-                    <Form.Row className="w-100">
-                      <Form.Group className="div_main" as={Col} md="12">
+                    <Form.Row className="w-100 justify-content-end">
+                      <Form.Group id='div_main' className="div_main">
+                        {
 
+                          // Section title
+                          path !== 'admin' &&
+                          <h1 className='text-capitalize mb-3 mb-lg-5 mt-2'>{this.context.t(path)}</h1>
+                        }
+
+                        {/* ROUTES */}
                         <Route exact path="/admin/logout" component={InstantLogout}/>
                         <Route exact path="/admin/update" component={UpdateUserForm}/>
                         <Route exact path="/admin/add_article/:id?" component={AddArticleForm}/>

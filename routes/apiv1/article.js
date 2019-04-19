@@ -223,7 +223,7 @@ router.get('/favourites', async (req, res, next) => {
  */
 router.get('/me', jwtAuth(), async (req, res, next) => {
 	const userId = req.user;
-	const {articles, pagination} = await filter(req, res,{author: userId});
+	const {articles, pagination} = await filter(req, res, {author: userId}, {}, true);
 	res.json({articles: articles, pagination: pagination});
 });
 router.delete('/deleteArticle', jwtAuth(), async (req, res, next) => {

@@ -29,7 +29,6 @@ const reducer = (state = initialState, action) => {
         return {...state, getArticles: true }
     case types.ARTICLES_LOADED:
         return {...state, getArticles: false }
-        ARTICLES_LOADED
     default:
         return state;
     }
