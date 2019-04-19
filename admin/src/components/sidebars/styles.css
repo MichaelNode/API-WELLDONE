@@ -1,9 +1,32 @@
+
 .div_main{
-    padding-left: 6% !important;
-    padding-right: 6%;
+
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
-    letter-spacing: 2px;
     font-weight: 500;
     color: #868686;
+    width: calc(100% - 90px);
+    transition: transform 0.15s;
+}
+
+.div_main.expanded {
+    transform: translateX(180px);
+    transition: transform 0.15s;
+}
+
+.sidenav {
+    min-height: 100vh;
+}
+
+.sidenav a {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+.sidenav a:hover {
+    text-decoration: none;
+}
+
+.sidenav.sidenav---expanded---1KdUL a{
+    color: var(--white);
 }

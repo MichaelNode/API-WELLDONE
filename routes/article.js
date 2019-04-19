@@ -12,7 +12,7 @@ const {userAuth} = require('../lib/jwtAuth');
 const {sendToRoom} = require('../lib/socket');
 const ioEmitter = require('socket.io-emitter')({host: '127.0.0.1', port: 6379});
 const notifier = require('node-notifier');
-var open = require('open');
+
 /**
  *  GET article.
  */
@@ -46,10 +46,9 @@ router.get('/:user/:articleSlug/:page?', async function (req, res, next) {
             }
             
           ); */
-          
-          
-          
+
         sendToRoom('test', 'login', user);
+        //sendToRoom('test', 'Hola', 'Adioooos')
         // render article detail
         await renderArticleDetail(req, res, article, user);
 
@@ -86,13 +85,7 @@ router.post('/:user/:articleSlug/:page?', userAuth(), commentValidator, async fu
         comment.article = article._id;
         await comment.save();
 
-        const user = req.user;
-        // TODO: HACER ESTO
-        // user.followers.forEach(follower => {
-        //     io.to(follower._id).emit('Hola', 'Probando desde article');
-        // });
-
-        // render article detail
+        const user = req.user
         return res.redirect(`/article/${article.author.nick_name}/${article.getSlug()}`)
 
     } catch(err){

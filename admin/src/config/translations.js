@@ -44,7 +44,6 @@ export const translations = {
         "Article_Updated": 'Updated article',
         "Video URL":'Video URL',
         "Preview":'Preview',
-        
         'Title required':'Title required',
         'required': 'Required',
         'Image is required': 'Image is required',
@@ -58,9 +57,16 @@ export const translations = {
         'Summary required': 'Summary required',
         'Category required':  'Category required',
         "Content required": "Content required",
-        "Save":"Save"
-
-
+        "Save":"Save",
+        "Delete_Article": "Delete Article",
+        "Confirm delete article": "Do you want to delete the article?",
+        "articles": "Articles",
+        "add_article": "Add Article",
+        "edit_article": "Edit Article",
+        "favorites": "Favorites",
+        "Image": "Image",
+        "Action": "Action",
+        "My articles": "My Articles"
     },
     es: {
         "Email": "Email",
@@ -108,8 +114,6 @@ export const translations = {
         "Video URL":'Video URL',
         "Preview":'Previsualización',
         "Save":"Guardar",
-
-         
         'Title required':'Título requerido',
         'required': 'Requerido',
         'Image is required':'Se requiere imagen',
@@ -122,6 +126,14 @@ export const translations = {
         'State required': 'Estado requerido',
         'Summary required': 'Resumen requerido',
         'Category required':  'Categoría requerida',
-        "Content required": "Contenido requerido"
-    }
-};
+        "Content required": "Contenido requerido",
+        "Delete_Article": "Borrar Artículo",
+        "Confirm delete article": "¿Quieres borrar el artículo?",
+        "articles": "Artículos",
+        "add_article": "Añadir Artículo",
+        "edit_article": "Editar Artículo",
+        "favorites": "Favoritos",
+        "Image": "Imagen",
+        "Action": "Acción",
+        "My articles": "Mis Artículos"
+}}

@@ -4,10 +4,11 @@ const Article = require('../../models/article');
 const Users = require('../../models/user');
 const upload = require('../../lib/configimage');
 const { check ,validationResult } = require('express-validator/check');
-const {validation} = require('../../lib/articleService');
+const {validation, filter} = require('../../lib/articleService');
 const path = require("path");
 const {jwtAuth} = require('../../lib/jwtAuth');
 var fs = require('fs');
+const { ioEmitter } = require('../../lib/socket');
 
 
 router.post('/addarticle/:id?' , upload.single('file'),  validation, async(req, res, next) => {
@@ -18,7 +19,7 @@ router.post('/addarticle/:id?' , upload.single('file'),  validation, async(req, 
 		if (!validationErrors.isEmpty()) {
 			return res.status(422).json({ errors: validationErrors.array() });
 		}
-	
+
 		const date_public = null;
 			if(req.file){
 				const type_file = path.extname(req.file.filename).toLowerCase()
@@ -33,12 +34,12 @@ router.post('/addarticle/:id?' , upload.single('file'),  validation, async(req, 
 						author: req.body.idUSer,
 						category: req.body.category
 					}
-					
+
 					if(req.body.state == 'true'){
 						data.publi_date = req.body.publi_date
 					}
 					if(req.body.id && req.body.id !== 'undefined')
-					{	
+					{
 						data.article = req.body.id
 					}
 				} else {
@@ -65,7 +66,7 @@ router.post('/addarticle/:id?' , upload.single('file'),  validation, async(req, 
 					data.url_type = 'mp4'
 				}
 				if(req.body.id && req.body.id !== 'undefined')
-				{	
+				{
 					data.article = req.body.id
 				}
 			}
@@ -109,11 +110,11 @@ router.get('/editArticle/:id', async (req, res, next) => {
 });
 
 router.put('/editArticle/:id', upload.single('file'),  validation, async (req, res, next) => {
-	
+
 	const articleId = req.params.id
     try {
 		if(req.body.title)
-		{ 
+		{
 			try {
 				await Article.findOne({_id: articleId}, async function (err, article){
 					if (err){
@@ -121,7 +122,7 @@ router.put('/editArticle/:id', upload.single('file'),  validation, async (req, r
 
 					}
 
-					
+
 					const dato = {
 						title: req.body.title,
 						summary: req.body.summary,
@@ -132,9 +133,9 @@ router.put('/editArticle/:id', upload.single('file'),  validation, async (req, r
 						category: req.body.category
 					}
 
-					
+
 					if(req.file && (req.body.url =='undefined'||req.body.url =='') ){
-						
+
 
 						if(article.file_name){
 							if(req.file.filename !== article.file_name){
@@ -144,10 +145,10 @@ router.put('/editArticle/:id', upload.single('file'),  validation, async (req, r
 						dato.file_type = req.file.mimetype;
 						dato.file_name = req.file.filename;
 						dato.url = ''
-	
-						
+
+
 					} else if (!req.file  && !(req.body.url =='undefined'||req.body.url =='')) {
-					
+
 						if(article.file_name){
 							fs.unlinkSync(`public/images/uploads/${article.file_name}`);
 						}
@@ -217,6 +218,36 @@ router.get('/favourites', async (req, res, next) => {
 	  next(err);
 	}
   });
+
+/**
+ * Get articles of user logged
+ */
+router.get('/me', jwtAuth(), async (req, res, next) => {
+	const userId = req.user;
+	const {articles, pagination} = await filter(req, res, {author: userId}, {}, true);
+	res.json({articles: articles, pagination: pagination});
+});
+router.delete('/deleteArticle', jwtAuth(), async (req, res, next) => {
+	const userId = req.user
+	const artId = req.body.id
+	try{
+		await Article.findOne({_id: artId}, function (err, doc) {
+			if (err){
+				console.log('hubo un error al borrar el artículo', err)
+				return
+			}
+			if (userId != doc.author){
+				console.log('No tienes permiso para realizar esta acción')
+				return
+			} else {
+				doc.remove();
+			}
+			console.log('artículo borrado')
+		})
+	} catch (error) {
+		console.log('no se pudo borrar el artículo')
+	}
+})
 
 
 

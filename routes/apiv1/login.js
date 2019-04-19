@@ -30,7 +30,6 @@ router.post('/login', upload.any(), async (req, res, next) => {
         }, (err, token) => {
             // check if error exists
             if (err) {
-                console.log('AQUI');
                 console.log(err);
                 res.json({'success': false, 'error': res.__('Error in login process')});
                 return;
@@ -90,7 +89,7 @@ router.put('/', uploadConfig.single('userImage'), async (req, res, next) => {
                 return
             } 
             try {
-                const filename = req.file != null ? path.basename(req.file.path) : req.session.user.image
+                const filename = req.file != null ? path.basename(req.file.path) : user.image
                 await Users.updateOne({_id: userId}, {
                     name: req.body.userName,
                     last_name: req.body.userLastName,

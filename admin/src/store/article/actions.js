@@ -27,3 +27,26 @@ export const successMessageEdit = (message) => {
   }
 };
 
+export const showModal = () =>{
+  return {
+    type: types.SHOW_ARTCILE_MODAL
+  }
+};
+
+export const hideModal = () =>{
+    return {
+      type: types.HIDE_ARTCILE_MODAL
+    }
+  };
+
+  export const getArticles = () =>{
+    return {
+      type: types.GET_ARTICLES
+    }
+  };
+
+  export const articlesLoaded = () =>{
+    return {
+      type: types.ARTICLES_LOADED
+    }
+  };

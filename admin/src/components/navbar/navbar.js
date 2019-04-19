@@ -2,8 +2,6 @@
 import React, {Component} from 'react';
 
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import FormControl from "react-bootstrap/FormControl"
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -17,7 +15,7 @@ export default class MainNavbar extends Component {
     render(){
         return (
           <>
-          <Navbar bg="light" variant="light">
+          <Navbar bg="white" variant="light">
             <Nav className="mr-auto">
             </Nav>
             <Form inline>

@@ -5,25 +5,57 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import { userOperations } from '../../store/user';
-import {handleInputChange} from '../../utils/utils';
 import { TwitterPicker } from 'react-color';
-import {Card} from 'react-bootstrap'
+import {Card} from 'react-bootstrap';
+import styled from 'styled-components';
 
 function UpdateUserForm (props, context) {
 
   const {_id, name, last_name, nick_name, address, description} = props.userData 
 
   const [nameUpdated, setName] = useState(name)
+  const [nameError, setNameError] = useState('')
   const [last_nameUpdated, setLastName] = useState(last_name)
+  const [last_nameError, setLastNameError] = useState('')
   const [nick_nameUpdated, setNickName] = useState(nick_name)
+  const [nick_nameError, setNickNameError] = useState('')
   const [addressUpdated, setAddress] = useState(address)
   const [color, setColor] = useState('')
   const [descriptionUpdated, setDescription] = useState(description)
   const [selectedFile, setSelectedFile] = useState(null)
+  const [selectedFileError, setselectedFileError] = useState('')
+
+  function validate() {
+  
+    if (!nameUpdated.length > 0){
+      setNameError('El nombre no puede estar vacío')
+      return false
+    }
+    if (!last_nameUpdated.length > 0){
+      setLastNameError('El apellido no puede estar vacío')
+      return false
+    }
+    if (!nick_nameUpdated.length > 0){
+      setNickNameError('El Nombre de Usuario no puede estar vacío')
+      return false
+    }
+    if (selectedFile != null && selectedFile.type != 'image/jpeg' && selectedFile.type != 'image/png') {
+      setselectedFileError('La imagen puede ser un archivo jpg o png')
+      return false
+    }
+    return true
+  }
 
   function submit(e){
     e.preventDefault()
-    props.updateUser (_id, nameUpdated, last_nameUpdated, nick_nameUpdated, addressUpdated, color, descriptionUpdated, selectedFile)
+    const isValid = validate()
+    if (isValid){
+      props.updateUser (_id, nameUpdated, last_nameUpdated, nick_nameUpdated, addressUpdated, color, descriptionUpdated, selectedFile)
+      setNameError('')
+      setLastNameError('')
+      setNickNameError('')
+      setselectedFileError('')
+    }
   }
   
     return (
@@ -42,6 +74,9 @@ function UpdateUserForm (props, context) {
                                 setName(e.target.value)
                               }} 
                               value={nameUpdated} />
+                  <ErrorMsg>
+                    <span>{nameError}</span>
+                  </ErrorMsg> 
               </Form.Group>
 
               <Form.Group  controlId="formGridAddress2">
@@ -52,6 +87,9 @@ function UpdateUserForm (props, context) {
                                 setLastName(e.target.value)
                               }} 
                               value={last_nameUpdated} />
+                <ErrorMsg>
+                    <span>{last_nameError}</span>
+                </ErrorMsg> 
               </Form.Group>
 
               <Form.Group  controlId="formGridAddress1">
@@ -62,6 +100,9 @@ function UpdateUserForm (props, context) {
                                 setNickName(e.target.value)
                               }} 
                               value={nick_nameUpdated} />
+                <ErrorMsg>
+                    <span>{nick_nameError}</span>
+                </ErrorMsg> 
               </Form.Group>
 
               <Form.Group  controlId="formGridAddress2">
@@ -106,6 +147,9 @@ function UpdateUserForm (props, context) {
                       }}/>
                 <label class="custom-file-label" >{context.t("Choose_Image")}</label>
               </div>
+              <ErrorMsg> 
+                <span>{selectedFileError}</span>
+              </ErrorMsg>    
 
               </Form.Group>    
 
@@ -113,9 +157,9 @@ function UpdateUserForm (props, context) {
                       type="submit">
                       {context.t("Submit")}
               </Button>
-            <div>
+            <SuccesMsg>
               <span>{context.t(props.message)}</span>
-            </div>             
+            </SuccesMsg>        
 
             </Form>
           </Card.Body>
@@ -125,9 +169,19 @@ function UpdateUserForm (props, context) {
   }
 
 
-  UpdateUserForm.contextTypes = {
-    t: PropTypes.func
-  };
+UpdateUserForm.contextTypes = {
+  t: PropTypes.func
+};
+
+const ErrorMsg = styled.span`
+  color: #dc3545;
+  font-weight: bold;
+`;
+
+const SuccesMsg = styled.span`
+  color: green;
+  font-weight: bold;
+`;
 
 const mapStateToProps = state => ({
    userData: state.user.userData,

@@ -3,13 +3,11 @@ import {Provider} from 'react-redux';
 import {render} from 'react-dom';
 import store from './store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import InstantLogout from './components/login/InstantLogout';
 
 import * as serviceWorker from './serviceWorker';
 import I18n from "redux-i18n"
 import {translations} from "./config/translations";
 import 'bootstrap/dist/css/bootstrap.css';
-
 
 import './index.css'
 import sideBars from './components/sidebars/sidebars';

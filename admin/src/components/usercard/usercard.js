@@ -1,19 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import {UserCard} from './src/index';
+import {connect} from 'react-redux';
 
-
-import {
-  UserCard
-} from './src/index';
-
-
-
-export default class CardUSer extends Component {
+class CardUser extends Component {
     constructor(props) {
         super(props);
     }
-
-  
 
     render() {
         return (
@@ -39,9 +31,14 @@ export default class CardUSer extends Component {
                     }
                     ]}
             />
-           
+
             </div>
         )
         }
 }
 
+const mapStateToProps = state => ({
+    userData: state.user.userData,
+});
+
+export default connect(mapStateToProps)(CardUser);
