@@ -4,7 +4,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
 import {Form, Col} from "react-bootstrap";
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-
+import './style.css'
 
 export default class EditorComponent extends Component {
     constructor(props) {
@@ -17,8 +17,7 @@ export default class EditorComponent extends Component {
 
   render() {
     return (
-      <Form.Group as={Col}  md="12" controlId="content">
-         <Form.Label>{this.context.t("Content")}</Form.Label>
+      <Form.Group className="formeditor"  controlId="content">
          { this.props.editorStateError ?(
                        <div className="errorValidation">{this.props.editorStateError}</div>
                 ): null }
@@ -26,7 +25,6 @@ export default class EditorComponent extends Component {
             wrapperClassName="wrapper-class"
             editorClassName="editor-class"
             toolbarClassName="toolbar-class"
-            editorClassName="editorState"
             editorState = {this.props.editorState}
             onEditorStateChange={this.props.handleChange}
       

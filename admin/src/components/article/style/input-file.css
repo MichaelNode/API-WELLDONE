@@ -32,6 +32,7 @@
   float: none;
   margin-bottom: 10px;
   border-radius: .5rem;
+  /*padding-top: 20px;*/
 }
 
 .button-send {
@@ -44,5 +45,9 @@
   font-weight: bold;
   font-size: 16px;
   border-radius: 10px 10px 0px 0px;
+}
+
+.custom-file-input {
+  padding-top: 30px;
 }
 
