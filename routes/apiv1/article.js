@@ -9,11 +9,12 @@ const path = require("path");
 const {jwtAuth} = require('../../lib/jwtAuth');
 var fs = require('fs');
 const { ioEmitter } = require('../../lib/socket');
-
+const {sendNotification} = require('../../lib/socket');
 
 router.post('/addarticle/:id?' , upload.single('file'),  validation, async(req, res, next) => {
 
     try {
+		const user = req.session.user;
 		var data = {};
 		const validationErrors = validationResult(req.body);
 		if (!validationErrors.isEmpty()) {
@@ -31,7 +32,7 @@ router.post('/addarticle/:id?' , upload.single('file'),  validation, async(req, 
 						summary: req.body.summary,
 						content: req.body.content,
 						state:   req.body.state,
-						author: req.body.idUSer,
+						author: user._id,
 						category: req.body.category
 					}
 
@@ -53,7 +54,7 @@ router.post('/addarticle/:id?' , upload.single('file'),  validation, async(req, 
 					content: req.body.content,
 					state:   req.body.state,
 					url: req.body.url,
-					author: req.body.idUSer,
+					author: user._id,
 					category: req.body.category
 				}
 				if(req.body.state == 'true'){
@@ -73,6 +74,19 @@ router.post('/addarticle/:id?' , upload.single('file'),  validation, async(req, 
 
 			const article = new Article(data);
 			const articleSave = await article.save();
+		
+			const users_r =  await Users.findOne({_id:req.session.user._id})
+			const followers_r = await users_r.getFollowing();
+
+			sendNotification(
+						users_r, 
+						'notification-article', 
+						followers_r , 
+						`${res.__('New article')} ${articleSave.title} by ${users_r.nick_name}`, 
+						`${articleSave.summary}`,
+						`${process.env.HOST}/article/${user.nick_name}/${articleSave._id}`
+			); 
+ 
 			console.log('create success')
 			res.json({ success: true, result: articleSave});
 
