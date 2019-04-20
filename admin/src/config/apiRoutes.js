@@ -7,6 +7,7 @@ export default {
     logout: `${API_BASE}/user/logout`,
     delete_user: `${API_BASE}/deleteuser`,
     user: `${API_BASE}/user`,
+    users: `${API_BASE}/users`,
     article: `${API_BASE}/article/addarticle`,
     categories: `${API_BASE}/article/categories`,
     favourites: `${API_BASE}/article/favourites`,
