@@ -4,64 +4,64 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 const i18n = require('i18n');
 const Comment = require('./comment');
-const {getUserMention} = require('../lib/articleService');
+const User = require('./user');
 const {sendNotification} = require('../lib/socket');
 
 var ArticleSchema = Schema({
-    title: {
-        type: String
+  title: {
+    type: String
 
-    },
-    file: String,
-    file_type: String,
-    file_name: String,
-    url: String,
-    url_type: String,
-    summary: {
-        type: String
-    },
-    shortDescription: {
-        type: String,
-        default: ''
-    },
-    content: {
-        type: String
-    },
-    state: {
-        type: Boolean,
-        index: true
-    },
-    category: {
-        type: String,
-        index: true
-    },
-    create_at: {
-        type: Date,
-        default: Date.now
-    },
-    publi_date: {
-        type: Date,
-        require: false
-    },
-    author: {
-        type: Schema.ObjectId,
-        ref: 'user'
-    },
-    article: {
-        type: Schema.ObjectId,
-        ref: 'articles'
-    },
-    last_modification: Date,
+  },
+  file: String,
+  file_type: String,
+  file_name: String,
+  url: String,
+  url_type: String,
+  summary: {
+    type: String
+  },
+  shortDescription: {
+    type: String,
+    default: ''
+  },
+  content: {
+    type: String
+  },
+  state: {
+    type: Boolean,
+    index: true
+  },
+  category: {
+    type: String,
+    index: true
+  },
+  create_at: {
+    type: Date,
+    default: Date.now
+  },
+  publi_date: {
+    type: Date,
+    require: false
+  },
+  author: {
+    type: Schema.ObjectId,
+    ref: 'user'
+  },
+  article: {
+    type: Schema.ObjectId,
+    ref: 'articles'
+  },
+  last_modification: Date,
 
 });
 
 ArticleSchema.statics.allowedCategories = function () {
-    return [
-        'Culture',
-        'Tech',
-        'Health',
-        'Music'
-    ];
+  return [
+    'Culture',
+    'Tech',
+    'Health',
+    'Music'
+  ];
 };
 
 /**
@@ -74,32 +74,32 @@ ArticleSchema.statics.allowedCategories = function () {
  * @returns {Promise<Array>}
  */
 ArticleSchema.statics.list = async function (filters, sort, pages, perPage, stateAll = false) {
-    // add filter for not show articles draft
-    if(!filters.state && !stateAll) {
-        filters.state = true;
-    }
-    // add filter for not show not published articles
-    if(!filters.publi_date && !stateAll){
-        filters.publi_date = {$lt: new Date()}
-    }
+  // add filter for not show articles draft
+  if (!filters.state && !stateAll) {
+    filters.state = true;
+  }
+  // add filter for not show not published articles
+  if (!filters.publi_date && !stateAll) {
+    filters.publi_date = {$lt: new Date()}
+  }
 
-    const query = Article.find(filters).populate('author', 'name nick_name image');
-    query.sort(sort);
-    if (pages !== undefined && perPage !== undefined) {
-        query.skip((perPage * pages) - perPage);
-        query.limit(perPage);
-    }
-    const articlesArr = await query.exec();
+  const query = Article.find(filters).populate('author', 'name nick_name image');
+  query.sort(sort);
+  if (pages !== undefined && perPage !== undefined) {
+    query.skip((perPage * pages) - perPage);
+    query.limit(perPage);
+  }
+  const articlesArr = await query.exec();
 
-    // Add num comments to all articles and create a new array with this
-    let articles = [];
+  // Add num comments to all articles and create a new array with this
+  let articles = [];
 
-    for (const article of articlesArr) {
-        article.numComments = await article.getCommentsCount();
-        article.shortDescription = article.getShortDescription();
-        articles.push(article);
-    }
-    return articles;
+  for (const article of articlesArr) {
+    article.numComments = await article.getCommentsCount();
+    article.shortDescription = article.getShortDescription();
+    articles.push(article);
+  }
+  return articles;
 }
 
 /**
@@ -109,8 +109,8 @@ ArticleSchema.statics.list = async function (filters, sort, pages, perPage, stat
  * @constructor
  */
 ArticleSchema.statics.Count = function (filters) {
-    const query = Article.find(filters);
-    return query.countDocuments().exec();
+  const query = Article.find(filters);
+  return query.countDocuments().exec();
 }
 
 /**
@@ -119,43 +119,43 @@ ArticleSchema.statics.Count = function (filters) {
  * @returns {string}
  */
 ArticleSchema.methods.getFormattedDatePost = function () {
-    // get difference in milliseconds
-    const date = this.create_at;
-    const dateNow = new Date();
-    const milliseconds = Math.floor(dateNow.getTime() - date.getTime());
-    // get number of days
-    const day = 1000 * 60 * 60 * 24;
-    const days = milliseconds / day;
-    // if have 1 or more days format and return it
-    if (days >= 1) {
-        let lastString = i18n.__('días');
-        if (Math.floor(days) === 1) {
-            lastString = i18n.__('día');
-        }
-        return `${i18n.__('Hace')} ${Math.floor(days)} ${lastString}`;
+  // get difference in milliseconds
+  const date = this.create_at;
+  const dateNow = new Date();
+  const milliseconds = Math.floor(dateNow.getTime() - date.getTime());
+  // get number of days
+  const day = 1000 * 60 * 60 * 24;
+  const days = milliseconds / day;
+  // if have 1 or more days format and return it
+  if (days >= 1) {
+    let lastString = i18n.__('días');
+    if (Math.floor(days) === 1) {
+      lastString = i18n.__('día');
     }
-    // Get in hours
-    const hours = days * 24;
-    if (hours >= 1) {
-        let lastString = i18n.__('horas');
-        if (Math.floor(hours) === 1) {
-            lastString = i18n.__('hora');
-        }
-        return `${i18n.__('Hace')} ${Math.floor(hours)} ${lastString}`;
+    return `${i18n.__('Hace')} ${Math.floor(days)} ${lastString}`;
+  }
+  // Get in hours
+  const hours = days * 24;
+  if (hours >= 1) {
+    let lastString = i18n.__('horas');
+    if (Math.floor(hours) === 1) {
+      lastString = i18n.__('hora');
     }
+    return `${i18n.__('Hace')} ${Math.floor(hours)} ${lastString}`;
+  }
 
-    // get in minutes
-    const minutes = hours * 60;
-    if (minutes >= 1) {
-        let lastString = i18n.__('minutos');
-        if (Math.floor(minutes) === 1) {
-            lastString = i18n.__('minuto');
-        }
-        return `${i18n.__('Hace')} ${Math.floor(minutes)} ${lastString}`;
+  // get in minutes
+  const minutes = hours * 60;
+  if (minutes >= 1) {
+    let lastString = i18n.__('minutos');
+    if (Math.floor(minutes) === 1) {
+      lastString = i18n.__('minuto');
     }
+    return `${i18n.__('Hace')} ${Math.floor(minutes)} ${lastString}`;
+  }
 
-    // if not then return default string
-    return i18n.__('Hace menos de 1 minuto');
+  // if not then return default string
+  return i18n.__('Hace menos de 1 minuto');
 };
 
 /**
@@ -163,9 +163,9 @@ ArticleSchema.methods.getFormattedDatePost = function () {
  * @returns {string}
  */
 ArticleSchema.methods.getSlug = function () {
-    let slug = this.title;
-    let slugFormatted = slug.split(' ').join('-');
-    return `${slugFormatted}-${this._id}`;
+  let slug = this.title;
+  let slugFormatted = slug.split(' ').join('-');
+  return `${slugFormatted}-${this._id}`;
 }
 
 /**
@@ -174,8 +174,8 @@ ArticleSchema.methods.getSlug = function () {
  * @returns {*}
  */
 ArticleSchema.statics.getIdFromSlug = function (slug) {
-    const slugArray = slug.split('-');
-    return slugArray[slugArray.length - 1];
+  const slugArray = slug.split('-');
+  return slugArray[slugArray.length - 1];
 }
 
 /**
@@ -184,12 +184,12 @@ ArticleSchema.statics.getIdFromSlug = function (slug) {
  * @returns {string}
  */
 ArticleSchema.methods.getShortDescription = function (maxLength = 100) {
-    if (!this.summary) return '';
-    // trim the string to the maximum length
-    let summary = this.summary.substr(0, maxLength);
-    summary = summary.substr(0, Math.min(summary.length, summary.lastIndexOf(" ")));
-    // re-trim if we are in the middle of a word
-    return `${summary}...`;
+  if (!this.summary) return '';
+  // trim the string to the maximum length
+  let summary = this.summary.substr(0, maxLength);
+  summary = summary.substr(0, Math.min(summary.length, summary.lastIndexOf(" ")));
+  // re-trim if we are in the middle of a word
+  return `${summary}...`;
 }
 
 /**
@@ -197,28 +197,27 @@ ArticleSchema.methods.getShortDescription = function (maxLength = 100) {
  * @returns {Promise<void>}
  */
 ArticleSchema.methods.getCommentsCount = async function () {
-    return await Comment.Count({article: this._id});
+  return await Comment.Count({article: this._id});
 }
 
-ArticleSchema.pre('save', function (next) {
-  this.wasNew = this.isNew;
-  next();
-});
 
 ArticleSchema.post('save', async function () {
-  if (!this.wasNew) {
-    return;
-  }
+
+  const {getUserMention} = require('../lib/articleService');
   // if is a new article notify user mention
   const users = await getUserMention(this.content);
-  await this.populate('author');
+  if (!users || users.length <= 0) {
+    return;
+  }
+  const author = await User.findOne({_id: this.author});
 
   sendNotification(
       'notification-article',
-       users,
-      `${i18n.__('You have been mentioned in a new article by ')} ${this.author.nick_name}`,
+      users,
+      `${i18n.__('You have been mentioned in a new article by ')} ${author.nick_name}`,
       `${this.summary}`,
-      `${process.env.HOST}/article/${this.author.nick_name}/${this._id}`)
+      `${process.env.HOST}/article/${author.nick_name}/${this._id}`
+  );
 });
 
 const Article = mongoose.model('articles', ArticleSchema);
