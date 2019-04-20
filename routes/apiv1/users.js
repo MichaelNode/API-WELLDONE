@@ -10,7 +10,7 @@ const User = require('../../models/user');
  * Get articles of user logged
  */
 router.get('/', jwtAuth(), async (req, res, next) => {
-  const users = await User.find({}, 'nick_name _id');
+  const users = await User.find({_id: {$ne: req.user}}, 'nick_name _id');
   res.json({users: users});
 });
 

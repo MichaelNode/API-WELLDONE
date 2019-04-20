@@ -9,16 +9,17 @@ import {connect} from 'react-redux';
 
 const EditorComponent = (props) => {
 
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [suggestion, setSuggestion] = useState([]);
   const fetchUsers = async () => {
     try {
       // add my articles to the state
       const data = await userUtils.getUsers(props.token);
       const users = data.users;
+      const suggestionArr = [];
       for(const user of users){
-        setSuggestion([...suggestion, ...[{ text: user.nick_name, value: user.nick_name, url: `/articles/user/${user.nick_name}` }]]);
+        suggestionArr.push({ text: user.nick_name, value: user.nick_name, url: `/articles/user/${user.nick_name}` });
       }
+      setSuggestion(suggestionArr);
     } catch (err) {
       console.log(err);
     }
@@ -37,7 +38,7 @@ const EditorComponent = (props) => {
             wrapperClassName="wrapper-class"
             editorClassName="editor-class"
             toolbarClassName="toolbar-class"
-            editorState={editorState}
+            editorState={props.editorState}
             onEditorStateChange={props.handleChange}
             mention={{
               separator: ' ',

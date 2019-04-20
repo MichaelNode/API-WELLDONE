@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 const i18n = require('i18n');
 const Comment = require('./comment');
+const {getUserMention} = require('../lib/articleService');
+const {sendNotification} = require('../lib/socket');
 
 var ArticleSchema = Schema({
     title: {
@@ -197,6 +199,27 @@ ArticleSchema.methods.getShortDescription = function (maxLength = 100) {
 ArticleSchema.methods.getCommentsCount = async function () {
     return await Comment.Count({article: this._id});
 }
+
+ArticleSchema.pre('save', function (next) {
+  this.wasNew = this.isNew;
+  next();
+});
+
+ArticleSchema.post('save', async function () {
+  if (!this.wasNew) {
+    return;
+  }
+  // if is a new article notify user mention
+  const users = await getUserMention(this.content);
+  await this.populate('author');
+
+  sendNotification(
+      'notification-article',
+       users,
+      `${i18n.__('You have been mentioned in a new article by ')} ${this.author.nick_name}`,
+      `${this.summary}`,
+      `${process.env.HOST}/article/${this.author.nick_name}/${this._id}`)
+});
 
 const Article = mongoose.model('articles', ArticleSchema);
 
