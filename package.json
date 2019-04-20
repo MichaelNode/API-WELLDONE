@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "build": "webpack ./public/javascripts/app.js --output ./public/dist/js/app.js ",
+    "build": "webpack --output ./public/dist/js/app.js ",
     "install_react": "cd admin && npm install",
     "dev": "(npm run start &) && cd admin && npm start",
     "seeder": "npm run install_users && npm run install_articles && npm run install_comments",
