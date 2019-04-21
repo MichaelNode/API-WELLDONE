@@ -50,12 +50,12 @@ block content
                         i.mx-2.fa-bookmark.fa-2x.fav(data-article=article._id, class=bookmark)
 
             .col-12.col-md-10.col-lg-8.p-0.mt-3.art-content.editable
-                i.fas.fa-pencil-alt.pencil(data-article=article._id) #{__('underline')}
                 !{article.content}
                 if isLogged
                     .col-12.col-md-10.col-lg-8.row
                         a.btn.btn-outline-secondary.mt-2(href=`/admin/add_article/${article._id}`) #{__('Response with article')}
-
+            .menu
+                i.fas.fa-pencil-alt.pencil(data-article=article._id) #{__('underline')}
             // Comments
             .col-12.col-md-10.col-lg-8.p-0.pt-5.mb-5.row(id='comments')
 

@@ -2,6 +2,7 @@ export default class Articles {
     constructor() {
         this.bookmark = document.querySelector('.fav');
         this.content = document.querySelector('.art-content')
+        this.menu = document.querySelector('.menu')
         this.pencil = document.querySelector('.pencil')
     }
 
@@ -38,24 +39,28 @@ export default class Articles {
         this.content.addEventListener('mouseup', (e) => {
 
             let selection = window.getSelection().getRangeAt(0)
-            const { x, y, width } = selection.getBoundingClientRect() 
+            const { x, top, width } = selection.getBoundingClientRect() 
             const startNode = selection.startContainer.parentNode
             const endNode = selection.endContainer.parentNode
             
 
             if (!width) {
-                this.pencil.style.visibility = 'hidden'
+                this.menu.style.display = 'none'
                 return
             }
 
             let xpos = startNode.offsetWidth
             let ypos = startNode.offsetTop
+            const menuWidth = this.menu.offsetWidth
+            const menuHeight = this.menu.offsetTop
 
-            this.pencil.style.visibility = 'visible'
-            this.pencil.style.left = xpos/2 + 'px'
-            this.pencil.style.top = ypos + 'px'
+            this.menu.style.display = 'block'
+            this.menu.style.left = (x + (width/2) - (menuWidth/2)) + 'px'
+            this.menu.style.top = (top - 10) + 'px'
 
-            this.pencil.addEventListener('click', () => {
+            console.log(selection.getBoundingClientRect(),  this.menu.style.top)
+
+            this.menu.addEventListener('click', () => {
                 let selectedText = selection.extractContents()
                 let span = document.createElement('span')
                 span.style.backgroundColor = 'yellow'
