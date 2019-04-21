@@ -10,7 +10,6 @@ const createError = require('http-errors');
 const {renderArticleDetail, commentValidator} = require('../lib/articleService');
 const { validationResult } = require('express-validator/check');
 const {userAuth} = require('../lib/jwtAuth');
-const {sendNotification} = require('../lib/socket');
 const notifier = require('node-notifier');
 
 /**

@@ -88,6 +88,6 @@ html(lang=getLocale())
     socket.on('notification-article', function(title,msg,url){
       toastr.info('<a href="'+ url +'">'  + msg + '</a>', title)
     });
-    socket.on('follow', (data) => toastr.info(data));
+    socket.on('follow-user', (data) => toastr.info(data));
       
 

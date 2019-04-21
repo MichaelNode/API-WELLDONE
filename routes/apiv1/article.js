@@ -256,7 +256,7 @@ router.delete('/deleteArticle', jwtAuth(), async (req, res, next) => {
 			} else {
 				doc.remove();
 			}
-			console.log('artículo borrado')
+			console.log('artículo borrado', doc.title)
 		})
 	} catch (error) {
 		console.log('no se pudo borrar el artículo')

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
@@ -6,45 +6,44 @@ import Modal from "react-bootstrap/Modal";
 import { articleOperations } from "../../../store/article";
 import * as types from '../../../store/article/types';
 
-class DeleteArticle extends Component {
-    constructor(props){
-        super(props)
-    }
-  delete = () => {
-    this.props.deleteArticle(this.props.id, this.props.token);
-    this.props.hideModal()
-  };
+function DeleteArticle (props, context) {
 
-  render() {
+  const [showModal2, setShowModal2] = useState(false)
+    
+  function deleteArt () {
+    props.deleteArticle(props.id, props.token)
+    setShowModal2(false)
+  }
+  
     return (
       <>
-        <Button className='icon-button' variant="danger" onClick={this.props.showModal}>
+        <Button className='icon-button' variant="danger" onClick={() => setShowModal2(true)}>
           <i className="fa fa-fw fa-trash"/>
         </Button>
 
         <Modal
           size="sm"
-          show={this.props.modal}
-          onHide={this.props.hideModal}
+          show={showModal2}
+          onHide={() => setShowModal2(false)}
           aria-labelledby="example-modal-sizes-title-sm"
         >
           <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-sm">
-            {this.context.t("Confirm delete article")}
+            {context.t("Confirm delete article")}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Button variant="light" onClick={this.props.hideModal}>
-                {this.context.t("Cancel")}
+            <Button variant="light" onClick={() => setShowModal2(false)}>
+                {context.t("Cancel")}
             </Button>
-            <Button variant="danger" onClick={this.delete}>
-                {this.context.t("Confirm")}
+            <Button variant="danger" onClick={deleteArt}>
+                {context.t("Confirm")}
             </Button>
           </Modal.Body>
         </Modal>
       </>
     );
-  }
+  
 }
 
 DeleteArticle.contextTypes = {
@@ -60,16 +59,6 @@ const mapDispatchToProps = dispatch => {
   return {
     deleteArticle: (id, token) => {
       dispatch(articleOperations.deleteArticle(id, token));
-    },
-    showModal: () => {
-        dispatch({
-          type: types.SHOW_ARTCILE_MODAL
-        });
-    },
-    hideModal: () => {
-        dispatch({
-            type: types.HIDE_ARTCILE_MODAL
-        });
     }
   };
 };

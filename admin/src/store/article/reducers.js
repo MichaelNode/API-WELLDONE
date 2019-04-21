@@ -21,8 +21,6 @@ const reducer = (state = initialState, action) => {
         return {...state, message: action.payload}
     case types.SUCCESS_MESSAGE_EDIT:
         return {...state, message: action.payload}
-    case types.SHOW_ARTCILE_MODAL:
-        return {...state, show_modal: true }
     case types.HIDE_ARTCILE_MODAL:
         return {...state, show_modal: false }
     case types.GET_ARTICLES:
