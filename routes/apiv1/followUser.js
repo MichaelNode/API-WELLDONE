@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router();
 const Users = require('../../models/user');
-const {userAuth} = require('../../lib/jwtAuth');
-const { ioEmitter } = require('../../lib/socket');
+const { userAuth } = require('../../lib/jwtAuth');
+const { sendNotification } = require('../../lib/socket');
 
 router.put('/', userAuth(), async (req, res, next) => {
 
@@ -21,8 +21,14 @@ router.put('/', userAuth(), async (req, res, next) => {
                 { _id: user._id },
                 { $push: { followers: userLogged }});
                 res.json({success: true, btnText:res.__('Unfollow')})
-                
-                ioEmitter.to(user.socket).emit('follow', `${userName} ha comenzado a seguirte`)
+                sendNotification(
+                    userLogged, 
+                    'follow-user', 
+                    [user], 
+                    `${userName} ${res.__('follows you')}`,
+                    `${res.__('Congrats! You have a new follower')}`,
+                    null
+        ); 
                 console.log('se agregó el usuario a seguir ')
            } else {
             await Users.updateOne(

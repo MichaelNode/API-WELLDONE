@@ -105,8 +105,9 @@
 	"Article image": "Article image",
 	"Seguir": "Seguir",
 	"No seguir": "No seguir",
-
 	"article,blog,Escoge...": "article,blog,Escoge...",
-	"article,blog,Health": "article,blog,Health"
-
+	"article,blog,Health": "article,blog,Health",
+	"New article": "New article",
+	"follows you": "has begun to follow you",
+	"Congrats! You have a new follower": "Congratulations, you have a new follower of your articles. Keep posting!"
 }
