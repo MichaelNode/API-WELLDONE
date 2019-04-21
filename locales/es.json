@@ -111,5 +111,6 @@
 	"article,blog,Health": "article,blog,Health",
 	"New article": "New article",
 	"follows you": "ha comenzado a seguirte",
-	"Congrats! You have a new follower": "Enhorabuena, tienes un nuevo seguidor de tus artículos. ¡Sigue publicando!"
+	"Congrats! You have a new follower": "Enhorabuena, tienes un nuevo seguidor de tus artículos. ¡Sigue publicando!",
+	"You have been mentioned in a new article by ": "You have been mentioned in a new article by "
 }
