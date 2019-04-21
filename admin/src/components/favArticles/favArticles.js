@@ -23,7 +23,7 @@ function FavArticles(props, context) {
             <ArticleList>
                 <li key={item._id}>{item.title} -
                     <a href={`${apiRoutes.articles}/${item.author.nick_name}/${item.title}-${item._id}`}>
-                       leer
+                        {context.t("Read Article")}
                     </a>
                 </li>
             </ArticleList>

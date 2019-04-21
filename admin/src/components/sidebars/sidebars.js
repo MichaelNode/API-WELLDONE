@@ -15,6 +15,7 @@ import Loading from '../loading/Loading'
 import InstantLogout from "../login/InstantLogout";
 import UpdateUserForm from "../updateUser/updateUserForm";
 import FavArticles from '../favArticles/favArticles';
+import UnderlinedContents from '../underlined/underlined';
 import ArticleList from '../article/list/ArticleList';
 import AddArticleForm from '../article/add_article/addarticle_form'
 import EditArticleForm from '../article/edit_article/edit_article'
@@ -107,6 +108,16 @@ class sideBars extends Component {
                     </NavItem>
 
                   </NavItem>
+                  <NavItem eventKey="underlined">
+                    <NavIcon>
+                      <Link to='/admin/underlined'>
+                        <i className="fa fa-fw fa-underline" style={{fontSize: '1.75em'}}/>
+                      </Link>
+                    </NavIcon>
+                    <NavText>
+                      My Underlined
+                    </NavText>
+                  </NavItem>
                 </SideNav.Nav>
               </SideNav>
           )}
@@ -131,6 +142,7 @@ class sideBars extends Component {
                         <Route exact path="/admin/favorites" component={FavArticles}/>
                         <Route exact path="/admin/edit_article/:id" component={EditArticleForm}/>
                         <Route exact path="/admin/articles" component={ArticleList}/>
+                        <Route exact path="/admin/underlined" component={UnderlinedContents}/>
                         <Row className="justify-content-around">
                           <Col md={9} lg={6}>
                             <Route exact path="/admin" component={CardUser}/>

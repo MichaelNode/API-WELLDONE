@@ -50,9 +50,10 @@ export default class Articles {
             }
 
             let ypos = startNode.offsetTop
+            let xpos = startNode.offsetWidth
 
             this.pencil.style.visibility = 'visible'
-            this.pencil.style.left = x + 'px'
+            this.pencil.style.left = xpos/2 + 'px'
             this.pencil.style.top = ypos -20 + 'px'
 
             this.pencil.addEventListener('click', () => {
@@ -61,6 +62,29 @@ export default class Articles {
                 span.style.backgroundColor = 'yellow'
                 span.appendChild(selectedText)
                 selection.insertNode(span)
+
+                var article = this.pencil.getAttribute('data-article')
+                var articleID = article.slice(1, -1)
+                var textUnderlined = selection.toString()
+
+                const url = `/apiv1/underlinetext`;
+                const data = {
+                    article: articleID,
+                    content: textUnderlined
+                }
+                
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => res.json())
+                    .catch(error => console.error('Error:', error))
+                    .then(response => {
+                        console.log('guardado', response)
+                        selection = ''
+                    })
             })
 
         })

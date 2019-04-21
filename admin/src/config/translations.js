@@ -66,7 +66,8 @@ export const translations = {
         "favorites": "Favorites",
         "Image": "Image",
         "Action": "Action",
-        "My articles": "My Articles"
+        "My articles": "My Articles",
+        "Read Article": "Read Article"
     },
     es: {
         "Email": "Email",
@@ -135,5 +136,6 @@ export const translations = {
         "favorites": "Favoritos",
         "Image": "Imagen",
         "Action": "Acción",
-        "My articles": "Mis Artículos"
+        "My articles": "Mis Artículos",
+        "Read Article": "Leer Artículo"
 }}

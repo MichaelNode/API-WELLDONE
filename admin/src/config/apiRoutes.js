@@ -13,5 +13,6 @@ export default {
     articles: `${APP_BASE}/article`,
     article_edit: `${API_BASE}/article/editarticle/`,
     article_me: `${API_BASE}/article/me`,
-    article_delete: `${API_BASE}/article/deleteArticle/`
+    article_delete: `${API_BASE}/article/deleteArticle/`,
+    underlined: `${API_BASE}/underlinetext`,
 };
