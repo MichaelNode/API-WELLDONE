@@ -38,23 +38,22 @@ export default class Articles {
         this.content.addEventListener('mouseup', (e) => {
 
             let selection = window.getSelection().getRangeAt(0)
-            let { x, y, width } = selection.getBoundingClientRect() 
+            const { x, y, width } = selection.getBoundingClientRect() 
             const startNode = selection.startContainer.parentNode
             const endNode = selection.endContainer.parentNode
-
-            console.log(x, y, width, selection)
+            
 
             if (!width) {
                 this.pencil.style.visibility = 'hidden'
                 return
             }
 
-            let ypos = startNode.offsetTop
             let xpos = startNode.offsetWidth
+            let ypos = startNode.offsetTop
 
             this.pencil.style.visibility = 'visible'
             this.pencil.style.left = xpos/2 + 'px'
-            this.pencil.style.top = ypos -20 + 'px'
+            this.pencil.style.top = ypos + 'px'
 
             this.pencil.addEventListener('click', () => {
                 let selectedText = selection.extractContents()
