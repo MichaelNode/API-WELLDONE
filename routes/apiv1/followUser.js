@@ -22,7 +22,6 @@ router.put('/', userAuth(), async (req, res, next) => {
                 { $push: { followers: userLogged }});
                 res.json({success: true, btnText:res.__('Unfollow')})
                 sendNotification(
-                    userLogged, 
                     'follow-user', 
                     [user], 
                     `${userName} ${res.__('follows you')}`,

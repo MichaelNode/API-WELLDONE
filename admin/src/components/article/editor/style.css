@@ -5,5 +5,14 @@
 
 .formeditor{
     height: 100% !important;
+    position: absolute;
+    width: 100%;
 }
 
+.editor-wrapper {
+    position: relative;
+}
+
+.rdw-suggestion-option {
+    cursor: pointer;
+}
