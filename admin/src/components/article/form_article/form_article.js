@@ -392,9 +392,7 @@ class ArticleForm extends Component {
     return (
       <>
       <OCAlertsProvider />
-      {this.state.fireRedirect  && (
-          <Redirect to='/admin/articles' />
-      )}
+   
       <Form.Row>
         <Card as={Col}  md="4"  className="text-center card-main">
           { this.props.type == 'ADD' && (
