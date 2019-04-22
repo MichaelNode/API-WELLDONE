@@ -39,6 +39,7 @@ export const addArticle = (title,file,summary,content,state,category,publi_date,
     }
 }
 
+
 export const EditArticle = (title,file,summary,content,state,category,publi_date, url, token, idUSer, id) => {
 
     const fd = new FormData();

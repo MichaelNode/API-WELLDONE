@@ -5,12 +5,13 @@ const express = require('express');
 const router = express.Router();
 const Article = require('../models/article');
 const Users = require('../models/user');
+const Text = require('../models/text');
 const Comment = require('../models/comment');
 const createError = require('http-errors');
 const {renderArticleDetail, commentValidator} = require('../lib/articleService');
 const { validationResult } = require('express-validator/check');
 const {userAuth} = require('../lib/jwtAuth');
-const notifier = require('node-notifier');
+
 
 /**
  *  GET article.
@@ -26,29 +27,17 @@ router.get('/:user/:articleSlug/:page?', async function (req, res, next) {
                 publi_date: {$lt: new Date()}})
             .populate('author', '_id image nick_name');
         const user = req.session.user;
-       
+
+        const text = await Text.find({article: id, user: user._id}).select('content');
+      
         if(!article){
             next(createError(404));
             return;
         }
-
-    
-   
-/* 
-          notifier.notify(
-            {
-              title: 'My awesome title 45',
-              message: 'Hello from node, Mr. User! , http://localhost:3002/articles',
-              //icon: path.join(__dirname, 'coulson.jpg'), // Absolute path (doesn't work on balloons)
-              sound: true, // Only Notification Center or Windows Toasters
-              wait: true, // Wait with callback, until user action is taken against notification
-              open: 'http://localhost:3002/articles'
-            }
-            
-          ); */
-
+        
+      
         // render article detail
-        await renderArticleDetail(req, res, article, user);
+        await renderArticleDetail(req, res, article, user, text);
 
     } catch(err){
         next(err);

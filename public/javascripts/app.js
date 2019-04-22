@@ -7,6 +7,10 @@ import Commons from './Commons';
 import Socket from './Socket';
 import Followers from './Followers';
 
+
+
+
+
 (function () {
   window.addEventListener('DOMContentLoaded', () => {
     new Cards();
@@ -14,6 +18,7 @@ import Followers from './Followers';
     new Commons();
     new Followers().eventListeners();
     new Socket();
+   
   })
 })();
 

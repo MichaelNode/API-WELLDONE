@@ -259,7 +259,6 @@ hr {
 }
 
 .menu {
-  height: 30px;
   padding: 5px 10px;
   background: #333;
   border-radius: 3px;
@@ -272,7 +271,7 @@ hr {
   justify-content: center;
   align-items: center;
   display: none;
-  color: bisque;
+  color:#fafafa;
 }
 
 .menu:hover {
@@ -290,4 +289,8 @@ hr {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-top: 6px solid #333;
+}
+
+.menu i {
+  padding-right: 10px;
 }

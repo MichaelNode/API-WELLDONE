@@ -1,5 +1,6 @@
 import * as types from "./types";
 import StorageWrapper from '../../utils/StorageWrapper';
+import { OCAlert } from '@opuscapita/react-alerts';
 
 const token = StorageWrapper.getValue('token');
 
@@ -18,9 +19,9 @@ const reducer = (state = initialState, action) => {
     case types.SHOW_FORM:
         return {...state, showform: true,  updateAccount: false}
     case types.SUCCESS_MESSAGE:
-        return {...state, message: action.payload}
+        return {...state, message: OCAlert.alertSuccess(action.payload)}
     case types.SUCCESS_MESSAGE_EDIT:
-        return {...state, message: action.payload}
+        return {...state, message: OCAlert.alertSuccess(action.payload)}
     case types.HIDE_ARTCILE_MODAL:
         return {...state, show_modal: false }
     case types.GET_ARTICLES:

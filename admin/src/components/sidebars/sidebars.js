@@ -131,6 +131,7 @@ class sideBars extends Component {
                           path !== 'admin' &&
                           <h1 className='text-capitalize mb-3 mb-lg-5 mt-2'>{this.context.t(path)}</h1>
                         }
+                       
 
                         {/* ROUTES */}
                         <Route exact path="/admin/logout" component={InstantLogout}/>

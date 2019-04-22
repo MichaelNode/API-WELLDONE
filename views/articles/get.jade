@@ -49,13 +49,15 @@ block content
                     if isLogged
                         i.mx-2.fa-bookmark.fa-2x.fav(data-article=article._id, class=bookmark)
 
-            .col-12.col-md-10.col-lg-8.p-0.mt-3.art-content.editable
+            div(id='content-id').col-12.col-md-10.col-lg-8.p-0.mt-3.art-content.editable
                 !{article.content}
                 if isLogged
                     .col-12.col-md-10.col-lg-8.row
                         a.btn.btn-outline-secondary.mt-2(href=`/admin/add_article/${article._id}`) #{__('Response with article')}
             .menu
-                i.fas.fa-pencil-alt.pencil(data-article=article._id) #{__('underline')}
+                i(id='underline').fas.fa-pencil-alt.pencil(data-article=article._id)  #{__('underline')} 
+                i(id='erase').fas.fa-trash-alt(data-article=article._id)  #{__('Erase')}
+              
             // Comments
             .col-12.col-md-10.col-lg-8.p-0.pt-5.mb-5.row(id='comments')
 
@@ -73,4 +75,31 @@ block content
 
                 .mt-3
                     +pagination(link, '')
+    script.
+        var texts = !{JSON.stringify(text)} 
+        function underline(text) { 
+           
+            var inputText = document.getElementById("content-id");
+            var innerHTML = inputText.innerHTML;
+            var index = innerHTML.indexOf(text);
+            console.log(index)
+            if (index >= 0) { 
+                innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+                inputText.innerHTML = innerHTML;
+            }
+        }
+       
+        texts.forEach(function(text) {
+           
+            underline(text.content)
+        });
+        
+       
+       
+
+        
+       
+
+        
+      
             

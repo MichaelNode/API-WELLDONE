@@ -8,10 +8,13 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import PropTypes from "prop-types";
 import Logout from '../login/Logout';
 import DeleteUser from '../deleteUser/deleteUser';
+
 // Be sure to include styles at some point, probably during your bootstraping
 
 
 export default class MainNavbar extends Component {
+  
+ 
     render(){
         return (
           <>
@@ -32,6 +35,7 @@ export default class MainNavbar extends Component {
               </Dropdown>
             </Form>
           </Navbar>
+         
         </>
         )
     }
