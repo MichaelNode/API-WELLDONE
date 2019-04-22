@@ -23,10 +23,14 @@ header
         each category in categories
           - const categoryClass = categorySelected === category.toLowerCase() ? 'bold' : '';
           a(class=`nav-item mx-lg-2 nav-link ${categoryClass}` href=`${categoryLink}${pageIndex}?category=${category.toLowerCase()}`) #{__(category)}
-      if isLogged
-        a(class="btn btn-outline-secondary ml-auto d-md-inline d-none" href='/admin') #{__('My Area')}
-      else
-        a(class="btn btn-outline-secondary ml-auto d-md-inline d-none" href='/admin') #{__('Sign In')}
+      div.dropdown
+        button.btn.btn-secondary.dropdown-toggle(type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Dropdown button
+        div.dropdown-menu(aria-labelledby="dropdownMenuButton")
+          a.dropdown-item(href="#") #{__('Action')}
+          if isLogged
+            a.dropdown-item.btn.btn-outline-secondary.ml-auto.d-md-inline.d-none(href='/admin') #{__('My Area')}
+          else
+            a.dropdown-item.btn.btn-outline-secondary.ml-auto.d-md-inline.d-none(href='/admin') #{__('Sign In')}
       form.form-inline.d-flex.mt-2.mt-md-0.ml-md-2.flex-nowrap(action=searchLink)
         input(type="search" name="text" class="form-control mx-lg-2" aria-label="#{__('Search')}" placeholder=__('Search') value=searchTextValue)
         button(type="submit" class="btn btn-outline-secondary" aria-label="#{__('Search')}")
