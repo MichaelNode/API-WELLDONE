@@ -1,4 +1,5 @@
 // Dependencies
+import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {articleUtils} from "../../../store/article";
@@ -10,7 +11,7 @@ import styled from "styled-components";
 var ReactBsTable = require('react-bootstrap-table');
 var BootstrapTable = ReactBsTable.BootstrapTable;
 var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
-import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+
 
 
 const Status = {
