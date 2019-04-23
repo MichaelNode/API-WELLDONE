@@ -6,6 +6,7 @@ import Articles from './Articles';
 import Commons from './Commons';
 import Socket from './Socket';
 import Followers from './Followers';
+import Accessibility from './Accessibility';
 
 (function () {
   window.addEventListener('DOMContentLoaded', () => {
@@ -14,6 +15,7 @@ import Followers from './Followers';
     new Commons();
     new Followers().eventListeners();
     new Socket();
+    new Accessibility();
   })
 })();
 

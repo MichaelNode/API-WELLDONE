@@ -116,6 +116,16 @@ hr {
   width: 50px;
 }
 
+// Nav
+nav .dropdown-toggle::after {
+  border: none;
+}
+
+nav .dropdown-toggle i {
+  vertical-align: middle;
+}
+
+
 // Form
 .error {
   color: red;
@@ -131,7 +141,12 @@ hr {
     position:absolute;
     bottom: 10px;
     right: 15px;
-    width: 60px;
+  }
+
+  a {
+    position:absolute;
+    bottom: 10px;
+    left: 15px;
   }
 }
 
@@ -247,6 +262,9 @@ hr {
 .btn {
   padding-top: .4rem;
   padding-bottom: .4rem;
+}
+
+.btn.fit {
   height: fit-content;
 }
 
@@ -290,4 +308,62 @@ hr {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-top: 6px solid #333;
+}
+
+
+// Night mode
+
+body.night {
+  background-color: $night-color;
+  color: $white;
+
+  header {
+    background-color: $night-color !important;
+  }
+
+  nav, nav.bg-light,
+  .article-card .card-body,
+  .dropdown-menu,
+  .textarea-wrapper,
+  .comment-card,
+  textarea.comment {
+    background-color: theme-color('dark') !important;
+  }
+
+  nav,
+  nav.bg-light,
+  header,
+  a,
+  .navbar-light .navbar-nav .nav-link,
+  .navbar-light .navbar-brand,
+  textarea.comment {
+    color: $white;
+  }
+
+  a.btn-outline-secondary {
+    color: theme-color('secondary');
+  }
+
+  textarea::placeholder,
+  input::placeholder {
+    color: $dark-light;
+  }
+
+}
+
+body,
+nav,
+nav.bg-light,
+header,
+a,
+.navbar-light .navbar-nav .nav-link,
+.navbar-light .navbar-brand,
+.article-card .card-body,
+.dropdown-menu,
+.textarea-wrapper,
+.comment-card,
+textarea.comment,
+textarea::placeholder,
+input::placeholder {
+  transition: background-color .3s, color .3s;
 }

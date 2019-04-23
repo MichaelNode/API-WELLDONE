@@ -1,0 +1,16 @@
+mixin config_dropdown(extraClass)
+    div(class="dropdown ml-auto #{extraClass}")
+        a.dropdown-toggle(href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+            i(class="fas fa-cog")
+        div.dropdown-menu.dropdown-menu-right(aria-labelledby="dropdownMenuButton")
+            a.dropdown-item.night-btn(href="#")
+                i(class="fas fa-moon night-icon mr-1")
+                span.night-text #{__('Night light')}
+                span.night-text.d-none #{__('Normal mode')}
+            a.dropdown-item(href='/admin')
+                i(class="fas fa-user mr-1")
+                if isLogged
+                    span #{__('My Area')}
+                else
+                    span #{__('Sign In')}
+

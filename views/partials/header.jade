@@ -7,15 +7,13 @@
 - const searchTextExists = typeof searchText !== 'undefined';
 - const searchTextValue = searchTextExists ? searchText : '';
 
+include ../includes/_config_dropdown
 
 header
   // Header
   nav(class="navbar navbar-light bg-light navbar-expand-md shadow fixed-top")
     a(href="/" class="navbar-brand")= __('WB')
-    if isLogged
-      a(class="btn btn-outline-secondary ml-auto d-inline d-md-none" href='/admin') #{__('My Area')}
-    else
-      a(class="btn btn-outline-secondary ml-auto d-inline d-md-none" href='/admin') #{__('Sign In')}
+    +config_dropdown('d-inline d-md-none')
     button(class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#mainNav")
       span(class="navbar-toggler-icon")
     div(class="collapse navbar-collapse" id="mainNav")
@@ -23,14 +21,7 @@ header
         each category in categories
           - const categoryClass = categorySelected === category.toLowerCase() ? 'bold' : '';
           a(class=`nav-item mx-lg-2 nav-link ${categoryClass}` href=`${categoryLink}${pageIndex}?category=${category.toLowerCase()}`) #{__(category)}
-      div.dropdown
-        button.btn.btn-secondary.dropdown-toggle(type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Dropdown button
-        div.dropdown-menu(aria-labelledby="dropdownMenuButton")
-          a.dropdown-item(href="#") #{__('Action')}
-          if isLogged
-            a.dropdown-item.btn.btn-outline-secondary.ml-auto.d-md-inline.d-none(href='/admin') #{__('My Area')}
-          else
-            a.dropdown-item.btn.btn-outline-secondary.ml-auto.d-md-inline.d-none(href='/admin') #{__('Sign In')}
+      +config_dropdown('d-md-inline d-none')
       form.form-inline.d-flex.mt-2.mt-md-0.ml-md-2.flex-nowrap(action=searchLink)
         input(type="search" name="text" class="form-control mx-lg-2" aria-label="#{__('Search')}" placeholder=__('Search') value=searchTextValue)
         button(type="submit" class="btn btn-outline-secondary" aria-label="#{__('Search')}")
