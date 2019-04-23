@@ -183,7 +183,7 @@ nav .dropdown-toggle i {
 
 .article-card{
   width: 98%;
-  margin: 1.16%;
+  margin: 1.5rem 1.16% 1.16% 1.16%;
 
   @include media-breakpoint-up(md) {
     width: 48%;
@@ -330,12 +330,22 @@ body.night {
     background-color: theme-color('dark') !important;
   }
 
+  .navbar-toggler {
+    border-color: $white;
+  }
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(255,255,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+
+
   nav,
   nav.bg-light,
   header,
   a,
   .navbar-light .navbar-nav .nav-link,
   .navbar-light .navbar-brand,
+  .navbar-light .navbar-toggler,
   textarea.comment {
     color: $white;
   }
@@ -365,5 +375,5 @@ a,
 textarea.comment,
 textarea::placeholder,
 input::placeholder {
-  transition: background-color .3s, color .3s;
+  transition: background-color .3s, color .1s;
 }
