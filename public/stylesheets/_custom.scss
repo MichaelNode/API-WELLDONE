@@ -1,7 +1,12 @@
 // custom variables
 
 $body-bg: #FAFAFA;
+$light-color: #d6d6d6;
 $body-color: #404E5C;
+$night-color: #38444c;
+$dark-light: #989595;
+$green-night: #46683d;
+$green: #b3f4d8;
 
 $theme-colors: (
   "primary": #4F6272,
@@ -11,7 +16,7 @@ $theme-colors: (
   "warning": #f8e15d,
   "info":  #96BBBB,
   "light": #fafafa,
-  "dark": #404E5C
+  "dark": #404E5C,
 );
 
 $footer-height: 109px;
@@ -69,15 +74,11 @@ div.card-body {
     border: none !important;
     background-color: white !important;
     border-radius: 0.25rem !important;
-    box-shadow: 0 20px 40px -9px rgba(0,0,0,0.25) !important; 
-}
-
-.highlight {
-    background-color:#b3f4d8;
+    box-shadow: 0 20px 40px -9px rgba(0,0,0,0.25) !important;
 }
 
 #content-id{
     text-align: justify;
 }
-  
+
 

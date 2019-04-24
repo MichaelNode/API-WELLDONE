@@ -50,11 +50,20 @@ export default class Articles {
             this.selection = ''
         })
 
+<<<<<<< HEAD
         this.content.addEventListener('mouseup', (e) => {
             
             this.selection = window.getSelection().getRangeAt(0)
             const { x, top, width } = this.selection.getBoundingClientRect() 
             
+=======
+            let selection = window.getSelection().getRangeAt(0)
+            const { x, top, width } = selection.getBoundingClientRect()
+            const startNode = selection.startContainer.parentNode
+            const endNode = selection.endContainer.parentNode
+
+
+>>>>>>> develop
             if (!width) {
                 this.menu.style.display = 'none'
                 return
@@ -66,8 +75,20 @@ export default class Articles {
             this.menu.style.top = (top - 10) + 'px'
         })
 
+<<<<<<< HEAD
             this.underline.addEventListener('click', (e) => {
                 this.changeBackgoundColor('#b3f4d8')
+=======
+            //console.log(selection.getBoundingClientRect(),  this.menu.style.top)
+
+            this.underline.addEventListener('click', () => {
+                let selectedText = selection.extractContents()
+                let span = document.createElement('span')
+                span.classList.add('highlight')
+                span.appendChild(selectedText)
+                selection.insertNode(span)
+
+>>>>>>> develop
                 var article = this.pencil.getAttribute('data-article')
                 var articleID = article.slice(1, -1)
                 var textUnderlined = this.selection.toString()
@@ -77,7 +98,7 @@ export default class Articles {
                     article: articleID,
                     content: textUnderlined
                 }
-                
+
                 fetch(url, {
                     method: 'POST',
                     body: JSON.stringify(data),
@@ -95,7 +116,16 @@ export default class Articles {
             // Delete underline
 
             this.erase.addEventListener('click', () => {
+<<<<<<< HEAD
                 this.changeBackgoundColor('white')
+=======
+                let selectedText = selection.extractContents()
+                console.log(selectedText)
+                let span = document.createElement('span')
+                span.style.backgroundColor = 'transparent'
+                span.appendChild(selectedText)
+                selection.insertNode(span)
+>>>>>>> develop
 
                 var article = this.erase.getAttribute('data-article')
                 var articleID = article.slice(1, -1)
@@ -106,7 +136,7 @@ export default class Articles {
                     article: articleID,
                     content: textUnderlined
                 }
-                
+
                 fetch(url, {
                     method: 'PUT',
                     body: JSON.stringify(data),

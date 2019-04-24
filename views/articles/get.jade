@@ -27,7 +27,7 @@ block content
                 else if article.url_type == 'mp4'
                     video(width='100%', height='100%', controls)
                         source(src=article.url, type='video/mp4')
-        
+
 
         // Article Content
         .col-12.mt-5.mb-4.mr-0.ml-0.p-0.row.d-flex.justify-content-center
@@ -51,13 +51,11 @@ block content
                         i.mx-2.fa-bookmark.fa-2x.fav(data-article=article._id, class=bookmark )
                         i#letter.mx-2.fas.fa-font.fa-1x.fav( data-csize='-4')
                         i#letter.mx-2.fas.fa-font.fa-2x.fav( data-csize='4')
-                    
+
 
             div(id='content-id').col-12.col-md-10.col-lg-8.p-0.mt-3.art-content.editable
                 !{article.content}
-                if isLogged
-                    .col-12.col-md-10.col-lg-8.row
-                        a.btn.btn-outline-secondary.mt-2(href=`/admin/add_article/${article._id}`) #{__('Response with article')}
+
             .menu
                 i(id='underline').fas.fa-pencil-alt.pencil(data-article=article._id)  #{__('underline')} 
                 i(id='erase').fas.fa-trash-alt(data-article=article._id)  #{__('erase')}
@@ -71,6 +69,7 @@ block content
                     form.col-12.p-0(method="post")
                         .textarea-wrapper.col-12.pr-0
                             textarea.comment.col-12.p-0.pt-2.pr-2(placeholder=`${__('Write here...')}`, name="content" required)=commentPosted
+                            a.btn.btn-outline-secondary.mt-2(href=`/admin/add_article/${article._id}`) #{__('Response with article')}
                             input.btn.btn-outline-secondary.mt-2(type='submit' value=`${__('Send')}`)
                         +error_input('content', errors)
 
@@ -79,48 +78,15 @@ block content
 
                 .mt-3
                     +pagination(link, '')
+
     script.
-       
-        var texts = !{JSON.stringify(text)} 
-        function underline(text) { 
-           
-            var inputText = document.getElementById("content-id");
-            var innerHTML = inputText.innerHTML;
-            var index = innerHTML.indexOf(text);
-            if (index >= 0) { 
-                innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
-                inputText.innerHTML = innerHTML;
-            }
-        }
-        if(texts){
-            texts.forEach(function(text) {
-                underline(text.content)
+
+        var texts = !{JSON.stringify(text)}
+
+        if (texts) {
+            texts.forEach(function (text) {
+                Utils.underline(text.content)
             });
         }
 
-     
-        var def_size=16;
-        var cur_base=def_size;
-        $('i#letter').click(function(){
-            var span = document.getElementById("content-id");
-            change_font_size( parseInt($(this).data('csize')) );
-        })
-        function change_font_size(csize){
-            var $cotent_html=$('#content-id p');
-            $cotent_html.each(function(){
-                var cur_size = parseInt($(this).css('font-size'));
-                cur_size=cur_size+csize;
-                $(this).css('font-size', cur_size.toString()+'px');
-        });
-        }
-       
-        
-       
-       
-
-        
-       
-
-        
-      
-            
+        Utils.changeSizeText();

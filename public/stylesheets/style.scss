@@ -125,6 +125,16 @@ hr {
   width: 50px;
 }
 
+// Nav
+nav .dropdown-toggle::after {
+  border: none;
+}
+
+nav .dropdown-toggle i {
+  vertical-align: middle;
+}
+
+
 // Form
 .error {
   color: red;
@@ -140,7 +150,12 @@ hr {
     position:absolute;
     bottom: 10px;
     right: 15px;
-    width: 60px;
+  }
+
+  a {
+    position:absolute;
+    bottom: 10px;
+    left: 15px;
   }
 }
 
@@ -177,7 +192,7 @@ hr {
 
 .article-card{
   width: 98%;
-  margin: 1.16%;
+  margin: 1.5rem 1.16% 1.16% 1.16%;
 
   @include media-breakpoint-up(md) {
     width: 48%;
@@ -256,6 +271,9 @@ hr {
 .btn {
   padding-top: .4rem;
   padding-bottom: .4rem;
+}
+
+.btn.fit {
   height: fit-content;
 }
 
@@ -298,6 +316,92 @@ hr {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-top: 6px solid #333;
+}
+
+// Night mode
+
+body.night {
+  background-color: $night-color;
+  color: $light-color;
+
+  header {
+    background-color: $night-color !important;
+  }
+
+  nav, nav.bg-light,
+  .article-card .card-body,
+  .dropdown-menu,
+  .textarea-wrapper,
+  .comment-card,
+  textarea.comment {
+    background-color: theme-color('dark') !important;
+  }
+
+  .navbar-toggler {
+    border-color: $light-color;
+  }
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(255,255,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+
+  .highlight {
+    background-color: $green-night;
+  }
+
+  .not-highlight {
+    background-color: $night-color;
+  }
+
+  nav,
+  nav.bg-light,
+  header,
+  a,
+  .navbar-light .navbar-nav .nav-link,
+  .navbar-light .navbar-brand,
+  .navbar-light .navbar-toggler,
+  textarea.comment {
+    color: $light-color;
+  }
+
+  nav p.dropdown-item:hover a{
+    color: theme-color('dark');
+  }
+
+  a.btn-outline-secondary {
+    color: theme-color('secondary');
+  }
+
+  textarea::placeholder,
+  input::placeholder {
+    color: $dark-light;
+  }
+
+}
+
+body,
+nav,
+nav.bg-light,
+header,
+a,
+.navbar-light .navbar-nav .nav-link,
+.navbar-light .navbar-brand,
+.article-card .card-body,
+.dropdown-menu,
+.textarea-wrapper,
+.comment-card,
+textarea.comment,
+textarea::placeholder,
+input::placeholder {
+  transition: background-color .3s, color .1s;
+}
+
+.highlight {
+  background-color: $green;
+}
+
+.not-highlight {
+  background-color: $white;
 }
 
 .menu i {

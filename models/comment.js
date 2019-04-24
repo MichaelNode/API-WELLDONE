@@ -20,7 +20,7 @@ var CommentSchema = Schema({
 });
 
 CommentSchema.statics.listComments = async function(filters, pages, perPage){
-    const query = this.model('comment').find(filters).sort({create_at: -1}).populate('user', '_id nick_name');
+    const query = this.model('comment').find(filters).sort({create_at: -1}).populate('user', '_id nick_name image');
     if(pages !== undefined && perPage !== undefined){
         query.skip((perPage * pages) - perPage);
         query.limit(perPage)
