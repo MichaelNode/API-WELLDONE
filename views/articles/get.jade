@@ -42,13 +42,13 @@ block content
                         a.col-12.small(href='#comments')=`${article.numComments} ${__('comments')}`
 
 
-                .small
+                .small(style=`color:${color}`)
                     a(href='https://www.facebook.com/sharer/sharer.php?u=#{requested_url}' target="_blank")
-                        i.mx-2.fa-facebook-square.fa-2x.fab
+                        i.mx-2.fa-facebook-square.fa-2x.fab(style=`color:${color}`)
                     a(href='http://twitter.com/share?text=#{article.title}&url=#{requested_url}' target="_blank" aria-label="Twitter")
-                        i.mx-2.fa-twitter.fa-2x.fab
+                        i.mx-2.fa-twitter.fa-2x.fab(style=`color:${color}`)
                     if isLogged
-                        i.mx-2.fa-bookmark.fa-2x.fav(data-article=article._id, class=bookmark /*, style=`color:${color}`*/)
+                        i.mx-2.fa-bookmark.fa-2x.fav(data-article=article._id, class=bookmark )
                         i#letter.mx-2.fas.fa-font.fa-1x.fav( data-csize='-4')
                         i#letter.mx-2.fas.fa-font.fa-2x.fav( data-csize='4')
                     

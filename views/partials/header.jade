@@ -11,7 +11,8 @@
 header
   // Header
   nav(class="navbar navbar-light bg-light navbar-expand-md shadow fixed-top")
-    a(href="/" class="navbar-brand")= __('WB')
+    a(href="/" class="navbar-brand") 
+      img(class="logo" src="/images/logo-header.png" alt="logo Well Done")
     if isLogged
       a(class="btn btn-outline-secondary ml-auto d-inline d-md-none" href='/admin') #{__('My Area')}
     else
