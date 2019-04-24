@@ -82,46 +82,11 @@ block content
     script.
 
         var texts = !{JSON.stringify(text)}
-        function underline(text) {
 
-            var inputText = document.getElementById("content-id");
-            var innerHTML = inputText.innerHTML;
-            var index = innerHTML.indexOf(text);
-            if (index >= 0) {
-                innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
-                inputText.innerHTML = innerHTML;
-            }
-        }
-        if(texts){
-            texts.forEach(function(text) {
-                underline(text.content)
+        if (texts) {
+            texts.forEach(function (text) {
+                Utils.underline(text.content)
             });
         }
 
-
-        var def_size=16;
-        var cur_base=def_size;
-        $('i#letter').click(function(){
-            var span = document.getElementById("content-id");
-            change_font_size( parseInt($(this).data('csize')) );
-        })
-        function change_font_size(csize){
-            var $cotent_html=$('#content-id p');
-            $cotent_html.each(function(){
-                var cur_size = parseInt($(this).css('font-size'));
-                cur_size=cur_size+csize;
-                $(this).css('font-size', cur_size.toString()+'px');
-        });
-        }
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> develop
+        Utils.changeSizeText();

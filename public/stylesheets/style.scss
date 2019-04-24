@@ -359,6 +359,10 @@ body.night {
     color: $light-color;
   }
 
+  nav p.dropdown-item:hover a{
+    color: theme-color('dark');
+  }
+
   a.btn-outline-secondary {
     color: theme-color('secondary');
   }

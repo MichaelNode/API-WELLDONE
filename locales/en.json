@@ -115,5 +115,9 @@
 	"Night light": "Night mode",
 	"Normal mode": "Normal mode",
 	"Sun mode": "Sun mode",
-	"Erase": "Erase"
+	"Erase": "Erase",
+	"ES": "Spanish",
+	"EN": "English",
+	"Languages": "Languages",
+	"Config": "Configuration"
 }
