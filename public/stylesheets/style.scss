@@ -8,9 +8,10 @@ html {
 }
 
 body {
-  font-size: 20px;
+  font-size: 24px;
   min-height: 100vh;
   position: relative;
+  font-family: Georgia,Cambria,"Times New Roman",Times,serif;
 }
 
 .h1-style,
@@ -46,8 +47,11 @@ h6, .h6-style {
   font-size: 1.1rem;
 }
 
+.container {
+  padding-top: 100px;
+}
 main {
-  padding-top: 110px;
+  //padding-top: 100px;
   min-height: 70vh;
   padding-bottom: $footer-height + 20px;
 }
@@ -138,7 +142,7 @@ hr {
 // Articles
 .article-detail-image{
   width: 100%;
-  max-height: 300px;
+  max-height: 500px;
   object-fit: cover;
 }
 

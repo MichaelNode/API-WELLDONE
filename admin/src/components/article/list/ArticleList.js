@@ -1,5 +1,4 @@
 // Dependencies
-import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {articleUtils} from "../../../store/article";
@@ -8,25 +7,10 @@ import {Col, Row} from 'react-bootstrap';
 import * as types from '../../../store/article/types';
 import PropTypes from 'prop-types';
 import styled from "styled-components";
-var ReactBsTable = require('react-bootstrap-table');
-var BootstrapTable = ReactBsTable.BootstrapTable;
-var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
-
-
-
-const Status = {
-  true: 'yes',
-  false: 'no'
-};
-
-function enumFormatter(cell, row, enumObject) {
-  return enumObject[cell];
-}
 
 const ArticleList = (props, context) => {
   const [error, setError] = useState('');
   const [articles, setArticles] = useState(null);
-
 
   const fetchArticles = async () => {
     try {
@@ -43,22 +27,36 @@ const ArticleList = (props, context) => {
     fetchArticles();
   }, [props.getArticles]);
 
-  
-
   return (
-    
       <Row className='mx-0 mx-lg-3'>
         {
           error &&
           <p>{error}</p>
         }
-        <BootstrapTable data={articles} pagination search>
-        <TableHeaderColumn isKey dataField='title'  dataSort={ true }>{context.t('Title')}</TableHeaderColumn>
-        <TableHeaderColumn dataField='summary' tdStyle={ { whiteSpace: 'normal' } } dataSort={ true }>{context.t('Summary')}</TableHeaderColumn>
-        <TableHeaderColumn dataField='state' dataSort={ true }  dataFormat={ enumFormatter } formatExtraData={ Status }>{context.t('Published')}</TableHeaderColumn>
-        <TableHeaderColumn>{context.t('Action')}</TableHeaderColumn>
-        </BootstrapTable>,
-
+        {!error &&
+        <Row className='pb-2 border-bottom px-0' as={Col} xs={12}>
+          <Col xs={6} md={6} lg={3}>
+            <Paragraph>{context.t('Title')}</Paragraph>
+          </Col>
+          <Col className='d-none d-lg-block' lg={4} xl={5}>
+            <Paragraph>{context.t('Summary')}</Paragraph>
+          </Col>
+          <Col xs={3} md={2} lg={1}>
+            <Paragraph>{context.t('Published')}</Paragraph>
+          </Col>
+          <Col className='d-none d-md-block' md={2} xl={1}>
+            <Paragraph>{context.t('Image')}</Paragraph>
+          </Col>
+          <Col xs={3} md={2}>
+            <Paragraph>{context.t('Action')}</Paragraph>
+          </Col>
+        </Row>
+        }
+        {!error && articles && articles.map(article => {
+          return (
+              <Article key={article._id} article={article}/>
+          )
+        })}
       </Row>
   );
 };

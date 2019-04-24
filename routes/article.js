@@ -27,15 +27,17 @@ router.get('/:user/:articleSlug/:page?', async function (req, res, next) {
                 publi_date: {$lt: new Date()}})
             .populate('author', '_id image nick_name');
         const user = req.session.user;
-
-        const text = await Text.find({article: id, user: user._id}).select('content');
+      
+        if(user) {
+           var text = await Text.find({article: id, user: user._id}).select('content');
+        } 
+       
       
         if(!article){
             next(createError(404));
             return;
         }
-        
-      
+    
         // render article detail
         await renderArticleDetail(req, res, article, user, text);
 

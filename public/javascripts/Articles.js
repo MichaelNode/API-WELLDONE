@@ -65,7 +65,7 @@ export default class Articles {
             this.underline.addEventListener('click', () => {
                 let selectedText = selection.extractContents()
                 let span = document.createElement('span')
-                span.style.backgroundColor = 'yellow'
+                span.style.backgroundColor = '#b3f4d8'
                 span.appendChild(selectedText)
                 selection.insertNode(span)
 
