@@ -51,3 +51,6 @@
   padding-top: 30px;
 }
 
+.react-bs-table {
+  height: auto !important;
+}

@@ -7,7 +7,10 @@ import Nav from "./components/nav/Nav";
 import styled from "styled-components";
 
 
+
 class Header extends Component{
+
+
     render() {
         return (
             <div className="App">

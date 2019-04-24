@@ -17,6 +17,11 @@ import moment from 'moment';
 import '../style/main.css'
 import apiRoutes from '../../../config/apiRoutes';
 import FileComponent from '../fileUpload/file'
+import { OCAlertsProvider } from '@opuscapita/react-alerts';
+import { Redirect } from 'react-router-dom'
+
+
+
 
 
 class ArticleForm extends Component {
@@ -46,7 +51,8 @@ class ArticleForm extends Component {
       ask_fileError: '',
       showCard: false,
       showCardtube: false,
-      showCardMP4: false
+      showCardMP4: false,
+      fireRedirect: false
 
     };
   }
@@ -377,12 +383,16 @@ class ArticleForm extends Component {
                 this.state.id
               )
           }
+          
+          this.setState({ fireRedirect: true })
         }
     };
 
   render() {
     return (
       <>
+      <OCAlertsProvider />
+   
       <Form.Row>
         <Card as={Col}  md="4"  className="text-center card-main">
           { this.props.type == 'ADD' && (
@@ -392,6 +402,7 @@ class ArticleForm extends Component {
             <Card.Header>{this.props.title} : {this.state.title}</Card.Header>
           )}
           <Card.Body>
+         
             <Form onSubmit={this.handleSubmit } noValidate encType="multipart/form-data"  >
               <Form.Row>
                 <Form.Group as={Col}  md="6" controlId="title">
@@ -478,13 +489,7 @@ class ArticleForm extends Component {
                   handleInputChange={this.handleInputChange}
                   type={this.props.type}
                />
-            { this.props.message && (
-              <Form.Group as={Col}  md="12" >
-                <Alert   md="12" variant= 'success'>
-                  {this.context.t(this.props.message)}
-                </Alert>
-              </Form.Group>
-            )}
+          
               <Button className="button-send" variant="primary" type="submit">
                   {this.context.t("Save")}
               </Button>

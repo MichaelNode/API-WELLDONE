@@ -3,6 +3,8 @@ export default class Articles {
         this.bookmark = document.querySelector('.fav');
         this.content = document.querySelector('.art-content')
         this.menu = document.querySelector('.menu')
+        this.underline = document.querySelector('.fa-pencil-alt')
+        this.erase = document.querySelector('.fa-trash-alt')
         this.pencil = document.querySelector('.pencil')
     }
 
@@ -39,10 +41,10 @@ export default class Articles {
         this.content.addEventListener('mouseup', (e) => {
 
             let selection = window.getSelection().getRangeAt(0)
-            const { x, top, width } = selection.getBoundingClientRect() 
+            const { x, top, width } = selection.getBoundingClientRect()
             const startNode = selection.startContainer.parentNode
             const endNode = selection.endContainer.parentNode
-            
+
 
             if (!width) {
                 this.menu.style.display = 'none'
@@ -58,12 +60,12 @@ export default class Articles {
             this.menu.style.left = (x + (width/2) - (menuWidth/2)) + 'px'
             this.menu.style.top = (top - 10) + 'px'
 
-            console.log(selection.getBoundingClientRect(),  this.menu.style.top)
+            //console.log(selection.getBoundingClientRect(),  this.menu.style.top)
 
-            this.menu.addEventListener('click', () => {
+            this.underline.addEventListener('click', () => {
                 let selectedText = selection.extractContents()
                 let span = document.createElement('span')
-                span.style.backgroundColor = 'yellow'
+                span.classList.add('highlight')
                 span.appendChild(selectedText)
                 selection.insertNode(span)
 
@@ -76,7 +78,7 @@ export default class Articles {
                     article: articleID,
                     content: textUnderlined
                 }
-                
+
                 fetch(url, {
                     method: 'POST',
                     body: JSON.stringify(data),
@@ -87,6 +89,40 @@ export default class Articles {
                     .catch(error => console.error('Error:', error))
                     .then(response => {
                         console.log('guardado', response)
+                        selection = ''
+                    })
+            })
+
+            // Delete underline
+
+            this.erase.addEventListener('click', () => {
+                let selectedText = selection.extractContents()
+                console.log(selectedText)
+                let span = document.createElement('span')
+                span.style.backgroundColor = 'transparent'
+                span.appendChild(selectedText)
+                selection.insertNode(span)
+
+                var article = this.erase.getAttribute('data-article')
+                var articleID = article.slice(1, -1)
+                var textUnderlined = selection.toString()
+
+                const url = `/apiv1/underlinetext`;
+                const data = {
+                    article: articleID,
+                    content: textUnderlined
+                }
+
+                fetch(url, {
+                    method: 'PUT',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => res.json())
+                    .catch(error => console.error('Error:', error))
+                    .then(response => {
+                        console.log('eliminado', response)
                         selection = ''
                     })
             })

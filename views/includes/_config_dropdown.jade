@@ -13,4 +13,6 @@ mixin config_dropdown(extraClass)
                     span #{__('My Area')}
                 else
                     span #{__('Sign In')}
-
+            - getLocales().forEach( function(lang) {
+            a(class='nav-item mx-lg-2 nav-link' href=`/lang/${lang}`)= lang.toUpperCase()
+            -  })
