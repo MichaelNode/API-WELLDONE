@@ -6,6 +6,14 @@ export default class Articles {
         this.underline = document.querySelector('.fa-pencil-alt')
         this.erase = document.querySelector('.fa-trash-alt')
         this.pencil = document.querySelector('.pencil')
+        this.selection = ''
+        this.changeBackgoundColor = (color) => {
+            let selectedText = this.selection.extractContents()
+            let span = document.createElement('span')
+            span.style.backgroundColor = color
+            span.appendChild(selectedText)
+            this.selection.insertNode(span)
+        }
     }
 
     eventListeners() {
@@ -38,40 +46,31 @@ export default class Articles {
                 })
         })
 
+        this.content.addEventListener('mousedown', (e) => {
+            this.selection = ''
+        })
+
         this.content.addEventListener('mouseup', (e) => {
-
-            let selection = window.getSelection().getRangeAt(0)
-            const { x, top, width } = selection.getBoundingClientRect() 
-            const startNode = selection.startContainer.parentNode
-            const endNode = selection.endContainer.parentNode
             
-
+            this.selection = window.getSelection().getRangeAt(0)
+            const { x, top, width } = this.selection.getBoundingClientRect() 
+            
             if (!width) {
                 this.menu.style.display = 'none'
                 return
             }
 
-            let xpos = startNode.offsetWidth
-            let ypos = startNode.offsetTop
             const menuWidth = this.menu.offsetWidth
-            const menuHeight = this.menu.offsetTop
-
             this.menu.style.display = 'block'
             this.menu.style.left = (x + (width/2) - (menuWidth/2)) + 'px'
             this.menu.style.top = (top - 10) + 'px'
+        })
 
-            //console.log(selection.getBoundingClientRect(),  this.menu.style.top)
-
-            this.underline.addEventListener('click', () => {
-                let selectedText = selection.extractContents()
-                let span = document.createElement('span')
-                span.style.backgroundColor = '#b3f4d8'
-                span.appendChild(selectedText)
-                selection.insertNode(span)
-
+            this.underline.addEventListener('click', (e) => {
+                this.changeBackgoundColor('#b3f4d8')
                 var article = this.pencil.getAttribute('data-article')
                 var articleID = article.slice(1, -1)
-                var textUnderlined = selection.toString()
+                var textUnderlined = this.selection.toString()
 
                 const url = `/apiv1/underlinetext`;
                 const data = {
@@ -89,22 +88,18 @@ export default class Articles {
                     .catch(error => console.error('Error:', error))
                     .then(response => {
                         console.log('guardado', response)
-                        selection = ''
+                        this.selection = ''
                     })
             })
 
             // Delete underline
 
             this.erase.addEventListener('click', () => {
-                let selectedText = selection.extractContents()
-                let span = document.createElement('span')
-                span.style.backgroundColor = 'white'
-                span.appendChild(selectedText)
-                selection.insertNode(span)
+                this.changeBackgoundColor('white')
 
                 var article = this.erase.getAttribute('data-article')
                 var articleID = article.slice(1, -1)
-                var textUnderlined = selection.toString()
+                var textUnderlined = this.selection.toString()
 
                 const url = `/apiv1/underlinetext`;
                 const data = {
@@ -122,15 +117,10 @@ export default class Articles {
                     .catch(error => console.error('Error:', error))
                     .then(response => {
                         console.log('eliminado', response)
-                        selection = ''
+                        this.selection = ''
                     })
             })
-
-        })
-
-
     }
-
 }
 
 
