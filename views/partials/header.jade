@@ -22,7 +22,10 @@ header
       div(class="navbar-nav pl-md-2")
         each category in categories
           - const categoryClass = categorySelected === category.toLowerCase() ? 'bold' : '';
-          a(class=`nav-item mx-lg-2 nav-link ${categoryClass}` href=`${categoryLink}${pageIndex}?category=${category.toLowerCase()}`) #{__(category)}
+          a(class=`nav-item mx-lg-2 nav-link ${categoryClass}` href=`${categoryLink}${pageIndex}?category=${category.toLowerCase()}`) #{__(category)}   
+        - getLocales().forEach( function(lang) { 
+            a(class='nav-item mx-lg-2 nav-link' href=`/lang/${lang}`)= lang.toUpperCase()
+        -  })
       if isLogged
         a(class="btn btn-outline-secondary ml-auto d-md-inline d-none" href='/admin') #{__('My Area')}
       else

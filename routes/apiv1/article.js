@@ -223,6 +223,7 @@ router.get('/favourites', async (req, res, next) => {
 			console.log("Error recuperando los artículos favoritos", err);
 			return
 		}
+		console.log('favoooritos',articles)
 		res.json({ success: "ok", articles: articles });
 		}
 	  });

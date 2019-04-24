@@ -8,9 +8,10 @@ html {
 }
 
 body {
-  font-size: 20px;
+  font-size: 24px;
   min-height: 100vh;
   position: relative;
+  font-family: Georgia,Cambria,"Times New Roman",Times,serif;
 }
 
 .h1-style,
@@ -46,8 +47,11 @@ h6, .h6-style {
   font-size: 1.1rem;
 }
 
+.container {
+  padding-top: 100px;
+}
 main {
-  padding-top: 110px;
+  //padding-top: 100px;
   min-height: 70vh;
   padding-bottom: $footer-height + 20px;
 }
@@ -138,7 +142,7 @@ hr {
 // Articles
 .article-detail-image{
   width: 100%;
-  max-height: 300px;
+  max-height: 500px;
   object-fit: cover;
 }
 
@@ -259,7 +263,6 @@ hr {
 }
 
 .menu {
-  height: 30px;
   padding: 5px 10px;
   background: #333;
   border-radius: 3px;
@@ -272,7 +275,7 @@ hr {
   justify-content: center;
   align-items: center;
   display: none;
-  color: bisque;
+  color:#fafafa;
 }
 
 .menu:hover {
@@ -290,4 +293,8 @@ hr {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-top: 6px solid #333;
+}
+
+.menu i {
+  padding-right: 10px;
 }

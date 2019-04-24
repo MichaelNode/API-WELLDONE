@@ -1,6 +1,7 @@
 import * as types from "./types";
 import StorageWrapper from '../../utils/StorageWrapper';
 
+
 const token = StorageWrapper.getValue('token');
 
 const initialState = {

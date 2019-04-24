@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
+import {Card, Alert, Form,  Button, Col } from 'react-bootstrap'
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { userOperations } from "../../store/user";
@@ -17,20 +18,37 @@ function FavArticles(props, context) {
 
 
   return (
-
-      <ul>
+    <Form.Row> 
         {articles && articles.map(item => (
-            <ArticleList>
-                <li key={item._id}>{item.title} -
-                    <a href={`${apiRoutes.articles}/${item.author.nick_name}/${item.title}-${item._id}`}>
-                        {context.t("Read Article")}
-                    </a>
-                </li>
-            </ArticleList>
+          <Form.Group as={Col}  md="2">
+            <Card style={{ width: '18rem' }}>
+              { item.file_name && (
+                <Card.Img variant="top" src={`/images/uploads/${item.file_name}`} />
+              )}
+              { item.url && item.url_type == 'youtube' && (
+                <iframe frameborder="0" allowFullScreen  width="100%" height="100%"
+                          src={item.url.replace('watch?v=', 'embed/')}>
+                </iframe>
+              )}
+              {item.url && item.url_type == 'mp4' && (
+                <video width="100%" height="100%" controls>
+                          <source  src={item.url} type="video/mp4" />
+                </video>
+              )}
+              <Card.Body>
+                <Card.Title>{item.title}</Card.Title>
+                  <Card.Text>
+                    {item.summary}
+                  </Card.Text>
+                  <Card.Link href={`${apiRoutes.articles}/${item.author.nick_name}/${item.title}-${item._id}`} > 
+                    {context.t("Read Article")} 
+                  </Card.Link>
+              </Card.Body>
+            </Card>   
+          </Form.Group>
         ))}
-      </ul>
-
-  );
+    </Form.Row>
+   );
 }
 
 FavArticles.contextTypes = {
