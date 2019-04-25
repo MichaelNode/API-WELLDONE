@@ -3,14 +3,18 @@ export default class Articles {
         this.bookmark = document.querySelector('.fav');
         this.content = document.querySelector('.art-content')
         this.menu = document.querySelector('.menu')
-        this.underline = document.querySelector('.fa-pencil-alt')
-        this.erase = document.querySelector('.fa-trash-alt')
+        this.underline = document.querySelector('.underline')
+        this.erase = document.querySelector('.erase')
         this.pencil = document.querySelector('.pencil')
+        this.highlighted = document.querySelectorAll('.highlight')
         this.selection = ''
+        this.textUnderlined = ''
+        this.node = null
         this.changeBackgoundColor = (color) => {
             let selectedText = this.selection.extractContents()
             let span = document.createElement('span')
             span.style.backgroundColor = color
+            span.classList.add('highlight')
             span.appendChild(selectedText)
             this.selection.insertNode(span)
         }
@@ -50,46 +54,26 @@ export default class Articles {
             this.selection = ''
         })
 
-<<<<<<< HEAD
         this.content.addEventListener('mouseup', (e) => {
             
             this.selection = window.getSelection().getRangeAt(0)
             const { x, top, width } = this.selection.getBoundingClientRect() 
             
-=======
-            let selection = window.getSelection().getRangeAt(0)
-            const { x, top, width } = selection.getBoundingClientRect()
-            const startNode = selection.startContainer.parentNode
-            const endNode = selection.endContainer.parentNode
-
-
->>>>>>> develop
             if (!width) {
-                this.menu.style.display = 'none'
+                this.underline.style.display = 'none'
+                this.erase.style.display = 'none'
                 return
             }
 
-            const menuWidth = this.menu.offsetWidth
-            this.menu.style.display = 'block'
-            this.menu.style.left = (x + (width/2) - (menuWidth/2)) + 'px'
-            this.menu.style.top = (top - 10) + 'px'
+            const menuWidth = this.underline.offsetWidth
+            this.underline.style.display = 'block'
+            this.underline.style.left = (x + (width/2) - (menuWidth/2)) + 'px'
+            this.underline.style.top = (top - 10) + 'px'
         })
 
-<<<<<<< HEAD
             this.underline.addEventListener('click', (e) => {
                 this.changeBackgoundColor('#b3f4d8')
-=======
-            //console.log(selection.getBoundingClientRect(),  this.menu.style.top)
-
-            this.underline.addEventListener('click', () => {
-                let selectedText = selection.extractContents()
-                let span = document.createElement('span')
-                span.classList.add('highlight')
-                span.appendChild(selectedText)
-                selection.insertNode(span)
-
->>>>>>> develop
-                var article = this.pencil.getAttribute('data-article')
+                var article = this.underline.getAttribute('data-article')
                 var articleID = article.slice(1, -1)
                 var textUnderlined = this.selection.toString()
 
@@ -115,26 +99,24 @@ export default class Articles {
 
             // Delete underline
 
+            this.highlighted.forEach(node => node.addEventListener ('click', (e) => {
+                this.erase.style.display = 'block'
+                this.erase.style.left = e.x + 'px'
+                this.erase.style.top = (e.y - 10) + 'px'
+                this.textUnderlined = e.target.textContent
+                this.node = e.target
+            }))
+
             this.erase.addEventListener('click', () => {
-<<<<<<< HEAD
-                this.changeBackgoundColor('white')
-=======
-                let selectedText = selection.extractContents()
-                console.log(selectedText)
-                let span = document.createElement('span')
-                span.style.backgroundColor = 'transparent'
-                span.appendChild(selectedText)
-                selection.insertNode(span)
->>>>>>> develop
+                this.node.classList.add = ('not-highlight')
 
                 var article = this.erase.getAttribute('data-article')
                 var articleID = article.slice(1, -1)
-                var textUnderlined = this.selection.toString()
-
+                
                 const url = `/apiv1/underlinetext`;
                 const data = {
                     article: articleID,
-                    content: textUnderlined
+                    content: this.textUnderlined
                 }
 
                 fetch(url, {
@@ -147,7 +129,7 @@ export default class Articles {
                     .catch(error => console.error('Error:', error))
                     .then(response => {
                         console.log('eliminado', response)
-                        this.selection = ''
+                        this.erase.style.display = 'none'
                     })
             })
     }
