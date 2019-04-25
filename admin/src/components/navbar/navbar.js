@@ -8,6 +8,8 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import PropTypes from "prop-types";
 import Logout from '../login/Logout';
 import DeleteUser from '../deleteUser/deleteUser';
+import Iso from '../../../public/isowelldone.jpg'
+import styled from 'styled-components';
 
 // Be sure to include styles at some point, probably during your bootstraping
 
@@ -23,7 +25,11 @@ export default class MainNavbar extends Component {
             </Nav>
             <Form inline>
               <Nav.Link href={process.env.REACT_APP_API_URL + '/articles'} title="Welldone"> 
-                 <i className="fa fa-fw fa-globe " style={{fontSize: '2.7em', color: '#305abb'}}/>  
+                <Logo>
+                  <div>
+                    <img src={Iso}/>  
+                  </div>
+                </Logo>
               </Nav.Link>
               <Dropdown  drop='left'>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -43,6 +49,11 @@ export default class MainNavbar extends Component {
         )
     }
 }
+
+const Logo = styled.div`
+  width: 50px;
+`;
+
 
 MainNavbar.contextTypes = {
   t: PropTypes.func
