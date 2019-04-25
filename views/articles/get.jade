@@ -46,11 +46,11 @@ block content
                         a.col-12.small(href='#comments')=`${article.numComments} ${__('comments')}`
 
 
-                .small
+                .small(style=`color:${color}`)
                     a(href='https://www.facebook.com/sharer/sharer.php?u=#{requested_url}' target="_blank")
-                        i.mx-2.fa-facebook-square.fa-2x.fab
+                        i.mx-2.fa-facebook-square.fa-2x.fab(style=`color:${color}`)
                     a(href='http://twitter.com/share?text=#{article.title}&url=#{requested_url}' target="_blank" aria-label="Twitter")
-                        i.mx-2.fa-twitter.fa-2x.fab
+                        i.mx-2.fa-twitter.fa-2x.fab(style=`color:${color}`)
                     if isLogged
                         i.mx-2.fa-bookmark.fa-2x.fav(data-article=article._id, class=bookmark)
             .col-12.col-md-10.col-lg-8.d-flex.align-items-center.p-0.justify-content-between           
@@ -62,10 +62,11 @@ block content
             div(id='content-id').col-12.col-md-10.col-lg-8.p-0.mt-3.art-content.editable
                 !{article.content}
 
-            .menu
-                i(id='underline').fas.fa-pencil-alt.pencil(data-article=article._id)  #{__('underline')}
-                i(id='erase').fas.fa-trash-alt(data-article=article._id)  #{__('Erase')}
-
+            .menu.underline(data-article=article._id)
+                i(id='underline').fas.fa-pencil-alt.pencil
+            .menu.erase(data-article=article._id)
+                i(id='erase').fas.fa-eraser
+              
             // Comments
             .col-12.col-md-10.col-lg-8.p-0.pt-5.mb-5.row(id='comments')
 

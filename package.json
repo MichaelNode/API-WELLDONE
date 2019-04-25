@@ -15,7 +15,7 @@
     "install_articles": "node ./lib/saveArticles",
     "install_comments": "node ./lib/saveComments",
     "install_microservice": "cd ./lib/microservice/ && npm install",
-    "run_microservice":"cd ./lib/microservice/ && node resize.js"
+    "run_microservice": "cd ./lib/microservice/ && node resize.js"
   },
   "dependencies": {
     "@babel/core": "^7.3.4",

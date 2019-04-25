@@ -12,7 +12,13 @@ include ../includes/_config_dropdown
 header
   // Header
   nav(class="navbar navbar-light bg-light navbar-expand-md shadow fixed-top")
-    a(href="/" class="navbar-brand")= __('WB')
+    a(href="/" class="navbar-brand") 
+      img(class="logo" src="/images/logo-header.png" alt="logo Well Done")
+    if isLogged
+      a(class="btn btn-outline-secondary ml-auto d-inline d-md-none" href='/admin') #{__('My Area')}
+    else
+      a(class="btn btn-outline-secondary ml-auto d-inline d-md-none" href='/admin') #{__('Sign In')}
+    
     +config_dropdown('d-inline d-md-none')
     button(class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#mainNav")
       span(class="navbar-toggler-icon")
