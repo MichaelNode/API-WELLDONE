@@ -22,6 +22,9 @@ export default class MainNavbar extends Component {
             <Nav className="mr-auto">
             </Nav>
             <Form inline>
+              <Nav.Link href={process.env.REACT_APP_API_URL + '/articles'} title="Welldone"> 
+                 <i className="fa fa-fw fa-globe " style={{fontSize: '2.7em', color: '#305abb'}}/>  
+              </Nav.Link>
               <Dropdown  drop='left'>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                   <i className="fa fa-user"></i>

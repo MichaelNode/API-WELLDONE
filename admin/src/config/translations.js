@@ -67,7 +67,10 @@ export const translations = {
         "Image": "Image",
         "Action": "Action",
         "My articles": "My Articles",
-        "Read Article": "Read Article"
+        "Read Article": "Read Article",
+        'followers': 'followers',
+        'following':'following',
+        'articles':'articles'
     },
     es: {
         "Email": "Email",
@@ -137,5 +140,8 @@ export const translations = {
         "Image": "Imagen",
         "Action": "Acción",
         "My articles": "Mis Artículos",
-        "Read Article": "Leer Artículo"
+        "Read Article": "Leer Artículo",
+        'followers': 'seguidores',
+        'following':'siguiendo',
+        'articles':'artículos'
 }}

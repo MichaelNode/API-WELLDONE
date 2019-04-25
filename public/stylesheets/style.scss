@@ -11,7 +11,6 @@ body {
   font-size: 24px;
   min-height: 100vh;
   position: relative;
-  font-family: Georgia,Cambria,"Times New Roman",Times,serif;
 }
 
 .h1-style,
@@ -406,4 +405,9 @@ input::placeholder {
 
 .menu i {
   padding-right: 10px;
+}
+
+.center-text {
+  display: table;
+  margin: 0 auto;
 }

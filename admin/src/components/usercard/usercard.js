@@ -1,10 +1,28 @@
 import React, { Component } from "react";
 import {UserCard} from './src/index';
 import {connect} from 'react-redux';
+import apiRoutes from "../../config/apiRoutes";
+import PropTypes from "prop-types";
 
 class CardUser extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            resp: {}
+        }
+    }
+
+    async componentDidMount() {
+        console.log(this.props.userData)
+          const data = await fetch(apiRoutes.summary)
+            .then(result => {
+               return result.json();
+            }).then(data => {
+                if(data.result){
+                    console.log(data.result)
+                this.setState({ resp: data.result}) 
+            }
+        })
     }
 
     render() {
@@ -13,21 +31,21 @@ class CardUser extends Component {
                 <UserCard
                 cardClass='float card-user'
                 header='https://i.imgur.com/w5tX1Pn.jpg'
-                avatar='https://i.imgur.com/uDYejhJ.jpg'
+                avatar={ '/images/' + this.props.userData.image}
                 name={this.props.userData.name}
                 positionName='Software Developer'
                 stats={[
                     {
-                        name: 'followers',
-                        value: 0
+                        name:  this.context.t('followers'),
+                        value: this.state.resp.follower
                     },
                     {
-                        name: 'following',
-                        value: 0
+                        name:  this.context.t('following'),
+                        value: this.state.resp.following
                     },
                     {
-                        name: 'articles',
-                        value: 0
+                        name:  this.context.t('articles'),
+                        value: this.state.resp.articles
                     }
                     ]}
             />
@@ -40,5 +58,9 @@ class CardUser extends Component {
 const mapStateToProps = state => ({
     userData: state.user.userData,
 });
+
+CardUser.contextTypes = {
+    t: PropTypes.func
+  };
 
 export default connect(mapStateToProps)(CardUser);

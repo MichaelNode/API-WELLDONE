@@ -9,7 +9,11 @@ if articles
             .card.article-card.bg-light.card_article
                 a(href=`/article/${article.author.nick_name}\/${article.getSlug()}` aria-label="#{__('User profile')}")
                     if article.file_name
-                        img(alt="#{__('Article image')}").card-img-top.img-fluid(src=`/images/uploads/${article.file_name}`)
+                        picture.article-detail-image.p-0
+                            source(srcset=`/images/resize/400px-${article.file_name}`, media='(max-width: 500px)')
+                            source(srcset=`/images/resize/600px-${article.file_name}`, media='(max-width: 600px)')
+                            source(srcset=`/images/resize/800px-${article.file_name}`, media='(max-width: 800px)')
+                            img(alt="#{__('Article image')}").card-img-top.img-fluid(srcset=`/images/uploads/${article.file_name}`)
                 if article.url
                     if article.url_type == 'youtube'
                         iframe(frameborder='0', allowfullscreen='', width='100%', height='100%', src=article.url.replace('watch?v=', 'embed/'))
