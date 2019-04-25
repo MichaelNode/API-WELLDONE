@@ -1,0 +1,17 @@
+{
+  "name": "microservice",
+  "version": "1.0.0",
+  "description": "resize image",
+  "main": "resize.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cote": "^0.20.0",
+    "node-thumbnail": "^0.15.0",
+    "responsive-images-generator": "^0.2.2",
+    "sharp": "^0.22.0"
+  }
+}

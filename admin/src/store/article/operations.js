@@ -43,21 +43,7 @@ export const addArticle = (title,file,summary,content,state,category,publi_date,
 export const EditArticle = (title,file,summary,content,state,category,publi_date, url, token, idUSer, id) => {
 
     const fd = new FormData();
-
-    const body = {
-        title: title,
-        file:    file,
-        summary:  summary,
-        content:  content,
-        state:    state,
-        category: category,
-        publi_date: publi_date,
-        url: url,
-        token:token,
-        idUSer: idUSer,
-        id: id
-    };
-  
+     
     fd.append('title',   title)
     fd.append('file',     file)
     fd.append('summary',  summary)

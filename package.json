@@ -30,6 +30,7 @@
     "bootstrap": "^4.3.1",
     "connect-mongo": "^2.0.3",
     "cookie-parser": "~1.4.3",
+    "cote": "^0.20.0",
     "cross-env": "^5.2.0",
     "debug": "~2.6.9",
     "dotenv": "^6.2.0",

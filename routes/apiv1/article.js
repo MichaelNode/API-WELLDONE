@@ -7,12 +7,15 @@ const { check ,validationResult } = require('express-validator/check');
 const {validation, filter} = require('../../lib/articleService');
 const path = require("path");
 const {jwtAuth} = require('../../lib/jwtAuth');
-var fs = require('fs');
 const {sendNotification} = require('../../lib/socket');
+const cote = require('cote');
+const request = new cote.Requester({ name: 'resize' });
+const image = require('../../lib/delete_image')
 
-router.post('/addarticle/:id?' , upload.single('file'),  validation, async(req, res, next) => {
 
-    try {
+
+router.post('/addarticle/:id?', upload.single('file'),  validation, jwtAuth(), async(req, res, next) => {
+	 try {
 		const user = req.session.user;
 		var data = {};
 		const validationErrors = validationResult(req.body);
@@ -20,10 +23,16 @@ router.post('/addarticle/:id?' , upload.single('file'),  validation, async(req, 
 			return res.status(422).json({ errors: validationErrors.array() });
 		}
 
-		const date_public = null;
 			if(req.file){
 				const type_file = path.extname(req.file.filename).toLowerCase()
 				if(type_file == '.jpg' || type_file == '.jpeg' || type_file == '.png'){
+					// send to micro service resize
+					request.send({
+						type: 'convert' ,
+						image: req.file.filename,
+					}, res => { 
+						console.log('respuesta '+ res);
+					});
 					data = {
 						title: req.body.title,
 						file_type: type_file,
@@ -121,7 +130,7 @@ router.get('/editArticle/:id', async (req, res, next) => {
 	}
 });
 
-router.put('/editArticle/:id', upload.single('file'),  validation, async (req, res, next) => {
+router.put('/editArticle/:id', upload.single('file'),  validation, jwtAuth(), async (req, res, next) => {
 
 	const articleId = req.params.id
     try {
@@ -131,10 +140,7 @@ router.put('/editArticle/:id', upload.single('file'),  validation, async (req, r
 				await Article.findOne({_id: articleId}, async function (err, article){
 					if (err){
 						console.log('hubo un error al encontrar el artículo', err)
-
 					}
-
-
 					const dato = {
 						title: req.body.title,
 						summary: req.body.summary,
@@ -145,24 +151,31 @@ router.put('/editArticle/:id', upload.single('file'),  validation, async (req, r
 						category: req.body.category
 					}
 
-
 					if(req.file && (req.body.url =='undefined'||req.body.url =='') ){
-
 
 						if(article.file_name){
 							if(req.file.filename !== article.file_name){
-								fs.unlinkSync(path.join('public/images/uploads/', article.file_name ));
+								image.delete_image('public/images/uploads/',article.file_name,'public/images/resize/') 
 							}
 						}
+
 						dato.file_type = req.file.mimetype;
 						dato.file_name = req.file.filename;
 						dato.url = ''
+
+						// micro service - resize
+						request.send({
+							type: 'convert' ,
+							image: req.file.filename,
+						}, res => { 
+							console.log('respuesta '+ res);
+						});
 
 
 					} else if (!req.file  && !(req.body.url =='undefined'||req.body.url =='')) {
 
 						if(article.file_name){
-							fs.unlinkSync(`public/images/uploads/${article.file_name}`);
+							image.delete_image('public/images/uploads/',article.file_name,'public/images/resize/') 
 						}
 						dato.file_type = '';
 						dato.file_name = '';
@@ -240,6 +253,44 @@ router.get('/me', jwtAuth(), async (req, res, next) => {
 	const {articles, pagination} = await filter(req, res, {author: userId}, {}, true);
 	res.json({articles: articles, pagination: pagination});
 });
+
+
+router.get('/resumen', async (req, res, next) => {
+	console.log('ingreso a resumen')
+	try {
+	  const userId = req.session.user._id;
+	
+		let follower = null;
+		let following = null;
+		let articles = null;
+	  await Users.findOne({ _id: userId }, async function(err, user) {
+		if (err) {
+		  console.log("Hubo un error recuperando el usuario");
+		  return
+		} else {
+		  try {
+			articles = await Article.find({
+			  author: userId }
+			).countDocuments();
+			const users_r =  await Users.findOne({_id:userId})
+			follower = await Users.find({followers: {$in: [userId]}}).countDocuments()
+			following =  await Users.find({_id:userId}).select('-_id +followers').countDocuments()
+			var response = {
+				articles,
+				follower,
+				following
+			}
+		} catch (err) {
+			console.log("Error recuperando los datos", err);
+			return
+		}
+		res.json({ success: "ok", result: response });
+		}
+	  });
+	} catch (err) {
+	  next(err);
+	}
+  });
 
 router.delete('/deleteArticle', jwtAuth(), async (req, res, next) => {
 	const userId = req.user
