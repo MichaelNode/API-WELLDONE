@@ -182,6 +182,10 @@ nav .dropdown-toggle i {
   .fav, .fab {
     cursor: pointer;
   }
+
+  .art-content p a{
+    color: theme-color('secondary');
+  }
 }
 
 .article-card{

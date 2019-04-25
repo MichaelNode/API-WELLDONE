@@ -351,9 +351,28 @@ class ArticleForm extends Component {
     let token = this.props.token
     const isValid = this.validate();
     if (isValid) {
+        let options = {
+            entityStyleFn: (entity) => {
+                const entityType = entity.get('type').toLowerCase();
+                if (entityType === 'MENTION' || entityType === 'mention') {
+
+                    const data = entity.getData();
+                    return {
+                        element: 'a',
+                        attributes: {
+                            href: data.url,
+                            target:'_blank'
+                        },
+                        style: {
+                            // Put styles here...
+                        },
+                    };
+                }
+            }
+        };
         const convertedData = convertToRaw(
           this.state.editorState.getCurrentContent())
-        const content = stateToHTML(convertFromRaw(convertedData))
+        const content = stateToHTML(convertFromRaw(convertedData), options)
         if(this.props.type=='ADD'){
             this.props.addArticle (
                 this.state.title,
@@ -392,7 +411,7 @@ class ArticleForm extends Component {
     return (
       <>
       <OCAlertsProvider />
-   
+
       <Form.Row>
         <Card as={Col}  md="4"  className="text-center card-main">
           { this.props.type == 'ADD' && (
@@ -402,7 +421,7 @@ class ArticleForm extends Component {
             <Card.Header>{this.props.title} : {this.state.title}</Card.Header>
           )}
           <Card.Body>
-         
+
             <Form onSubmit={this.handleSubmit } noValidate encType="multipart/form-data"  >
               <Form.Row>
                 <Form.Group as={Col}  md="6" controlId="title">
@@ -489,7 +508,7 @@ class ArticleForm extends Component {
                   handleInputChange={this.handleInputChange}
                   type={this.props.type}
                />
-          
+
               <Button className="button-send" variant="primary" type="submit">
                   {this.context.t("Save")}
               </Button>
