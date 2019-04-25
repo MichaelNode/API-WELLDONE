@@ -51,7 +51,7 @@ router.get('/', async (req, res, next) => {
             try {
                 let opts = [{path: 'article', select:'title'}, {path: 'user', select:'nick_name'}]
                 const contents = await Text.populate(docs, opts)
-                console.log('estos son los contenidos', contents)
+                //console.log('estos son los contenidos', contents)
                 
           } catch (err) {
               console.log("Error recuperando los contenidos subrayados", err);

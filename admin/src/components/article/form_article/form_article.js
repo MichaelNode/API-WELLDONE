@@ -18,7 +18,7 @@ import '../style/main.css'
 import apiRoutes from '../../../config/apiRoutes';
 import FileComponent from '../fileUpload/file'
 import { OCAlertsProvider } from '@opuscapita/react-alerts';
-import { Redirect } from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
 
 
 
@@ -383,8 +383,8 @@ class ArticleForm extends Component {
                 this.state.id
               )
           }
-          
-          this.setState({ fireRedirect: true })
+          console.log('creao articulo')
+          this.props.history.push('/admin/articles');
         }
     };
 
@@ -581,8 +581,8 @@ class ArticleForm extends Component {
     };
   };
 
-  export default connect(
+  export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-  )(ArticleForm);
+  )(ArticleForm));
 

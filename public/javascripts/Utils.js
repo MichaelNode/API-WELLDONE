@@ -30,7 +30,10 @@ class Utils {
             $cotent_html.each(function(){
                 let cur_size = parseInt($(this).css('font-size'));
                 cur_size=cur_size+csize;
-                $(this).css('font-size', cur_size.toString()+'px');
+                if( cur_size < 48 && cur_size > 16 ){
+                    $(this).css('font-size', cur_size.toString()+'px');
+                }
+                              
             });
         }
     }

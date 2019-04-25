@@ -16,4 +16,5 @@ export default {
     article_me: `${API_BASE}/article/me`,
     article_delete: `${API_BASE}/article/deleteArticle/`,
     underlined: `${API_BASE}/underlinetext`,
+    summary: `${API_BASE}/article/resumen`
 };
