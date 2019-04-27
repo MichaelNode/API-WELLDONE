@@ -10,11 +10,10 @@ export default class Articles {
         this.selection = ''
         this.textUnderlined = ''
         this.node = null
-        this.changeBackgoundColor = (color) => {
+        this.changeBackgoundColor = (className) => {
             let selectedText = this.selection.extractContents()
             let span = document.createElement('span')
-            span.style.backgroundColor = color
-            span.classList.add('highlight')
+            span.classList.add(className)
             span.appendChild(selectedText)
             this.selection.insertNode(span)
         }
@@ -57,6 +56,7 @@ export default class Articles {
         this.content.addEventListener('mouseup', (e) => {
             
             this.selection = window.getSelection().getRangeAt(0)
+            console.log(this.selection.cloneContents())
             const { x, top, width } = this.selection.getBoundingClientRect() 
             
             if (!width) {
@@ -72,7 +72,7 @@ export default class Articles {
         })
 
             this.underline.addEventListener('click', (e) => {
-                this.changeBackgoundColor('#b3f4d8')
+                this.changeBackgoundColor('highlight')
                 var article = this.underline.getAttribute('data-article')
                 var articleID = article.slice(1, -1)
                 var textUnderlined = this.selection.toString()
@@ -108,7 +108,7 @@ export default class Articles {
             }))
 
             this.erase.addEventListener('click', () => {
-                this.node.style.backgroundColor = 'white'
+                this.node.style.backgroundColor = '#FAFAFA'
 
                 var article = this.erase.getAttribute('data-article')
                 var articleID = article.slice(1, -1)
