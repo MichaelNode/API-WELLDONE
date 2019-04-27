@@ -9,6 +9,7 @@ router.put('/', userAuth(), async (req, res, next) => {
     const userToFollow = req.body.userToFollow;
     const userLogged = req.session.user._id;
     const userName = req.session.user.name;
+    const user_nickName = req.session.user.nick_name
 
     try {
         await Users.findOne({_id: userToFollow}, async function (err, user){
@@ -26,7 +27,7 @@ router.put('/', userAuth(), async (req, res, next) => {
                     [user], 
                     `${userName} ${res.__('follows you')}`,
                     `${res.__('Congrats! You have a new follower')}`,
-                    null
+                    `${process.env.HOST}/articles/user/${user_nickName}`
         ); 
                 console.log('se agregó el usuario a seguir ')
            } else {

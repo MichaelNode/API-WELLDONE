@@ -44,7 +44,9 @@ export default class Socket {
       this.sendNotification(title, msg, url)
     });
 
-    this.socket.on('follow-user', (data) => this.sendNotification('', data));
+    this.socket.on('follow-user', (title, msg, url) => {
+      this.sendNotification(title, msg, url);
+    })
   }
 
   /**
