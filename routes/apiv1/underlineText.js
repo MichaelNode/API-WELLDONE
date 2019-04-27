@@ -83,31 +83,7 @@ router.put('/', userAuth(), async (req, res, next) => {
             console.log('contenido encontrado')
         } else {
           console.log('contenido no encontrado')
-        }
-
-       /*  if(!getText){
-            const newText = await Text.findOne({
-              article: textData.article, 
-              user: textData.user,
-              content:{ "$regex": textData.content, "$options": "i"} }) 
-           
-            if(newText){
-              newText.remove()
-              var newContent = newText.content.replace(textData.content,'')
-              await Text.updateOne({_id: newText._id},{
-                content: newContent
-              }) 
-            }
-           
-            if(!newText){ 
-              console.log('contenido no encontrado')
-              return
-            }
-
-            res.json({success: true})
-            
-        } */
-        
+        }        
 
     } catch (err) {
         console.log('error al eliminar contenido subrayado', err)

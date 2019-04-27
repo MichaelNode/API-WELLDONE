@@ -9,8 +9,10 @@ class Utils {
     static underline(text) {
 
         const inputText = document.getElementById("content-id");
+        const content = inputText.textContent
         let innerHTML = inputText.innerHTML;
         const index = innerHTML.indexOf(text);
+
         if (index >= 0) {
             innerHTML = innerHTML.substring(0,index) + 
             "<span class='highlight'>" + 
@@ -18,7 +20,7 @@ class Utils {
             "</span>" + 
             innerHTML.substring(index + text.length);
             inputText.innerHTML = innerHTML;
-        }
+        } 
     }
 
     /**

@@ -56,7 +56,6 @@ export default class Articles {
         this.content.addEventListener('mouseup', (e) => {
             
             this.selection = window.getSelection().getRangeAt(0)
-            console.log(this.selection.cloneContents())
             const { x, top, width } = this.selection.getBoundingClientRect() 
             
             if (!width) {
