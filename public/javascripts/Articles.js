@@ -107,7 +107,7 @@ export default class Articles {
             }))
 
             this.erase.addEventListener('click', () => {
-                this.node.style.backgroundColor = '#FAFAFA'
+                this.node.classList.toggle('not-highlight')
 
                 var article = this.erase.getAttribute('data-article')
                 var articleID = article.slice(1, -1)
