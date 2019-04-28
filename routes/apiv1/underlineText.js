@@ -50,14 +50,14 @@ router.get('/', async (req, res, next) => {
           } else {
             try {
                 let opts = [{path: 'article', select:'title'}, {path: 'user', select:'nick_name'}]
-                const contents = await Text.populate(docs, opts)
-                //console.log('estos son los contenidos', contents)
+                await Text.populate(docs, opts)
                 
           } catch (err) {
               console.log("Error recuperando los contenidos subrayados", err);
               return
           }
-          res.json({ success: "ok", contents: docs });
+          
+          res.json({ success: "ok", contents: docs.filter(doc => doc.article !== null) });
           }
         });
       } catch (err) {
