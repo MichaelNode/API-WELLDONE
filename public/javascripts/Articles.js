@@ -19,7 +19,7 @@ export default class Articles {
         }
     }
 
-    eventListeners() {
+     eventListeners() {
         if (!this.bookmark) return;
         this.bookmark.addEventListener('click', (e) => {
             e.stopPropagation()
@@ -69,7 +69,7 @@ export default class Articles {
             this.underline.style.left = (x + (width/2) - (menuWidth/2)) + 'px'
             this.underline.style.top = (top - 10) + 'px'
         })
-
+    
             this.underline.addEventListener('click', (e) => {
                 this.changeBackgoundColor('highlight')
                 var article = this.underline.getAttribute('data-article')
@@ -97,8 +97,9 @@ export default class Articles {
             })
 
             // Delete underline
-
+           
             this.highlighted.forEach(node => node.addEventListener ('click', (e) => {
+                console.log(this.highlighted)
                 this.erase.style.display = 'block'
                 this.erase.style.left = e.x + 'px'
                 this.erase.style.top = (e.y - 10) + 'px'

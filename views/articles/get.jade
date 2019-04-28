@@ -24,7 +24,7 @@ block content
                     source(srcset=`/images/resize/400px-${article.file_name}`, media='(max-width: 500px)')
                     source(srcset=`/images/resize/600px-${article.file_name}`, media='(max-width: 600px)')
                     source(srcset=`/images/resize/800px-${article.file_name}`, media='(max-width: 800px)')
-                    img.article-detail-image.p-0(srcset=`/images/uploads/${article.file_name}`, alt='My default image')
+                    img.article-detail-image.p-0(srcset=`/images/uploads/${article.file_name}`, alt=article.title)
             if article.url && !article.file_name
                 if article.url_type == 'youtube'
                     iframe(width='100%', height='600px', src=article.url.replace('watch?v=', 'embed/'))
@@ -61,11 +61,11 @@ block content
 
             div(id='content-id').col-12.col-md-10.col-lg-8.p-0.mt-3.art-content.editable
                 !{article.content}
-
-            .menu.underline(data-article=article._id)
-                i(id='underline').fas.fa-pencil-alt.pencil
-            .menu.erase(data-article=article._id)
-                i(id='erase').fas.fa-eraser
+            if isLogged
+                .menu.underline(data-article=article._id)
+                    i(id='underline').fas.fa-pencil-alt.pencil
+                .menu.erase(data-article=article._id)
+                    i(id='erase').fas.fa-eraser
               
             // Comments
             .col-12.col-md-10.col-lg-8.p-0.pt-5.mb-5.row(id='comments')
@@ -86,14 +86,6 @@ block content
                 .mt-3
                     +pagination(link, '')
 
-    script.
-
-        var texts = !{JSON.stringify(text)}
-
-        if (texts) {
-            texts.forEach(function (text) {
-                Utils.underline(text.content)
-            });
-        }
-
-        Utils.changeSizeText();
+ 
+        
+        
