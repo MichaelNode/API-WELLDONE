@@ -9,6 +9,7 @@ export default class Articles {
         this.highlighted = document.querySelectorAll('.highlight')
         this.selection = ''
         this.textUnderlined = ''
+        this.idTextUnderlined = null;
         this.node = null
         this.changeBackgoundColor = (className) => {
             let selectedText = this.selection.extractContents()
@@ -19,7 +20,7 @@ export default class Articles {
         }
     }
 
-     eventListeners() {
+    eventListeners() {
         if (!this.bookmark) return;
         this.bookmark.addEventListener('click', (e) => {
             e.stopPropagation()
@@ -54,10 +55,10 @@ export default class Articles {
         })
 
         this.content.addEventListener('mouseup', (e) => {
-            
+
             this.selection = window.getSelection().getRangeAt(0)
-            const { x, top, width } = this.selection.getBoundingClientRect() 
-            
+            const {x, top, width} = this.selection.getBoundingClientRect()
+
             if (!width) {
                 this.underline.style.display = 'none'
                 this.erase.style.display = 'none'
@@ -66,72 +67,80 @@ export default class Articles {
 
             const menuWidth = this.underline.offsetWidth
             this.underline.style.display = 'block'
-            this.underline.style.left = (x + (width/2) - (menuWidth/2)) + 'px'
+            this.underline.style.left = (x + (width / 2) - (menuWidth / 2)) + 'px'
             this.underline.style.top = (top - 10) + 'px'
         })
-    
-            this.underline.addEventListener('click', (e) => {
-                this.changeBackgoundColor('highlight')
-                var article = this.underline.getAttribute('data-article')
-                var articleID = article.slice(1, -1)
-                var textUnderlined = this.selection.toString()
 
-                const url = `/apiv1/underlinetext`;
-                const data = {
-                    article: articleID,
-                    content: textUnderlined
+        this.highlightEvent(this.highlighted);
+
+        this.underline.addEventListener('click', (e) => {
+            var article = this.underline.getAttribute('data-article')
+            var articleID = article.slice(1, -1)
+            const div = document.createElement('div');
+            const contents = this.selection.cloneContents();
+            div.appendChild(contents.cloneNode(true));
+            const textUnderlined = div.innerHTML;
+
+            const url = `/apiv1/underlinetext`;
+            const data = {
+                article: articleID,
+                content: textUnderlined
+            }
+
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
                 }
+            }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(response => {
+                    const textObj = response.text;
+                    const newHighLights = Utils.underline(textObj.content, textObj._id);
+                    this.highlightEvent(newHighLights);
+                })
+        })
 
-                fetch(url, {
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(res => res.json())
-                    .catch(error => console.error('Error:', error))
-                    .then(response => {
-                        console.log('guardado', response)
-                        this.selection = ''
-                    })
+        this.erase.addEventListener('click', () => {
+            const highContents = document.querySelectorAll(`[data-textId='${this.idTextUnderlined}']`);
+            highContents.forEach(node => {
+                const parent = node.parentNode;
+                const text = document.createTextNode(node.innerHTML);
+                parent.replaceChild(text, node);
             })
 
-            // Delete underline
-           
-            this.highlighted.forEach(node => node.addEventListener ('click', (e) => {
-                console.log(this.highlighted)
-                this.erase.style.display = 'block'
-                this.erase.style.left = e.x + 'px'
-                this.erase.style.top = (e.y - 10) + 'px'
-                this.textUnderlined = e.target.textContent
-                this.node = e.target
-            }))
+            const url = `/apiv1/underlinetext`;
+            const data = {
+                id: this.idTextUnderlined
+            }
 
-            this.erase.addEventListener('click', () => {
-                this.node.classList.toggle('not-highlight')
-
-                var article = this.erase.getAttribute('data-article')
-                var articleID = article.slice(1, -1)
-                
-                const url = `/apiv1/underlinetext`;
-                const data = {
-                    article: articleID,
-                    content: this.textUnderlined
+            fetch(url, {
+                method: 'DELETE',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
                 }
+            }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(response => {
+                    console.log('eliminado', response)
+                    this.erase.style.display = 'none'
+                })
+        })
+    }
 
-                fetch(url, {
-                    method: 'PUT',
-                    body: JSON.stringify(data),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(res => res.json())
-                    .catch(error => console.error('Error:', error))
-                    .then(response => {
-                        console.log('eliminado', response)
-                        this.erase.style.display = 'none'
-                    })
-            })
+    highlightEvent(hightlightElems) {
+        // Delete underline
+
+        hightlightElems.forEach(node => node.addEventListener('click', (e) => {
+            this.erase.style.display = 'block'
+            this.erase.style.left = e.x + 'px'
+            this.erase.style.top = (e.y - 10) + 'px'
+            this.textUnderlined = e.target.textContent
+            this.idTextUnderlined = e.target.getAttribute('data-textId');
+            this.node = e.target
+        }))
     }
 }
 

@@ -1,12 +1,12 @@
 import 'bootstrap';
 import style from '../stylesheets/style.scss';
+import './Utils';
 import Cards from './Cards';
 import Articles from './Articles';
 import Commons from './Commons';
 import Socket from './Socket';
 import Followers from './Followers';
 import Accessibility from './Accessibility';
-import './Utils';
 
 
 (function () {
