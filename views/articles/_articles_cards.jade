@@ -10,9 +10,9 @@ if articles
                 a(href=`/article/${article.author.nick_name}\/${article.getSlug()}` aria-label="#{__('User profile')}")
                     if article.file_name
                         picture.article-detail-image.p-0
-                            source(srcset=`/images/resize/400px-${article.file_name}`, media='(max-width: 500px)')
-                            source(srcset=`/images/resize/600px-${article.file_name}`, media='(max-width: 600px)')
-                            source(srcset=`/images/resize/800px-${article.file_name}`, media='(max-width: 800px)')
+                            source(srcset=`/images/resize/400px-${article.file_name}`, media='(max-width: 640px)')
+                            source(srcset=`/images/resize/600px-${article.file_name}`, media='(max-width: 768px)')
+                            source(srcset=`/images/resize/800px-${article.file_name}`, media='(max-width: 900px)')
                             img(alt="#{__('Article image')}").card-img-top.img-fluid(srcset=`/images/uploads/${article.file_name}`)
                 if article.url
                     if article.url_type == 'youtube'

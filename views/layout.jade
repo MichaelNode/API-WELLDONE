@@ -50,12 +50,7 @@ html(lang=getLocale())
         meta(name='theme-color', content='#ffffff')
         meta(http-equiv='Cache-control', content='public')
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous")
-        link(href='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css', rel='stylesheet')
-        script(src="/socket.io/socket.io.js")
-
-
-
-
+        
     body
         include ./partials/header.jade
         main(id="main")
@@ -64,19 +59,21 @@ html(lang=getLocale())
         if showFooter
             footer
                 include ./partials/footer.jade
-    
+
+
+    link(href='/stylesheets/toastr.min.css', rel='stylesheet')
     script(src="/dist/js/app.js")
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js")
+    script(src="/javascripts/plugins/jquery.min.js")
+    script(src="/javascripts/plugins/toastr.min.js")
+    script(src="/socket.io/socket.io.js")
     script.
-       
-            Utils.changeSizeText();
-            texts = `!{JSON.stringify(text)}` 
-            if (texts) {
-                texts = !{JSON.stringify(text)} 
-                texts.forEach(function (text) {
-                    Utils.underline(text.content)
-                });
-            } 
+        Utils.changeSizeText();
+        texts = `!{JSON.stringify(text)}` 
+        if (texts) {
+            texts = !{JSON.stringify(text)} 
+            texts.forEach(function (text) {
+                Utils.underline(text.content)
+            });
+        } 
             
 

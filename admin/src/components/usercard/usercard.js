@@ -13,7 +13,6 @@ class CardUser extends Component {
     }
 
     async componentDidMount() {
-        console.log(this.props.userData)
           const data = await fetch(apiRoutes.summary)
             .then(result => {
                return result.json();
@@ -37,11 +36,11 @@ class CardUser extends Component {
                 stats={[
                     {
                         name:  this.context.t('followers'),
-                        value: this.state.resp.follower
+                        value: this.state.resp.following
                     },
                     {
                         name:  this.context.t('following'),
-                        value: this.state.resp.following
+                        value: this.state.resp.follower
                     },
                     {
                         name:  this.context.t('articles'),

@@ -21,9 +21,9 @@ block content
         .p-0.row.d-flex.justify-content-center.overlay-wrapper
             if article.file_name
                 picture.article-detail-image.p-0
-                    source(srcset=`/images/resize/400px-${article.file_name}`, media='(max-width: 500px)')
-                    source(srcset=`/images/resize/600px-${article.file_name}`, media='(max-width: 600px)')
-                    source(srcset=`/images/resize/800px-${article.file_name}`, media='(max-width: 800px)')
+                    source(srcset=`/images/resize/400px-${article.file_name}`, media='(max-width: 640px)')
+                    source(srcset=`/images/resize/600px-${article.file_name}`, media='(max-width: 768px)')
+                    source(srcset=`/images/resize/800px-${article.file_name}`, media='(max-width: 900px)')
                     img.article-detail-image.p-0(srcset=`/images/uploads/${article.file_name}`, alt=article.title)
             if article.url && !article.file_name
                 if article.url_type == 'youtube'

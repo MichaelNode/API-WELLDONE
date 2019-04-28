@@ -30,7 +30,7 @@ class sideBars extends Component {
     super();
     this.state = {
       response: false,
-      endpoint: "http://127.0.0.1:3002"
+      endpoint: process.env.REACT_APP_URL_SOCKET
     };
   }
 
@@ -46,6 +46,7 @@ class sideBars extends Component {
 
   render() {
     let path = this.props.location.pathname.slice(1).replace('admin/', '');
+    if(path.includes('add_article'))  path = 'add_article';
     if(path.includes('edit_article')) path = 'edit_article';
 
     return (

@@ -9,7 +9,6 @@
   border: 2px solid #007bff;
   color: #007bff;
   background-color: white;
- /* padding: 8px 20px;*/
   border-radius: 8px;
   font-weight: bold;
   width: 40%;
@@ -32,7 +31,6 @@
   float: none;
   margin-bottom: 10px;
   border-radius: .5rem;
-  /*padding-top: 20px;*/
 }
 
 .button-send {
@@ -40,7 +38,7 @@
 }
 
 .card-header {
-  background-color: #305abb;
+  background-color: #998ec7;
   color: white;
   font-weight: bold;
   font-size: 16px;
@@ -53,4 +51,9 @@
 
 .react-bs-table {
   height: auto !important;
+}
+
+.btn-primary {
+  background-color: #998ec7 !important;
+  border-color:  #998ec7 !important;
 }

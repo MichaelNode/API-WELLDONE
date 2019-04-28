@@ -21,7 +21,7 @@ function FavArticles(props, context) {
     <Form.Row> 
         {articles && articles.map(item => (
           <Form.Group as={Col}  md="3">
-            <Card style={{ width: '18rem' }}>
+            <Card>
               { item.file_name && (
                 <Card.Img variant="top" src={`/images/uploads/${item.file_name}`} />
               )}

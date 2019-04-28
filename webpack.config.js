@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 require("@babel/polyfill");
 
 module.exports = {
