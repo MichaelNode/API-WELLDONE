@@ -21,18 +21,17 @@ function UnderlinedContents(props, context) {
 
   return (
 
-      <Form.Row> 
+      <Form.Row>
         {underlined && underlined.map(item => (
          <Form.Group as={Col}  md="6">
            <Card className="text-center">
               <Card.Body>
                 <Card.Title> <h2>{item.article.title}</h2></Card.Title>
-                <Card.Text>
-                  <p>"<b>{item.content}" - </b></p>
+                <Card.Text dangerouslySetInnerHTML={{__html: item.content}}>
                 </Card.Text>
               </Card.Body>
               <Card.Footer className="text-muted">
-                <Card.Link href={`${apiRoutes.articles}/${item.user.nick_name}/${item.article.title}-${item.article._id}`} > 
+                <Card.Link href={`${apiRoutes.articles}/${item.user.nick_name}/${item.article.title}-${item.article._id}`} >
                   <p className="read">{context.t("Read Article")}</p>
                 </Card.Link>
               </Card.Footer>
@@ -40,7 +39,7 @@ function UnderlinedContents(props, context) {
           </Form.Group>
         ))}
       </Form.Row>
-     
+
 
   );
 }
