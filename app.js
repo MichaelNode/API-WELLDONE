@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express');
+var compression = require('compression')
 var createError = require('http-errors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -10,6 +11,7 @@ var flash = require('express-flash');
 const toastr = require('express-toastr');
 const MongoStore = require('connect-mongo')(session);
 var app = express();
+app.use(compression())
 app.locals.moment = require('moment');
 require('./lib/connectMongoose');
 
