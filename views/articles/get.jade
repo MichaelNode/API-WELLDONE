@@ -53,7 +53,7 @@ block content
                         i.mx-2.fa-twitter.fa-2x.fab(style=`color:${color}`)
                     if isLogged
                         i.mx-2.fa-bookmark.fa-2x.fav(data-article=article._id, class=bookmark)
-            .col-12.col-md-10.col-lg-8.d-flex.align-items-center.p-0.justify-content-between           
+            .col-12.col-md-10.col-lg-8.d-flex.align-items-center.p-0.justify-content-between
                 .small.center-text
                     i#letter.mx-2.fas.fa-font.fa-1x.fav( data-csize='-4')
                     i#letter.mx-2.fas.fa-font.fa-2x.fav( data-csize='4')
@@ -66,7 +66,7 @@ block content
                     i(id='underline').fas.fa-pencil-alt.pencil
                 .menu.erase(data-article=article._id)
                     i(id='erase').fas.fa-eraser
-              
+
             // Comments
             .col-12.col-md-10.col-lg-8.p-0.pt-5.mb-5.row(id='comments')
 
@@ -85,7 +85,18 @@ block content
 
                 .mt-3
                     +pagination(link, '')
+        
+    script.
+        window.addEventListener('DOMContentLoaded', function (evt) {
+            Utils.changeSizeText();
+            texts = `!{JSON.stringify(text)}`
+            if (texts) {
+                texts = !{JSON.stringify(text)}
+                texts.forEach(function (text) {
+                    Utils.underline(text.content, text._id)
+                });
+            }
+        })
 
- 
-        
-        
+  
+

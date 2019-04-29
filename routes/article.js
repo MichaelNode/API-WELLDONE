@@ -22,22 +22,22 @@ router.get('/:user/:articleSlug/:page?', async function (req, res, next) {
         const id = Article.getIdFromSlug(req.params.articleSlug);
         const article = await Article
             .findOne({
-                _id: id, 
-                state: true, 
+                _id: id,
+                state: true,
                 publi_date: {$lt: new Date()}})
             .populate('author', '_id image nick_name');
         const user = req.session.user;
-      
+
         if(user) {
-           var text = await Text.find({article: id, user: user._id}).select('content');
-        } 
-       
-      
+           var text = await Text.find({article: id, user: user._id}).select('_id content');
+        }
+
+
         if(!article){
             next(createError(404));
             return;
         }
-    
+
         // render article detail
         await renderArticleDetail(req, res, article, user, text);
 
