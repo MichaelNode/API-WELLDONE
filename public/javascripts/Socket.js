@@ -33,7 +33,7 @@ export default class Socket {
   async initialize() {
     this.initializeToast();
     // register service worker for push notifications
-    if ('Notification' in window) {
+    if ('Notification' in window && navigator.permissions) {
       const hasNotificationPermission = await this.checkPermission('notifications');
       if (!hasNotificationPermission) {
         this.requestNotificationPermission();
