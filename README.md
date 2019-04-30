@@ -6,6 +6,14 @@ Welldone blog project
 
 - redis-server
 
+
+## Windows
+install this dependency
+
+```
+npm install --global --production windows-build-tools
+```
+
 ## Installation
 
 - Install all dependencies
