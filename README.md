@@ -25,6 +25,11 @@ npm run install_react
 npm run seeder
 ```
 
+## Important
+
+create folders upload and resize within public/images
+
+
 ## Development
 
 - You can use 'npm run dev' for have express in one port and react in other. For this you will need to configure server CORS
